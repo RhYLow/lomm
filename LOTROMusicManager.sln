@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOTROMusicManager", "LOTROMusicManager\LOTROMusicManager.csproj", "{A2613B56-1290-4CA2-9F0D-C7F7062797B7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Style Enforcer", "Code Style Enforcer", "{A2D1E299-2A79-4368-8B1B-EACF157F8742}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml
+		..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml
+		..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LMMSetup", "LMMSetup\LMMSetup.vdproj", "{0F043263-05E6-4EA3-BFA0-6186885DFA56}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2613B56-1290-4CA2-9F0D-C7F7062797B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2613B56-1290-4CA2-9F0D-C7F7062797B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2613B56-1290-4CA2-9F0D-C7F7062797B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2613B56-1290-4CA2-9F0D-C7F7062797B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F043263-05E6-4EA3-BFA0-6186885DFA56}.Debug|Any CPU.ActiveCfg = Debug
+		{0F043263-05E6-4EA3-BFA0-6186885DFA56}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		CodeStyleEnforcer_Active = -1
+		CodeStyleEnforcer_RulesLocation = 0
+	EndGlobalSection
+EndGlobal
