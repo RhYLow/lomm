@@ -1,0 +1,123 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LOTROMusicManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PlayFileCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/play "{0}"</Value>
+    </Setting>
+    <Setting Name="ClientAppID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">lotroclient</Value>
+    </Setting>
+    <Setting Name="PlaySync" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SelectedFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ToggleMusicCommand" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/music</Value>
+    </Setting>
+    <Setting Name="MusicSubfolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\The Lord of the Rings Online\music\</Value>
+    </Setting>
+    <Setting Name="PlaySyncCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/play "{0}" sync</Value>
+    </Setting>
+    <Setting Name="ABCTagTitle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">T:</Value>
+    </Setting>
+    <Setting Name="ABCTagNote" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">N:</Value>
+    </Setting>
+    <Setting Name="AOT" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WindowLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">100, 100</Value>
+    </Setting>
+    <Setting Name="WindowSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">746, 618</Value>
+    </Setting>
+    <Setting Name="EditorFontSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="Opacity" Type="System.String" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="Dances" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;(basic dances)&lt;/string&gt;
+  &lt;string&gt;  /dance&lt;/string&gt;
+  &lt;string&gt;  /dance1&lt;/string&gt;
+  &lt;string&gt;  /dance2&lt;/string&gt;
+  &lt;string&gt;  /dance3&lt;/string&gt;
+  &lt;string&gt;(learned dances)&lt;/string&gt;
+  &lt;string&gt;  /dance_hobbit &lt;/string&gt;
+  &lt;string&gt;  /dance_elf&lt;/string&gt;
+  &lt;string&gt;  /dance_man&lt;/string&gt;
+  &lt;string&gt;  /dance_dwarf&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="Emotes" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;(meet and greet)&lt;/string&gt;
+  &lt;string&gt;  /wave&lt;/string&gt;
+  &lt;string&gt;  /salute&lt;/string&gt;
+  &lt;string&gt;  /bow&lt;/string&gt;
+  &lt;string&gt;  /curtsey&lt;/string&gt;
+  &lt;string&gt;  /hug&lt;/string&gt;
+  &lt;string&gt;  /kiss&lt;/string&gt;
+  &lt;string&gt;  /bye&lt;/string&gt;
+  &lt;string&gt;(converse)&lt;/string&gt;
+  &lt;string&gt;  /yes&lt;/string&gt;
+  &lt;string&gt;  /no&lt;/string&gt;
+  &lt;string&gt;  /shrug&lt;/string&gt;
+  &lt;string&gt;  /sorry&lt;/string&gt;
+  &lt;string&gt;  /thank&lt;/string&gt;
+  &lt;string&gt;(settle in)&lt;/string&gt;
+  &lt;string&gt;  /sit&lt;/string&gt;
+  &lt;string&gt;  /kneel&lt;/string&gt;
+  &lt;string&gt;  /liedown&lt;/string&gt;
+  &lt;string&gt;  /stretch&lt;/string&gt;
+  &lt;string&gt;  /smoke&lt;/string&gt;
+  &lt;string&gt;  /smoke1&lt;/string&gt;
+  &lt;string&gt;  /story&lt;/string&gt;
+  &lt;string&gt;  /talk&lt;/string&gt;
+  &lt;string&gt;(respond)&lt;/string&gt;
+  &lt;string&gt;  /cheer&lt;/string&gt;
+  &lt;string&gt;  /clap&lt;/string&gt;
+  &lt;string&gt;  /laugh&lt;/string&gt;
+  &lt;string&gt;  /bored&lt;/string&gt;
+  &lt;string&gt;  /fidget&lt;/string&gt;
+  &lt;string&gt;  /impatient&lt;/string&gt;
+  &lt;string&gt;  /cry&lt;/string&gt;
+  &lt;string&gt;  /think&lt;/string&gt;
+  &lt;string&gt;  /whistle&lt;/string&gt;
+  &lt;string&gt;  /yawn&lt;/string&gt;
+  &lt;string&gt;(hobbits)&lt;/string&gt;
+  &lt;string&gt;  /eat&lt;/string&gt;
+  &lt;string&gt;  /drink&lt;/string&gt;
+  &lt;string&gt;  /burp&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="Moods" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;(moods)&lt;/string&gt;
+  &lt;string&gt;  /mood_angry&lt;/string&gt;
+  &lt;string&gt;  /mood_apprehensive&lt;/string&gt;
+  &lt;string&gt;  /mood_calm&lt;/string&gt;
+  &lt;string&gt;  /mood_confused&lt;/string&gt;
+  &lt;string&gt;  /mood_fearful&lt;/string&gt;
+  &lt;string&gt;  /mood_happy&lt;/string&gt;
+  &lt;string&gt;  /mood_mischievous&lt;/string&gt;
+  &lt;string&gt;  /mood_sad&lt;/string&gt;
+  &lt;string&gt;  /mood_sleepy&lt;/string&gt;
+  &lt;string&gt;  /mood_solemn&lt;/string&gt;
+  &lt;string&gt;  /mood_surprised&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
