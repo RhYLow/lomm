@@ -10,7 +10,7 @@ using System.IO;
 
 namespace LOTROMusicManager
 {
-    // Delegate to defer reading the curson location until after the text box has moved it.
+    // Delegate to defer reading the cursor location until after the text box has moved it.
     // Otherwise we get the change notification during the key or mouse processing and we're
     // one location behine. We use this delegate to push over to a thread to make the check.
     // Basically, the thread waits on the UI message queue via InvokeRequired/Invoke
@@ -50,8 +50,9 @@ namespace LOTROMusicManager
             mniOpacity.SelectedIndex = (int)(10*(1-Opacity));
             //TODO: Get EditorFontSize menu an initial value 
 
-            // Auto-binding size causes all sorts of mess with minimizing and maximizing
+            // Auto-binding size or AOT causes all sorts of mess 
             Size = (Size)Properties.Settings.Default.WindowSize;
+            TopMost = Properties.Settings.Default.AOT;
 
             // Simulate a click on the "Title" column. Much more useful than starting with
             // the filename sorted.
@@ -63,6 +64,7 @@ namespace LOTROMusicManager
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
             Properties.Settings.Default.WindowSize = Size;
+            Properties.Settings.Default.AOT = TopMost;
             Properties.Settings.Default.Save();
             return;
         }

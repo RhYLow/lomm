@@ -670,14 +670,12 @@ namespace LOTROMusicManager
             this.Controls.Add(this.statPane);
             this.Controls.Add(tableLayoutPanel1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::LOTROMusicManager.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("TopMost", global::LOTROMusicManager.Properties.Settings.Default, "AOT", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = global::LOTROMusicManager.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = menuStrip1;
             this.Name = "FormMain";
             this.Text = "LOTRO Music Manager";
-            this.TopMost = global::LOTROMusicManager.Properties.Settings.Default.AOT;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.Load += new System.EventHandler(this.OnLoad);
             tableLayoutPanel1.ResumeLayout(false);
