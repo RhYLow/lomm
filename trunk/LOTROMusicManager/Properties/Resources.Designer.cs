@@ -61,12 +61,12 @@ namespace LOTROMusicManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fswiss\fprq2\fcharset0 Cordia New;}{\f2\fswiss\fcharset0 Courier New;}{\f3\fswiss\fprq2\fcharset0 Arial;}{\f4\fnil\fcharset2 Symbol;}}
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fswiss\fprq2\fcharset0 Arial;}{\f2\fswiss\fcharset0 Courier New;}{\f3\fmodern\fprq1\fcharset0 Courier New;}{\f4\froman\fcharset0 Times New Roman;}{\f5\fswiss\fprq2\fcharset0 Cordia New;}{\f6\fnil\fcharset2 Symbol;}}
         ///{\*\generator Msftedit 5.41.21.2507;}\viewkind4\uc1\pard\qc\b\f0\fs20 LOTRO ABC format - Quick Reference\par
         ///\pard\b0\par
         ///\pard\qc As of Chapter 11\par
         ///\pard\ul\fs24 Useful links:\ulnone\par
-        ///\pard{\pntext\f4\&apos;B7\tab}{\*\pn\pnlvlblt\pnf4\pnindent0{\pntxtb\&apos;B7}}\fi-270\li450\fs20 LOTRO off [rest of string was truncated]&quot;;.
+        ///\pard{\pntext\f6 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ABCRef {
             get {
