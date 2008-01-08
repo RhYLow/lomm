@@ -40,7 +40,7 @@ namespace LOTROMusicManager
             this.rtfABCRef.Location = new System.Drawing.Point(0, 0);
             this.rtfABCRef.Name = "rtfABCRef";
             this.rtfABCRef.ReadOnly = true;
-            this.rtfABCRef.Size = new System.Drawing.Size(290, 270);
+            this.rtfABCRef.Size = new System.Drawing.Size(658, 270);
             this.rtfABCRef.TabIndex = 0;
             this.rtfABCRef.Text = "";
             // 
@@ -48,7 +48,7 @@ namespace LOTROMusicManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 270);
+            this.ClientSize = new System.Drawing.Size(658, 270);
             this.Controls.Add(this.rtfABCRef);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ABCRef";

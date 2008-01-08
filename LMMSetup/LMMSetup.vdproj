@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:LMMSetup"
+"ProjectName" = "8:LOMMSetup"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -13,6 +13,12 @@
 "SccProvider" = "8:"
     "Hierarchy"
     {
+        "Entry"
+        {
+        "MsmKey" = "8:_C7798561242C4C1E86031F21AAEF28C0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
         "Entry"
         {
         "MsmKey" = "8:_EED2738FDB79408DB5F280EB277141CC"
@@ -33,7 +39,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\LMMSetup.msi"
+        "OutputFilename" = "8:Debug\\LOMMSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -65,7 +71,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\LMMSetup.msi"
+        "OutputFilename" = "8:Release\\LOMMSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -115,6 +121,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7798561242C4C1E86031F21AAEF28C0"
+            {
+            "SourcePath" = "8:..\\LOTROMusicManager\\LOMM.ico"
+            "TargetName" = "8:LOMM.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -134,7 +160,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_4DF4F09FC7DC4C458BE0654C63F98B4B"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -153,6 +179,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_AF3D54F164F04FB1A54636E87506E80A"
+                    {
+                    "Name" = "8:LOTRO Music Manager"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_24238537FDF14FB2A6ABE32B8EA2BF04"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -171,19 +208,19 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LMMSetup"
         "ProductCode" = "8:{585C3103-BB89-498D-B7F4-2D85EB98C94B}"
-        "PackageCode" = "8:{2D390A8D-70A3-48C9-9519-5182BFC5D2E2}"
+        "PackageCode" = "8:{8FBA6F8A-6828-416D-A033-D3A5059CC0C3}"
         "UpgradeCode" = "8:{3D2358BD-678A-4A17-9F61-9C23259BD900}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:Herndon Morris, Inc."
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:LMMSetup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Herndon Morris, Inc."
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -290,6 +327,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3FA55BC8373345078AC5AF8412942A1D"
+            {
+            "Name" = "8:LOMM"
+            "Arguments" = "8:"
+            "Description" = "8:LOTRO Music Manager"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_EED2738FDB79408DB5F280EB277141CC"
+            "Folder" = "8:_4543249EE51B4B38B98712A80E62E545"
+            "WorkingFolder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
+            "Icon" = "8:_C7798561242C4C1E86031F21AAEF28C0"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C78A6291CE1842DA92D1B609DDC5220A"
+            {
+            "Name" = "8:LOMM"
+            "Arguments" = "8:"
+            "Description" = "8:LOTRO Music Manager"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_EED2738FDB79408DB5F280EB277141CC"
+            "Folder" = "8:_AF3D54F164F04FB1A54636E87506E80A"
+            "WorkingFolder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
+            "Icon" = "8:_C7798561242C4C1E86031F21AAEF28C0"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -689,34 +754,6 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8191B76904674DE79685C2870926E050"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:SourceFiles"
-            "OutputProjectGuid" = "8:{A2613B56-1290-4CA2-9F0D-C7F7062797B7}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EED2738FDB79408DB5F280EB277141CC"
             {
             "SourcePath" = "8:..\\LOTROMusicManager\\obj\\Debug\\LOTROMusicManager.exe"
