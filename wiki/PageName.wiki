@@ -1,8 +1,0 @@
-#summary Comments page
-
-= Introduction =
-
-Add comments if you need to reach the author.
-
-
-= Details =
