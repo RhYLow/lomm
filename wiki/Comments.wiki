@@ -1,7 +1,6 @@
 #summary Page for comments from users
+#labels Featured
 
 = Introduction =
 
 Add comments here if you want to reach the author. Or email Carborunda.Riverside@pobox.com
-
-
