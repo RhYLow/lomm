@@ -571,36 +571,29 @@ namespace LOTROMusicManager
 
     public class ColumnSorter : System.Collections.IComparer
     {
-        List<String> _lstIgnore   = new List<string>();
-        private int  _nCurrentCol = 0;
-        public int CurrentCol {get {return _nCurrentCol;} set {_nCurrentCol = value;}}
-        
-        int System.Collections.IComparer.Compare(object x, object y)
-        {
-            ListViewItem rowA = (ListViewItem)x; String strA = rowA.SubItems[CurrentCol].Text;
-            ListViewItem rowB = (ListViewItem)y; String strB = rowB.SubItems[CurrentCol].Text;
-            switch (_nCurrentCol)
-            {
-                default:
-                    //Trouble
-                    throw new Exception("Unknown column being sorted");
+        private List<String> _lstIgnore = new List<string>();
+        public int CurrentCol {get; set;} // Yay for new 2008 simple property syntax!
 
-                case 0:
-                    return SortName(strA, strB);
-
-                case 1:
-                    return SortPath(strA, strB);
-            }
-        }
-        public ColumnSorter() 
+        public ColumnSorter()
         {//--------------------------------------------------------------------
             // Remove A, An, and The for purposes of comparing
             _lstIgnore.Add("a ");
             _lstIgnore.Add("an ");
             _lstIgnore.Add("the ");
-            return;            
+            return;
         }
 
+        int System.Collections.IComparer.Compare(object x, object y)
+        {//====================================================================
+            ListViewItem rowA = (ListViewItem)x; String strA = rowA.SubItems[CurrentCol].Text;
+            ListViewItem rowB = (ListViewItem)y; String strB = rowB.SubItems[CurrentCol].Text;
+            switch (CurrentCol)
+            {
+                default: throw new Exception("Unknown column being sorted");
+                case 0:  return SortName(strA, strB);
+                case 1:  return SortPath(strA, strB);
+            }
+        }
         int SortName(String strA, String strB)
         {//--------------------------------------------------------------------
             // Remove any prefixes we want to ignore
@@ -615,18 +608,25 @@ namespace LOTROMusicManager
         int SortPath(String strA, String strB)
         {//--------------------------------------------------------------------
             // One or more has as subdir in it
-            // cases to consider:
-            // bbb.abc vs. stuff/aaa.abc > aaa is first
-            // stuff/bbb.abc vs. tmp/aaa.abc > aaa is first
-            // stuff/zzz/bbb.abc vs. tmp/aaa.abc > aaa is first
+            // Cases to consider:
+            //   bbb.abc           stuff/aaa.abc > bbb is first
+            //   stuff/bbb.abc     tmp/aaa.abc   > bbb is first
+            //   stuff/zzz/bbb.abc tmp/aaa.abc   > bbb is first
+            
+            // Need to fake up a dir name for the root so we have parallelism: 
+            // .\aaa.abc and stuff\bbb.abc have to compare at the same depths
             if (strA.IndexOfAny(@"/\".ToCharArray()) == -1) strA = @".\" + strA;
             if (strB.IndexOfAny(@"/\".ToCharArray()) == -1) strB = @".\" + strB;
+            
             String[] aPartsA = strA.Split(@"/\".ToCharArray()); 
             String[] aPartsB = strB.Split(@"/\".ToCharArray());
+            
+            // Compare parallel elements of the arrays
             for (int i = 0; i < (aPartsA.Length < aPartsB.Length ? aPartsA.Length : aPartsB.Length); i += 1)
             {
                 if (aPartsA[i] != aPartsB[i]) return String.Compare(aPartsA[i], aPartsB[i]);
             }
+            
             // Okay, we walked off the end of one of the arrays, so return the shorter of the two as first
             return aPartsA.Length - aPartsB.Length; // Will be negative if B is longer, making A first. And vice-versa.
         }
