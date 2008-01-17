@@ -85,6 +85,7 @@
   &lt;string&gt;  /smoke1&lt;/string&gt;
   &lt;string&gt;  /story&lt;/string&gt;
   &lt;string&gt;  /talk&lt;/string&gt;
+  &lt;string&gt; /dustoff&lt;/string&gt;
   &lt;string&gt;(respond)&lt;/string&gt;
   &lt;string&gt;  /cheer&lt;/string&gt;
   &lt;string&gt;  /clap&lt;/string&gt;
@@ -93,7 +94,6 @@
   &lt;string&gt;  /fidget&lt;/string&gt;
   &lt;string&gt;  /impatient&lt;/string&gt;
   &lt;string&gt;  /cry&lt;/string&gt;
-  &lt;string&gt;  /think&lt;/string&gt;
   &lt;string&gt;  /whistle&lt;/string&gt;
   &lt;string&gt;  /yawn&lt;/string&gt;
   &lt;string&gt;(hobbits)&lt;/string&gt;
@@ -118,6 +118,33 @@
   &lt;string&gt;  /mood_solemn&lt;/string&gt;
   &lt;string&gt;  /mood_surprised&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="Bestowals" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Bestows an Emote&lt;/string&gt;
+  &lt;string&gt; /cheer (grants /firebreath - receive 100 - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /bow  (grants /heropose - receive 100 - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /laugh (grants /juggle - receive 200 - max 6/day)&lt;/string&gt;
+  &lt;string&gt; /salute (grants /swordsalute - receive 100 - max 5/day)&lt;/string&gt;
+  &lt;string&gt;Bestowes a Title&lt;/string&gt;
+  &lt;string&gt; /hug (grants The Adorable: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /flirt (grants The Alluring: 100 times  - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /confused (grants The Befuddling: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /kiss (grants The Beloved: 100 times - max 5/day) &lt;/string&gt;
+  &lt;string&gt; /bored (grants The Dull: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /beg (grants The Harrassed: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /thank (grants The Helpful: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /angry (grants The Infuriating: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /rude (grants The Insulted: 200 times - max 5?/day)&lt;/string&gt;
+  &lt;string&gt; /cower (grants The Intimidating: 40 times - max 2/day)&lt;/string&gt;
+  &lt;string&gt; /scold (grants The Naughty:  100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /mock (grants The Ridiculed: 100 times - max 5/day)&lt;/string&gt;
+  &lt;string&gt; /surrender (grants The Victorious: 40 times - max 2/day)&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="MillisWaitOnCommand" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">250</Value>
     </Setting>
   </Settings>
 </SettingsFile>

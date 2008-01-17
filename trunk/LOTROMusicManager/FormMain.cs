@@ -19,7 +19,8 @@ namespace LOTROMusicManager
     public partial class FormMain: Form
     {
     #region Properties and types
-        private String          _strFileNameShowing;
+        //private String          _strFileNameShowing;
+        private int             _nSelectedFile = -1;
         private ColumnSorter    _sorter = new ColumnSorter();
         
         private enum PlayTypes {Immediate, Sync}
@@ -43,9 +44,10 @@ namespace LOTROMusicManager
         {//--------------------------------------------------------------------
             ReloadFileList();
             ShowSelectedFile();
-            InsertMenuItems(Properties.Settings.Default.Dances, mniDances, OnEmote);
-            InsertMenuItems(Properties.Settings.Default.Emotes, mniEmotes, OnEmote);
-            InsertMenuItems(Properties.Settings.Default.Moods,  mniMoods,  OnEmote);
+            InsertMenuItems(Properties.Settings.Default.Dances,     mniDances,    OnEmote);
+            InsertMenuItems(Properties.Settings.Default.Emotes,     mniEmotes,    OnEmote);
+            InsertMenuItems(Properties.Settings.Default.Moods,      mniMoods,     OnEmote);
+            InsertMenuItems(Properties.Settings.Default.Bestowals,  mniBestowals, OnEmote);
 
             mniOpacity.SelectedIndex = (int)(10*(1-Opacity));
             //TODO: Get EditorFontSize menu an initial value 
@@ -53,16 +55,18 @@ namespace LOTROMusicManager
             // Auto-binding size or AOT causes all sorts of mess 
             Size = (Size)Properties.Settings.Default.WindowSize;
             TopMost = Properties.Settings.Default.AOT;
+            Location = (Point)Properties.Settings.Default.WindowLocation;
 
             // Simulate a click on the "Title" column. Much more useful than starting with
             // the filename sorted.
-            ColumnClickEventArgs eClick = new ColumnClickEventArgs(1);
+            ColumnClickEventArgs eClick = new ColumnClickEventArgs(0);
             OnColumnClick(new object(), eClick);
             return;
         }                           
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
+            Properties.Settings.Default.WindowLocation = Location;
             Properties.Settings.Default.WindowSize = Size;
             Properties.Settings.Default.AOT = TopMost;
             Properties.Settings.Default.Save();
@@ -76,6 +80,21 @@ namespace LOTROMusicManager
             _abcref.Visible = true;
             return;
         }
+
+        private void OnHelpAbout(object sender, EventArgs e)
+        {//====================================================================
+            AboutBox ab = new AboutBox();
+            ab.ShowDialog();
+            return;
+        }
+
+        private void OnExit(object sender, EventArgs e)
+        {//====================================================================
+            _abcref.Close();
+            Close();
+            return;            
+        }
+
     #endregion
 
     #region Sending Keys and Commands to LOTRO
@@ -142,16 +161,15 @@ namespace LOTROMusicManager
             SDK.INPUT input = new SDK.INPUT();
             input.type = (int)SDK.InputType.INPUT_KEYBOARD;
             input.ki.wVk = 0;
-            input.ki.wScan = 0;
             input.ki.time = 0;
             input.ki.dwFlags = 0;
             input.ki.dwExtraInfo = (IntPtr)0;
             input.ki.wScan = (short)ch;
-
-            input.ki.dwFlags = (int)SDK.KEYEVENTF.UNICODE;  // Nothing added implies keydown
+            
+            input.ki.dwFlags = (int)SDK.KEYEVENTF.UNICODE & ~(int)SDK.KEYEVENTF.KEYUP;  // Not Keyup
             SDK.SendInput(1, ref input, Marshal.SizeOf(input));
 
-            input.ki.dwFlags |= (int)SDK.KEYEVENTF.KEYUP;   // And now lift the key up... UNICODE is still set
+            input.ki.dwFlags = (int)SDK.KEYEVENTF.UNICODE |  (int)SDK.KEYEVENTF.KEYUP;   // And now lift the key up
             SDK.SendInput(1, ref input, Marshal.SizeOf(input));
             return;
         } // SendChar
@@ -188,7 +206,13 @@ namespace LOTROMusicManager
             if (dlgSaveAs.ShowDialog() == DialogResult.OK)
             {
                 FileInfo fi = new FileInfo(dlgSaveAs.FileName);
-                fi.Create();
+                Stream stm = this.GetType().Assembly.GetManifestResourceStream("LOTROMusicManager.Resources.NewABC.txt");
+                Byte[] ab = new Byte[stm.Length + 1];
+                stm.Read(ab, 0, (int)stm.Length);  // If someone tries to make a default ABC file over (signed int) in length, they deserve to phail
+                FileStream fs = fi.Open(FileMode.Create);
+                fs.Write(ab, 0, (int)stm.Length);
+                fs.Close();
+                
                 ReloadFileList();
                 ListViewItem item = lstFiles.FindItemWithText(new FileInfo(dlgSaveAs.FileName).Name);
                 if (item != null) 
@@ -210,7 +234,7 @@ namespace LOTROMusicManager
 
             lstFiles.SuspendLayout();
             lstFiles.Items.Clear();
-            FileInfo[] afi = di.GetFiles();
+            FileInfo[] afi = di.GetFiles("*.*", SearchOption.AllDirectories);
             foreach (FileInfo fi in afi)
             {
                 //TODO: Find the T: line, if any
@@ -229,8 +253,8 @@ namespace LOTROMusicManager
                 sr.Close();
                 sr.Dispose();
 
-                ListViewItem li = new ListViewItem(fi.Name);
-                li.SubItems.Add(new ListViewItem.ListViewSubItem(li, strTitle));
+                ListViewItem li = new ListViewItem(strTitle);
+                li.SubItems.Add(new ListViewItem.ListViewSubItem(li, fi.FullName.Substring((strDir + @"\" + @"The Lord of the Rings Online\music").Length + 1)));
                 lstFiles.Items.Add(li);
             }
             lstFiles.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -259,19 +283,18 @@ namespace LOTROMusicManager
                     case DialogResult.Yes:
                         // Just save and continue
                         //TODO: Need FQN
-                        SaveFileAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + _strFileNameShowing);
+                        SaveFileAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.Items[_nSelectedFile].SubItems[1].Text);
                         break;
                     
                     case DialogResult.Cancel:
                         // Re-select the old line
-                        ListViewItem lvi = lstFiles.FindItemWithText(_strFileNameShowing);
-                        if (lvi != null)
+                        try
                         {
-                            lvi.Selected = true;
-                            return;
+                            lstFiles.Items[_nSelectedFile].Selected = true;
                         }
+                        catch (Exception ex){ex.ToString();} // Makes the warning go away. I *know* I want to ignore this error case.
                         break;
-                    
+
                     case DialogResult.No:
                         // Nothing to do. Just exit the switch and carry on
                         break;                               
@@ -280,11 +303,11 @@ namespace LOTROMusicManager
             ShowSelectedFile();
             if (lstFiles.SelectedItems.Count > 0)
             {
-                _strFileNameShowing = lstFiles.SelectedItems[0].Text;
+                _nSelectedFile = lstFiles.SelectedIndices[0];
             }
             else
             {
-                _strFileNameShowing = null;
+                _nSelectedFile = -1;
             }
             btnPlay.Enabled = true;
             return;
@@ -294,7 +317,7 @@ namespace LOTROMusicManager
         {//====================================================================
             if (lstFiles.SelectedItems.Count > 0)
             {
-                PlayFile(lstFiles.SelectedItems[0].Text);
+                PlayFile(lstFiles.SelectedItems[0].SubItems[1].Text);
             }
             return;
         }
@@ -304,6 +327,8 @@ namespace LOTROMusicManager
         private void OnToggleMusicMode(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             ExecuteString(Properties.Settings.Default.ToggleMusicCommand);
+            System.Threading.Thread.Sleep(Properties.Settings.Default.MillisWaitOnCommand);
+            Activate(); // Return focus to the app
             return;
         }
 
@@ -332,7 +357,7 @@ namespace LOTROMusicManager
             if (lstFiles.SelectedItems.Count > 0)
             {
                 SaveFile();
-                PlayFile(lstFiles.SelectedItems[0].Text);
+                PlayFile(lstFiles.SelectedItems[0].SubItems[1].Text);
             }
             return;
         } // OnPlay
@@ -346,13 +371,24 @@ namespace LOTROMusicManager
             return;
         }
 
+        String ConvertNonDosFile(String str)
+        {
+            // If we have any dos newlines, use the file as-is
+            if (str.IndexOf('\r') != -1) return str;
+
+            // split on unix newlines and join with dos newlines
+            Char[]   aLF = { '\n' };
+            String[] aLines = str.Split(aLF, StringSplitOptions.None);
+            return String.Join("\r\n", aLines);
+        }
+
         private void ShowSelectedFile()
         {//--------------------------------------------------------------------
             if (lstFiles.SelectedItems.Count > 0)
             {
-                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.SelectedItems[0].Text;
+                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
                 StreamReader sr = new StreamReader(strFileName);
-                txtABC.Text = sr.ReadToEnd();
+                txtABC.Text = ConvertNonDosFile(sr.ReadToEnd());
                 sr.Close();
                 sr.Dispose();
 
@@ -395,7 +431,7 @@ namespace LOTROMusicManager
         {//--------------------------------------------------------------------
             if (lstFiles.SelectedItems.Count > 0)
             {
-                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.SelectedItems[0].Text;
+                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
                 SaveFileAs(strFileName);
             }
         }
@@ -406,11 +442,12 @@ namespace LOTROMusicManager
             return;
         }
 
-        private void OnUpdateEditor(object sender, EventArgs e)
+        private void OnEditorKeyUp   (object sender, KeyEventArgs e)     {OnUpdateEditor(sender, e);}
+        private void OnEditorMouseUp (object sender, MouseEventArgs e)   {OnUpdateEditor(sender, e);}
+        private void OnEditorKeyPress(object sender, KeyPressEventArgs e){OnUpdateEditor(sender, e);}
+        private void OnEditorClick   (object sender, EventArgs e)        {OnUpdateEditor(sender, e);}
+        private void OnUpdateEditor  (object sender, EventArgs e)
         {//--------------------------------------------------------------------
-            
-            // e could be a MouseEventArgs, a KeyEventArgs, or a generic
-            // EventArgs, if we ever care
             System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(UpdateCursorLocation));
             return;
         }
@@ -495,7 +532,15 @@ namespace LOTROMusicManager
             ToolStripItem item = (ToolStripItem)sender;
             if (IsCommand(item.Text))
             {
-                ExecuteString(item.Text.Trim());
+                String s = item.Text;
+                // If it has a parens in it, remove it. That's a comment.
+                if (s.Contains("("))
+                {
+                    s = s.Remove(s.IndexOf('('));
+                }
+                ExecuteString(s.Trim());
+                System.Threading.Thread.Sleep(Properties.Settings.Default.MillisWaitOnCommand);
+                Activate(); // Keep focus for multiple emotes
             }
             else
             {
@@ -521,29 +566,69 @@ namespace LOTROMusicManager
             return;
         }
     #endregion
+
     } // class
 
     public class ColumnSorter : System.Collections.IComparer
     {
-        private int _nCurrentCol = 0;
+        List<String> _lstIgnore   = new List<string>();
+        private int  _nCurrentCol = 0;
         public int CurrentCol {get {return _nCurrentCol;} set {_nCurrentCol = value;}}
+        
         int System.Collections.IComparer.Compare(object x, object y)
         {
-            List<String> lstIgnore = new List<string>();
-            lstIgnore.Add("the ");
-            lstIgnore.Add("an ");
-            lstIgnore.Add("a ");
+            ListViewItem rowA = (ListViewItem)x; String strA = rowA.SubItems[CurrentCol].Text;
+            ListViewItem rowB = (ListViewItem)y; String strB = rowB.SubItems[CurrentCol].Text;
+            switch (_nCurrentCol)
+            {
+                default:
+                    //Trouble
+                    throw new Exception("Unknown column being sorted");
 
-            ListViewItem rowA = (ListViewItem)x; String strA = rowA.SubItems[CurrentCol].Text.Trim();
-            ListViewItem rowB = (ListViewItem)y; String strB = rowB.SubItems[CurrentCol].Text.Trim();
-            
-            foreach (String s in lstIgnore)
+                case 0:
+                    return SortName(strA, strB);
+
+                case 1:
+                    return SortPath(strA, strB);
+            }
+        }
+        public ColumnSorter() 
+        {//--------------------------------------------------------------------
+            // Remove A, An, and The for purposes of comparing
+            _lstIgnore.Add("a ");
+            _lstIgnore.Add("an ");
+            _lstIgnore.Add("the ");
+            return;            
+        }
+
+        int SortName(String strA, String strB)
+        {//--------------------------------------------------------------------
+            // Remove any prefixes we want to ignore
+            foreach (String s in _lstIgnore)
             {
                 if (strA.StartsWith(s, StringComparison.CurrentCultureIgnoreCase)) strA = strA.Substring(s.Length);
                 if (strB.StartsWith(s, StringComparison.CurrentCultureIgnoreCase)) strB = strB.Substring(s.Length);
             }
-            return String.Compare(strA, strB); 
+            return String.Compare(strA, strB);
         }
-        public ColumnSorter() {}
+
+        int SortPath(String strA, String strB)
+        {//--------------------------------------------------------------------
+            // One or more has as subdir in it
+            // cases to consider:
+            // bbb.abc vs. stuff/aaa.abc > aaa is first
+            // stuff/bbb.abc vs. tmp/aaa.abc > aaa is first
+            // stuff/zzz/bbb.abc vs. tmp/aaa.abc > aaa is first
+            if (strA.IndexOfAny(@"/\".ToCharArray()) == -1) strA = @".\" + strA;
+            if (strB.IndexOfAny(@"/\".ToCharArray()) == -1) strB = @".\" + strB;
+            String[] aPartsA = strA.Split(@"/\".ToCharArray()); 
+            String[] aPartsB = strB.Split(@"/\".ToCharArray());
+            for (int i = 0; i < (aPartsA.Length < aPartsB.Length ? aPartsA.Length : aPartsB.Length); i += 1)
+            {
+                if (aPartsA[i] != aPartsB[i]) return String.Compare(aPartsA[i], aPartsB[i]);
+            }
+            // Okay, we walked off the end of one of the arrays, so return the shorter of the two as first
+            return aPartsA.Length - aPartsB.Length; // Will be negative if B is longer, making A first. And vice-versa.
+        }
     }
 } // namespace

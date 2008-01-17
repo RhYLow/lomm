@@ -1,28 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOTROMusicManager", "LOTROMusicManager\LOTROMusicManager.csproj", "{A2613B56-1290-4CA2-9F0D-C7F7062797B7}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Style Enforcer", "Code Style Enforcer", "{A2D1E299-2A79-4368-8B1B-EACF157F8742}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml
 		..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml
 		..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOTROMusicManager", "LOTROMusicManager\LOTROMusicManager.csproj", "{A2613B56-1290-4CA2-9F0D-C7F7062797B7}"
+EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LOMMSetup", "LMMSetup\LMMSetup.vdproj", "{0F043263-05E6-4EA3-BFA0-6186885DFA56}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,7 +30,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		CodeStyleEnforcer_RulesLocation = 0
 		CodeStyleEnforcer_Active = -1
+		CodeStyleEnforcer_RulesLocation = 0
 	EndGlobalSection
 EndGlobal

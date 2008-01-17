@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_C7798561242C4C1E86031F21AAEF28C0"
+        "MsmKey" = "8:_A6BDBC6E003045B780624F1A1FF6EA07"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -121,9 +121,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7798561242C4C1E86031F21AAEF28C0"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A6BDBC6E003045B780624F1A1FF6EA07"
             {
-            "SourcePath" = "8:..\\LOTROMusicManager\\LOMM.ico"
+            "SourcePath" = "8:..\\LOTROMusicManager\\Resources\\LOMM.ico"
             "TargetName" = "8:LOMM.ico"
             "Tag" = "8:"
             "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
@@ -208,7 +208,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LMMSetup"
         "ProductCode" = "8:{585C3103-BB89-498D-B7F4-2D85EB98C94B}"
-        "PackageCode" = "8:{8FBA6F8A-6828-416D-A033-D3A5059CC0C3}"
+        "PackageCode" = "8:{5997309A-AA84-4D13-AEC1-D1174BB91B08}"
         "UpgradeCode" = "8:{3D2358BD-678A-4A17-9F61-9C23259BD900}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -338,7 +338,7 @@
             "Target" = "8:_EED2738FDB79408DB5F280EB277141CC"
             "Folder" = "8:_4543249EE51B4B38B98712A80E62E545"
             "WorkingFolder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
-            "Icon" = "8:_C7798561242C4C1E86031F21AAEF28C0"
+            "Icon" = "8:_A6BDBC6E003045B780624F1A1FF6EA07"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C78A6291CE1842DA92D1B609DDC5220A"
@@ -352,7 +352,7 @@
             "Target" = "8:_EED2738FDB79408DB5F280EB277141CC"
             "Folder" = "8:_AF3D54F164F04FB1A54636E87506E80A"
             "WorkingFolder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
-            "Icon" = "8:_C7798561242C4C1E86031F21AAEF28C0"
+            "Icon" = "8:_A6BDBC6E003045B780624F1A1FF6EA07"
             "Feature" = "8:"
             }
         }
@@ -756,7 +756,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EED2738FDB79408DB5F280EB277141CC"
             {
-            "SourcePath" = "8:..\\LOTROMusicManager\\obj\\Debug\\LOTROMusicManager.exe"
+            "SourcePath" = "8:..\\LOTROMusicManager\\obj\\Release\\LOTROMusicManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
