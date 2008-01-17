@@ -30,8 +30,8 @@ namespace LOTROMusicManager
         private void OnLoad(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             // Open the resource we need
-            Stream s = this.GetType().Assembly.GetManifestResourceStream("LOTROMusicManager.Help.ABCRef.rtf");
-            rtfABCRef.LoadFile(s, RichTextBoxStreamType.RichText);
+            Stream stm = this.GetType().Assembly.GetManifestResourceStream("LOTROMusicManager.Help.ABCRef.rtf");
+            rtfABCRef.LoadFile(stm, RichTextBoxStreamType.RichText);
             return;
         }
     }
