@@ -33,7 +33,6 @@ namespace LOTROMusicManager
             System.Windows.Forms.SplitContainer splitContainer1;
             System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
             System.Windows.Forms.MenuStrip menuStrip1;
-            System.Windows.Forms.ToolStripMenuItem playTypeToolStripMenuItem;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -50,14 +49,14 @@ namespace LOTROMusicManager
             this.txtABC = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
             this.btnToggleMusicMode = new System.Windows.Forms.Button();
-            this.chkSync = new System.Windows.Forms.CheckBox();
-            this.btnStartSync = new System.Windows.Forms.Button();
+            this.btnPlay = new InstantUpdate.Controls.SplitButton();
+            this.mnuPlay = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniDDPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniDDPlaySync = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniDDStartSync = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mniPlay = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniPlayTypeImmediate = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniPlayTypeSync = new System.Windows.Forms.ToolStripMenuItem();
             this.mniNew = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSaveABC = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSaveAs = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,7 +91,6 @@ namespace LOTROMusicManager
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
-            playTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -105,6 +103,7 @@ namespace LOTROMusicManager
             splitContainer1.SuspendLayout();
             this.mnuListContext.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            this.mnuPlay.SuspendLayout();
             menuStrip1.SuspendLayout();
             this.statPane.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -217,19 +216,15 @@ namespace LOTROMusicManager
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.ColumnCount = 6;
+            tableLayoutPanel2.ColumnCount = 4;
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             tableLayoutPanel2.Controls.Add(this.btnSave, 0, 0);
             tableLayoutPanel2.Controls.Add(this.btnUndo, 1, 0);
-            tableLayoutPanel2.Controls.Add(this.btnPlay, 5, 0);
-            tableLayoutPanel2.Controls.Add(this.btnToggleMusicMode, 4, 0);
-            tableLayoutPanel2.Controls.Add(this.chkSync, 2, 0);
-            tableLayoutPanel2.Controls.Add(this.btnStartSync, 3, 0);
+            tableLayoutPanel2.Controls.Add(this.btnToggleMusicMode, 2, 0);
+            tableLayoutPanel2.Controls.Add(this.btnPlay, 3, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 561);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -244,7 +239,7 @@ namespace LOTROMusicManager
             this.btnSave.Location = new System.Drawing.Point(3, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(74, 28);
-            this.btnSave.TabIndex = 0;
+            this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save ABC";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.OnSaveABC);
@@ -255,56 +250,66 @@ namespace LOTROMusicManager
             this.btnUndo.Location = new System.Drawing.Point(83, 3);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(111, 28);
-            this.btnUndo.TabIndex = 1;
+            this.btnUndo.TabIndex = 2;
             this.btnUndo.Text = "Undo All Changes";
             this.btnUndo.UseVisualStyleBackColor = true;
             this.btnUndo.Click += new System.EventHandler(this.OnUndoAll);
             // 
+            // btnToggleMusicMode
+            // 
+            this.btnToggleMusicMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToggleMusicMode.Location = new System.Drawing.Point(518, 3);
+            this.btnToggleMusicMode.Name = "btnToggleMusicMode";
+            this.btnToggleMusicMode.Size = new System.Drawing.Size(94, 28);
+            this.btnToggleMusicMode.TabIndex = 5;
+            this.btnToggleMusicMode.Text = "Toggle /music";
+            this.btnToggleMusicMode.UseVisualStyleBackColor = true;
+            this.btnToggleMusicMode.Click += new System.EventHandler(this.OnToggleMusicMode);
+            // 
             // btnPlay
             // 
             this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPlay.Enabled = false;
-            this.btnPlay.Location = new System.Drawing.Point(638, 3);
+            this.btnPlay.AutoSize = true;
+            this.btnPlay.ContextMenuStrip = this.mnuPlay;
+            this.btnPlay.Location = new System.Drawing.Point(637, 3);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(99, 28);
-            this.btnPlay.TabIndex = 2;
+            this.btnPlay.Size = new System.Drawing.Size(100, 28);
+            this.btnPlay.SplitMenu = this.mnuPlay;
+            this.btnPlay.TabIndex = 6;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.OnPlay);
             // 
-            // btnToggleMusicMode
+            // mnuPlay
             // 
-            this.btnToggleMusicMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToggleMusicMode.Location = new System.Drawing.Point(502, 3);
-            this.btnToggleMusicMode.Name = "btnToggleMusicMode";
-            this.btnToggleMusicMode.Size = new System.Drawing.Size(130, 28);
-            this.btnToggleMusicMode.TabIndex = 3;
-            this.btnToggleMusicMode.Text = "Toggle Music Mode";
-            this.btnToggleMusicMode.UseVisualStyleBackColor = true;
-            this.btnToggleMusicMode.Click += new System.EventHandler(this.OnToggleMusicMode);
+            this.mnuPlay.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniDDPlay,
+            this.mniDDPlaySync,
+            this.mniDDStartSync});
+            this.mnuPlay.Name = "mnuPlay";
+            this.mnuPlay.ShowImageMargin = false;
+            this.mnuPlay.Size = new System.Drawing.Size(113, 70);
             // 
-            // chkSync
+            // mniDDPlay
             // 
-            this.chkSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkSync.AutoSize = true;
-            this.chkSync.Location = new System.Drawing.Point(233, 3);
-            this.chkSync.Name = "chkSync";
-            this.chkSync.Size = new System.Drawing.Size(84, 17);
-            this.chkSync.TabIndex = 4;
-            this.chkSync.Text = "Syn&chronize";
-            this.chkSync.UseVisualStyleBackColor = true;
-            this.chkSync.Click += new System.EventHandler(this.OnToggleSync);
+            this.mniDDPlay.Name = "mniDDPlay";
+            this.mniDDPlay.Size = new System.Drawing.Size(112, 22);
+            this.mniDDPlay.Text = "&Play";
+            this.mniDDPlay.Click += new System.EventHandler(this.OnDDPlay);
             // 
-            // btnStartSync
+            // mniDDPlaySync
             // 
-            this.btnStartSync.Enabled = false;
-            this.btnStartSync.Location = new System.Drawing.Point(323, 3);
-            this.btnStartSync.Name = "btnStartSync";
-            this.btnStartSync.Size = new System.Drawing.Size(75, 28);
-            this.btnStartSync.TabIndex = 5;
-            this.btnStartSync.Text = "Start Sync";
-            this.btnStartSync.UseVisualStyleBackColor = true;
-            this.btnStartSync.Click += new System.EventHandler(this.OnStartSync);
+            this.mniDDPlaySync.Name = "mniDDPlaySync";
+            this.mniDDPlaySync.Size = new System.Drawing.Size(112, 22);
+            this.mniDDPlaySync.Text = "&Wait to play";
+            this.mniDDPlaySync.Click += new System.EventHandler(this.OnDDWaitToPlay);
+            // 
+            // mniDDStartSync
+            // 
+            this.mniDDStartSync.Name = "mniDDStartSync";
+            this.mniDDStartSync.Size = new System.Drawing.Size(112, 22);
+            this.mniDDStartSync.Text = "&Start group";
+            this.mniDDStartSync.Click += new System.EventHandler(this.OnDDStartSyncPlay);
             // 
             // menuStrip1
             // 
@@ -328,7 +333,6 @@ namespace LOTROMusicManager
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniPlay,
-            playTypeToolStripMenuItem,
             toolStripSeparator3,
             this.mniNew,
             this.mniSaveABC,
@@ -348,32 +352,6 @@ namespace LOTROMusicManager
             this.mniPlay.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.mniPlay.Size = new System.Drawing.Size(242, 22);
             this.mniPlay.Text = "&Play File";
-            // 
-            // playTypeToolStripMenuItem
-            // 
-            playTypeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniPlayTypeImmediate,
-            this.mniPlayTypeSync});
-            playTypeToolStripMenuItem.Name = "playTypeToolStripMenuItem";
-            playTypeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            playTypeToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
-            playTypeToolStripMenuItem.Text = "Play &Type";
-            // 
-            // mniPlayTypeImmediate
-            // 
-            this.mniPlayTypeImmediate.Checked = true;
-            this.mniPlayTypeImmediate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mniPlayTypeImmediate.Name = "mniPlayTypeImmediate";
-            this.mniPlayTypeImmediate.Size = new System.Drawing.Size(145, 22);
-            this.mniPlayTypeImmediate.Text = "Immediate";
-            this.mniPlayTypeImmediate.Click += new System.EventHandler(this.OnSelectPlayImmediate);
-            // 
-            // mniPlayTypeSync
-            // 
-            this.mniPlayTypeSync.Name = "mniPlayTypeSync";
-            this.mniPlayTypeSync.Size = new System.Drawing.Size(145, 22);
-            this.mniPlayTypeSync.Text = "Synchronized";
-            this.mniPlayTypeSync.Click += new System.EventHandler(this.OnSelectPlaySync);
             // 
             // toolStripSeparator3
             // 
@@ -551,9 +529,13 @@ namespace LOTROMusicManager
             // 
             // mniDances
             // 
+            this.mniDances.Checked = true;
+            this.mniDances.CheckState = System.Windows.Forms.CheckState.Indeterminate;
             this.mniDances.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.mniDances.Name = "mniDances";
+            this.mniDances.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded;
             this.mniDances.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.mniDances.ShowShortcutKeys = false;
             this.mniDances.Size = new System.Drawing.Size(53, 20);
             this.mniDances.Text = "Dances";
             // 
@@ -561,7 +543,9 @@ namespace LOTROMusicManager
             // 
             this.mniEmotes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.mniEmotes.Name = "mniEmotes";
+            this.mniEmotes.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded;
             this.mniEmotes.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.mniEmotes.ShowShortcutKeys = false;
             this.mniEmotes.Size = new System.Drawing.Size(54, 20);
             this.mniEmotes.Text = "Emotes";
             // 
@@ -575,7 +559,9 @@ namespace LOTROMusicManager
             // 
             // mniBestowals
             // 
+            this.mniBestowals.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.mniBestowals.Name = "mniBestowals";
+            this.mniBestowals.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded;
             this.mniBestowals.Size = new System.Drawing.Size(71, 20);
             this.mniBestowals.Text = "Bestowals";
             // 
@@ -673,7 +659,6 @@ namespace LOTROMusicManager
             // 
             // FormMain
             // 
-            this.AcceptButton = this.btnPlay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = global::LOTROMusicManager.Properties.Settings.Default.WindowSize;
@@ -697,6 +682,7 @@ namespace LOTROMusicManager
             this.mnuListContext.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
+            this.mnuPlay.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             this.statPane.ResumeLayout(false);
@@ -727,15 +713,10 @@ namespace LOTROMusicManager
         private System.Windows.Forms.TextBox txtABC;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnUndo;
-        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnToggleMusicMode;
-        private System.Windows.Forms.CheckBox chkSync;
-        private System.Windows.Forms.Button btnStartSync;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mniPlay;
-        private System.Windows.Forms.ToolStripMenuItem mniPlayTypeImmediate;
-        private System.Windows.Forms.ToolStripMenuItem mniPlayTypeSync;
         private System.Windows.Forms.ToolStripMenuItem mniNew;
         private System.Windows.Forms.ToolStripMenuItem mniSaveABC;
         private System.Windows.Forms.ToolStripMenuItem mniSaveAs;
@@ -759,6 +740,11 @@ namespace LOTROMusicManager
         private System.Windows.Forms.ToolStripMenuItem mniListContextRefresh;
         private System.Windows.Forms.ToolStripMenuItem aBCQuickReferenceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mniBestowals;
+        private InstantUpdate.Controls.SplitButton btnPlay;
+        private System.Windows.Forms.ContextMenuStrip mnuPlay;
+        private System.Windows.Forms.ToolStripMenuItem mniDDPlay;
+        private System.Windows.Forms.ToolStripMenuItem mniDDPlaySync;
+        private System.Windows.Forms.ToolStripMenuItem mniDDStartSync;
     }
 }
 

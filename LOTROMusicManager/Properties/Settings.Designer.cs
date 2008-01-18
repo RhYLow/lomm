@@ -304,5 +304,86 @@ namespace LOTROMusicManager.Properties {
                 return ((int)(this["MillisWaitOnCommand"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/playstart")]
+        public string StartSyncCommand {
+            get {
+                return ((string)(this["StartSyncCommand"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("M:")]
+        public string ABCTagMeter {
+            get {
+                return ((string)(this["ABCTagMeter"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Q:")]
+        public string ABCTagTempo {
+            get {
+                return ((string)(this["ABCTagTempo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("K:")]
+        public string ABCTagKey {
+            get {
+                return ((string)(this["ABCTagKey"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("A:")]
+        public string ABCTagAuthor {
+            get {
+                return ((string)(this["ABCTagAuthor"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("O:")]
+        public string ABCTagOrigin {
+            get {
+                return ((string)(this["ABCTagOrigin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Z:")]
+        public string ABCTagTranscriber {
+            get {
+                return ((string)(this["ABCTagTranscriber"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("H:")]
+        public string ABCTagHistory {
+            get {
+                return ((string)(this["ABCTagHistory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("L:")]
+        public string ABCTagUnit {
+            get {
+                return ((string)(this["ABCTagUnit"]));
+            }
+        }
     }
 }
