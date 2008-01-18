@@ -1,0 +1,56 @@
+#summary Likely-Asked Questions
+= Introduction =
+Not enough people have asked questions to make a real FAQ, but these are the questions and answers that seem most important
+
+= Details =
+
+Q) What exactly is it? What does it do?
+A) A good, short feature list is the project home page. 
+
+Q) This is an executable. Aren't those evil?
+
+A) Yep. You shouldn't run any executable that adds features to an MMO. You especially shouldn't run an executable that knows about an MMO while you're entering your password. But LOTRO doesn't have any other way to do this, and I wrote it for my own use. I still wouldn't suggest you run it before entering your password; don't get in that habit.
+
+Q) If it's evil, is it dangerous?
+A) I don't think so, but I'm biased. It doesn't receive any input from LOTRO; it only sends it commands. It can't read your password, your game mail, or your chats. It doesn't know where you are in game or what you're doing. It's just a fancy keyboard macro, like those Logitech keyboards or MIDI2KEY.
+Users with a good firewall can verify that it doesn't access the network at all.
+
+Q) Any way to back those claims up?
+A) If you're a programmer, the source code available. It's a pretty simple and short project.
+
+Q) It uninstalls?
+A) Yep.
+
+Q) Is it legal with Turbine?
+A) I doubt they'll ever say for sure. They're busy.
+It only sends commands to LOTRO in response to user input. It sends multiple keys, but only one command. The FAQ on the Logitech macroing keyboards says that it can't be used for "unattended gameplay," "automated gameplay," or to do anything against the TOS. LOMM doesn't do anything unattended or automated. I don't see how playing an ABC or sending an emote can violate the TOS, but if it would, Don't do it!
+Interestingly, the Logitech keyboard is explicitly allowed to send multiple commands to macro frequently-used sequences. Gives me some ideas for new features....
+
+Q) Wait... you don't _think_ it's a problem with Turbine?
+A) Nope. If you know of a way I can get a formal call, though, I'm listening. I think this is a very low priority to them, though.
+
+Q) Is it finished?
+A) Nope. Never will be. I'll keep tinkering with it as I go and other people may or may not want to provide requests or code for it. At some point I'll get bored. If someone else wants to take it over then, fine.
+The current "not done" list is at the link. If you see anything there that bugs you, yell at me or do it yourself. I'm easy.
+
+Q) Great! Now, there's this fabulous WoW addon I want ported...
+A) Too bad. WoW addons run inside the client using a controlled, hosted environment that has limited access to in-game constructs like quests, units, zones, etc.([http://www.wowwiki.com/World_of_Warcraft_API API]) and provides a full UI model ([http://www.wowwiki.com/Widget_API WIdget UI]). 
+
+LOTRO doesn't have any of that. LOTRO gives us limited re-skinning )getting better every patch, though) ane the ability to put any existing "slash command" (all emotes, some UI-affecting commands, saying any one line of text, but no ability use) on a button.
+
+Grid, CT, !TipBuddy, !DeCursive, etc., are all either impossible to port or would be extremely difficult and would most likely break on every client update. Even CoH-/CoV-style keybinds are not open to LOTRO, so don't ask. 
+
+Q) This really doesn't seem like a big deal.
+A) That's an opinion, not a question, but I share it. It's just a tool for editing and playing songs in a game. Use it if you like it.
+
+Q) I installed it and it sucks! It doesn't do what I want! I edited an ABC file and saved it and I want it back! I'm offended that "/belch" is in the "Hobbits" section of the emotes! My dog ran away!
+A) If you don't like it, don't use it. If you want to make your own version, check the license: you can. If you want to convince me to change something, try; I'm pretty malleable. About /belch, it didn't seem worth making a "Dwarf" section for one emote....
+Sorry about your dog, though.
+
+Q) Can I bug you in-game about it?
+A) Probably. Unless I'm in an instance. Or in a bad mood. I'm usually Carborunda on Brandywine.
+
+And finally...
+Q) "LOMM"? LOMM? Really, couldn't you do better? That "O" doesn't even stand for anything!
+A) Um. Well... I tried, but I couldn't justify the G in GLOMM :-) 
+Kind of stuck with it now, I think, unless Google Code projects can be renamed.
