@@ -1,4 +1,5 @@
 #summary Likely-Asked Questions
+#labels Featured
 = Introduction =
 Not enough people have asked questions to make a real FAQ, but these are the questions and answers that seem most important
 
