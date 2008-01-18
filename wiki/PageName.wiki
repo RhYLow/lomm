@@ -37,7 +37,7 @@ A) Too bad. WoW addons run inside the client using a controlled, hosted environm
 
  LOTRO doesn't have any of that. LOTRO gives us limited re-skinning )getting better every patch, though) ane the ability to put any existing "slash command" (all emotes, some UI-affecting commands, saying any one line of text, but no ability use) on a button.
 
- Grid, CT, TipBuddy, DeCursive, etc., are all either impossible to port or would be extremely difficult and would most likely break on every client update. Even CoH-/CoV-style keybinds are not open to LOTRO, so don't ask. 
+ Grid, CT, !TipBuddy, !DeCursive, etc., are all either impossible to port or would be extremely difficult and would most likely break on every client update. Even CoH-/CoV-style keybinds are not open to LOTRO, so don't ask. 
 
 Q) This really doesn't seem like a big deal.
 A) That's an opinion, not a question, but I share it. It's just a tool for editing and playing songs in a game. Use it if you like it.
