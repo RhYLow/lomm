@@ -146,5 +146,32 @@
     <Setting Name="MillisWaitOnCommand" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">250</Value>
     </Setting>
+    <Setting Name="StartSyncCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/playstart</Value>
+    </Setting>
+    <Setting Name="ABCTagMeter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">M:</Value>
+    </Setting>
+    <Setting Name="ABCTagTempo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Q:</Value>
+    </Setting>
+    <Setting Name="ABCTagKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">K:</Value>
+    </Setting>
+    <Setting Name="ABCTagAuthor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">A:</Value>
+    </Setting>
+    <Setting Name="ABCTagOrigin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">O:</Value>
+    </Setting>
+    <Setting Name="ABCTagTranscriber" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Z:</Value>
+    </Setting>
+    <Setting Name="ABCTagHistory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">H:</Value>
+    </Setting>
+    <Setting Name="ABCTagUnit" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">L:</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
