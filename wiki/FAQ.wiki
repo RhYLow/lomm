@@ -41,7 +41,7 @@ Not enough people have asked questions to make a real FAQ, but these are the que
 =====Q) Great! Now, there's this fabulous WoW addon I want ported...=====
   Too bad. WoW addons run inside the client using a controlled, hosted environment that has limited access to in-game constructs like quests, units, zones, etc.([http://www.wowwiki.com/World_of_Warcraft_API API]) and provides a full UI model ([http://www.wowwiki.com/Widget_API WIdget UI]). 
 
- LOTRO doesn't have any of that. LOTRO gives us limited re-skinning )getting better every patch, though) ane the ability to put any existing "slash command" (all emotes, some UI-affecting commands, saying any one line of text, but no ability use) on a button.
+ LOTRO doesn't have any of that. LOTRO gives us limited re-skinning (getting better every patch, though) and the ability to put any existing "slash command" (all emotes, some UI-affecting commands, or saying any one line of text, but no ability use) on a button.
 
  Grid, CT, !TipBuddy, !DeCursive, etc., are all either impossible to port or would be extremely difficult and would most likely break on every client update. Even CoH-/CoV-style keybinds are not open to LOTRO, so don't ask
 
