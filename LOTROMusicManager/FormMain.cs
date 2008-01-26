@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.IO;
+using LOTROMusicManager.Properties;
 
 namespace LOTROMusicManager
 {
@@ -25,20 +22,19 @@ namespace LOTROMusicManager
         protected ColumnSorter    _sorter = new ColumnSorter();
         
         private   enum PlayTypes {Immediate, Sync}
-        private   enum KeepFocus {LOMM, LOTRO}
-        protected static Regex HEADER_REGEX = new Regex("^[ \t]*([^ \t]:|%)", RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
         private bool IsCommand(String s) {return s.Trim()[0] == '/';}
 
-        protected ABCRef _abcref = new ABCRef();
+        protected FormABCRef _abcref = new FormABCRef();
+        protected FormLyrics _lyrics = new FormLyrics();
     #endregion
 
     #region Form methods
         public FormMain()
         {//====================================================================
             InitializeComponent();
-            dlgSaveAs.InitialDirectory   = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder;
-            dlgOpenFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder;
+            dlgSaveAs.InitialDirectory   = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder; 
+            dlgOpenFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder;
             return;
         }
 
@@ -46,18 +42,18 @@ namespace LOTROMusicManager
         {//--------------------------------------------------------------------
             ReloadFileList();
             ShowSelectedFile();
-            InsertMenuItems(Properties.Settings.Default.Dances,     mniDances,    OnEmote);
-            InsertMenuItems(Properties.Settings.Default.Emotes,     mniEmotes,    OnEmote);
-            InsertMenuItems(Properties.Settings.Default.Moods,      mniMoods,     OnEmote);
-            InsertMenuItems(Properties.Settings.Default.Bestowals,  mniBestowals, OnEmote);
+            InsertMenuItems(Settings.Default.Dances,     mniDances,    OnEmote);
+            InsertMenuItems(Settings.Default.Emotes,     mniEmotes,    OnEmote);
+            InsertMenuItems(Settings.Default.Moods,      mniMoods,     OnEmote);
+            InsertMenuItems(Settings.Default.Bestowals,  mniBestowals, OnEmote);
 
             mniOpacity.SelectedIndex = (int)(10*(1-Opacity));
             //TODO: Get EditorFontSize menu an initial value 
 
             // Auto-binding size or AOT causes all sorts of mess 
-            Size = (Size)Properties.Settings.Default.WindowSize;
-            TopMost = Properties.Settings.Default.AOT;
-            Location = (Point)Properties.Settings.Default.WindowLocation;
+            Size = (Size)Settings.Default.WindowSize;
+            TopMost = Settings.Default.AOT;
+            Location = (Point)Settings.Default.WindowLocation;
 
             // Simulate a click on the "Title" column. Much more useful than starting with
             // the filename sorted.
@@ -73,10 +69,10 @@ namespace LOTROMusicManager
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
-            Properties.Settings.Default.WindowLocation = Location;
-            Properties.Settings.Default.WindowSize = Size;
-            Properties.Settings.Default.AOT = TopMost;
-            Properties.Settings.Default.Save();
+            Settings.Default.WindowLocation = Location;
+            Settings.Default.WindowSize = Size;
+            Settings.Default.AOT = TopMost;
+            Settings.Default.Save();
             return;
         }
 
@@ -102,86 +98,6 @@ namespace LOTROMusicManager
             return;            
         }
 
-    #endregion
-
-    #region Sending Keys and Commands to LOTRO
-        private void ExecuteString(string str, KeepFocus kf)
-        {//====================================================================
-            System.Diagnostics.Process[] ap = System.Diagnostics.Process.GetProcessesByName(Properties.Settings.Default.ClientAppID);
-            if (ap.Length > 0)
-            {
-                SDK.BringWindowToTop(ap[0].MainWindowHandle);
-
-                // Send RETURN, string, RETURN
-                SendVK(SDK.VK_RETURN);
-                SendString(str);
-                SendVK(SDK.VK_RETURN);
-
-                if (kf == KeepFocus.LOMM) System.Threading.Thread.Sleep(Properties.Settings.Default.MillisWaitOnCommand);
-            }
-            else
-            {
-                MessageBox.Show("Unable to find LOTRO client to send commands", "LOTRO Music Manager", MessageBoxButtons.OK);
-            }
-            return;
-        }
-
-        private void SendString(String str)
-        {//--------------------------------------------------------------------
-            for (int i = 0; i < str.Length; i += 1)
-            {
-                // Send a keydown followed by a keyup and use unicode so we 
-                // don't have to mess with converting to VK codes
-                //
-                // Note: Only sends succesfully when there is an insertion 
-                // caret on the LOTRO screen. Cannot send in-play keys
-                //
-                // To send keypresses when there is no insertion caret, send VKs
-                SendChar(str[i]);
-            }
-            return;
-        }
-
-        private void SendVK(short vk)
-        {//--------------------------------------------------------------------
-            // Convert the VK to a scancode
-            IntPtr hkl = SDK.GetKeyboardLayout(0);
-            uint scEnter = SDK.MapVirtualKeyEx((uint)vk, (uint)SDK.MAPVKFLAGS.MAPVK_VK_TO_VSC, hkl);
-
-            // Now send the scancode as a press and depress
-            SDK.INPUT input = new SDK.INPUT();
-            input.type = (int)SDK.InputType.INPUT_KEYBOARD;
-            input.ki.wVk = 0;
-            input.ki.time = 0;
-            input.ki.dwExtraInfo = (IntPtr)0;
-            input.ki.wScan = (short)scEnter;
-
-            input.ki.dwFlags = (int)SDK.KEYEVENTF.SCANCODE;
-            SDK.SendInput(1, ref input, Marshal.SizeOf(input));
-            input.ki.dwFlags |= (int)SDK.KEYEVENTF.KEYUP;
-            SDK.SendInput(1, ref input, Marshal.SizeOf(input));
-
-            return;
-        }
-
-        private void SendChar(char ch)
-        {//--------------------------------------------------------------------
-            // Use SendInput so even DirectX apps get the keys
-            SDK.INPUT input = new SDK.INPUT();
-            input.type = (int)SDK.InputType.INPUT_KEYBOARD;
-            input.ki.wVk = 0;
-            input.ki.time = 0;
-            input.ki.dwFlags = 0;
-            input.ki.dwExtraInfo = (IntPtr)0;
-            input.ki.wScan = (short)ch;
-            
-            input.ki.dwFlags = (int)SDK.KEYEVENTF.UNICODE & ~(int)SDK.KEYEVENTF.KEYUP;  // Not Keyup
-            SDK.SendInput(1, ref input, Marshal.SizeOf(input));
-
-            input.ki.dwFlags = (int)SDK.KEYEVENTF.UNICODE |  (int)SDK.KEYEVENTF.KEYUP;   // And now lift the key up
-            SDK.SendInput(1, ref input, Marshal.SizeOf(input));
-            return;
-        } // SendChar
     #endregion
 
     #region File List Management
@@ -210,20 +126,27 @@ namespace LOTROMusicManager
             return;
         }
 
+        private void MakeNewFile(String strName)
+        {//--------------------------------------------------------------------
+            FileInfo fi = new FileInfo(strName);
+            if (fi.Exists) fi.Delete();
+
+            // Here's something annoying: StreamWriter doesn't Close() when it goes out of scope
+            String strBaseABC = Resources.NewABC + "\0";
+            StreamWriter sw = fi.CreateText();
+            sw.Write(strBaseABC);
+            sw.Close();
+        }
+
         private void OnFileNew(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             if (dlgSaveAs.ShowDialog() == DialogResult.OK)
             {
-                FileInfo fi = new FileInfo(dlgSaveAs.FileName);
-                Stream stm = this.GetType().Assembly.GetManifestResourceStream("LOTROMusicManager.Resources.NewABC.txt");
-                Byte[] ab = new Byte[stm.Length + 1];
-                stm.Read(ab, 0, (int)stm.Length);  // If someone tries to make a default ABC file over (signed int) in length, they deserve to phail
-                FileStream fs = fi.Open(FileMode.Create);
-                fs.Write(ab, 0, (int)stm.Length);
-                fs.Close();
-                
+                String strName = dlgSaveAs.FileName;
+                MakeNewFile(strName);
+
                 ReloadFileList();
-                ListViewItem item = lstFiles.FindItemWithText(new FileInfo(dlgSaveAs.FileName).Name);
+                ListViewItem item = lstFiles.FindItemWithText(new FileInfo(strName).Name);
                 if (item != null) 
                 {
                     item.Selected = true;
@@ -236,14 +159,27 @@ namespace LOTROMusicManager
 
         private void ReloadFileList()
         {//====================================================================
-            String strTmp = "";
             String strDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             DirectoryInfo di = new DirectoryInfo(strDir);
             di = di.GetDirectories(@"The Lord of the Rings Online\music")[0];
 
             lstFiles.SuspendLayout();
             lstFiles.Items.Clear();
-            FileInfo[] afi = di.GetFiles("*.*", SearchOption.AllDirectories);
+            FileInfo[] afiTxt = di.GetFiles("*.txt", SearchOption.AllDirectories);
+            FileInfo[] afiAbc = di.GetFiles("*.abc", SearchOption.AllDirectories);
+
+            AddFilesToList(strDir, afiAbc);
+            AddFilesToList(strDir, afiTxt);
+
+            lstFiles.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lstFiles.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lstFiles.ResumeLayout();
+            return;
+        } // ReloadFileList
+
+        private void AddFilesToList(String strDir, FileInfo[] afi)
+        {//--------------------------------------------------------------------
+            String strTmp = "";
             foreach (FileInfo fi in afi)
             {
                 // Get headers of interest for tooltip. Not especially useful,
@@ -252,59 +188,45 @@ namespace LOTROMusicManager
                 String strNotes       = "";
                 String strKey         = ""; //   \
                 String strUnit        = ""; //    > These should be combined into one line
-                String strTempo       = ""; //    /
+                String strTempo       = ""; //   /
                 String strMeter       = ""; //  /
                 String strAuthor      = "";
                 String strOrigin      = "";
                 String strHistory     = "";
                 String strTranscriber = "";
 
-                Boolean bHeadersDone  = false;
-                
+                Boolean bHeadersDone = false;
+
                 StreamReader sr = new StreamReader(fi.FullName);
                 while (!sr.EndOfStream && !bHeadersDone)
                 {
                     strTmp = sr.ReadLine();
-                    if (strTmp.Length > 1 && (strTmp.Substring(1,1) != ":" || strTmp.Trim().Substring(0,1) != "%")) 
+                    if (!ABC.IsHeader(strTmp))
                     {
-                        if (!HEADER_REGEX.IsMatch(strTmp)) 
-                        {
-                            bHeadersDone = true;
-                        }
+                        bHeadersDone = true;
+                    }
+                    else
+                    {
+                        if (ABC.IsTitle(strTmp))      {strTitle       += strTmp.Substring(2) + "\n";}
                         else
-                        if (strTmp.Length > 1)
-                        {
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagTitle,       StringComparison.InvariantCultureIgnoreCase))
-                            {strTitle       += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagAuthor,      StringComparison.InvariantCultureIgnoreCase))
-                            {strAuthor      += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagHistory,     StringComparison.InvariantCultureIgnoreCase))
-                            {strHistory     += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagKey,         StringComparison.InvariantCultureIgnoreCase))
-                            {strKey         += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagMeter,       StringComparison.InvariantCultureIgnoreCase))
-                            {strMeter       += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagNote,        StringComparison.InvariantCultureIgnoreCase))
-                            {strNotes       += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagOrigin,      StringComparison.InvariantCultureIgnoreCase))
-                            {strOrigin      += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagTempo,       StringComparison.InvariantCultureIgnoreCase))
-                            {strTempo       += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagUnit,        StringComparison.InvariantCultureIgnoreCase))
-                            {strUnit       += strTmp.Substring(2) + "\n";}
-                            else
-                            if (strTmp.StartsWith(Properties.Settings.Default.ABCTagTranscriber, StringComparison.InvariantCultureIgnoreCase))
-                            {strTranscriber += strTmp.Substring(2) + "\n";}
-                        } // Still could be a header
-                    } // Long enough line to examine
+                        if (ABC.IsAuthor(strTmp))     {strAuthor      += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsHistory(strTmp))    {strHistory     += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsKey(strTmp))        {strKey         += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsMeter(strTmp))      {strMeter       += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsNotes(strTmp))      {strNotes       += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsOrigin(strTmp))     {strOrigin      += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsTempo(strTmp))      {strTempo       += strTmp.Substring(2) + "\n";}
+                        else                                           
+                        if (ABC.IsUnit(strTmp))       {strUnit        += strTmp.Substring(2) + "\n";}
+                        else
+                        if (ABC.IsTranscriber(strTmp)){strTranscriber += strTmp.Substring(2) + "\n";}
+                    } // Header line
                 } // Loop over lines until headers are done
                 sr.Close();
                 sr.Dispose();
@@ -313,27 +235,24 @@ namespace LOTROMusicManager
                 String strTooltip = "";
                 if (strTitle.Length > 0) strTooltip += strTitle; // Includes a \n
                 strTooltip += (strMeter.Length > 0 ? (strMeter.Remove(strMeter.Length - 1) + " time") : "free meter")
-                            + (strKey.Length   > 0 ? (" in " + strKey.Remove(strKey.Length - 1)) : " no key") + "\t"
+                            + (strKey.Length > 0 ? (" in " + strKey.Remove(strKey.Length - 1)) : " no key") + "\t"
                             + (strTempo.Length > 0 ? strTempo.Remove(strTempo.Length - 1) : "") + "\t"
-                            + (strUnit.Length  > 0 ? strUnit.Remove(strUnit.Length - 1)   : "1/8")     + " unit\n";
+                            + (strUnit.Length > 0 ? strUnit.Remove(strUnit.Length - 1) : "1/8") + " unit\n";
                 if (strAuthor.Length > 0) strTooltip += strAuthor; // Includes a \n
                 if (strOrigin.Length > 0) strTooltip += strOrigin; // Includes a \n
                 if (strTranscriber.Length > 0) strTooltip += strTranscriber; // Includes a \n
                 if (strNotes.Length > 0) strTooltip += //Double newline if we have text before
-                            (strTooltip.Length > 0 ? "\n" : "")  + strNotes; 
+                            (strTooltip.Length > 0 ? "\n" : "") + strNotes;
                 if (strHistory.Length > 0) strTooltip += //Double newline if we have text before
-                            (strTooltip.Length > 0 ? "\n" : "")  + strHistory; 
+                            (strTooltip.Length > 0 ? "\n" : "") + strHistory;
 
                 ListViewItem li = new ListViewItem(strTitle);
                 if (strTooltip.Length > 0) li.ToolTipText = strTooltip.Remove(strTooltip.Length - 1);
                 li.SubItems.Add(new ListViewItem.ListViewSubItem(li, fi.FullName.Substring((strDir + @"\" + @"The Lord of the Rings Online\music").Length + 1)));
                 lstFiles.Items.Add(li);
             }
-            lstFiles.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lstFiles.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lstFiles.ResumeLayout();
             return;
-        }
+        } // AddFilesToList
 
         private void OnRefresh(object sender, EventArgs e)
         {//====================================================================
@@ -355,7 +274,7 @@ namespace LOTROMusicManager
                     case DialogResult.Yes:
                         // Just save and continue
                         //TODO: Need FQN
-                        SaveFileAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.Items[_nSelectedFile].SubItems[1].Text);
+                        SaveFileAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.Items[_nSelectedFile].SubItems[1].Text);
                         break;
                     
                     case DialogResult.Cancel:
@@ -398,13 +317,36 @@ namespace LOTROMusicManager
     #region LOTRO Music
         private void OnToggleMusicMode(object sender, EventArgs e)
         {//--------------------------------------------------------------------
-            ExecuteString(Properties.Settings.Default.ToggleMusicCommand, KeepFocus.LOMM);
+            RemoteController.ExecuteString(Resources.ToggleMusicCommand, RemoteController.Focus.REMOTE);
             Activate(); // Return focus to the app
+            return;
+        }
+
+        private void PlayWithLyrics(String strFileName)
+        {//====================================================================
+            // Do we have lyrics? We have to check the whole universe to find out
+            Boolean bLyrics = false;
+            for (int i = 0; !bLyrics && i < txtABC.Lines.Length; i += 1)
+            {
+                if (ABC.IsLyrics(txtABC.Lines[i]))
+                {
+                    bLyrics = true;
+                }
+            }
+            if (!bLyrics) 
+            {
+                PlayFile(strFileName);
+                return;
+            }
+
+            // Okay... we have some lyrics. Let's fire up he lyrics panel and tell it to take over
+            _lyrics.PlayFile(txtABC.Lines);
             return;
         }
 
         private void PlayFile(String strFileName)
         {//====================================================================
+            // Make the string to send
             String str;
             switch ((PlayTypes)btnPlay.Tag)
             {
@@ -413,13 +355,13 @@ namespace LOTROMusicManager
                     throw new Exception("Unknown type of performance");
                     //break; -- unreachable
                 case PlayTypes.Immediate:
-                    str = String.Format(Properties.Settings.Default.PlayFileCommand, strFileName);
+                    str = String.Format(Resources.PlayFileCommand, strFileName);
                     break;
                 case PlayTypes.Sync:
-                    str = String.Format(Properties.Settings.Default.PlaySyncCommand, strFileName);
+                    str = String.Format(Resources.PlaySyncCommand, strFileName);
                     break;
             }
-            ExecuteString(str, KeepFocus.LOTRO);
+            RemoteController.ExecuteString(str, RemoteController.Focus.REMOTE);
             return;
         }
 
@@ -431,7 +373,7 @@ namespace LOTROMusicManager
             if (lstFiles.SelectedItems.Count > 0)
             {
                 SaveFile();
-                PlayFile(lstFiles.SelectedItems[0].SubItems[1].Text);
+                PlayWithLyrics(lstFiles.SelectedItems[0].SubItems[1].Text);
             }
             return;
         } // OnPlay
@@ -459,7 +401,7 @@ namespace LOTROMusicManager
             // Switch the button to be sync from now on
             btnPlay.Tag = PlayTypes.Sync;
             btnPlay.Text = mniDDPlaySync.Text;
-            ExecuteString(Properties.Settings.Default.StartSyncCommand, KeepFocus.LOTRO);
+            RemoteController.ExecuteString(Resources.StartSyncCommand, RemoteController.Focus.REMOTE);
             return;
         }
 
@@ -482,7 +424,7 @@ namespace LOTROMusicManager
         }
 
         String ConvertNonDosFile(String str)
-        {
+        {//====================================================================
             // If we have any dos newlines, use the file as-is
             if (str.IndexOf('\r') != -1) return str;
 
@@ -496,7 +438,7 @@ namespace LOTROMusicManager
         {//--------------------------------------------------------------------
             if (lstFiles.SelectedItems.Count > 0)
             {
-                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
+                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
                 StreamReader sr = new StreamReader(strFileName);
                 txtABC.Text = ConvertNonDosFile(sr.ReadToEnd());
                 sr.Close();
@@ -527,6 +469,18 @@ namespace LOTROMusicManager
             return;
         } // OnUndoAll
 
+        private void OnDeleteFile(object sender, EventArgs e)
+        {//====================================================================
+            if (lstFiles.SelectedItems.Count == 0) return;
+
+            String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
+            FileInfo fi = new FileInfo(strFileName);
+            fi.Delete();
+
+            ReloadFileList();
+            return;
+        }
+
         private void SaveFileAs(String strFileName)
         {//--------------------------------------------------------------------
             StreamWriter sw = new StreamWriter(strFileName, false);
@@ -541,7 +495,7 @@ namespace LOTROMusicManager
         {//--------------------------------------------------------------------
             if (lstFiles.SelectedItems.Count > 0)
             {
-                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Properties.Settings.Default.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
+                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
                 SaveFileAs(strFileName);
             }
         }
@@ -613,7 +567,7 @@ namespace LOTROMusicManager
                 {
                     s = s.Remove(s.IndexOf('('));
                 }
-                ExecuteString(s.Trim(), KeepFocus.LOMM);
+                RemoteController.ExecuteString(s.Trim(), RemoteController.Focus.LOCAL);
                 Activate(); // Keep focus for multiple emotes
             }
             else

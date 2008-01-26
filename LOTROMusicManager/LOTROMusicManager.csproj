@@ -46,6 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -65,11 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABCRef.cs">
+    <Compile Include="ABC.cs" />
+    <Compile Include="FormABCRef.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABCRef.Designer.cs">
-      <DependentUpon>ABCRef.cs</DependentUpon>
+    <Compile Include="FormABCRef.Designer.cs">
+      <DependentUpon>FormABCRef.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -77,11 +79,17 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLyrics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLyrics.Designer.cs">
+      <DependentUpon>FormLyrics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ABCRef.resx">
+    <EmbeddedResource Include="FormABCRef.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ABCRef.cs</DependentUpon>
+      <DependentUpon>FormABCRef.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <SubType>Designer</SubType>
@@ -115,6 +123,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="RemoteController.cs" />
     <Compile Include="SDK.cs" />
     <Compile Include="SplitButton.cs">
       <SubType>Component</SubType>
@@ -139,6 +148,10 @@
     <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormLyrics.resx">
+      <DependentUpon>FormLyrics.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\NewABC.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

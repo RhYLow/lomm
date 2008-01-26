@@ -71,6 +71,105 @@ namespace LOTROMusicManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A:.
+        /// </summary>
+        internal static string ABCTagAuthor {
+            get {
+                return ResourceManager.GetString("ABCTagAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H:.
+        /// </summary>
+        internal static string ABCTagHistory {
+            get {
+                return ResourceManager.GetString("ABCTagHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K:.
+        /// </summary>
+        internal static string ABCTagKey {
+            get {
+                return ResourceManager.GetString("ABCTagKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W:.
+        /// </summary>
+        internal static string ABCTagLyrics {
+            get {
+                return ResourceManager.GetString("ABCTagLyrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M:.
+        /// </summary>
+        internal static string ABCTagMeter {
+            get {
+                return ResourceManager.GetString("ABCTagMeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N:.
+        /// </summary>
+        internal static string ABCTagNote {
+            get {
+                return ResourceManager.GetString("ABCTagNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O:.
+        /// </summary>
+        internal static string ABCTagOrigin {
+            get {
+                return ResourceManager.GetString("ABCTagOrigin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Q:.
+        /// </summary>
+        internal static string ABCTagTempo {
+            get {
+                return ResourceManager.GetString("ABCTagTempo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T:.
+        /// </summary>
+        internal static string ABCTagTitle {
+            get {
+                return ResourceManager.GetString("ABCTagTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Z:.
+        /// </summary>
+        internal static string ABCTagTranscriber {
+            get {
+                return ResourceManager.GetString("ABCTagTranscriber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L:.
+        /// </summary>
+        internal static string ABCTagUnit {
+            get {
+                return ResourceManager.GetString("ABCTagUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOTRO Music Manager.
         /// </summary>
         internal static string AppTitle {
@@ -90,6 +189,15 @@ namespace LOTROMusicManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("LOMM", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \The Lord of the Rings Online\music\.
+        /// </summary>
+        internal static string MusicSubfolder {
+            get {
+                return ResourceManager.GetString("MusicSubfolder", resourceCulture);
             }
         }
         
@@ -126,11 +234,47 @@ namespace LOTROMusicManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /play &quot;{0}&quot;.
+        /// </summary>
+        internal static string PlayFileCommand {
+            get {
+                return ResourceManager.GetString("PlayFileCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /play &quot;{0}&quot; sync.
+        /// </summary>
+        internal static string PlaySyncCommand {
+            get {
+                return ResourceManager.GetString("PlaySyncCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The text in the ABC file has changed. Do you want to save the changes?.
         /// </summary>
         internal static string SavePrompt {
             get {
                 return ResourceManager.GetString("SavePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /playstart.
+        /// </summary>
+        internal static string StartSyncCommand {
+            get {
+                return ResourceManager.GetString("StartSyncCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /music.
+        /// </summary>
+        internal static string ToggleMusicCommand {
+            get {
+                return ResourceManager.GetString("ToggleMusicCommand", resourceCulture);
             }
         }
     }

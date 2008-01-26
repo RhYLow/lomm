@@ -25,15 +25,6 @@ namespace LOTROMusicManager.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/play \"{0}\"")]
-        public string PlayFileCommand {
-            get {
-                return ((string)(this["PlayFileCommand"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("lotroclient")]
         public string ClientAppID {
             get {
@@ -50,66 +41,6 @@ namespace LOTROMusicManager.Properties {
             }
             set {
                 this["PlaySync"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SelectedFile {
-            get {
-                return ((string)(this["SelectedFile"]));
-            }
-            set {
-                this["SelectedFile"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/music")]
-        public string ToggleMusicCommand {
-            get {
-                return ((string)(this["ToggleMusicCommand"]));
-            }
-            set {
-                this["ToggleMusicCommand"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\The Lord of the Rings Online\\music\\")]
-        public string MusicSubfolder {
-            get {
-                return ((string)(this["MusicSubfolder"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/play \"{0}\" sync")]
-        public string PlaySyncCommand {
-            get {
-                return ((string)(this["PlaySyncCommand"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("T:")]
-        public string ABCTagTitle {
-            get {
-                return ((string)(this["ABCTagTitle"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("N:")]
-        public string ABCTagNote {
-            get {
-                return ((string)(this["ABCTagNote"]));
             }
         }
         
@@ -302,87 +233,6 @@ namespace LOTROMusicManager.Properties {
         public int MillisWaitOnCommand {
             get {
                 return ((int)(this["MillisWaitOnCommand"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/playstart")]
-        public string StartSyncCommand {
-            get {
-                return ((string)(this["StartSyncCommand"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("M:")]
-        public string ABCTagMeter {
-            get {
-                return ((string)(this["ABCTagMeter"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Q:")]
-        public string ABCTagTempo {
-            get {
-                return ((string)(this["ABCTagTempo"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("K:")]
-        public string ABCTagKey {
-            get {
-                return ((string)(this["ABCTagKey"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("A:")]
-        public string ABCTagAuthor {
-            get {
-                return ((string)(this["ABCTagAuthor"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("O:")]
-        public string ABCTagOrigin {
-            get {
-                return ((string)(this["ABCTagOrigin"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Z:")]
-        public string ABCTagTranscriber {
-            get {
-                return ((string)(this["ABCTagTranscriber"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("H:")]
-        public string ABCTagHistory {
-            get {
-                return ((string)(this["ABCTagHistory"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("L:")]
-        public string ABCTagUnit {
-            get {
-                return ((string)(this["ABCTagUnit"]));
             }
         }
     }
