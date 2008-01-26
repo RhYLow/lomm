@@ -41,5 +41,4 @@ LOMM keeps focus when sending an emote.
 
 [http://lomm.googlecode.com/svn/trunk/Screenshots/DanceEmotes.jpg]
 [http://lomm.googlecode.com/svn/trunk/Screenshots/SocialEmotes.jpg]
-[http://lomm.googlecode.com/svn/trunk/Screenshots/MoodEmotes.jpg]
-[http://lomm.googlecode.com/svn/trunk/Screenshots/BestowalsEmotes.jpg]
+[http://lomm.googlecode.com/svn/trunk/Screenshots/MoodEmotes.jpg][http://lomm.googlecode.com/svn/trunk/Screenshots/BestowalsEmotes.jpg]
