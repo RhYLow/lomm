@@ -2,32 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LOTROMusicManager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PlayFileCommand" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/play "{0}"</Value>
-    </Setting>
     <Setting Name="ClientAppID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">lotroclient</Value>
     </Setting>
     <Setting Name="PlaySync" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="SelectedFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ToggleMusicCommand" Type="System.String" Scope="User">
-      <Value Profile="(Default)">/music</Value>
-    </Setting>
-    <Setting Name="MusicSubfolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">\The Lord of the Rings Online\music\</Value>
-    </Setting>
-    <Setting Name="PlaySyncCommand" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/play "{0}" sync</Value>
-    </Setting>
-    <Setting Name="ABCTagTitle" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">T:</Value>
-    </Setting>
-    <Setting Name="ABCTagNote" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">N:</Value>
     </Setting>
     <Setting Name="AOT" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -145,33 +124,6 @@
     </Setting>
     <Setting Name="MillisWaitOnCommand" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">250</Value>
-    </Setting>
-    <Setting Name="StartSyncCommand" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/playstart</Value>
-    </Setting>
-    <Setting Name="ABCTagMeter" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">M:</Value>
-    </Setting>
-    <Setting Name="ABCTagTempo" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Q:</Value>
-    </Setting>
-    <Setting Name="ABCTagKey" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">K:</Value>
-    </Setting>
-    <Setting Name="ABCTagAuthor" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">A:</Value>
-    </Setting>
-    <Setting Name="ABCTagOrigin" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">O:</Value>
-    </Setting>
-    <Setting Name="ABCTagTranscriber" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Z:</Value>
-    </Setting>
-    <Setting Name="ABCTagHistory" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">H:</Value>
-    </Setting>
-    <Setting Name="ABCTagUnit" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">L:</Value>
     </Setting>
   </Settings>
 </SettingsFile>

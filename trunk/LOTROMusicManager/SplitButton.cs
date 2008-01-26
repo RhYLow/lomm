@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using System.Drawing;
-using System.ComponentModel;
 
 //Original: http://blogs.msdn.com/jfoscoding/articles/491523.aspx
 //Wyatt's fixes: http://wyday.com/blog/csharp-splitbutton
