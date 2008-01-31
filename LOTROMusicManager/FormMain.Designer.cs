@@ -60,6 +60,7 @@ namespace LOTROMusicManager
             this.mniNew = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSaveABC = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.mniUndoAll = new System.Windows.Forms.ToolStripMenuItem();
             this.mniRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,6 @@ namespace LOTROMusicManager
             this.slEditLocation = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mniDelete = new System.Windows.Forms.ToolStripMenuItem();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -386,6 +386,14 @@ namespace LOTROMusicManager
             this.mniSaveAs.Text = "Save &As";
             this.mniSaveAs.Click += new System.EventHandler(this.OnSaveAs);
             // 
+            // mniDelete
+            // 
+            this.mniDelete.Name = "mniDelete";
+            this.mniDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.mniDelete.Size = new System.Drawing.Size(242, 22);
+            this.mniDelete.Text = "Delete";
+            this.mniDelete.Click += new System.EventHandler(this.OnDeleteFile);
+            // 
             // mniUndoAll
             // 
             this.mniUndoAll.Enabled = false;
@@ -658,14 +666,6 @@ namespace LOTROMusicManager
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(111, 25);
             this.toolStrip1.TabIndex = 1;
-            // 
-            // mniDelete
-            // 
-            this.mniDelete.Name = "mniDelete";
-            this.mniDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.mniDelete.Size = new System.Drawing.Size(242, 22);
-            this.mniDelete.Text = "Delete";
-            this.mniDelete.Click += new System.EventHandler(this.OnDeleteFile);
             // 
             // FormMain
             // 
