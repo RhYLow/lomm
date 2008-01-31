@@ -1,6 +1,6 @@
 namespace LOTROMusicManager
 {
-    partial class ABCRef
+    partial class FormABCRef
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace LOTROMusicManager
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ABCRef));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormABCRef));
             this.rtfABCRef = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 

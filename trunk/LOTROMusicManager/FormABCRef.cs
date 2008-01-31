@@ -6,12 +6,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LOTROMusicManager.Properties;
 
 namespace LOTROMusicManager
 {
-    public partial class ABCRef : Form
+    public partial class FormABCRef : Form
     {
-        public ABCRef()
+        public FormABCRef()
         {
             InitializeComponent();
         }
@@ -30,8 +31,7 @@ namespace LOTROMusicManager
         private void OnLoad(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             // Open the resource we need
-            Stream stm = this.GetType().Assembly.GetManifestResourceStream("LOTROMusicManager.Help.ABCRef.rtf");
-            rtfABCRef.LoadFile(stm, RichTextBoxStreamType.RichText);
+            rtfABCRef.Rtf = Resources.ABCRef;
             return;
         }
     }

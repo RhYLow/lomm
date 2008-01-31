@@ -317,6 +317,8 @@ namespace LOTROMusicManager
     #region LOTRO Music
         private void OnToggleMusicMode(object sender, EventArgs e)
         {//--------------------------------------------------------------------
+            ABC.PitchError[] ape = ABC.FindInvalidPitches(txtABC.Text);
+            
             RemoteController.ExecuteString(Resources.ToggleMusicCommand, RemoteController.Focus.REMOTE);
             Activate(); // Return focus to the app
             return;
