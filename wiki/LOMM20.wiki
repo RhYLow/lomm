@@ -1,0 +1,30 @@
+#summary Preview of 2.0 features
+#labels Featured,Phase-Design
+
+Here is a screenshot of some new features I'm working on for LOMM 2.0
+
+[http://lomm.googlecode.com/svn/trunk/Screenshots/LOMM-2.0-UI.jpg]
+
+_(This is a test app for the capabilities, not the full LOMM UI)_
+
+Some interesting points:
+  * Non-playing ABC elements are grayed out. These include
+    * Headers
+    * Text in quotes (usually used for tablature, as it is in this example)
+    * Repeat sybmols
+    * Triplets
+  * Lyric lines are highlighted (but see below)
+  * Certain error ABC is marked
+    * Pitches above or below the LOTRO range is highlighted in reverse. Note that it is possible to construct a degenrate note (such as `^^^^a'`) that is above the range but escapes the filter. If you do that kind of thing, you're on your own. I got yelled at in music theory for using B#s and transposing to Abmin^1 and even I think that's insane.
+    * Chords with notes of different lengths are marked. This is a warning, not an error, but usually should be handled differently
+
+ I'm working on tooltips for the relevant markings, but that's surprisingly more annoying in .NET than you'd expect. 
+
+This is for a music editing mode. The new UI will have two tabs. When you are _playing_ music, you can switch to the other (non-editing) tab and the highlighting will change: music will be grayed out and the lyrics will be more visible. Double clicking on a lyric line or pressing the "recite" button will send that line to LOTRO and move the focus to the next lyric line. It's up to you to set the timing (and to break the lyric lines where you want the phrasing), but it's a lot easier than copying and pasting in lyrics or otherwise doing it by hand.
+
+I'm looking at some interesting new features for emotes as well, but this is the start of the music overhaul. Let me know what you think.
+
+This would have shipped when book 12 did (that was my goal), but some Real Life business got in the way. For some reason, my clients seem to think I'm supposed to be delivering the projects I promised _them_ instead of this free thing for a game.
+
+
+1) Actually, I probably got in trouble for asking the teacher to sight read Abmin with lots of borrowed chords, but you get the point.
