@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx?wsdl" docRef="http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx" xmlns:q1="http://MyLotroBand.JoshKraker.com" binding="q1:ServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx" xmlns:q2="http://MyLotroBand.JoshKraker.com" binding="q2:ServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

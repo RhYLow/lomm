@@ -235,5 +235,73 @@ namespace LOTROMusicManager.Properties {
                 return ((int)(this["MillisWaitOnCommand"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::MarkedEditBox.RegexTagBag TagsEdit {
+            get {
+                return ((global::MarkedEditBox.RegexTagBag)(this["TagsEdit"]));
+            }
+            set {
+                this["TagsEdit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::MarkedEditBox.RegexTagBag TagsPerform {
+            get {
+                return ((global::MarkedEditBox.RegexTagBag)(this["TagsPerform"]));
+            }
+            set {
+                this["TagsPerform"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx")]
+        public string LOTROMusicManager_com_joshkraker_mylotroband_Service {
+            get {
+                return ((string)(this["LOTROMusicManager_com_joshkraker_mylotroband_Service"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MyLotroBandLoginEmail {
+            get {
+                return ((string)(this["MyLotroBandLoginEmail"]));
+            }
+            set {
+                this["MyLotroBandLoginEmail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MyLotroBandLoginPW {
+            get {
+                return ((string)(this["MyLotroBandLoginPW"]));
+            }
+            set {
+                this["MyLotroBandLoginPW"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MyLotroBandRememberLoginInformation {
+            get {
+                return ((bool)(this["MyLotroBandRememberLoginInformation"]));
+            }
+            set {
+                this["MyLotroBandRememberLoginInformation"] = value;
+            }
+        }
     }
 }

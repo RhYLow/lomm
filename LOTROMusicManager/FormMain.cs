@@ -5,6 +5,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using LOTROMusicManager.Properties;
+using System.Configuration;
+using LOTROMusicManager.com.joshkraker.mylotroband;
 
 namespace LOTROMusicManager
 {
@@ -26,7 +28,6 @@ namespace LOTROMusicManager
         private bool IsCommand(String s) {return s.Trim()[0] == '/';}
 
         protected FormABCRef _abcref = new FormABCRef();
-        protected FormLyrics _lyrics = new FormLyrics();
     #endregion
 
     #region Form methods
@@ -55,20 +56,39 @@ namespace LOTROMusicManager
             TopMost = Settings.Default.AOT;
             Location = (Point)Settings.Default.WindowLocation;
 
+            // Set up the sorting style we want in the list views
+            lstFiles.Columns[0].Tag = SortType.TITLE;
+            lstFiles.Columns[1].Tag = SortType.PATH; 
+
+            lstMyLotroBand.Columns[0].Tag = SortType.TITLE;
+            lstMyLotroBand.Columns[1].Tag = SortType.TITLE;
+            lstMyLotroBand.Columns[2].Tag = SortType.INTEGER;
+            lstMyLotroBand.Columns[3].Tag = SortType.DEFAULT;
+            lstMyLotroBand.Columns[4].Tag = SortType.DATE;
+
             // Simulate a click on the "Title" column. Much more useful than starting with
             // the filename sorted.
             ColumnClickEventArgs eClick = new ColumnClickEventArgs(0);
-            OnColumnClick(new object(), eClick);
+            OnColumnClick(lstFiles, eClick);
 
             // Default to immediate play
             btnPlay.Tag  = PlayTypes.Immediate;
             btnPlay.Text = mniDDPlay.Text;
+
+            // And to recite lyrics in /say
+            cmbReciteChannel.SelectedIndex = 0;
+
+            // Fill in the tags if they've been customized
+            //if (Settings.Default.TagsEdit    != null) rteEdit.Tags    = Settings.Default.TagsEdit;
+            //if (Settings.Default.TagsPerform != null) rtePerform.Tags = Settings.Default.TagsPerform;
 
             return;
         }                           
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
+            Settings.Default.TagsPerform = new MarkedEditBox.RegexTagBag(rtePerform.Tags);
+            Settings.Default.TagsEdit = new MarkedEditBox.RegexTagBag(rteEdit.Tags);
             Settings.Default.WindowLocation = Location;
             Settings.Default.WindowSize = Size;
             Settings.Default.AOT = TopMost;
@@ -103,9 +123,11 @@ namespace LOTROMusicManager
     #region File List Management
         private void OnColumnClick(object sender, ColumnClickEventArgs e)
         {//--------------------------------------------------------------------
+            ListView lv = sender as ListView;
             _sorter.CurrentCol = e.Column;
-            lstFiles.ListViewItemSorter = _sorter as System.Collections.IComparer;
-            lstFiles.Sort();
+            _sorter.SortType = (SortType)lv.Columns[e.Column].Tag;
+            lv.ListViewItemSorter = _sorter as System.Collections.IComparer;
+            lv.Sort();
             return;
         }
 
@@ -317,8 +339,6 @@ namespace LOTROMusicManager
     #region LOTRO Music
         private void OnToggleMusicMode(object sender, EventArgs e)
         {//--------------------------------------------------------------------
-            ABC.PitchError[] ape = ABC.FindInvalidPitches(txtABC.Text);
-            
             RemoteController.ExecuteString(Resources.ToggleMusicCommand, RemoteController.Focus.REMOTE);
             Activate(); // Return focus to the app
             return;
@@ -326,23 +346,7 @@ namespace LOTROMusicManager
 
         private void PlayWithLyrics(String strFileName)
         {//====================================================================
-            // Do we have lyrics? We have to check the whole universe to find out
-            Boolean bLyrics = false;
-            for (int i = 0; !bLyrics && i < txtABC.Lines.Length; i += 1)
-            {
-                if (ABC.IsLyrics(txtABC.Lines[i]))
-                {
-                    bLyrics = true;
-                }
-            }
-            if (!bLyrics) 
-            {
-                PlayFile(strFileName);
-                return;
-            }
-
-            // Okay... we have some lyrics. Let's fire up he lyrics panel and tell it to take over
-            _lyrics.PlayFile(txtABC.Lines);
+            PlayFile(strFileName);
             return;
         }
 
@@ -415,6 +419,15 @@ namespace LOTROMusicManager
             btnPlay.PerformClick();
             return;
         }
+
+        private void OnDDStopSong(object sender, EventArgs e)
+        {//--------------------------------------------------------------------
+            btnPlay.Text = mniDDPlay.Text;
+            btnPlay.Tag  = PlayTypes.Immediate;
+            RemoteController.SendKey('`', RemoteController.Focus.LOCAL); //TODO: Make the stop-song configurable
+            return;
+        } // OnDDStopSong
+
     #endregion
     
     #region File Editing
@@ -442,16 +455,18 @@ namespace LOTROMusicManager
             {
                 String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
                 StreamReader sr = new StreamReader(strFileName);
-                txtABC.Text = ConvertNonDosFile(sr.ReadToEnd());
+                rteEdit.Text = ConvertNonDosFile(sr.ReadToEnd());
+                rtePerform.Text = rteEdit.Text;
                 sr.Close();
                 sr.Dispose();
 
-                txtABC.Enabled  = true; // Allow edits
+                rteEdit.Enabled  = true; // Allow edits
             }
             else
             {
-                txtABC.Clear();
-                txtABC.Enabled  = false; // Disallow edits
+                rteEdit.Clear();
+                rtePerform.Clear();
+                rteEdit.Enabled  = false; // Disallow edits
             }
             slEditLocation.Text = "";
             SetChangedState(false); // No changes yet, so no save or undo
@@ -486,7 +501,7 @@ namespace LOTROMusicManager
         private void SaveFileAs(String strFileName)
         {//--------------------------------------------------------------------
             StreamWriter sw = new StreamWriter(strFileName, false);
-            sw.Write(txtABC.Text);
+            sw.Write(rteEdit.Text);
             sw.Close();
             sw.Dispose();
 
@@ -508,30 +523,9 @@ namespace LOTROMusicManager
             return;
         }
 
-        private void OnEditorKeyUp   (object sender, KeyEventArgs e)     {OnUpdateEditor(sender, e);}
-        private void OnEditorMouseUp (object sender, MouseEventArgs e)   {OnUpdateEditor(sender, e);}
-        private void OnEditorKeyPress(object sender, KeyPressEventArgs e){OnUpdateEditor(sender, e);}
-        private void OnEditorClick   (object sender, EventArgs e)        {OnUpdateEditor(sender, e);}
-        private void OnUpdateEditor  (object sender, EventArgs e)
-        {//--------------------------------------------------------------------
-            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(UpdateCursorLocation));
-            return;
-        }
-
-        private void UpdateCursorLocation(Object state)
-        {//--------------------------------------------------------------------
-            // Get to the right thread
-            if (txtABC.InvokeRequired)
-            {
-                UpdateCursorLocationDel ucp = new UpdateCursorLocationDel(UpdateCursorLocation);
-                txtABC.Invoke(ucp, new object[] {state});
-                return;
-            }
-
-            int nRow = txtABC.GetLineFromCharIndex(txtABC.SelectionStart);
-            int nCol = txtABC.SelectionStart - txtABC.GetFirstCharIndexFromLine(nRow);
-            nRow += 1; nCol += 1; // 1-base instead of 0-base
-            slEditLocation.Text = "Line " + (nRow).ToString() + ", Character " + (nCol).ToString();
+        private void OnCaretMoved(object sender, MarkedEditBox.CaretMovedEventArgs e)
+        {   //====================================================================
+            slEditLocation.Text = "Line " + e.Row.ToString() + ", Character " + e.Col.ToString();
             return;
         }
 
@@ -546,7 +540,7 @@ namespace LOTROMusicManager
 
         private void OnFontSizeChanged(object sender, EventArgs e)
         {//--------------------------------------------------------------------
-            txtABC.Font = new Font(txtABC.Font.FontFamily, Int32.Parse(mniEditorFontSize.Text));
+            rteEdit.Font = new Font(rteEdit.Font.FontFamily, Int32.Parse(mniEditorFontSize.Text));
             return;
         }
 
@@ -597,11 +591,85 @@ namespace LOTROMusicManager
         }
     #endregion
 
+        private void OnResetSettings(object sender, EventArgs e)
+        {//====================================================================
+            Settings.Default.Reset();
+            return;
+        }
+
+        private void OnMyLotroBandLogin(object sender, EventArgs e)
+        {//====================================================================
+            Credentials creds = new Credentials();
+            creds.Email    = Properties.Settings.Default.MyLotroBandLoginEmail;
+            creds.Password = Properties.Settings.Default.MyLotroBandLoginPW;
+
+            if (creds.Password == null || creds.Password.Length < 1 || creds.Email == null || creds.Email.Length < 1)
+            {
+                FormMyLotroBandLogin dlg = new FormMyLotroBandLogin();
+                dlg.RememberLoginInformation = Properties.Settings.Default.MyLotroBandRememberLoginInformation;
+
+                if (DialogResult.OK == dlg.ShowDialog())
+                {
+                    creds.Email = dlg.Email;        
+                    creds.Password = dlg.Password;  
+
+                    Properties.Settings.Default.MyLotroBandRememberLoginInformation = dlg.RememberLoginInformation;
+                    Properties.Settings.Default.MyLotroBandLoginEmail = dlg.RememberLoginInformation ? creds.Email    : String.Empty;
+                    Properties.Settings.Default.MyLotroBandLoginPW    = dlg.RememberLoginInformation ? creds.Password : String.Empty;
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    return; // Login was canceled
+                }
+            }
+            
+            Service mlbService = new Service();
+            SongResponse songs = mlbService.GetSongList(creds);
+            //TODO: error handling around song response
+
+            foreach (Song s in songs.Song)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = s.SongName;
+                lvi.SubItems.Add(s.ArtistName);
+                lvi.SubItems.Add(s.NumParts.ToString());
+                lvi.SubItems.Add(s.AddedBy);
+                lvi.SubItems.Add(s.Created.ToShortDateString());
+                lstMyLotroBand.Items.Add(lvi);                
+            }
+
+            return;
+        }
+
+        private void OnMyLotroBandForgetLoginInformation(object sender, EventArgs e)
+        {   //====================================================================
+            Properties.Settings.Default.MyLotroBandLoginEmail = String.Empty;
+            Properties.Settings.Default.MyLotroBandLoginPW    = String.Empty;
+            Properties.Settings.Default.Save();
+        }
+
+        static bool bInOnCaretMoved = false;
+        private void OnPerformCaretMoved(object sender, MarkedEditBox.CaretMovedEventArgs e)
+        {   //====================================================================
+            if (!bInOnCaretMoved)
+            {
+                bInOnCaretMoved = true;
+                int iStart = rtePerform.GetFirstCharIndexFromLine(rtePerform.InsertionRow);
+                int iLen   = rtePerform.GetFirstCharIndexFromLine(rtePerform.InsertionRow + 1) - iStart;
+                rtePerform.Select(iStart, iLen);
+                bInOnCaretMoved = false;
+            }
+            return;
+        }
+
     } // class
 
+    public enum SortType {DEFAULT, TITLE, PATH, DATE, INTEGER};
     public class ColumnSorter : System.Collections.IComparer
     {
-        public    int           CurrentCol      {get;set;} // Yay for new 2008 simple property syntax!
+        public    SortType      SortType        {get; set;}
+        public    int           CurrentCol      {get; set;} // Yay for new 2008 simple property syntax!
         protected List<String>  _lstIgnore      = new List<string>();
         protected static char[] PATH_SEPARATORS = @"/\".ToCharArray();
         protected static String CURRENT_DIR     = @".\";
@@ -619,11 +687,14 @@ namespace LOTROMusicManager
         {//====================================================================
             String strA = ((ListViewItem)x).SubItems[CurrentCol].Text;
             String strB = ((ListViewItem)y).SubItems[CurrentCol].Text;
-            switch (CurrentCol)
+            switch (SortType)
             {
-                default: throw new Exception("Unknown column being sorted");
-                case 0:  return SortTitle(strA, strB); // First column is the title
-                case 1:  return SortPath(strA, strB);  // Second columns is the file path and name
+                default: throw new Exception("Unknown sort type!");
+                case SortType.DEFAULT:      return String.Compare(strA.TrimStart(), strB.TrimStart());
+                case SortType.TITLE:        return SortTitle(strA, strB);
+                case SortType.PATH:         return SortPath(strA, strB);
+                case SortType.INTEGER:      return int.Parse(strA) < int.Parse(strB) ? -1 : int.Parse(strA) == int.Parse(strB) ? 0 : 1;
+                case SortType.DATE:         return DateTime.Parse(strA) < DateTime.Parse(strB) ? -1 : DateTime.Parse(strA) == DateTime.Parse(strB) ? 0 : 1;
             }
         }
         int SortTitle(String strA, String strB)
@@ -637,6 +708,9 @@ namespace LOTROMusicManager
                 if (strA.StartsWith(s, StringComparison.CurrentCultureIgnoreCase)) strA = strA.Substring(s.Length);
                 if (strB.StartsWith(s, StringComparison.CurrentCultureIgnoreCase)) strB = strB.Substring(s.Length);
             }
+            // Remove quotes, spaces, dashes, etc.
+            int i = 0; while (!Char.IsLetterOrDigit(strA[i])) i += 1; if (i > 0) strA = strA.Substring(i);
+            int j = 0; while (!Char.IsLetterOrDigit(strB[j])) j += 1; if (j > 0) strB = strB.Substring(j);
             return String.Compare(strA, strB);
         }
 

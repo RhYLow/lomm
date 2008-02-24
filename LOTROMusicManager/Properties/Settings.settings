@@ -125,5 +125,23 @@
     <Setting Name="MillisWaitOnCommand" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">250</Value>
     </Setting>
+    <Setting Name="TagsEdit" Type="MarkedEditBox.RegexTagBag" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TagsPerform" Type="MarkedEditBox.RegexTagBag" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LOTROMusicManager_com_joshkraker_mylotroband_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx</Value>
+    </Setting>
+    <Setting Name="MyLotroBandLoginEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MyLotroBandLoginPW" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MyLotroBandRememberLoginInformation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -29,9 +29,6 @@ namespace LOTROMusicManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-            System.Windows.Forms.SplitContainer splitContainer1;
-            System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
             System.Windows.Forms.MenuStrip menuStrip1;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -39,22 +36,9 @@ namespace LOTROMusicManager
             System.Windows.Forms.ToolStripMenuItem mniFileExit;
             System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
             System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+            System.Windows.Forms.SplitContainer splitContainer1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.lstFiles = new System.Windows.Forms.ListView();
-            this.Title = new System.Windows.Forms.ColumnHeader();
-            this.File = new System.Windows.Forms.ColumnHeader();
-            this.mnuListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mniListContextPlay = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniListContextRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtABC = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnUndo = new System.Windows.Forms.Button();
-            this.btnToggleMusicMode = new System.Windows.Forms.Button();
-            this.btnPlay = new InstantUpdate.Controls.SplitButton();
-            this.mnuPlay = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mniDDPlay = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniDDPlaySync = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniDDStartSync = new System.Windows.Forms.ToolStripMenuItem();
+            System.Windows.Forms.TableLayoutPanel layoutButtons;
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mniPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.mniNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +53,8 @@ namespace LOTROMusicManager
             this.mniOpacity = new System.Windows.Forms.ToolStripComboBox();
             this.mniEditorFontSizeParent = new System.Windows.Forms.ToolStripMenuItem();
             this.mniEditorFontSize = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.resetAllSettingsToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCQuickReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -77,6 +63,53 @@ namespace LOTROMusicManager
             this.mniEmotes = new System.Windows.Forms.ToolStripMenuItem();
             this.mniMoods = new System.Windows.Forms.ToolStripMenuItem();
             this.mniBestowals = new System.Windows.Forms.ToolStripMenuItem();
+            this.lstFiles = new System.Windows.Forms.ListView();
+            this.Title = new System.Windows.Forms.ColumnHeader();
+            this.File = new System.Windows.Forms.ColumnHeader();
+            this.mnuListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniListContextPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniListContextRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabsMain = new System.Windows.Forms.TabControl();
+            this.tpgEdit = new System.Windows.Forms.TabPage();
+            this.rteEdit = new MarkedEditBox.RegexTaggedEdit();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
+            this.btnToggleMusicMode = new System.Windows.Forms.Button();
+            this.btnPlay = new InstantUpdate.Controls.SplitButton();
+            this.mnuPlay = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniDDPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniDDStopSong = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniDDPlaySync = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniDDStartSync = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpgPerform = new System.Windows.Forms.TabPage();
+            this.rtePerform = new MarkedEditBox.RegexTaggedEdit();
+            this.layoutPerformButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnPerform = new InstantUpdate.Controls.SplitButton();
+            this.mnuPerform = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.reciteLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.playSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playSongsayFirstLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.waitToPlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startGroupandSayFirstLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbReciteChannel = new System.Windows.Forms.ComboBox();
+            this.tpgMyLotroBand = new System.Windows.Forms.TabPage();
+            this.layoutMyLotroBand = new System.Windows.Forms.TableLayoutPanel();
+            this.layoutMyLotroBandButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnLogin = new InstantUpdate.Controls.SplitButton();
+            this.mnuMyLotroBandLogin = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forgetLoginInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lstMyLotroBand = new System.Windows.Forms.ListView();
+            this.colName = new System.Windows.Forms.ColumnHeader();
+            this.colArtist = new System.Windows.Forms.ColumnHeader();
+            this.colParts = new System.Windows.Forms.ColumnHeader();
+            this.colAddedBy = new System.Windows.Forms.ColumnHeader();
+            this.colCreated = new System.Windows.Forms.ColumnHeader();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -88,9 +121,6 @@ namespace LOTROMusicManager
             this.slEditLocation = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
-            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -98,219 +128,28 @@ namespace LOTROMusicManager
             mniFileExit = new System.Windows.Forms.ToolStripMenuItem();
             contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            tableLayoutPanel1.SuspendLayout();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            layoutButtons = new System.Windows.Forms.TableLayoutPanel();
+            menuStrip1.SuspendLayout();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             this.mnuListContext.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
+            this.tabsMain.SuspendLayout();
+            this.tpgEdit.SuspendLayout();
+            layoutButtons.SuspendLayout();
             this.mnuPlay.SuspendLayout();
-            menuStrip1.SuspendLayout();
+            this.tpgPerform.SuspendLayout();
+            this.layoutPerformButtons.SuspendLayout();
+            this.mnuPerform.SuspendLayout();
+            this.tpgMyLotroBand.SuspendLayout();
+            this.layoutMyLotroBand.SuspendLayout();
+            this.layoutMyLotroBandButtons.SuspendLayout();
+            this.mnuMyLotroBandLogin.SuspendLayout();
             this.statPane.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(splitContainer1, 0, 1);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
-            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(746, 618);
-            tableLayoutPanel1.TabIndex = 0;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer1.Location = new System.Drawing.Point(3, 28);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(this.lstFiles);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(this.txtABC);
-            splitContainer1.Size = new System.Drawing.Size(740, 527);
-            splitContainer1.SplitterDistance = 227;
-            splitContainer1.TabIndex = 1;
-            // 
-            // lstFiles
-            // 
-            this.lstFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Title,
-            this.File});
-            this.lstFiles.ContextMenuStrip = this.mnuListContext;
-            this.lstFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstFiles.FullRowSelect = true;
-            this.lstFiles.HideSelection = false;
-            this.lstFiles.Location = new System.Drawing.Point(0, 0);
-            this.lstFiles.MultiSelect = false;
-            this.lstFiles.Name = "lstFiles";
-            this.lstFiles.ShowItemToolTips = true;
-            this.lstFiles.Size = new System.Drawing.Size(740, 227);
-            this.lstFiles.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lstFiles.TabIndex = 0;
-            this.lstFiles.UseCompatibleStateImageBehavior = false;
-            this.lstFiles.View = System.Windows.Forms.View.Details;
-            this.lstFiles.SelectedIndexChanged += new System.EventHandler(this.OnFileSelect);
-            this.lstFiles.DoubleClick += new System.EventHandler(this.OnFileDoubleClick);
-            this.lstFiles.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.OnColumnClick);
-            // 
-            // Title
-            // 
-            this.Title.Text = "Title";
-            // 
-            // File
-            // 
-            this.File.Text = "File";
-            // 
-            // mnuListContext
-            // 
-            this.mnuListContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniListContextPlay,
-            this.mniListContextRefresh});
-            this.mnuListContext.Name = "mnuListContext";
-            this.mnuListContext.Size = new System.Drawing.Size(114, 48);
-            // 
-            // mniListContextPlay
-            // 
-            this.mniListContextPlay.Name = "mniListContextPlay";
-            this.mniListContextPlay.Size = new System.Drawing.Size(113, 22);
-            this.mniListContextPlay.Text = "Play";
-            this.mniListContextPlay.Click += new System.EventHandler(this.OnPlay);
-            // 
-            // mniListContextRefresh
-            // 
-            this.mniListContextRefresh.Name = "mniListContextRefresh";
-            this.mniListContextRefresh.Size = new System.Drawing.Size(113, 22);
-            this.mniListContextRefresh.Text = "Refresh";
-            this.mniListContextRefresh.Click += new System.EventHandler(this.OnRefresh);
-            // 
-            // txtABC
-            // 
-            this.txtABC.AcceptsReturn = true;
-            this.txtABC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtABC.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtABC.Location = new System.Drawing.Point(0, 0);
-            this.txtABC.Multiline = true;
-            this.txtABC.Name = "txtABC";
-            this.txtABC.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtABC.Size = new System.Drawing.Size(740, 296);
-            this.txtABC.TabIndex = 0;
-            this.txtABC.WordWrap = false;
-            this.txtABC.TextChanged += new System.EventHandler(this.OnABCChanged);
-            this.txtABC.Click += new System.EventHandler(this.OnEditorClick);
-            this.txtABC.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnEditorKeyUp);
-            this.txtABC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnEditorKeyPress);
-            this.txtABC.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnEditorMouseUp);
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 4;
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            tableLayoutPanel2.Controls.Add(this.btnSave, 0, 0);
-            tableLayoutPanel2.Controls.Add(this.btnUndo, 1, 0);
-            tableLayoutPanel2.Controls.Add(this.btnToggleMusicMode, 2, 0);
-            tableLayoutPanel2.Controls.Add(this.btnPlay, 3, 0);
-            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(3, 561);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(740, 54);
-            tableLayoutPanel2.TabIndex = 2;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(3, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(74, 28);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save ABC";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.OnSaveABC);
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.Enabled = false;
-            this.btnUndo.Location = new System.Drawing.Point(83, 3);
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(111, 28);
-            this.btnUndo.TabIndex = 2;
-            this.btnUndo.Text = "Undo All Changes";
-            this.btnUndo.UseVisualStyleBackColor = true;
-            this.btnUndo.Click += new System.EventHandler(this.OnUndoAll);
-            // 
-            // btnToggleMusicMode
-            // 
-            this.btnToggleMusicMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToggleMusicMode.Location = new System.Drawing.Point(518, 3);
-            this.btnToggleMusicMode.Name = "btnToggleMusicMode";
-            this.btnToggleMusicMode.Size = new System.Drawing.Size(94, 28);
-            this.btnToggleMusicMode.TabIndex = 5;
-            this.btnToggleMusicMode.Text = "Toggle /music";
-            this.btnToggleMusicMode.UseVisualStyleBackColor = true;
-            this.btnToggleMusicMode.Click += new System.EventHandler(this.OnToggleMusicMode);
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPlay.AutoSize = true;
-            this.btnPlay.ContextMenuStrip = this.mnuPlay;
-            this.btnPlay.Location = new System.Drawing.Point(637, 3);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(100, 28);
-            this.btnPlay.SplitMenu = this.mnuPlay;
-            this.btnPlay.TabIndex = 6;
-            this.btnPlay.Text = "Play";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.OnPlay);
-            // 
-            // mnuPlay
-            // 
-            this.mnuPlay.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniDDPlay,
-            this.mniDDPlaySync,
-            this.mniDDStartSync});
-            this.mnuPlay.Name = "mnuPlay";
-            this.mnuPlay.ShowImageMargin = false;
-            this.mnuPlay.Size = new System.Drawing.Size(113, 70);
-            // 
-            // mniDDPlay
-            // 
-            this.mniDDPlay.Name = "mniDDPlay";
-            this.mniDDPlay.Size = new System.Drawing.Size(112, 22);
-            this.mniDDPlay.Text = "&Play";
-            this.mniDDPlay.Click += new System.EventHandler(this.OnDDPlay);
-            // 
-            // mniDDPlaySync
-            // 
-            this.mniDDPlaySync.Name = "mniDDPlaySync";
-            this.mniDDPlaySync.Size = new System.Drawing.Size(112, 22);
-            this.mniDDPlaySync.Text = "&Wait to play";
-            this.mniDDPlaySync.Click += new System.EventHandler(this.OnDDWaitToPlay);
-            // 
-            // mniDDStartSync
-            // 
-            this.mniDDStartSync.Name = "mniDDStartSync";
-            this.mniDDStartSync.Size = new System.Drawing.Size(112, 22);
-            this.mniDDStartSync.Text = "&Start group";
-            this.mniDDStartSync.Click += new System.EventHandler(this.OnDDStartSyncPlay);
             // 
             // menuStrip1
             // 
@@ -436,7 +275,9 @@ namespace LOTROMusicManager
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniAlwaysOnTop,
             this.opacityToolStripMenuItem,
-            this.mniEditorFontSizeParent});
+            this.mniEditorFontSizeParent,
+            this.toolStripSeparator8,
+            this.resetAllSettingsToDefaultToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "&Settings";
@@ -445,7 +286,7 @@ namespace LOTROMusicManager
             // 
             this.mniAlwaysOnTop.CheckOnClick = true;
             this.mniAlwaysOnTop.Name = "mniAlwaysOnTop";
-            this.mniAlwaysOnTop.Size = new System.Drawing.Size(155, 22);
+            this.mniAlwaysOnTop.Size = new System.Drawing.Size(215, 22);
             this.mniAlwaysOnTop.Text = "&Always on Top";
             this.mniAlwaysOnTop.Click += new System.EventHandler(this.OnToggleAOT);
             // 
@@ -454,7 +295,7 @@ namespace LOTROMusicManager
             this.opacityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniOpacity});
             this.opacityToolStripMenuItem.Name = "opacityToolStripMenuItem";
-            this.opacityToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.opacityToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.opacityToolStripMenuItem.Text = "&Opacity";
             // 
             // mniOpacity
@@ -478,7 +319,7 @@ namespace LOTROMusicManager
             this.mniEditorFontSizeParent.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniEditorFontSize});
             this.mniEditorFontSizeParent.Name = "mniEditorFontSizeParent";
-            this.mniEditorFontSizeParent.Size = new System.Drawing.Size(155, 22);
+            this.mniEditorFontSizeParent.Size = new System.Drawing.Size(215, 22);
             this.mniEditorFontSizeParent.Text = "Editor Font Si&ze";
             // 
             // mniEditorFontSize
@@ -493,6 +334,18 @@ namespace LOTROMusicManager
             this.mniEditorFontSize.Name = "mniEditorFontSize";
             this.mniEditorFontSize.Size = new System.Drawing.Size(121, 23);
             this.mniEditorFontSize.SelectedIndexChanged += new System.EventHandler(this.OnFontSizeChanged);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(212, 6);
+            // 
+            // resetAllSettingsToDefaultToolStripMenuItem
+            // 
+            this.resetAllSettingsToDefaultToolStripMenuItem.Name = "resetAllSettingsToDefaultToolStripMenuItem";
+            this.resetAllSettingsToDefaultToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.resetAllSettingsToDefaultToolStripMenuItem.Text = "Reset all settings to default";
+            this.resetAllSettingsToDefaultToolStripMenuItem.Click += new System.EventHandler(this.OnResetSettings);
             // 
             // helpToolStripMenuItem
             // 
@@ -574,6 +427,504 @@ namespace LOTROMusicManager
             this.mniBestowals.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded;
             this.mniBestowals.Size = new System.Drawing.Size(71, 20);
             this.mniBestowals.Text = "Bestowals";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.Location = new System.Drawing.Point(0, 22);
+            splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(this.lstFiles);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(this.tabsMain);
+            splitContainer1.Size = new System.Drawing.Size(746, 574);
+            splitContainer1.SplitterDistance = 247;
+            splitContainer1.TabIndex = 1;
+            // 
+            // lstFiles
+            // 
+            this.lstFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Title,
+            this.File});
+            this.lstFiles.ContextMenuStrip = this.mnuListContext;
+            this.lstFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstFiles.FullRowSelect = true;
+            this.lstFiles.HideSelection = false;
+            this.lstFiles.Location = new System.Drawing.Point(0, 0);
+            this.lstFiles.MultiSelect = false;
+            this.lstFiles.Name = "lstFiles";
+            this.lstFiles.ShowItemToolTips = true;
+            this.lstFiles.Size = new System.Drawing.Size(746, 247);
+            this.lstFiles.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.lstFiles.TabIndex = 0;
+            this.lstFiles.UseCompatibleStateImageBehavior = false;
+            this.lstFiles.View = System.Windows.Forms.View.Details;
+            this.lstFiles.SelectedIndexChanged += new System.EventHandler(this.OnFileSelect);
+            this.lstFiles.DoubleClick += new System.EventHandler(this.OnFileDoubleClick);
+            this.lstFiles.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.OnColumnClick);
+            // 
+            // Title
+            // 
+            this.Title.Text = "Title";
+            // 
+            // File
+            // 
+            this.File.Text = "File";
+            // 
+            // mnuListContext
+            // 
+            this.mnuListContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniListContextPlay,
+            this.mniListContextRefresh});
+            this.mnuListContext.Name = "mnuListContext";
+            this.mnuListContext.Size = new System.Drawing.Size(114, 48);
+            // 
+            // mniListContextPlay
+            // 
+            this.mniListContextPlay.Name = "mniListContextPlay";
+            this.mniListContextPlay.Size = new System.Drawing.Size(113, 22);
+            this.mniListContextPlay.Text = "Play";
+            this.mniListContextPlay.Click += new System.EventHandler(this.OnPlay);
+            // 
+            // mniListContextRefresh
+            // 
+            this.mniListContextRefresh.Name = "mniListContextRefresh";
+            this.mniListContextRefresh.Size = new System.Drawing.Size(113, 22);
+            this.mniListContextRefresh.Text = "Refresh";
+            this.mniListContextRefresh.Click += new System.EventHandler(this.OnRefresh);
+            // 
+            // tabsMain
+            // 
+            this.tabsMain.Controls.Add(this.tpgEdit);
+            this.tabsMain.Controls.Add(this.tpgPerform);
+            this.tabsMain.Controls.Add(this.tpgMyLotroBand);
+            this.tabsMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsMain.Location = new System.Drawing.Point(0, 0);
+            this.tabsMain.Name = "tabsMain";
+            this.tabsMain.SelectedIndex = 0;
+            this.tabsMain.Size = new System.Drawing.Size(746, 323);
+            this.tabsMain.TabIndex = 1;
+            // 
+            // tpgEdit
+            // 
+            this.tpgEdit.Controls.Add(this.rteEdit);
+            this.tpgEdit.Controls.Add(layoutButtons);
+            this.tpgEdit.Location = new System.Drawing.Point(4, 22);
+            this.tpgEdit.Name = "tpgEdit";
+            this.tpgEdit.Padding = new System.Windows.Forms.Padding(3);
+            this.tpgEdit.Size = new System.Drawing.Size(738, 297);
+            this.tpgEdit.TabIndex = 0;
+            this.tpgEdit.Text = "Edit";
+            this.tpgEdit.UseVisualStyleBackColor = true;
+            // 
+            // rteEdit
+            // 
+            this.rteEdit.AutoTag = true;
+            this.rteEdit.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rteEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rteEdit.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rteEdit.HoverDelay = 1500;
+            this.rteEdit.InsertionCol = 0;
+            this.rteEdit.InsertionRow = 0;
+            this.rteEdit.Location = new System.Drawing.Point(3, 3);
+            this.rteEdit.Name = "rteEdit";
+            this.rteEdit.Size = new System.Drawing.Size(732, 256);
+            this.rteEdit.TabIndex = 3;
+            this.rteEdit.Tags = new MarkedEditBox.RegexTag[] {
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags1"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags2"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags3"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags4"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags5"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags6"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags7")))};
+            this.rteEdit.Text = "";
+            this.rteEdit.WordWrap = false;
+            this.rteEdit.CaretMoved += new System.EventHandler<MarkedEditBox.CaretMovedEventArgs>(this.OnCaretMoved);
+            // 
+            // layoutButtons
+            // 
+            layoutButtons.ColumnCount = 4;
+            layoutButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            layoutButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            layoutButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            layoutButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            layoutButtons.Controls.Add(this.btnSave, 0, 0);
+            layoutButtons.Controls.Add(this.btnUndo, 1, 0);
+            layoutButtons.Controls.Add(this.btnToggleMusicMode, 2, 0);
+            layoutButtons.Controls.Add(this.btnPlay, 3, 0);
+            layoutButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            layoutButtons.Location = new System.Drawing.Point(3, 259);
+            layoutButtons.Name = "layoutButtons";
+            layoutButtons.RowCount = 1;
+            layoutButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            layoutButtons.Size = new System.Drawing.Size(732, 35);
+            layoutButtons.TabIndex = 2;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Enabled = false;
+            this.btnSave.Location = new System.Drawing.Point(3, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(74, 28);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Text = "Save ABC";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.OnSaveABC);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Enabled = false;
+            this.btnUndo.Location = new System.Drawing.Point(83, 3);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(111, 28);
+            this.btnUndo.TabIndex = 2;
+            this.btnUndo.Text = "Undo All Changes";
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.OnUndoAll);
+            // 
+            // btnToggleMusicMode
+            // 
+            this.btnToggleMusicMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToggleMusicMode.Location = new System.Drawing.Point(510, 3);
+            this.btnToggleMusicMode.Name = "btnToggleMusicMode";
+            this.btnToggleMusicMode.Size = new System.Drawing.Size(94, 28);
+            this.btnToggleMusicMode.TabIndex = 5;
+            this.btnToggleMusicMode.Text = "Toggle /music";
+            this.btnToggleMusicMode.UseVisualStyleBackColor = true;
+            this.btnToggleMusicMode.Click += new System.EventHandler(this.OnToggleMusicMode);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPlay.AutoSize = true;
+            this.btnPlay.ContextMenuStrip = this.mnuPlay;
+            this.btnPlay.Location = new System.Drawing.Point(629, 3);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(100, 27);
+            this.btnPlay.SplitMenu = this.mnuPlay;
+            this.btnPlay.TabIndex = 6;
+            this.btnPlay.Text = "Play";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.OnPlay);
+            // 
+            // mnuPlay
+            // 
+            this.mnuPlay.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniDDPlay,
+            this.mniDDStopSong,
+            this.toolStripSeparator5,
+            this.mniDDPlaySync,
+            this.mniDDStartSync});
+            this.mnuPlay.Name = "mnuPlay";
+            this.mnuPlay.ShowImageMargin = false;
+            this.mnuPlay.Size = new System.Drawing.Size(113, 98);
+            // 
+            // mniDDPlay
+            // 
+            this.mniDDPlay.Name = "mniDDPlay";
+            this.mniDDPlay.Size = new System.Drawing.Size(112, 22);
+            this.mniDDPlay.Text = "&Play";
+            this.mniDDPlay.Click += new System.EventHandler(this.OnDDPlay);
+            // 
+            // mniDDStopSong
+            // 
+            this.mniDDStopSong.Name = "mniDDStopSong";
+            this.mniDDStopSong.Size = new System.Drawing.Size(112, 22);
+            this.mniDDStopSong.Text = "Stop Song";
+            this.mniDDStopSong.Click += new System.EventHandler(this.OnDDStopSong);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(109, 6);
+            // 
+            // mniDDPlaySync
+            // 
+            this.mniDDPlaySync.Name = "mniDDPlaySync";
+            this.mniDDPlaySync.Size = new System.Drawing.Size(112, 22);
+            this.mniDDPlaySync.Text = "&Wait to play";
+            this.mniDDPlaySync.Click += new System.EventHandler(this.OnDDWaitToPlay);
+            // 
+            // mniDDStartSync
+            // 
+            this.mniDDStartSync.Name = "mniDDStartSync";
+            this.mniDDStartSync.Size = new System.Drawing.Size(112, 22);
+            this.mniDDStartSync.Text = "&Start group";
+            this.mniDDStartSync.Click += new System.EventHandler(this.OnDDStartSyncPlay);
+            // 
+            // tpgPerform
+            // 
+            this.tpgPerform.Controls.Add(this.rtePerform);
+            this.tpgPerform.Controls.Add(this.layoutPerformButtons);
+            this.tpgPerform.Location = new System.Drawing.Point(4, 22);
+            this.tpgPerform.Name = "tpgPerform";
+            this.tpgPerform.Padding = new System.Windows.Forms.Padding(3);
+            this.tpgPerform.Size = new System.Drawing.Size(738, 297);
+            this.tpgPerform.TabIndex = 1;
+            this.tpgPerform.Text = "Perform";
+            this.tpgPerform.UseVisualStyleBackColor = true;
+            // 
+            // rtePerform
+            // 
+            this.rtePerform.AutoTag = true;
+            this.rtePerform.AutoWordSelection = true;
+            this.rtePerform.BackColor = System.Drawing.SystemColors.Window;
+            this.rtePerform.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtePerform.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtePerform.ForeColor = System.Drawing.Color.Gray;
+            this.rtePerform.HideSelection = false;
+            this.rtePerform.HoverDelay = 1500;
+            this.rtePerform.InsertionCol = 0;
+            this.rtePerform.InsertionRow = 0;
+            this.rtePerform.Location = new System.Drawing.Point(3, 3);
+            this.rtePerform.Name = "rtePerform";
+            this.rtePerform.ReadOnly = true;
+            this.rtePerform.ShowSelectionMargin = true;
+            this.rtePerform.Size = new System.Drawing.Size(732, 256);
+            this.rtePerform.TabIndex = 1;
+            this.rtePerform.Tags = new MarkedEditBox.RegexTag[] {
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rtePerform.Tags"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rtePerform.Tags1")))};
+            this.rtePerform.Text = "";
+            this.rtePerform.WordWrap = false;
+            this.rtePerform.CaretMoved += new System.EventHandler<MarkedEditBox.CaretMovedEventArgs>(this.OnPerformCaretMoved);
+            // 
+            // layoutPerformButtons
+            // 
+            this.layoutPerformButtons.ColumnCount = 4;
+            this.layoutPerformButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPerformButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPerformButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
+            this.layoutPerformButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 121F));
+            this.layoutPerformButtons.Controls.Add(this.btnPerform, 3, 0);
+            this.layoutPerformButtons.Controls.Add(this.cmbReciteChannel, 0, 0);
+            this.layoutPerformButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.layoutPerformButtons.Location = new System.Drawing.Point(3, 259);
+            this.layoutPerformButtons.Name = "layoutPerformButtons";
+            this.layoutPerformButtons.RowCount = 1;
+            this.layoutPerformButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.layoutPerformButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.layoutPerformButtons.Size = new System.Drawing.Size(732, 35);
+            this.layoutPerformButtons.TabIndex = 0;
+            // 
+            // btnPerform
+            // 
+            this.btnPerform.AutoSize = true;
+            this.btnPerform.ContextMenuStrip = this.mnuPerform;
+            this.btnPerform.Location = new System.Drawing.Point(614, 3);
+            this.btnPerform.Name = "btnPerform";
+            this.btnPerform.Size = new System.Drawing.Size(100, 27);
+            this.btnPerform.SplitMenu = this.mnuPerform;
+            this.btnPerform.TabIndex = 0;
+            this.btnPerform.Text = "Recite Line";
+            this.btnPerform.UseVisualStyleBackColor = true;
+            // 
+            // mnuPerform
+            // 
+            this.mnuPerform.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reciteLineToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.playSongToolStripMenuItem,
+            this.playSongsayFirstLineToolStripMenuItem,
+            this.stopSongToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.waitToPlayToolStripMenuItem,
+            this.startGroupToolStripMenuItem,
+            this.startGroupandSayFirstLineToolStripMenuItem});
+            this.mnuPerform.Name = "mnuPerform";
+            this.mnuPerform.Size = new System.Drawing.Size(231, 170);
+            // 
+            // reciteLineToolStripMenuItem
+            // 
+            this.reciteLineToolStripMenuItem.Name = "reciteLineToolStripMenuItem";
+            this.reciteLineToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.reciteLineToolStripMenuItem.Text = "Recite Line";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(227, 6);
+            // 
+            // playSongToolStripMenuItem
+            // 
+            this.playSongToolStripMenuItem.Name = "playSongToolStripMenuItem";
+            this.playSongToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.playSongToolStripMenuItem.Text = "Play Song";
+            // 
+            // playSongsayFirstLineToolStripMenuItem
+            // 
+            this.playSongsayFirstLineToolStripMenuItem.Name = "playSongsayFirstLineToolStripMenuItem";
+            this.playSongsayFirstLineToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.playSongsayFirstLineToolStripMenuItem.Text = "Play Song (and say first line)";
+            // 
+            // stopSongToolStripMenuItem
+            // 
+            this.stopSongToolStripMenuItem.Name = "stopSongToolStripMenuItem";
+            this.stopSongToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.stopSongToolStripMenuItem.Text = "Stop Song";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(227, 6);
+            // 
+            // waitToPlayToolStripMenuItem
+            // 
+            this.waitToPlayToolStripMenuItem.Name = "waitToPlayToolStripMenuItem";
+            this.waitToPlayToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.waitToPlayToolStripMenuItem.Text = "Wait to Play";
+            // 
+            // startGroupToolStripMenuItem
+            // 
+            this.startGroupToolStripMenuItem.Name = "startGroupToolStripMenuItem";
+            this.startGroupToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.startGroupToolStripMenuItem.Text = "Start Group";
+            // 
+            // startGroupandSayFirstLineToolStripMenuItem
+            // 
+            this.startGroupandSayFirstLineToolStripMenuItem.Name = "startGroupandSayFirstLineToolStripMenuItem";
+            this.startGroupandSayFirstLineToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.startGroupandSayFirstLineToolStripMenuItem.Text = "Start Group (and say first line)";
+            // 
+            // cmbReciteChannel
+            // 
+            this.cmbReciteChannel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbReciteChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbReciteChannel.FormattingEnabled = true;
+            this.cmbReciteChannel.Items.AddRange(new object[] {
+            "/say",
+            "/f",
+            "/ra",
+            "/rpc",
+            "/region"});
+            this.cmbReciteChannel.Location = new System.Drawing.Point(3, 7);
+            this.cmbReciteChannel.Name = "cmbReciteChannel";
+            this.cmbReciteChannel.Size = new System.Drawing.Size(121, 21);
+            this.cmbReciteChannel.TabIndex = 1;
+            // 
+            // tpgMyLotroBand
+            // 
+            this.tpgMyLotroBand.Controls.Add(this.layoutMyLotroBand);
+            this.tpgMyLotroBand.Location = new System.Drawing.Point(4, 22);
+            this.tpgMyLotroBand.Name = "tpgMyLotroBand";
+            this.tpgMyLotroBand.Padding = new System.Windows.Forms.Padding(3);
+            this.tpgMyLotroBand.Size = new System.Drawing.Size(738, 297);
+            this.tpgMyLotroBand.TabIndex = 2;
+            this.tpgMyLotroBand.Text = "MyLotroBand";
+            this.tpgMyLotroBand.UseVisualStyleBackColor = true;
+            // 
+            // layoutMyLotroBand
+            // 
+            this.layoutMyLotroBand.ColumnCount = 1;
+            this.layoutMyLotroBand.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.layoutMyLotroBand.Controls.Add(this.layoutMyLotroBandButtons, 0, 1);
+            this.layoutMyLotroBand.Controls.Add(this.lstMyLotroBand, 0, 0);
+            this.layoutMyLotroBand.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutMyLotroBand.Location = new System.Drawing.Point(3, 3);
+            this.layoutMyLotroBand.Name = "layoutMyLotroBand";
+            this.layoutMyLotroBand.RowCount = 2;
+            this.layoutMyLotroBand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.layoutMyLotroBand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.layoutMyLotroBand.Size = new System.Drawing.Size(732, 291);
+            this.layoutMyLotroBand.TabIndex = 2;
+            // 
+            // layoutMyLotroBandButtons
+            // 
+            this.layoutMyLotroBandButtons.ColumnCount = 5;
+            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.8297F));
+            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.170305F));
+            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
+            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207F));
+            this.layoutMyLotroBandButtons.Controls.Add(this.btnLogin, 0, 0);
+            this.layoutMyLotroBandButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.layoutMyLotroBandButtons.Location = new System.Drawing.Point(3, 259);
+            this.layoutMyLotroBandButtons.Name = "layoutMyLotroBandButtons";
+            this.layoutMyLotroBandButtons.RowCount = 1;
+            this.layoutMyLotroBandButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutMyLotroBandButtons.Size = new System.Drawing.Size(726, 29);
+            this.layoutMyLotroBandButtons.TabIndex = 1;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnLogin.AutoSize = true;
+            this.btnLogin.ContextMenuStrip = this.mnuMyLotroBandLogin;
+            this.btnLogin.Location = new System.Drawing.Point(3, 3);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(103, 23);
+            this.btnLogin.SplitMenu = this.mnuMyLotroBandLogin;
+            this.btnLogin.TabIndex = 0;
+            this.btnLogin.Text = "Get Song List";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.OnMyLotroBandLogin);
+            // 
+            // mnuMyLotroBandLogin
+            // 
+            this.mnuMyLotroBandLogin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loginToolStripMenuItem,
+            this.forgetLoginInformationToolStripMenuItem});
+            this.mnuMyLotroBandLogin.Name = "mnuMyLotroBandLogin";
+            this.mnuMyLotroBandLogin.Size = new System.Drawing.Size(208, 48);
+            // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.loginToolStripMenuItem.Text = "Get Song List";
+            // 
+            // forgetLoginInformationToolStripMenuItem
+            // 
+            this.forgetLoginInformationToolStripMenuItem.Name = "forgetLoginInformationToolStripMenuItem";
+            this.forgetLoginInformationToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.forgetLoginInformationToolStripMenuItem.Text = "Forget Login Information";
+            this.forgetLoginInformationToolStripMenuItem.Click += new System.EventHandler(this.OnMyLotroBandForgetLoginInformation);
+            // 
+            // lstMyLotroBand
+            // 
+            this.lstMyLotroBand.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colName,
+            this.colArtist,
+            this.colParts,
+            this.colAddedBy,
+            this.colCreated});
+            this.lstMyLotroBand.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstMyLotroBand.FullRowSelect = true;
+            this.lstMyLotroBand.Location = new System.Drawing.Point(3, 3);
+            this.lstMyLotroBand.Name = "lstMyLotroBand";
+            this.lstMyLotroBand.Size = new System.Drawing.Size(726, 250);
+            this.lstMyLotroBand.TabIndex = 0;
+            this.lstMyLotroBand.UseCompatibleStateImageBehavior = false;
+            this.lstMyLotroBand.View = System.Windows.Forms.View.Details;
+            this.lstMyLotroBand.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.OnColumnClick);
+            // 
+            // colName
+            // 
+            this.colName.Text = "Name";
+            // 
+            // colArtist
+            // 
+            this.colArtist.Text = "Artist";
+            // 
+            // colParts
+            // 
+            this.colParts.Text = "Parts";
+            // 
+            // colAddedBy
+            // 
+            this.colAddedBy.Text = "Added By";
+            // 
+            // colCreated
+            // 
+            this.colCreated.Text = "Added On";
+            this.colCreated.Width = 123;
             // 
             // dlgOpenFile
             // 
@@ -672,9 +1023,9 @@ namespace LOTROMusicManager
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = global::LOTROMusicManager.Properties.Settings.Default.WindowSize;
+            this.Controls.Add(splitContainer1);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.statPane);
-            this.Controls.Add(tableLayoutPanel1);
             this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::LOTROMusicManager.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -684,17 +1035,26 @@ namespace LOTROMusicManager
             this.Text = "LOTRO Music Manager";
             this.Load += new System.EventHandler(this.OnLoad);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
-            tableLayoutPanel1.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            splitContainer1.Panel2.PerformLayout();
-            splitContainer1.ResumeLayout(false);
-            this.mnuListContext.ResumeLayout(false);
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
-            this.mnuPlay.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.ResumeLayout(false);
+            this.mnuListContext.ResumeLayout(false);
+            this.tabsMain.ResumeLayout(false);
+            this.tpgEdit.ResumeLayout(false);
+            layoutButtons.ResumeLayout(false);
+            layoutButtons.PerformLayout();
+            this.mnuPlay.ResumeLayout(false);
+            this.tpgPerform.ResumeLayout(false);
+            this.layoutPerformButtons.ResumeLayout(false);
+            this.layoutPerformButtons.PerformLayout();
+            this.mnuPerform.ResumeLayout(false);
+            this.tpgMyLotroBand.ResumeLayout(false);
+            this.layoutMyLotroBand.ResumeLayout(false);
+            this.layoutMyLotroBandButtons.ResumeLayout(false);
+            this.layoutMyLotroBandButtons.PerformLayout();
+            this.mnuMyLotroBandLogin.ResumeLayout(false);
             this.statPane.ResumeLayout(false);
             this.statPane.PerformLayout();
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
@@ -720,7 +1080,6 @@ namespace LOTROMusicManager
         private System.Windows.Forms.ListView lstFiles;
         private System.Windows.Forms.ColumnHeader File;
         private System.Windows.Forms.ColumnHeader Title;
-        private System.Windows.Forms.TextBox txtABC;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.Button btnToggleMusicMode;
@@ -756,6 +1115,41 @@ namespace LOTROMusicManager
         private System.Windows.Forms.ToolStripMenuItem mniDDPlaySync;
         private System.Windows.Forms.ToolStripMenuItem mniDDStartSync;
         private System.Windows.Forms.ToolStripMenuItem mniDelete;
+        private System.Windows.Forms.ToolStripMenuItem mniDDStopSong;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.TabControl tabsMain;
+        private System.Windows.Forms.TabPage tpgEdit;
+        private System.Windows.Forms.TabPage tpgPerform;
+        private MarkedEditBox.RegexTaggedEdit rtePerform;
+        private System.Windows.Forms.TableLayoutPanel layoutPerformButtons;
+        private InstantUpdate.Controls.SplitButton btnPerform;
+        private System.Windows.Forms.ContextMenuStrip mnuPerform;
+        private System.Windows.Forms.ToolStripMenuItem playSongToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem playSongsayFirstLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stopSongToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem waitToPlayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startGroupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startGroupandSayFirstLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reciteLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private MarkedEditBox.RegexTaggedEdit rteEdit;
+        private System.Windows.Forms.ComboBox cmbReciteChannel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem resetAllSettingsToDefaultToolStripMenuItem;
+        private System.Windows.Forms.TabPage tpgMyLotroBand;
+        private System.Windows.Forms.ListView lstMyLotroBand;
+        public System.Windows.Forms.ColumnHeader colName;
+        private System.Windows.Forms.TableLayoutPanel layoutMyLotroBandButtons;
+        private System.Windows.Forms.ColumnHeader colArtist;
+        private System.Windows.Forms.ColumnHeader colParts;
+        private System.Windows.Forms.ColumnHeader colAddedBy;
+        private System.Windows.Forms.ColumnHeader colCreated;
+        private System.Windows.Forms.TableLayoutPanel layoutMyLotroBand;
+        private InstantUpdate.Controls.SplitButton btnLogin;
+        private System.Windows.Forms.ContextMenuStrip mnuMyLotroBandLogin;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forgetLoginInformationToolStripMenuItem;
     }
 }
 

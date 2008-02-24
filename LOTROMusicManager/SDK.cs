@@ -2,11 +2,36 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace LOTROMusicManager
 {
     internal class SDK
     {
+        [DllImport("user32.dll")]
+        public static extern int TrackMouseEvent(ref TRACKMOUSEEVENT lpEventTrack);
+        
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TRACKMOUSEEVENT 
+        {
+            public UInt32 cbSize;
+            public UInt32 dwFlags;
+            public IntPtr hwndTrack;
+            public UInt32 dwHoverTime;
+        } 
+
+        public enum TrackMouseFlags : uint
+        {
+            TME_HOVER      = 0x00000001,
+            TME_LEAVE      = 0x00000002,
+            TME_NONCLIENT  = 0x00000010,
+            TME_QUERY      = 0x40000000,
+            TME_CANCEL     = 0x80000000
+        };
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCaretPos(out Point lpPoint);
+
         //[DllImport("User32.dll")] public extern static int     SendMessageA    (IntPtr hwnd, int msg, int wParam, int lParam);
         //[DllImport("User32.Dll")] public static extern IntPtr  PostMessageA    (IntPtr hWnd, int msg, int wParam, int lParam);
         [DllImport("User32.Dll")] public static extern Boolean BringWindowToTop(IntPtr hWnd);
