@@ -8,10 +8,24 @@ namespace LOTROMusicManager
 {
     class ABC
     {
+        public enum Octave {UNKNOWN, LOW, MED, HIGH}
+        public class Pitch
+        {
+            public string Note   {get; private set;}
+            public Octave Octave {get; private set;}
+            public Pitch(string s, Octave o)
+            {
+                Octave = o;
+                Note = null;
+                if (PITCH_REGEX.IsMatch(s)) Note = s;
+            }
+            public static implicit operator string (Pitch rhs) {return rhs.Note == null ? String.Empty : rhs.Note;}
+        }
+
         private static Regex HEADER_REGEX = new Regex("^[ \t]*([^ \t]:|%)",     RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         private static Regex PITCH_REGEX  = new Regex("[_=^]*[zZa-gA-G][,']*" , RegexOptions.ExplicitCapture | RegexOptions.Compiled);
         
-        public static bool IsHeader(String s) {return HEADER_REGEX.IsMatch(s);}
+        public static bool IsHeader(String s) {return s.Length == 0 || HEADER_REGEX.IsMatch(s);}
         
         public static bool IsTitle      (String s){return s.StartsWith(Resources.ABCTagTitle,       StringComparison.CurrentCultureIgnoreCase);}
         public static bool IsNotes      (String s){return s.StartsWith(Resources.ABCTagNote,        StringComparison.CurrentCultureIgnoreCase);}
@@ -89,7 +103,7 @@ namespace LOTROMusicManager
             // So, is this the regex pair?
             //  (?'low'_+C,)|(?'low'[A-G],{2,})|(?'low'_+c,,)|(?'low'[a-g],{3,})
             //  (?'high'[abd-g]'+)|(?'high'\^+c')|(?'high'[ABD-G]'{2,})|(?'high'C'{3,})|(?'high'\^+C'')
-            Regex regexLow  = new Regex(@"(?'low'_+C,+)|(?'low'[A-G],{2,})|(?'low'_+c,{2,})|(?'low'[a-g],{3,}");
+            Regex regexLow  = new Regex(@"(?'low'_+C,+)|(?'low'[A-G],{2,})|(?'low'_+c,{2,})|(?'low'[a-g],{3,})");
             Regex regexHigh = new Regex(@"(?'high'[abd-g]'+)|(?'high'\^+c'+)|(?'high'[ABD-G]'{2,})|(?'high'C'{3,})|(?'high'\^+C'{2,})");
 
             MatchCollection mcLow  = regexLow.Matches(s);

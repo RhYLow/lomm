@@ -28,6 +28,22 @@ namespace LOTROMusicManager
             return;
         }
 
+        public static void SendKey(char ch, Focus kf)
+        {//====================================================================
+            System.Diagnostics.Process[] ap = System.Diagnostics.Process.GetProcessesByName(Properties.Settings.Default.ClientAppID);
+            if (ap.Length > 0)
+            {
+                SDK.BringWindowToTop(ap[0].MainWindowHandle);
+                SendChar(ch);
+                if (kf == Focus.LOCAL) System.Threading.Thread.Sleep(Properties.Settings.Default.MillisWaitOnCommand); // Let the commands execute so we can get focus again
+            }
+            else
+            {
+                MessageBox.Show("Unable to find LOTRO client to send commands", "LOTRO Music Manager", MessageBoxButtons.OK);
+            }
+            return;
+        }
+
         private static void SendString(String str)
         {//--------------------------------------------------------------------
             for (int i = 0; i < str.Length; i += 1)

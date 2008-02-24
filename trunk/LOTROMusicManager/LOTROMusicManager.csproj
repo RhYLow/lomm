@@ -62,6 +62,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -79,12 +81,13 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLyrics.cs">
+    <Compile Include="FormMyLotroBandLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLyrics.Designer.cs">
-      <DependentUpon>FormLyrics.cs</DependentUpon>
+    <Compile Include="FormMyLotroBandLogin.Designer.cs">
+      <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Keymapping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormABCRef.resx">
@@ -123,10 +126,21 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegexTaggedEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RegexTaggedEdit.designer.cs">
+      <DependentUpon>RegexTaggedEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="RemoteController.cs" />
     <Compile Include="SDK.cs" />
     <Compile Include="SplitButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Web References\com.joshkraker.mylotroband\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -146,13 +160,44 @@
   <ItemGroup>
     <None Include="LOTROMusicManager_TemporaryKey.pfx" />
     <None Include="Resources\logo.png" />
+    <None Include="Web References\com.joshkraker.mylotroband\Service.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormLyrics.resx">
-      <DependentUpon>FormLyrics.cs</DependentUpon>
+    <EmbeddedResource Include="FormMyLotroBandLogin.resx">
+      <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegexTaggedEdit.resx">
+      <DependentUpon>RegexTaggedEdit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\NewABC.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.joshkraker.mylotroband\</RelPath>
+      <UpdateFromURL>http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LOTROMusicManager_com_joshkraker_mylotroband_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\com.joshkraker.mylotroband\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\com.joshkraker.mylotroband\Service.disco" />
+    <None Include="Web References\com.joshkraker.mylotroband\SongResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
