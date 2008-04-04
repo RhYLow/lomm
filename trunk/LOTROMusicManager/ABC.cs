@@ -53,6 +53,18 @@ namespace LOTROMusicManager
             return astr;
         }
 
+        public static String RemoveHeaderTag(String s)
+        {   //--------------------------------------------------------------------
+            if (!IsHeader(s)) return s;
+            try
+            {
+                //TODO: Remove %% headers as well
+                int nStartHeader    = s.IndexOf(':');
+                return s.Substring(nStartHeader + 1);
+            }
+            catch(Exception e) {return s;}
+        }
+
         //====================================================================
         public enum PITCH_ERROR { NOERROR, TOO_HIGH, TOO_LOW };
         public class PitchError : IComparable
@@ -128,24 +140,32 @@ namespace LOTROMusicManager
     
     class ABCLine
     {
-        public String Text {get; set;}
+        public String Text       {get; set;}
+        public int    SourceLine {get; set;}
         
-        public ABCLine() {Text = "";}
-        public ABCLine(String s) {Text = s;}
+        public ABCLine()                    {Text = ""; SourceLine = -1;}
+        public ABCLine(String s)            {Text = s;  SourceLine = -1;}
+        public ABCLine(String s, int line)  {Text = s;  SourceLine = line;}
 
-        public bool IsHeader     {get {return ABC.IsHeader     (Text);} private set {return;}}
-        public bool IsTitle      {get {return ABC.IsTitle      (Text);} private set {return;}}
-        public bool IsNotes      {get {return ABC.IsNotes      (Text);} private set {return;}}
-        public bool IsKey        {get {return ABC.IsKey        (Text);} private set {return;}}
-        public bool IsUnit       {get {return ABC.IsUnit       (Text);} private set {return;}}
-        public bool IsTempo      {get {return ABC.IsTempo      (Text);} private set {return;}}
-        public bool IsMeter      {get {return ABC.IsMeter      (Text);} private set {return;}}
-        public bool IsAuthor     {get {return ABC.IsAuthor     (Text);} private set {return;}}
-        public bool IsOrigin     {get {return ABC.IsOrigin     (Text);} private set {return;}}
-        public bool IsHistory    {get {return ABC.IsHistory    (Text);} private set {return;}}
-        public bool IsTranscriber{get {return ABC.IsTranscriber(Text);} private set {return;}}
-        public bool IsLyrics     {get {return ABC.IsLyrics     (Text);} private set {return;}}
 
-        public List<String> Pitches {get {return ABC.ParseLineAsPitches(Text);} private set {return;}}
+        public bool IsHeader     {get {return ABC.IsHeader     (Text);} private set{}}
+        public bool IsTitle      {get {return ABC.IsTitle      (Text);} private set{}}
+        public bool IsNotes      {get {return ABC.IsNotes      (Text);} private set{}}
+        public bool IsKey        {get {return ABC.IsKey        (Text);} private set{}}
+        public bool IsUnit       {get {return ABC.IsUnit       (Text);} private set{}}
+        public bool IsTempo      {get {return ABC.IsTempo      (Text);} private set{}}
+        public bool IsMeter      {get {return ABC.IsMeter      (Text);} private set{}}
+        public bool IsAuthor     {get {return ABC.IsAuthor     (Text);} private set{}}
+        public bool IsOrigin     {get {return ABC.IsOrigin     (Text);} private set{}}
+        public bool IsHistory    {get {return ABC.IsHistory    (Text);} private set{}}
+        public bool IsTranscriber{get {return ABC.IsTranscriber(Text);} private set{}}
+        public bool IsLyrics     {get {return ABC.IsLyrics     (Text);} private set{}}
+
+        public List<String> Pitches {get {return ABC.ParseLineAsPitches(Text);} private set{}}
+
+        public override string ToString()
+        {
+            return Text.ToString();
+        }
     }
 }

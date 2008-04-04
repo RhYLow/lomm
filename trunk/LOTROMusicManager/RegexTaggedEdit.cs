@@ -34,8 +34,7 @@ namespace MarkedEditBox
 
         // Flag to prevent infinite recursion during InRescan. InRescan can cause OnTextChanged to be fired and OnTextChanged can call InRescan.
         private Boolean _bInRescan = false;
-        // Flag to prevent infinite recursion in OnToolTipPopup
-        private Boolean _bInToolTipPopup = false;
+
     #endregion        
 
         public RegexTaggedEdit()
@@ -43,7 +42,7 @@ namespace MarkedEditBox
             InitializeComponent();
             AutoTag = true;
             if (HoverDelay <= 0) HoverDelay = HOVER_DEFAULT;
-            //tt.InitialDelay = HoverDelay;
+
             tt.SetToolTip(this, "LOMM");
             tt.Site = this as ISite;
             
@@ -65,7 +64,7 @@ namespace MarkedEditBox
             return null;
         }
 
-        private void SelectLine(int iLine)
+        private void SelectBackBufferLine(int iLine)
         {   //====================================================================
             rtfBackBuffer.SelectionStart = GetFirstCharIndexFromLine(iLine);
             if (iLine == rtfBackBuffer.Lines.Length - 1)
@@ -81,7 +80,7 @@ namespace MarkedEditBox
 
         private void SetLineToTag(int iLine, RegexTag ret)
         {   //====================================================================
-            SelectLine(iLine);
+            SelectBackBufferLine(iLine);
             rtfBackBuffer.SelectionFont = ret.Font;
             rtfBackBuffer.SelectionColor = ret.ForeColor;
             rtfBackBuffer.SelectionBackColor = ret.BackColor;
@@ -117,7 +116,7 @@ namespace MarkedEditBox
                 }
                 else
                 {
-                    SelectLine(i);
+                    SelectBackBufferLine(i);
                     rtfBackBuffer.SelectionFont = Font;
                     rtfBackBuffer.SelectionBackColor = BackColor;
                     rtfBackBuffer.SelectionColor = ForeColor;
@@ -149,9 +148,40 @@ namespace MarkedEditBox
             return;
         }
 
+        protected int GetFirstCharOnLine(int nLine)
+        {   //====================================================================
+            for (int i = 0; i < Text.Length; i += 1)
+            {
+                if (GetLineFromCharIndex(i) == nLine)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void SelectLine(int nLine)
+        {   //====================================================================
+            if (0 == Lines.Length) return;
+            if (nLine >= Lines.Length || nLine < -1) throw new ArgumentOutOfRangeException("nRow", "nRow must be between -1 and the number of declared lines in the text box");
+            if (nLine == -1)
+            {
+                SelectionStart = 0;
+                SelectionLength = 0;
+                return;
+            }
+
+            int nStartChar = GetFirstCharOnLine(nLine);
+            int nSelLen = Lines[nLine].Length;
+
+            Select(nStartChar, nSelLen);
+            return;
+        }
+
         protected override void OnTextChanged(EventArgs e)
         {   //====================================================================
             if (AutoTag) RescanTags();
+            base.OnTextChanged(e);
             return;
         }
 
@@ -381,8 +411,13 @@ namespace MarkedEditBox
         [Category("Display")] public  Color    BackColor  {get; set;}
         [Category("Display")] public  Color    ForeColor  {get; set;}
         
-        [XmlIgnore(), Category("Display")]  public Font           Font       {get; set;}
-        [Browsable(false)]                  public FontSerializer FontShadow {get; set;}
+        private Font _font = null;
+        [XmlIgnore(), Category("Display")]  public Font           Font  // Show in properties UI as Display but do not serialize
+        {
+            get {if (_font == null) _font = new Font(FontShadow.FamilyName, FontShadow.EmSize, FontShadow.Style); return _font;}
+            set {_font = value; FontShadow = new FontSerializer(_font);}
+        }
+        [Browsable(false)]                  public FontSerializer FontShadow {get; set;} // Public to get serialized
 
         private String   _strExpression = "";
         private Regex    _regex = new System.Text.RegularExpressions.Regex("");
@@ -394,7 +429,7 @@ namespace MarkedEditBox
             ControlsWholeLine = false;
             BackColor         = SystemColors.Window;
             ForeColor         = SystemColors.WindowText;
-            Font              = SystemFonts.DefaultFont;
+            Font              = null;
             Comment           = "";
             ToolTip           = true;
             Enabled           = true;
@@ -428,5 +463,5 @@ namespace MarkedEditBox
             Font = FontShadow;
             return;
         }
-}
+    }
 }
