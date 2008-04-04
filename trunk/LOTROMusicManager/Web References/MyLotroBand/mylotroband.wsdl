@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://MyLotroBand.JoshKraker.com" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://MyLotroBand.JoshKraker.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://MyLotroBand.JoshKraker.com">
+      <s:element name="GetSongList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="C" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Credentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSongListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSongListResult" type="tns:SongResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SongResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="E" type="tns:Err" />
+          <s:element minOccurs="0" maxOccurs="1" name="Song" type="tns:ArrayOfSong" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Err">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HasError" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMsg" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Song" nillable="true" type="tns:Song" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Song">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SongId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SongName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArtistName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumParts" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSongParts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="C" type="tns:Credentials" />
+            <s:element minOccurs="1" maxOccurs="1" name="SongId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSongPartsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSongPartsResult" type="tns:PartResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PartResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="E" type="tns:Err" />
+          <s:element minOccurs="0" maxOccurs="1" name="Part" type="tns:ArrayOfPart" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPart">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Part" nillable="true" type="tns:Part" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Part">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PartId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Abc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Instruments" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSongListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSongList" />
+  </wsdl:message>
+  <wsdl:message name="GetSongListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSongListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSongPartsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSongParts" />
+  </wsdl:message>
+  <wsdl:message name="GetSongPartsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSongPartsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MyLotroBandSoap">
+    <wsdl:operation name="GetSongList">
+      <wsdl:input message="tns:GetSongListSoapIn" />
+      <wsdl:output message="tns:GetSongListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSongParts">
+      <wsdl:input message="tns:GetSongPartsSoapIn" />
+      <wsdl:output message="tns:GetSongPartsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MyLotroBandSoap" type="tns:MyLotroBandSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSongList">
+      <soap:operation soapAction="http://MyLotroBand.JoshKraker.com/GetSongList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSongParts">
+      <soap:operation soapAction="http://MyLotroBand.JoshKraker.com/GetSongParts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MyLotroBandSoap12" type="tns:MyLotroBandSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSongList">
+      <soap12:operation soapAction="http://MyLotroBand.JoshKraker.com/GetSongList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSongParts">
+      <soap12:operation soapAction="http://MyLotroBand.JoshKraker.com/GetSongParts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MyLotroBand">
+    <wsdl:port name="MyLotroBandSoap" binding="tns:MyLotroBandSoap">
+      <soap:address location="http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MyLotroBandSoap12" binding="tns:MyLotroBandSoap12">
+      <soap12:address location="http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
