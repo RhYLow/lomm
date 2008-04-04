@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ABC.cs" />
+    <Compile Include="ColumnSorter.cs" />
+    <Compile Include="Emotes.cs" />
     <Compile Include="FormABCRef.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,7 +89,14 @@
     <Compile Include="FormMyLotroBandLogin.Designer.cs">
       <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOptions.Designer.cs">
+      <DependentUpon>FormOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Keymapping.cs" />
+    <Compile Include="LOTROFocuser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormABCRef.resx">
@@ -137,7 +146,7 @@
     <Compile Include="SplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Web References\com.joshkraker.mylotroband\Reference.cs">
+    <Compile Include="Web References\MyLotroBand\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -160,11 +169,25 @@
   <ItemGroup>
     <None Include="LOTROMusicManager_TemporaryKey.pfx" />
     <None Include="Resources\logo.png" />
-    <None Include="Web References\com.joshkraker.mylotroband\Service.wsdl" />
+    <None Include="Web References\MyLotroBand\mylotroband.wsdl" />
+    <None Include="Web References\MyLotroBand\PartResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\MyLotroBand\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\MyLotroBand\SongResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormMyLotroBandLogin.resx">
       <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOptions.resx">
+      <DependentUpon>FormOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="RegexTaggedEdit.resx">
@@ -177,27 +200,21 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx">
+    <WebReferenceUrl Include="http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\com.joshkraker.mylotroband\</RelPath>
-      <UpdateFromURL>http://mylotroband.joshkraker.com/LommService/Alpha/Service.asmx</UpdateFromURL>
+      <RelPath>Web References\MyLotroBand\</RelPath>
+      <UpdateFromURL>http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>LOTROMusicManager_com_joshkraker_mylotroband_Service</CachedSettingsPropName>
+      <CachedSettingsPropName>LOTROMusicManager_MyLotroBand_MyLotroBand</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\com.joshkraker.mylotroband\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\com.joshkraker.mylotroband\Service.disco" />
-    <None Include="Web References\com.joshkraker.mylotroband\SongResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
+    <Content Include="Commands %28book 12%29.htm" />
+    <Content Include="LOTRO Commands %28Book 12%29.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

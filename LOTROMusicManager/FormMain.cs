@@ -4,30 +4,30 @@ using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Diagnostics;
 using LOTROMusicManager.Properties;
 using System.Configuration;
-using LOTROMusicManager.com.joshkraker.mylotroband;
+using LOTROMusicManager.MyLotroBand;
+using System.Collections.Specialized;
 
 namespace LOTROMusicManager
 {
-    // Delegate to defer reading the cursor location until after the text box has moved it.
-    // Otherwise we get the change notification during the key or mouse processing and we're
-    // one location behine. We use this delegate to push over to a thread to make the check.
-    // Basically, the thread waits on the UI message queue via InvokeRequired/Invoke
-    public delegate void UpdateCursorLocationDel(Object state);
-
-    public partial class FormMain: Form
+    public partial class FormMain: Form      
     {
     #region Properties and types
-        //private String          _strFileNameShowing;
+        //private String          _strFileNameShowing;  
         protected int             _nSelectedFile = -1;
         protected ColumnSorter    _sorter = new ColumnSorter();
         
-        private   enum PlayTypes {Immediate, Sync}
+        private enum PlayTypes   {Immediate, Sync}           
+        private enum SONG_COLUMN {Title = 0, Path = 1};
+        private enum PROMPT_LOGIN{Yes, No};
 
         private bool IsCommand(String s) {return s.Trim()[0] == '/';}
 
         protected FormABCRef _abcref = new FormABCRef();
+
+        private LOTROFocuser _focuser = new LOTROFocuser();
     #endregion
 
     #region Form methods
@@ -41,6 +41,10 @@ namespace LOTROMusicManager
 
         private void OnLoad(object sender, EventArgs e)
         {//--------------------------------------------------------------------
+            // Set up the sorting style we want in the list views
+            lstFiles.Columns[0].Tag = SortType.TITLE;
+            lstFiles.Columns[1].Tag = SortType.PATH; 
+
             ReloadFileList();
             ShowSelectedFile();
             InsertMenuItems(Settings.Default.Dances,     mniDances,    OnEmote);
@@ -48,23 +52,10 @@ namespace LOTROMusicManager
             InsertMenuItems(Settings.Default.Moods,      mniMoods,     OnEmote);
             InsertMenuItems(Settings.Default.Bestowals,  mniBestowals, OnEmote);
 
-            mniOpacity.SelectedIndex = (int)(10*(1-Opacity));
-            //TODO: Get EditorFontSize menu an initial value 
-
             // Auto-binding size or AOT causes all sorts of mess 
             Size = (Size)Settings.Default.WindowSize;
             TopMost = Settings.Default.AOT;
             Location = (Point)Settings.Default.WindowLocation;
-
-            // Set up the sorting style we want in the list views
-            lstFiles.Columns[0].Tag = SortType.TITLE;
-            lstFiles.Columns[1].Tag = SortType.PATH; 
-
-            lstMyLotroBand.Columns[0].Tag = SortType.TITLE;
-            lstMyLotroBand.Columns[1].Tag = SortType.TITLE;
-            lstMyLotroBand.Columns[2].Tag = SortType.INTEGER;
-            lstMyLotroBand.Columns[3].Tag = SortType.DEFAULT;
-            lstMyLotroBand.Columns[4].Tag = SortType.DATE;
 
             // Simulate a click on the "Title" column. Much more useful than starting with
             // the filename sorted.
@@ -75,18 +66,80 @@ namespace LOTROMusicManager
             btnPlay.Tag  = PlayTypes.Immediate;
             btnPlay.Text = mniDDPlay.Text;
 
-            // And to recite lyrics in /say
+            // And to recite lyrics in the first option, probably /say
             cmbReciteChannel.SelectedIndex = 0;
 
+            lstMyLotroBand.Columns[0].Tag = SortType.TITLE;
+            lstMyLotroBand.Columns[1].Tag = SortType.TITLE;
+            lstMyLotroBand.Columns[2].Tag = SortType.INTEGER;
+            lstMyLotroBand.Columns[3].Tag = SortType.DEFAULT;
+            lstMyLotroBand.Columns[4].Tag = SortType.DATE;
+
             // Fill in the tags if they've been customized
-            //if (Settings.Default.TagsEdit    != null) rteEdit.Tags    = Settings.Default.TagsEdit;
-            //if (Settings.Default.TagsPerform != null) rtePerform.Tags = Settings.Default.TagsPerform;
+            if (Settings.Default.TagsEdit    != null) rteEdit.Tags    = Settings.Default.TagsEdit;
+            if (Settings.Default.TagsPerform != null) rtePerform.Tags = Settings.Default.TagsPerform;
+
+            CreateTestEmotes();
+            LoadEmotes();
+
+            // Kick off the timer that makes LOTRO music play while LOMM has focus
+            _focuser.Start();
+
+            return;
+        }
+
+        private static void CreateTestEmotes()
+        {   //====================================================================
+            EmoteGroup eg1 = new EmoteGroup(); eg1.Name = "Dances";
+            eg1.Emotes.Add(new Emote("Clap Hands", new String[] { "/dance" }));
+            eg1.Emotes.Add(new Emote("Dance 1", new String[] { "/dance1" }));
+            eg1.Emotes.Add(new Emote("Hobbit", new String[] { "/dance_hobbit" }));
+            eg1.Emotes.Add(new Emote("Elf", new String[] { "/dance_elf" }));
+            eg1.Emotes.Add(new Emote("Dwarf", new String[] { "/dance_dwarf" }));
+
+            //--------------------------------------------------------------------
+            EmoteGroup eg2 = new EmoteGroup(); eg2.Name = "Social";
+            eg2.Emotes.Add(new Emote("Scold x 5 (grants The Naughty at 100)", new String[] { "/scold", "/scold", "/scold", "/scold", "/scold" }));
+
+            //--------------------------------------------------------------------
+            EmoteGroup eg3 = new EmoteGroup(); eg3.Name = "Experiments";
+
+            Emote emKey = new Emote(); emKey.Name = "Send key 8";
+            emKey.EmoteBlocks.Add(new EmoteBlock(EmoteLine.LineType.KEY, new String[] { "8" }));
+            eg3.Emotes.Add(emKey);
+
+            Emote emChance = new Emote(); emChance.Name = "A4, B4, C1";
+            EmoteBlock ebA = new EmoteBlock(EmoteLine.LineType.Say, new String[] { "A" }); ebA.Chance = 4;
+            EmoteBlock ebB = new EmoteBlock(EmoteLine.LineType.Say, new String[] { "B" }); ebB.Chance = 4;
+            EmoteBlock ebC = new EmoteBlock(EmoteLine.LineType.Say, new String[] { "C" }); ebC.Chance = 1;
+            emChance.EmoteBlocks.Add(ebA);
+            emChance.EmoteBlocks.Add(ebB);
+            emChance.EmoteBlocks.Add(ebC);
+            eg3.Emotes.Add(emChance);
+
+
+            Emote emRP = new Emote(); emRP.Name = "Text and then 8";
+            EmoteBlock ebRP = new EmoteBlock();
+            ebRP.Lines.Add(new EmoteLine(EmoteLine.LineType.Say, "/t ;target Heal incoming"));
+            ebRP.Lines.Add(new EmoteLine(EmoteLine.LineType.KEY, "8"));
+            emRP.EmoteBlocks.Add(ebRP);
+            eg3.Emotes.Add(emRP);
+
+            EmoteGroup eg = new EmoteGroup();
+            eg.Groups.Add(eg1);
+            eg.Groups.Add(eg2);
+            eg.Groups.Add(eg3);
+
+            Settings.Default.EmoteList = eg;
+            Settings.Default.Save();
 
             return;
         }                           
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
+            _focuser.Stop();
+
             Settings.Default.TagsPerform = new MarkedEditBox.RegexTagBag(rtePerform.Tags);
             Settings.Default.TagsEdit = new MarkedEditBox.RegexTagBag(rteEdit.Tags);
             Settings.Default.WindowLocation = Location;
@@ -116,6 +169,12 @@ namespace LOTROMusicManager
             _abcref.Close();
             Close();
             return;            
+        }
+
+        private void OnActivated(object sender, EventArgs e)
+        {   //====================================================================
+            _focuser.Start();
+            return;
         }
 
     #endregion
@@ -229,25 +288,25 @@ namespace LOTROMusicManager
                     }
                     else
                     {
-                        if (ABC.IsTitle(strTmp))      {strTitle       += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsTitle(strTmp))      {strTitle       += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsAuthor(strTmp))     {strAuthor      += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsAuthor(strTmp))     {strAuthor      += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsHistory(strTmp))    {strHistory     += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsHistory(strTmp))    {strHistory     += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsKey(strTmp))        {strKey         += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsKey(strTmp))        {strKey         += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsMeter(strTmp))      {strMeter       += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsMeter(strTmp))      {strMeter       += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsNotes(strTmp))      {strNotes       += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsNotes(strTmp))      {strNotes       += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsOrigin(strTmp))     {strOrigin      += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsOrigin(strTmp))     {strOrigin      += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsTempo(strTmp))      {strTempo       += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsTempo(strTmp))      {strTempo       += strTmp.Substring(2).Trim();}
                         else                                           
-                        if (ABC.IsUnit(strTmp))       {strUnit        += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsUnit(strTmp))       {strUnit        += strTmp.Substring(2).Trim();}
                         else
-                        if (ABC.IsTranscriber(strTmp)){strTranscriber += strTmp.Substring(2) + "\n";}
+                        if (ABC.IsTranscriber(strTmp)){strTranscriber += strTmp.Substring(2).Trim();}
                     } // Header line
                 } // Loop over lines until headers are done
                 sr.Close();
@@ -255,22 +314,24 @@ namespace LOTROMusicManager
 
                 // Assemble the tooltip
                 String strTooltip = "";
-                if (strTitle.Length > 0) strTooltip += strTitle; // Includes a \n
-                strTooltip += (strMeter.Length > 0 ? (strMeter.Remove(strMeter.Length - 1) + " time") : "free meter")
-                            + (strKey.Length > 0 ? (" in " + strKey.Remove(strKey.Length - 1)) : " no key") + "\t"
-                            + (strTempo.Length > 0 ? strTempo.Remove(strTempo.Length - 1) : "") + "\t"
-                            + (strUnit.Length > 0 ? strUnit.Remove(strUnit.Length - 1) : "1/8") + " unit\n";
-                if (strAuthor.Length > 0) strTooltip += strAuthor; // Includes a \n
-                if (strOrigin.Length > 0) strTooltip += strOrigin; // Includes a \n
-                if (strTranscriber.Length > 0) strTooltip += strTranscriber; // Includes a \n
+                if (strTitle.Length > 0) strTooltip += strTitle + Environment.NewLine; 
+                strTooltip += (strMeter.Length > 0 ? (strMeter + " time") : "free meter")
+                            + (strKey.Length   > 0 ? (" in " + strKey) : " no key") + Environment.NewLine;
+                strTooltip += (strTempo.Length > 0 ? strTempo + " bpm with " : "")
+                            + (strUnit.Length  > 0 ? strUnit : "1/8") + " as the beat unit" + Environment.NewLine;
+                if (strAuthor.Length > 0) strTooltip += "By: " + strAuthor + Environment.NewLine; 
+                if (strOrigin.Length > 0) strTooltip += "Origin: " + strOrigin + Environment.NewLine; 
+                if (strTranscriber.Length > 0) strTooltip += "Transcribed by: " + strTranscriber + Environment.NewLine; 
+                
                 if (strNotes.Length > 0) strTooltip += //Double newline if we have text before
-                            (strTooltip.Length > 0 ? "\n" : "") + strNotes;
+                            (strTooltip.Length > 0 ? Environment.NewLine : "") + strNotes;
+                
                 if (strHistory.Length > 0) strTooltip += //Double newline if we have text before
-                            (strTooltip.Length > 0 ? "\n" : "") + strHistory;
+                            (strTooltip.Length > 0 ? Environment.NewLine : "") + strHistory;
 
                 ListViewItem li = new ListViewItem(strTitle);
                 if (strTooltip.Length > 0) li.ToolTipText = strTooltip.Remove(strTooltip.Length - 1);
-                li.SubItems.Add(new ListViewItem.ListViewSubItem(li, fi.FullName.Substring((strDir + @"\" + @"The Lord of the Rings Online\music").Length + 1)));
+                li.SubItems.Insert((int)SONG_COLUMN.Path, new ListViewItem.ListViewSubItem(li, fi.FullName.Substring((strDir + @"\" + @"The Lord of the Rings Online\music").Length + 1)));
                 lstFiles.Items.Add(li);
             }
             return;
@@ -296,7 +357,7 @@ namespace LOTROMusicManager
                     case DialogResult.Yes:
                         // Just save and continue
                         //TODO: Need FQN
-                        SaveFileAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.Items[_nSelectedFile].SubItems[1].Text);
+                        SaveFileAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.Items[_nSelectedFile].SubItems[(int)SONG_COLUMN.Title].Text);
                         break;
                     
                     case DialogResult.Cancel:
@@ -330,7 +391,7 @@ namespace LOTROMusicManager
         {//====================================================================
             if (lstFiles.SelectedItems.Count > 0)
             {
-                PlayFile(lstFiles.SelectedItems[0].SubItems[1].Text);
+                PlayFile(lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Title].Text);
             }
             return;
         }
@@ -339,7 +400,7 @@ namespace LOTROMusicManager
     #region LOTRO Music
         private void OnToggleMusicMode(object sender, EventArgs e)
         {//--------------------------------------------------------------------
-            RemoteController.ExecuteString(Resources.ToggleMusicCommand, RemoteController.Focus.REMOTE);
+            RemoteController.SendText(Resources.ToggleMusicCommand);
             Activate(); // Return focus to the app
             return;
         }
@@ -367,7 +428,8 @@ namespace LOTROMusicManager
                     str = String.Format(Resources.PlaySyncCommand, strFileName);
                     break;
             }
-            RemoteController.ExecuteString(str, RemoteController.Focus.REMOTE);
+            RemoteController.SendText(str);
+            _focuser.Start();
             return;
         }
 
@@ -379,12 +441,12 @@ namespace LOTROMusicManager
             if (lstFiles.SelectedItems.Count > 0)
             {
                 SaveFile();
-                PlayWithLyrics(lstFiles.SelectedItems[0].SubItems[1].Text);
+                PlayWithLyrics(lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Path].Text);
             }
             return;
         } // OnPlay
 
-        private void OnDDStartSync(object sender, EventArgs e)
+        private void OnStartSync(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             // Switch the button to be sync from now on
             btnPlay.Tag  = PlayTypes.Sync;
@@ -393,7 +455,7 @@ namespace LOTROMusicManager
             return;
         }
 
-        private void OnDDWaitToPlay(object sender, EventArgs e)
+        private void OnWaitToPlay(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             // Switch the button to be sync from now on
             btnPlay.Tag = PlayTypes.Sync;
@@ -402,16 +464,16 @@ namespace LOTROMusicManager
             return;
         }
 
-        private void OnDDStartSyncPlay(object sender, EventArgs e)
+        private void OnStartSyncPlay(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             // Switch the button to be sync from now on
             btnPlay.Tag = PlayTypes.Sync;
             btnPlay.Text = mniDDPlaySync.Text;
-            RemoteController.ExecuteString(Resources.StartSyncCommand, RemoteController.Focus.REMOTE);
+            RemoteController.SendText(Resources.StartSyncCommand);
             return;
         }
 
-        private void OnDDPlay(object sender, EventArgs e)
+        private void OnDropDownPlay(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             // Switch the button to be immediate from now on
             btnPlay.Tag  = PlayTypes.Immediate;
@@ -420,11 +482,12 @@ namespace LOTROMusicManager
             return;
         }
 
-        private void OnDDStopSong(object sender, EventArgs e)
+        private void OnStopSong(object sender, EventArgs e)
         {//--------------------------------------------------------------------
             btnPlay.Text = mniDDPlay.Text;
             btnPlay.Tag  = PlayTypes.Immediate;
-            RemoteController.SendKey('`', RemoteController.Focus.LOCAL); //TODO: Make the stop-song configurable
+            //RemoteController.SendKey('`', RemoteController.Focus.LOCAL); //TODO: Make the stop-song configurable
+            RemoteController.SendChars(new char[]{'`'}, new BuckyBits {Alt = false, Shift = false, Control = false});
             return;
         } // OnDDStopSong
 
@@ -437,8 +500,8 @@ namespace LOTROMusicManager
             btnUndo.Enabled = b; mniUndoAll.Enabled = b;
             return;
         }
-
-        String ConvertNonDosFile(String str)
+                                                          
+        private String ConvertNonDosFile(String str)
         {//====================================================================
             // If we have any dos newlines, use the file as-is
             if (str.IndexOf('\r') != -1) return str;
@@ -446,24 +509,38 @@ namespace LOTROMusicManager
             // split on unix newlines and join with dos newlines
             Char[]   aLF = { '\n' };
             String[] aLines = str.Split(aLF, StringSplitOptions.None);
-            return String.Join("\r\n", aLines);
+            return String.Join(Environment.NewLine, aLines);
         }
 
         private void ShowSelectedFile()
         {//--------------------------------------------------------------------
             if (lstFiles.SelectedItems.Count > 0)
             {
-                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
+                // Clear selections because we can get in a weird state otherwise
+                rteEdit.SelectionStart    = 0;  rteEdit.SelectionLength    = 0;
+                rtePerform.SelectionStart = 0;  rtePerform.SelectionLength = 0;
+                
+                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Path].Text;
                 StreamReader sr = new StreamReader(strFileName);
                 rteEdit.Text = ConvertNonDosFile(sr.ReadToEnd());
+                
                 rtePerform.Text = rteEdit.Text;
                 sr.Close();
                 sr.Dispose();
 
                 rteEdit.Enabled  = true; // Allow edits
+
+                for (int i = 0; i < rteEdit.Lines.Length; i += 1)
+                {
+                    if (ABC.IsLyrics(rteEdit.Lines[i])) 
+                    {
+                        lstLyrics.Items.Add(new ABCLine(ABC.RemoveHeaderTag(rteEdit.Lines[i]), i));
+                    }
+                }
             }
             else
             {
+                lstLyrics.Items.Clear();
                 rteEdit.Clear();
                 rtePerform.Clear();
                 rteEdit.Enabled  = false; // Disallow edits
@@ -490,7 +567,7 @@ namespace LOTROMusicManager
         {//====================================================================
             if (lstFiles.SelectedItems.Count == 0) return;
 
-            String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
+            String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Title].Text;
             FileInfo fi = new FileInfo(strFileName);
             fi.Delete();
 
@@ -512,7 +589,7 @@ namespace LOTROMusicManager
         {//--------------------------------------------------------------------
             if (lstFiles.SelectedItems.Count > 0)
             {
-                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[1].Text;
+                String strFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Path].Text;
                 SaveFileAs(strFileName);
             }
         }
@@ -525,30 +602,32 @@ namespace LOTROMusicManager
 
         private void OnCaretMoved(object sender, MarkedEditBox.CaretMovedEventArgs e)
         {   //====================================================================
-            slEditLocation.Text = "Line " + e.Row.ToString() + ", Character " + e.Col.ToString();
+            slEditLocation.Text = "Line " + (e.Row + 1).ToString() + ", Character " + (e.Col + 1).ToString();
             return;
         }
 
     #endregion
     
     #region Settings
-        private void OnToggleAOT(object sender, EventArgs e)
-        {//--------------------------------------------------------------------
-            TopMost = mniAlwaysOnTop.Checked;
-            return;
-        }
+        private void OnOptions(object sender, EventArgs e)
+        {
+            FormOptions dlg = new FormOptions(this);
+            if (dlg.ShowDialog() == DialogResult.OK) 
+            {
+                Settings.Default.KeepLOTROFocused = dlg.KeepLOTROFocused;
+                Settings.Default.Opacity          = Opacity.ToString();
+                
+                Settings.Default.AOT              = dlg.AOT;
+                TopMost = Settings.Default.AOT;
 
-        private void OnFontSizeChanged(object sender, EventArgs e)
-        {//--------------------------------------------------------------------
-            rteEdit.Font = new Font(rteEdit.Font.FontFamily, Int32.Parse(mniEditorFontSize.Text));
-            return;
-        }
-
-        private void OnOpacityChanged(object sender, EventArgs e)
-        {//--------------------------------------------------------------------
-            Opacity = double.Parse(mniOpacity.Text) / 100.0;
-            return;
-        }
+                Settings.Default.Save();
+            }
+            else
+            {
+                Opacity = Double.Parse(Settings.Default.Opacity);
+            }
+            return;                   
+        }               
     #endregion
 
     #region Emotes
@@ -563,7 +642,7 @@ namespace LOTROMusicManager
                 {
                     s = s.Remove(s.IndexOf('('));
                 }
-                RemoteController.ExecuteString(s.Trim(), RemoteController.Focus.LOCAL);
+                RemoteController.SendText(s.Trim());
                 Activate(); // Keep focus for multiple emotes
             }
             else
@@ -574,7 +653,7 @@ namespace LOTROMusicManager
             return;
         }
 
-        private void InsertMenuItems(System.Collections.Specialized.StringCollection src, ToolStripMenuItem mnu, EventHandler func)
+        private void InsertMenuItems(StringCollection src, ToolStripMenuItem mnu, EventHandler func)
         {//--------------------------------------------------------------------
             foreach (String s in src)
             {
@@ -589,43 +668,49 @@ namespace LOTROMusicManager
             }
             return;
         }
-    #endregion
 
-        private void OnResetSettings(object sender, EventArgs e)
+        private void LoadEmotes()
         {//====================================================================
-            Settings.Default.Reset();
+            EmoteGroup egTop = Settings.Default.EmoteList;
+            foreach (EmoteGroup eg in egTop.Groups)
+            {
+                ToolStripMenuItem item = (ToolStripMenuItem)menustripEmotes.Items.Add(eg.Name);
+                AddEmoteGroupToMenuItem(eg, item);
+            }
             return;
         }
 
+        private void AddEmoteGroupToMenuItem(EmoteGroup eg, ToolStripMenuItem tsi)
+        {   //====================================================================
+            foreach (EmoteGroup egInner in eg.Groups)
+            {
+                ToolStripMenuItem item = (ToolStripMenuItem)tsi.DropDownItems.Add(egInner.Name);
+                item.Tag = egInner;
+                AddEmoteGroupToMenuItem(egInner, item);
+            }
+
+            foreach (Emote e in eg.Emotes)
+            {
+                ToolStripMenuItem item = (ToolStripMenuItem)tsi.DropDownItems.Add(e.Name, null, OnCustomEmote);
+                item.Tag = e;
+            }
+            return;
+        }
+
+        private void OnCustomEmote(object sender, EventArgs e)
+        {   //====================================================================
+            Emote em = (Emote)(((ToolStripMenuItem)sender).Tag);
+            em.Execute();
+            return;
+        }
+    #endregion
+
+    #region MyLotroBand
         private void OnMyLotroBandLogin(object sender, EventArgs e)
         {//====================================================================
-            Credentials creds = new Credentials();
-            creds.Email    = Properties.Settings.Default.MyLotroBandLoginEmail;
-            creds.Password = Properties.Settings.Default.MyLotroBandLoginPW;
-
-            if (creds.Password == null || creds.Password.Length < 1 || creds.Email == null || creds.Email.Length < 1)
-            {
-                FormMyLotroBandLogin dlg = new FormMyLotroBandLogin();
-                dlg.RememberLoginInformation = Properties.Settings.Default.MyLotroBandRememberLoginInformation;
-
-                if (DialogResult.OK == dlg.ShowDialog())
-                {
-                    creds.Email = dlg.Email;        
-                    creds.Password = dlg.Password;  
-
-                    Properties.Settings.Default.MyLotroBandRememberLoginInformation = dlg.RememberLoginInformation;
-                    Properties.Settings.Default.MyLotroBandLoginEmail = dlg.RememberLoginInformation ? creds.Email    : String.Empty;
-                    Properties.Settings.Default.MyLotroBandLoginPW    = dlg.RememberLoginInformation ? creds.Password : String.Empty;
-                    Properties.Settings.Default.Save();
-                }
-                else
-                {
-                    return; // Login was canceled
-                }
-            }
-            
-            Service mlbService = new Service();
-            SongResponse songs = mlbService.GetSongList(creds);
+            Credentials creds = GetMyLotroBandCredentials(PROMPT_LOGIN.Yes);
+            MyLotroBand.MyLotroBand mlb = new MyLotroBand.MyLotroBand();
+            SongResponse songs = mlb.GetSongList(creds);
             //TODO: error handling around song response
 
             foreach (Song s in songs.Song)
@@ -636,114 +721,204 @@ namespace LOTROMusicManager
                 lvi.SubItems.Add(s.NumParts.ToString());
                 lvi.SubItems.Add(s.AddedBy);
                 lvi.SubItems.Add(s.Created.ToShortDateString());
-                lstMyLotroBand.Items.Add(lvi);                
+                lvi.SubItems.Add(s.SongId.ToString());
+                lstMyLotroBand.Items.Add(lvi);
             }
 
             return;
+        }
+
+        private Boolean CredsIsBad(Credentials creds)
+        {   //====================================================================
+            return creds.Password == null || creds.Password.Length < 1 || creds.Email == null || creds.Email.Length < 1;
+        }
+
+        private Credentials GetMyLotroBandCredentials(PROMPT_LOGIN prompt)
+        {   //====================================================================
+            Credentials credsRet = null;
+            Credentials creds = new Credentials();
+            creds.Email = Properties.Settings.Default.MyLotroBandLoginEmail;
+            creds.Password = Properties.Settings.Default.MyLotroBandLoginPW;
+
+            if (prompt == PROMPT_LOGIN.Yes && CredsIsBad(creds))
+            {
+                FormMyLotroBandLogin dlg = new FormMyLotroBandLogin();
+                dlg.RememberLoginInformation = Properties.Settings.Default.MyLotroBandRememberLoginInformation;
+
+                if (DialogResult.OK == dlg.ShowDialog())
+                {
+                    creds.Email = dlg.Email;
+                    creds.Password = dlg.Password;
+
+                    Properties.Settings.Default.MyLotroBandRememberLoginInformation = dlg.RememberLoginInformation;
+                    Properties.Settings.Default.MyLotroBandLoginEmail = dlg.RememberLoginInformation ? creds.Email : String.Empty;
+                    Properties.Settings.Default.MyLotroBandLoginPW = dlg.RememberLoginInformation ? creds.Password : String.Empty;
+                    Properties.Settings.Default.Save();
+
+                    credsRet = creds;
+                }
+            }
+            else
+            {
+                credsRet = creds;
+            }
+            return credsRet;
         }
 
         private void OnMyLotroBandForgetLoginInformation(object sender, EventArgs e)
         {   //====================================================================
             Properties.Settings.Default.MyLotroBandLoginEmail = String.Empty;
-            Properties.Settings.Default.MyLotroBandLoginPW    = String.Empty;
+            Properties.Settings.Default.MyLotroBandLoginPW = String.Empty;
             Properties.Settings.Default.Save();
         }
 
-        static bool bInOnCaretMoved = false;
+        private void OnMyLotroBandVisitSite(object sender, EventArgs e)
+        {   //====================================================================
+            Process.Start("http://mylotroband.joshkraker.com/");
+            return;
+        }
+
+        private void OnMyLotroBandCreateAccount(object sender, EventArgs e)
+        {   //====================================================================
+            Process.Start("http://mylotroband.joshkraker.com/CreateMember.aspx"); //TODO: Replace with web service call when available
+            return;
+        }
+    
+        private void OnMyLotroBandSongSelectionChange(object sender, EventArgs e)
+        {   //====================================================================
+            if (lstMyLotroBand.SelectedItems.Count > 0) btnMyLotroBandActions.Enabled = true;
+            return;
+        }
+
+        private void OnMyLotroBandClick(object sender, EventArgs e)
+        {   //====================================================================
+            if (lstMyLotroBand.SelectedItems.Count > 0)
+            {
+                DownloadAllParts(lstMyLotroBand.SelectedItems[0].SubItems[5].Text, lstMyLotroBand.SelectedItems[0].Text);
+            }
+            return;
+        }
+
+        private void DownloadAllParts(String strSongId, String strSongName)
+        {   //--------------------------------------------------------------------
+            Credentials creds = GetMyLotroBandCredentials(PROMPT_LOGIN.No);
+            if (null == creds) return;
+
+            MyLotroBand.MyLotroBand mlb = new MyLotroBand.MyLotroBand();
+            PartResponse parts = mlb.GetSongParts(creds, Int32.Parse(strSongId));
+            foreach (Part p in parts.Part)
+            {
+                String strBaseName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder + @"\" + strSongName;
+                FileInfo fi = new FileInfo(strBaseName + " - part " + p.PartId.ToString()+".abc");
+                int i = 0;
+                while (fi.Exists && i < 100) fi = new FileInfo(strBaseName + " - part " + p.PartId.ToString() + " (" + (++i).ToString() + ").abc");
+                if (i >= 100) break; //TODO: Sounds like a major error condition here!
+                StreamWriter sw = fi.CreateText();
+                sw.Write(p.Abc);
+                sw.Flush();
+                sw.Close();
+            }
+            return;
+        }
+    #endregion
+
+    #region Lyrics Playing
+        protected static bool _bInProgrammaticUIChange = false;
         private void OnPerformCaretMoved(object sender, MarkedEditBox.CaretMovedEventArgs e)
         {   //====================================================================
-            if (!bInOnCaretMoved)
+            if (_bInProgrammaticUIChange) return;
+            _bInProgrammaticUIChange = true;
+
+            rtePerform.SelectLine(rtePerform.InsertionRow);
+
+            if (ABC.IsLyrics(rtePerform.Lines[rtePerform.InsertionRow]))
             {
-                bInOnCaretMoved = true;
-                int iStart = rtePerform.GetFirstCharIndexFromLine(rtePerform.InsertionRow);
-                int iLen   = rtePerform.GetFirstCharIndexFromLine(rtePerform.InsertionRow + 1) - iStart;
-                rtePerform.Select(iStart, iLen);
-                bInOnCaretMoved = false;
+                // We have a lyrics line
+                btnPerform.Text = "Recite Line";
+
+                // Select the right item in the listbox
+                lstLyrics.SelectedIndex = -1;
+                for (int i = 0; i < lstLyrics.Items.Count; i += 1)
+                {
+                    ABCLine line = (ABCLine)lstLyrics.Items[i];
+                    if (line.SourceLine == rtePerform.InsertionRow) 
+                    {
+                        lstLyrics.SelectedIndex = i;
+                        break;
+                    }
+                }
+            } // Lyrics line
+            else
+            {
+                btnPerform.Text = "Recite Next Line";
+            } // Not a lyrics line
+
+            _bInProgrammaticUIChange = false;
+            return;
+        }
+    
+        private void OnLyricsListSelectedIndexChanged(object sender, EventArgs e)
+        {   //====================================================================
+            if (_bInProgrammaticUIChange) return;
+            _bInProgrammaticUIChange = true;
+            
+            // Select the right line in the rtf view
+            ABCLine line = (ABCLine)lstLyrics.SelectedItem;
+            rtePerform.SelectLine(line.SourceLine);
+            
+            _bInProgrammaticUIChange = false;
+            return;
+        }
+
+        private void OnPerformKeyPress(object sender, KeyPressEventArgs e)
+        {   //====================================================================
+            // No right and left, only up and down
+            if (e.KeyChar == (char)System.Windows.Forms.Keys.Right) e.KeyChar = (char)System.Windows.Forms.Keys.Down;
+            if (e.KeyChar == (char)System.Windows.Forms.Keys.Left)  e.KeyChar = (char)System.Windows.Forms.Keys.Up;
+            e.Handled = false;
+        }
+
+    #endregion
+
+    #region Song List Context Menu
+        private void OnSongListCopyTitle(object sender, EventArgs e)
+        {   //====================================================================
+            if (lstFiles.SelectedItems.Count > 0)
+            {
+                Clipboard.SetText(lstFiles.SelectedItems[0].Text);
             }
             return;
         }
+
+        private void OnSongListCopyFilename(object sender, EventArgs e)
+        {   //--------------------------------------------------------------------
+            if (lstFiles.SelectedItems.Count > 0)
+            {
+                Clipboard.SetText(lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Path].Text);
+            }
+            return;
+        }
+
+        private void OnSongListCopyFQFilename(object sender, EventArgs e)
+        {   //--------------------------------------------------------------------
+            if (lstFiles.SelectedItems.Count > 0)
+            {
+                Clipboard.SetText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                                  Resources.MusicSubfolder +
+                                  lstFiles.SelectedItems[0].SubItems[(int)SONG_COLUMN.Path].Text);
+            }
+            return;
+        }
+
+        private void OnSongListCopyInfoBlock(object sender, EventArgs e)
+        {   //--------------------------------------------------------------------
+            if (lstFiles.SelectedItems.Count > 0)
+            {
+                Clipboard.SetText(lstFiles.SelectedItems[0].ToolTipText);
+            }
+            return;
+        }
+    #endregion
 
     } // class
-
-    public enum SortType {DEFAULT, TITLE, PATH, DATE, INTEGER};
-    public class ColumnSorter : System.Collections.IComparer
-    {
-        public    SortType      SortType        {get; set;}
-        public    int           CurrentCol      {get; set;} // Yay for new 2008 simple property syntax!
-        protected List<String>  _lstIgnore      = new List<string>();
-        protected static char[] PATH_SEPARATORS = @"/\".ToCharArray();
-        protected static String CURRENT_DIR     = @".\";
-
-        public ColumnSorter()
-        {//--------------------------------------------------------------------
-            // Remove A, An, and The for purposes of comparing
-            _lstIgnore.Add("a ");
-            _lstIgnore.Add("an ");
-            _lstIgnore.Add("the ");
-            return;
-        }
-
-        int System.Collections.IComparer.Compare(object x, object y)
-        {//====================================================================
-            String strA = ((ListViewItem)x).SubItems[CurrentCol].Text;
-            String strB = ((ListViewItem)y).SubItems[CurrentCol].Text;
-            switch (SortType)
-            {
-                default: throw new Exception("Unknown sort type!");
-                case SortType.DEFAULT:      return String.Compare(strA.TrimStart(), strB.TrimStart());
-                case SortType.TITLE:        return SortTitle(strA, strB);
-                case SortType.PATH:         return SortPath(strA, strB);
-                case SortType.INTEGER:      return int.Parse(strA) < int.Parse(strB) ? -1 : int.Parse(strA) == int.Parse(strB) ? 0 : 1;
-                case SortType.DATE:         return DateTime.Parse(strA) < DateTime.Parse(strB) ? -1 : DateTime.Parse(strA) == DateTime.Parse(strB) ? 0 : 1;
-            }
-        }
-        int SortTitle(String strA, String strB)
-        {//--------------------------------------------------------------------
-            // Remove any prefixes we want to ignore
-            // Note that this code will turn "A to Z Waltz" and "The A to Z 
-            // Waltz" into "to Z Waltz" for comparison, putting them in the Ts. 
-            // This is not necessarily desirable, but is a PITA to fix.
-            foreach (String s in _lstIgnore)
-            {
-                if (strA.StartsWith(s, StringComparison.CurrentCultureIgnoreCase)) strA = strA.Substring(s.Length);
-                if (strB.StartsWith(s, StringComparison.CurrentCultureIgnoreCase)) strB = strB.Substring(s.Length);
-            }
-            // Remove quotes, spaces, dashes, etc.
-            int i = 0; while (!Char.IsLetterOrDigit(strA[i])) i += 1; if (i > 0) strA = strA.Substring(i);
-            int j = 0; while (!Char.IsLetterOrDigit(strB[j])) j += 1; if (j > 0) strB = strB.Substring(j);
-            return String.Compare(strA, strB);
-        }
-
-        int SortPath(String strA, String strB)
-        {//--------------------------------------------------------------------
-            // One or more has as subdir in it
-            // Cases to consider:
-            //   bbb.abc           stuff/aaa.abc > bbb is first
-            //   stuff/bbb.abc     tmp/aaa.abc   > bbb is first
-            //   stuff/zzz/bbb.abc tmp/aaa.abc   > bbb is first
-            
-            // We're going to make parallel-but-possibly-ragged arrays of
-            // the subdir structure and compare parallel depths. We need to 
-            // fake up a dir name for files in the root so we have parallelism: 
-            // .\zzz.abc and stuff\bbb.abc have to compare at the same depths.
-            // Without this we compare zzz.abc to stuff, which is wrong. The 
-            // root should always sort to the top (simulating a depth-first 
-            // recursion like dir /s)
-            if (strA.IndexOfAny(PATH_SEPARATORS) == -1) strA = CURRENT_DIR + strA;
-            if (strB.IndexOfAny(PATH_SEPARATORS) == -1) strB = CURRENT_DIR + strB;
-
-            String[] aPartsA = strA.Split(PATH_SEPARATORS);
-            String[] aPartsB = strB.Split(PATH_SEPARATORS);
-            
-            // Compare parallel elements of the arrays
-            for (int i = 0; i < (aPartsA.Length < aPartsB.Length ? aPartsA.Length : aPartsB.Length); i += 1)
-            {
-                if (aPartsA[i] != aPartsB[i]) return String.Compare(aPartsA[i], aPartsB[i]);
-            }
-            
-            // Okay, we walked off the end of one of the arrays, so return the lower 
-            // depth of the two as first
-            return aPartsA.Length - aPartsB.Length; // Will be negative if B is longer, making A first. And vice-versa.
-        }
-    }
 } // namespace
