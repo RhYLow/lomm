@@ -1,30 +1,55 @@
 #summary Preview of 2.0 features
 #labels Featured,Phase-Design
 
-Here is a screenshot of some new features I'm working on for LOMM 2.0
+Totally new preview of 2.0!
 
-[http://lomm.googlecode.com/svn/trunk/Screenshots/LOMM-2.0-UI.jpg]
+I really want feedback on all of this.
 
-_(This is a test app for the capabilities, not the full LOMM UI)_
+----
 
-Some interesting points:
-  * Non-playing ABC elements are grayed out. These include
-    * Headers
-    * Text in quotes (usually used for tablature, as it is in this example)
-    * Repeat sybmols
-    * Triplets
-  * Lyric lines are highlighted (but see below)
-  * Certain error ABC is marked
-    * Pitches above or below the LOTRO range is highlighted in reverse. Note that it is possible to construct a degenrate note (such as `^^^^a'`) that is above the range but escapes the filter. If you do that kind of thing, you're on your own. I got yelled at in music theory for using B#s and transposing to Abmin^1 and even I think that's insane.
-    * Chords with notes of different lengths are marked. This is a warning, not an error, but usually should be handled differently
+=Music Features=
+Music UI is now split into two parts. One is for the edit/compose/test mode and has a full-width editing area and ABC syntax highlighting:
 
- I'm working on tooltips for the relevant markings, but that's surprisingly more annoying in .NET than you'd expect. 
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EditMode.jpg]
 
-This is for a music editing mode. The new UI will have two tabs. When you are _playing_ music, you can switch to the other (non-editing) tab and the highlighting will change: music will be grayed out and the lyrics will be more visible. Double clicking on a lyric line or pressing the "recite" button will send that line to LOTRO and move the focus to the next lyric line. It's up to you to set the timing (and to break the lyric lines where you want the phrasing), but it's a lot easier than copying and pasting in lyrics or otherwise doing it by hand.
+There is also Play mode for helping recite lyrics:
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-PlayMode.jpg]
 
-I'm looking at some interesting new features for emotes as well, but this is the start of the music overhaul. Let me know what you think.
+The highlighting is a bit system-intensive when an ABC file is opened or edited, so it can be disabled if you prefer. It is noticeably painful on my large test file ().
 
-This would have shipped when book 12 did (that was my goal), but some Real Life business got in the way. For some reason, my clients seem to think I'm supposed to be delivering the projects I promised _them_ instead of this free thing for a game.
+I need to work something up for the X tag support. Tuple and dynamic support should be just more syntax highlighting, which I can add easily.
+----
+=Macro Features=
 
+All-new command automation! Instead of the pre-defined list of "role-play friendly" commands from 1.x you can now create and organize your own actions. 
 
-1) Actually, I probably got in trouble for asking the teacher to sight read Abmin with lots of borrowed chords, but you get the point.
+Instead of "macro", they're called "emotes" in the UI, which is entirely wrong and may change. An "emote" consists of one or more actions. Actions come in a bunch of types:
+
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EmotesActionTypes.jpg]
+
+For each type you can specify the text or action to take. For instance, for the LOTRO command type, the list of actions from the key mapping panel appears:
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EmotesActionMenu1.jpg]
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EmotesActionMenu2.jpg]
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EmotesActionMenu3.jpg]
+
+Allowing you to create macros like:
+
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EmotesActionLines.jpg]
+
+or
+
+[http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-EmotesActionLines2.jpg]
+
+----
+=Other Stuff=
+There are some other features coming as well:
+  * Per-character options (including emotes)
+  * Keep LOTRO sound playing when LOMM has the focus
+  * "One of many" emote actions (to say one item out of a list, for example)
+  * Options dialog to clean up the menu UI
+
+And some "still might happen" items
+  * Customize what's marked in the ABC highlighting
+  * Float a toolbar or emotes separate from the main LOMM UI
+  * Radial menu for emotes (this is less likely, but I really want it)
+  * Invisible buttons to float over your on-screen quickbars (I can go on about this if people want; I think it's a cool idea)
