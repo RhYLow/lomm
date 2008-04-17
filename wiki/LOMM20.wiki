@@ -15,7 +15,7 @@ Music UI is now split into two parts. One is for the edit/compose/test mode and 
 There is also Play mode for helping recite lyrics:
 [http://lomm.googlecode.com/svn/trunk/Screenshots/20-planned-PlayMode.jpg]
 
-The highlighting is a bit system-intensive when an ABC file is opened or edited, so it can be disabled if you prefer. It is noticeably painful on my large test file ().
+The highlighting is a bit system-intensive when an ABC file is opened or edited, so it can be disabled if you prefer. It is noticeably painful on my large test file (2,300 lines).
 
 I need to work something up for the X tag support. Tuple and dynamic support should be just more syntax highlighting, which I can add easily.
 ----
