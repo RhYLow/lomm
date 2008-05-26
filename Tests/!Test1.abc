@@ -1,0 +1,11 @@
+X:1
+T: - LOMM Test File 1: Single Song
+M: 4/4     
+L: 1/4     
+K: Amin    
+Q: 1/4=120 
+% Headers below are optional
+A: Carborunda Riverside of the Stoors
+O: Stock, The Shire, Eriador
+N: Test file 1 - only 1 song in the file
+|+p+ABCD|+f+z(3EFG>^G|+fff+[A4a4C4E4]||
