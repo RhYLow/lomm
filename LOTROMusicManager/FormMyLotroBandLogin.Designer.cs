@@ -1,4 +1,4 @@
-﻿namespace LOTROMusicManager
+﻿namespace LotroMusicManager
 {
     partial class FormMyLotroBandLogin
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     // This class handles sorting for a listview in details mode. The tag property for each column
     // should be set to one of the SortType enumeration. 
@@ -40,11 +40,21 @@ namespace LOTROMusicManager
                 case SortType.DEFAULT:      return String.Compare(strA.TrimStart(), strB.TrimStart());
                 case SortType.TITLE:        return SortTitle(strA, strB);
                 case SortType.PATH:         return SortPath (strA, strB);
-                case SortType.INTEGER:      return int.Parse(strA)      < int.Parse(strB)      ? -1 : int.Parse(strA)      == int.Parse(strB)      ? 0 : 1;
                 case SortType.DATE:         return DateTime.Parse(strA) < DateTime.Parse(strB) ? -1 : DateTime.Parse(strA) == DateTime.Parse(strB) ? 0 : 1;
+                case SortType.INTEGER:      
+                    if (strA == "") return 1; 
+                    else if (strB == "") return -1; 
+                    else 
+                    {
+                        int a = 0; int b = 0;
+                        try {a = int.Parse(strA);} catch{};
+                        try {b = int.Parse(strB);} catch{};
+                        return a < b ? -1 : a == b ? 0 : 1;
+                    }
             }
         }
-        int SortTitle(String strA, String strB)
+        
+        private  int SortTitle(String strA, String strB)
         {//--------------------------------------------------------------------
             // Remove quotes, spaces, dashes, etc.
             if (strA.Length > 0) {int i = 0; while (!Char.IsLetterOrDigit(strA[i])) i += 1; if (i > 0) strA = strA.Substring(i);}
@@ -69,7 +79,7 @@ namespace LOTROMusicManager
             return String.Compare(strA, strB);
         }
 
-        int SortPath(String strA, String strB)
+        private int SortPath(String strA, String strB)
         {//--------------------------------------------------------------------
             // One or more has as subdir in it
             // Cases to consider:

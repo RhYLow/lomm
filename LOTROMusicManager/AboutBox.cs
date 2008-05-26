@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     public partial class AboutBox : Form
     {

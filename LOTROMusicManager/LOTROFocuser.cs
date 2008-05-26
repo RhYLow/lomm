@@ -1,10 +1,10 @@
-﻿using LOTROMusicManager.Properties;
+﻿using LotroMusicManager.Properties;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     class LOTROFocuser
     {

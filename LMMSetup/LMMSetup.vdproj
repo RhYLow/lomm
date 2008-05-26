@@ -15,6 +15,18 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_00C216E0A817160026DB8E294044B487"
+        "OwnerKey" = "8:_EED2738FDB79408DB5F280EB277141CC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7DD28891889EDF123D734A763B271CEC"
+        "OwnerKey" = "8:_EED2738FDB79408DB5F280EB277141CC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A6BDBC6E003045B780624F1A1FF6EA07"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -29,6 +41,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EED2738FDB79408DB5F280EB277141CC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7DD28891889EDF123D734A763B271CEC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_00C216E0A817160026DB8E294044B487"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -121,6 +145,68 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_00C216E0A817160026DB8E294044B487"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MarkedEditBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_00C216E0A817160026DB8E294044B487"
+                    {
+                    "Name" = "8:MarkedEditBox.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MarkedEditBox.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7DD28891889EDF123D734A763B271CEC"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:LOMMSplitButton, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7DD28891889EDF123D734A763B271CEC"
+                    {
+                    "Name" = "8:LOMMSplitButton.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:LOMMSplitButton.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A6BDBC6E003045B780624F1A1FF6EA07"
             {
             "SourcePath" = "8:..\\LOTROMusicManager\\Resources\\LOMM.ico"
@@ -202,6 +288,7 @@
         "MsiBootstrapper"
         {
         "LangId" = "3:1033"
+        "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
@@ -756,7 +843,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EED2738FDB79408DB5F280EB277141CC"
             {
-            "SourcePath" = "8:..\\LOTROMusicManager\\obj\\Release\\LOTROMusicManager.exe"
+            "SourcePath" = "8:..\\LOTROMusicManager\\obj\\Debug\\LOTROMusicManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4DF4F09FC7DC4C458BE0654C63F98B4B"
@@ -782,9 +869,6 @@
                 {
                 }
             }
-        }
-        "VJSharpPlugin"
-        {
         }
     }
 }

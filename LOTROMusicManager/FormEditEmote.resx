@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,77 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ABCRef" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Help\ABCRef.rtf;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOMM" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\lomm.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NewABC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NewABC.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AppTitle" xml:space="preserve">
-    <value>LOTRO Music Manager</value>
-  </data>
-  <data name="NoLOTROFound" xml:space="preserve">
-    <value>Unable to find LOTRO client to send commands</value>
-  </data>
-  <data name="SavePrompt" xml:space="preserve">
-    <value>The text in the ABC file has changed. Do you want to save the changes?</value>
-  </data>
-  <data name="ABCTagAuthor" xml:space="preserve">
-    <value>A:</value>
-  </data>
-  <data name="ABCTagHistory" xml:space="preserve">
-    <value>H:</value>
-  </data>
-  <data name="ABCTagKey" xml:space="preserve">
-    <value>K:</value>
-  </data>
-  <data name="ABCTagLyrics" xml:space="preserve">
-    <value>W:</value>
-  </data>
-  <data name="ABCTagMeter" xml:space="preserve">
-    <value>M:</value>
-  </data>
-  <data name="ABCTagNote" xml:space="preserve">
-    <value>N:</value>
-  </data>
-  <data name="ABCTagOrigin" xml:space="preserve">
-    <value>O:</value>
-  </data>
-  <data name="ABCTagTempo" xml:space="preserve">
-    <value>Q:</value>
-  </data>
-  <data name="ABCTagTitle" xml:space="preserve">
-    <value>T:</value>
-  </data>
-  <data name="ABCTagTranscriber" xml:space="preserve">
-    <value>Z:</value>
-  </data>
-  <data name="ABCTagUnit" xml:space="preserve">
-    <value>L:</value>
-  </data>
-  <data name="MusicSubfolder" xml:space="preserve">
-    <value>\The Lord of the Rings Online\music\</value>
-  </data>
-  <data name="PlayFileCommand" xml:space="preserve">
-    <value>/play "{0}" {1}</value>
-  </data>
-  <data name="PlaySyncCommand" xml:space="preserve">
-    <value>/play "{0}" {1} sync</value>
-  </data>
-  <data name="StartSyncCommand" xml:space="preserve">
-    <value>/playstart</value>
-  </data>
-  <data name="ToggleMusicCommand" xml:space="preserve">
-    <value>/music</value>
-  </data>
-  <data name="ABCTagIndex" xml:space="preserve">
-    <value>X:</value>
-  </data>
+  <metadata name="btnOK.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="mnuLOTROCommands2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>338, 17</value>
+  </metadata>
+  <metadata name="toolsEmoteEditor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="mnuLOTROCommands.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>162, 17</value>
+  </metadata>
 </root>

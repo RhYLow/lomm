@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     public partial class FormMyLotroBandLogin : Form
     {

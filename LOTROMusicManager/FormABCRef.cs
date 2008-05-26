@@ -6,9 +6,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LOTROMusicManager.Properties;
+using LotroMusicManager.Properties;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     public partial class FormABCRef : Form
     {

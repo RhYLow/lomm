@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LOTROMusicManager")]
-[assembly: AssemblyDescription("ABC file manager for LOTRO")]
+[assembly: AssemblyTitle("LOMM")]
+[assembly: AssemblyDescription("LOTRO Music and Macros")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Herndon Morris, Inc")]
 [assembly: AssemblyProduct("LOTRO Music Manager")]
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.4.0")]
-[assembly: AssemblyFileVersion("1.0.4.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]

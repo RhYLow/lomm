@@ -1,4 +1,4 @@
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     public partial class AboutBox
     {
@@ -66,7 +66,7 @@ namespace LOTROMusicManager
             // logoPictureBox
             // 
             logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            logoPictureBox.Image = global::LOTROMusicManager.Properties.Resources.logo;
+            logoPictureBox.Image = global::LotroMusicManager.Properties.Resources.logo;
             logoPictureBox.Location = new System.Drawing.Point(3, 3);
             logoPictureBox.Name = "logoPictureBox";
             tableLayoutPanel.SetRowSpan(logoPictureBox, 4);

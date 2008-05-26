@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     // Emotes.
     //
@@ -11,7 +11,7 @@ namespace LOTROMusicManager
     // where the random element should live.
     //
     // This lovely diagram is a product of the great CodePlotter from 
-    // AbstractSpoon. I also use the AbstractSpood ToDo list.
+    // AbstractSpoon. I also use the AbstractSpoon ToDo list.
     //
     //  .-----------.  .-------------.
     //  |EmoteGroup >-->Emote        |
@@ -38,31 +38,27 @@ namespace LOTROMusicManager
     //  | .Execute()   |
     //  ·--------------·
     //
-    [Serializable]
-    public class BuckyBits
-    {   //====================================================================
-        public Boolean  Shift   {get; set;}
-        public Boolean  Control {get; set;}
-        public Boolean  Alt     {get; set;}
-        
-        public BuckyBits() {Shift = false; Control = false; Alt = false; return;}
-    }
-    
+
     [Serializable]
     public class EmoteLine
     {   //====================================================================
         public enum LineType {UNKNOWN, 
-                              KEY, 
+                              KEY,
+                              LOTROFUNCTION,
                               COMMAND, 
                               Say, 
                               Fellowship, 
                               Raid, 
                               Local, 
                               RP, 
-                              Custom1, 
-                              Custom2, 
-                              Custom3, 
-                              LFF}
+                              UserChannel1, 
+                              UserChannel2, 
+                              UserChannel3, 
+                              LFF,
+                              Kinship,
+                              KinOfficers,
+                              Tribe,
+                              TribeOfficers}
                
         public LineType  Channel {get; set;}
         public String    Text    {get; set;}
@@ -103,15 +99,23 @@ namespace LOTROMusicManager
                     foreach (char ch in Text) RemoteController.SendChars(Text.ToCharArray(), Bits);
                     break;
 
-                case LineType.Say:          ExecuteStrings("/say ",      Text);    break;
-                case LineType.RP:           ExecuteStrings("/rpc ",      Text);    break;
-                case LineType.Raid:         ExecuteStrings("/ra ",       Text);    break;
-                case LineType.Local:        ExecuteStrings("/regional ", Text);    break;
-                case LineType.Fellowship:   ExecuteStrings("/f ",        Text);    break;
-                case LineType.Custom1:      ExecuteStrings("/1 ",        Text);    break; // That is slash-1 (one)
-                case LineType.Custom2:      ExecuteStrings("/2 ",        Text);    break;
-                case LineType.Custom3:      ExecuteStrings("/3 ",        Text);    break;
-                case LineType.LFF:          ExecuteStrings("/l ",        Text);    break; // That is a slash-L, but LOTRO is case-sensitive about it
+                case LineType.LOTROFUNCTION:
+                        RemoteController.ExecuteFunction(Text);
+                    break;
+
+                case LineType.Say:           ExecuteStrings("/say ",      Text);    break;
+                case LineType.RP:            ExecuteStrings("/rpc ",      Text);    break;
+                case LineType.Raid:          ExecuteStrings("/ra ",       Text);    break;
+                case LineType.Local:         ExecuteStrings("/regional ", Text);    break;
+                case LineType.Fellowship:    ExecuteStrings("/f ",        Text);    break;
+                case LineType.UserChannel1:  ExecuteStrings("/1 ",        Text);    break; // That is slash-1 (one)
+                case LineType.UserChannel2:  ExecuteStrings("/2 ",        Text);    break;
+                case LineType.UserChannel3:  ExecuteStrings("/3 ",        Text);    break;
+                case LineType.LFF:           ExecuteStrings("/l ",        Text);    break; // That is a slash-L, but LOTRO is case-sensitive about it
+                case LineType.Kinship:       ExecuteStrings("/k ",        Text);    break; 
+                case LineType.KinOfficers:   ExecuteStrings("/ko ",       Text);    break;
+                case LineType.Tribe:         ExecuteStrings("/t ",        Text);    break; 
+                case LineType.TribeOfficers: ExecuteStrings("/to ",       Text);    break; 
             }
             return;
         }

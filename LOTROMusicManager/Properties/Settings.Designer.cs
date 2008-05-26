@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LOTROMusicManager.Properties {
+namespace LotroMusicManager.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -294,21 +294,11 @@ namespace LOTROMusicManager.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx")]
-        public string LOTROMusicManager_MyLotroBand_MyLotroBand {
-            get {
-                return ((string)(this["LOTROMusicManager_MyLotroBand_MyLotroBand"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::LOTROMusicManager.EmoteGroup EmoteList {
+        public global::LotroMusicManager.EmoteGroup EmoteList {
             get {
-                return ((global::LOTROMusicManager.EmoteGroup)(this["EmoteList"]));
+                return ((global::LotroMusicManager.EmoteGroup)(this["EmoteList"]));
             }
             set {
                 this["EmoteList"] = value;
@@ -333,6 +323,18 @@ namespace LOTROMusicManager.Properties {
             }
             set {
                 this["KeepLOTROFocused"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HighlightABC {
+            get {
+                return ((bool)(this["HighlightABC"]));
+            }
+            set {
+                this["HighlightABC"] = value;
             }
         }
     }

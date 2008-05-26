@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Text;
-using LOTROMusicManager.Properties;
+using LotroMusicManager.Properties;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
-    class ABC
+    public class ABC
     {
         public enum Octave {UNKNOWN, LOW, MED, HIGH}
         public class Pitch
@@ -38,6 +38,7 @@ namespace LOTROMusicManager
         public static bool IsHistory    (String s){return s.StartsWith(Resources.ABCTagHistory,     StringComparison.CurrentCultureIgnoreCase);}
         public static bool IsTranscriber(String s){return s.StartsWith(Resources.ABCTagTranscriber, StringComparison.CurrentCultureIgnoreCase);}
         public static bool IsLyrics     (String s){return s.StartsWith(Resources.ABCTagLyrics,      StringComparison.CurrentCultureIgnoreCase);}
+        public static bool IsIndex      (String s){return s.StartsWith(Resources.ABCTagIndex,       StringComparison.CurrentCultureIgnoreCase);}
 
         public static List<String> ParseLineAsPitches(String s)
         {//====================================================================
@@ -62,7 +63,15 @@ namespace LOTROMusicManager
                 int nStartHeader    = s.IndexOf(':');
                 return s.Substring(nStartHeader + 1);
             }
-            catch(Exception e) {return s;}
+            catch {}
+            return s;
+        }
+
+        public static String RemoveComments(String s)
+        {//--------------------------------------------------------------------
+            int iComment = s.IndexOf('%');
+            if (-1 != iComment) return s.Substring(0, iComment - 1);
+            return s;
         }
 
         //====================================================================
@@ -90,51 +99,6 @@ namespace LOTROMusicManager
                 return ((PitchError)obj).LocStart - LocStart;
             }
         #endregion
-        }
-
-        public static PitchError[] FindInvalidPitches(String s)
-        {//====================================================================
-            // Okay... a pitch is invalid IF:
-            //  Capital letter and more than one comma: B,,
-            //  Lower case letter and more than three commas: b,,,
-            //  Lower case letter other than c and an apostrophe: d'
-            //  Lower case c and more than one apostrophe: c''
-            //  Upper case letter other than C and more than one apostrophes: B''
-            //  Upper case C and more than two apostrophes: C''''
-            //  Special cases:
-            //      _C,
-            //      _c,,
-            //      ^c'
-            //      ^C''
-            //
-            // Degenerate cases:
-            //      ___B,
-            //      ^^b'
-            // etc.
-            //
-            // So, is this the regex pair?
-            //  (?'low'_+C,)|(?'low'[A-G],{2,})|(?'low'_+c,,)|(?'low'[a-g],{3,})
-            //  (?'high'[abd-g]'+)|(?'high'\^+c')|(?'high'[ABD-G]'{2,})|(?'high'C'{3,})|(?'high'\^+C'')
-            Regex regexLow  = new Regex(@"(?'low'_+C,+)|(?'low'[A-G],{2,})|(?'low'_+c,{2,})|(?'low'[a-g],{3,})");
-            Regex regexHigh = new Regex(@"(?'high'[abd-g]'+)|(?'high'\^+c'+)|(?'high'[ABD-G]'{2,})|(?'high'C'{3,})|(?'high'\^+C'{2,})");
-
-            MatchCollection mcLow  = regexLow.Matches(s);
-            MatchCollection mcHigh = regexHigh.Matches(s);
-
-            PitchError[] ape = new PitchError[mcHigh.Count + mcLow.Count];
-            int i = 0;
-            foreach (Match m in mcHigh)
-            {
-                ape[i] = new PitchError(m.Value, m.Index, PITCH_ERROR.TOO_HIGH);
-                i += 1;
-            }
-            foreach (Match m in mcLow)
-            {
-                ape[i] = new PitchError(m.Value, m.Index, PITCH_ERROR.TOO_LOW);
-                i += 1;
-            }
-            Array.Sort(ape);
-            return ape;
         }
     }
     
@@ -166,6 +130,40 @@ namespace LOTROMusicManager
         public override string ToString()
         {
             return Text.ToString();
+        }
+    }
+
+    public class SongIndex
+    {
+        public String FileName      {get; set;}
+        public String Title         {get; set;}
+        public String Notes         {get; set;}
+        public String Key           {get; set;}
+        public String Unit          {get; set;}
+        public String Tempo         {get; set;}
+        public String Meter         {get; set;}
+        public String Author        {get; set;}
+        public String Origin        {get; set;}
+        public String History       {get; set;}
+        public String Transcriber   {get; set;}
+        public String Lyrics        {get; set;}
+        public String Index         {get; set;}
+        
+        public SongIndex()
+        {
+            FileName    = String.Empty;
+            Index       = String.Empty;
+            Title       = String.Empty;
+            Notes       = String.Empty;
+            Key         = String.Empty;
+            Unit        = String.Empty;
+            Tempo       = String.Empty;
+            Meter       = String.Empty;
+            Author      = String.Empty;
+            Origin      = String.Empty;
+            History     = String.Empty;
+            Transcriber = String.Empty;
+            Lyrics      = String.Empty;
         }
     }
 }
