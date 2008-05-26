@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LOTROMusicManager.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LotroMusicManager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="ClientAppID" Type="System.String" Scope="Application">
@@ -140,16 +140,16 @@
     <Setting Name="MyLotroBandRememberLoginInformation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LOTROMusicManager_MyLotroBand_MyLotroBand" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx</Value>
-    </Setting>
-    <Setting Name="EmoteList" Type="LOTROMusicManager.EmoteGroup" Scope="User">
+    <Setting Name="EmoteList" Type="LotroMusicManager.EmoteGroup" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FocusTimeout" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">400</Value>
     </Setting>
     <Setting Name="KeepLOTROFocused" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HighlightABC" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

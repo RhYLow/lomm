@@ -7,7 +7,7 @@
     <ProjectGuid>{A2613B56-1290-4CA2-9F0D-C7F7062797B7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LOTROMusicManager</RootNamespace>
+    <RootNamespace>LotroMusicManager</RootNamespace>
     <AssemblyName>LOTROMusicManager</AssemblyName>
     <ApplicationIcon>Resources\LOMM.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -77,6 +77,12 @@
     <Compile Include="FormABCRef.Designer.cs">
       <DependentUpon>FormABCRef.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEditEmote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditEmote.Designer.cs">
+      <DependentUpon>FormEditEmote.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,7 @@
     </Compile>
     <Compile Include="Keymapping.cs" />
     <Compile Include="LOTROFocuser.cs" />
+    <Compile Include="Macro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormABCRef.resx">
@@ -135,22 +142,10 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegexTaggedEdit.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="RegexTaggedEdit.designer.cs">
-      <DependentUpon>RegexTaggedEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="RemoteController.cs" />
     <Compile Include="SDK.cs" />
-    <Compile Include="SplitButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Web References\MyLotroBand\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
+    <Compile Include="Song.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutBox.resx">
@@ -167,21 +162,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Help\keymapping.xlsx" />
     <None Include="LOTROMusicManager_TemporaryKey.pfx" />
     <None Include="Resources\logo.png" />
-    <None Include="Web References\MyLotroBand\mylotroband.wsdl" />
-    <None Include="Web References\MyLotroBand\PartResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\MyLotroBand\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\MyLotroBand\SongResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormEditEmote.resx">
+      <DependentUpon>FormEditEmote.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMyLotroBandLogin.resx">
       <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -190,31 +179,27 @@
       <DependentUpon>FormOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegexTaggedEdit.resx">
-      <DependentUpon>RegexTaggedEdit.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\NewABC.txt" />
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx%3fWSDL">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\MyLotroBand\</RelPath>
-      <UpdateFromURL>http://mylotroband.joshkraker.com/lommservice/alpha/mylotroband.asmx%3fWSDL</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>LOTROMusicManager_MyLotroBand_MyLotroBand</CachedSettingsPropName>
-    </WebReferenceUrl>
+    <Content Include="Help\Commands %28book 12%29.htm" />
+    <Content Include="Help\LOTRO Commands %28Book 12%29.txt" />
+    <Content Include="Help\LOTRO Commands - non-emote %28Book 13%29.txt" />
+    <Content Include="Help\lotro.keymap %28book 12%29.txt" />
+    <Content Include="Help\lotro.keymap %28book 13%29.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Commands %28book 12%29.htm" />
-    <Content Include="LOTRO Commands %28Book 12%29.txt" />
+    <ProjectReference Include="..\LOMMSplitButton\Control_LOMMSplitButton.csproj">
+      <Project>{B12A704E-7DC3-4005-A01D-6DFA54AC3B18}</Project>
+      <Name>Control_LOMMSplitButton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MarkedEditBox\Control_MarkedEditBox.csproj">
+      <Project>{5B294E8D-A43A-4EEC-AFFE-899AE406AEDA}</Project>
+      <Name>Control_MarkedEditBox</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -224,4 +209,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Notes="&lt;Notes Project=&quot;a2613b56-1290-4ca2-9f0d-c7f7062797b7&quot; xmlns=&quot;clr-namespace:StickyNotes.Model;assembly=StickyNotes&quot;&gt;&lt;Notes.StickyNotes&gt;&lt;Note FilePath=&quot;&quot; Content=&quot;&quot; Date=&quot;2008-04-27T19:35:35.5319684-07:00&quot; /&gt;&lt;Note FilePath=&quot;C:\Dev\src\LOTROMusicManager\LOTROMusicManager\LOTROMusicManager.csproj&quot; Content=&quot;ToDo:&amp;#xD;&amp;#xA; * X: tag handling&amp;#xD;&amp;#xA; * Finish lyrics&amp;#xD;&amp;#xA; * Tuple handling&amp;#xD;&amp;#xA; * Macro class types&amp;#xD;&amp;#xA; * Macro class editing&amp;#xD;&amp;#xA;Desirable:&amp;#xD;&amp;#xA; * Detachable toolbars for macros&amp;#xD;&amp;#xA; * Minimized mode&amp;#xD;&amp;#xA;Investigate:&amp;#xD;&amp;#xA; * New Ribbon classes?&quot; Date=&quot;2008-04-27T19:53:15.8674229-07:00&quot; /&gt;&lt;/Notes.StickyNotes&gt;&lt;/Notes&gt;" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

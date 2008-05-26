@@ -1,4 +1,4 @@
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     partial class FormABCRef
     {
@@ -44,18 +44,18 @@ namespace LOTROMusicManager
             this.rtfABCRef.TabIndex = 0;
             this.rtfABCRef.Text = "";
             // 
-            // ABCRef
+            // FormABCRef
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 270);
             this.Controls.Add(this.rtfABCRef);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ABCRef";
+            this.Name = "FormABCRef";
             this.Text = "LOTRO ABC Quick Reference";
             this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.Load += new System.EventHandler(this.OnLoad);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.ResumeLayout(false);
 
         }

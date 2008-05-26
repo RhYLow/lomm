@@ -278,7 +278,7 @@ namespace MarkedEditBox
         protected int GetCol()
         {   //====================================================================
             Point p = new Point();
-            LOTROMusicManager.SDK.GetCaretPos(out p);
+            MarkedEditBox.SDK.GetCaretPos(out p);
             if (ClientRectangle.Contains(p))
             {
                 int c = GetCharIndexFromPosition(p);
@@ -290,7 +290,7 @@ namespace MarkedEditBox
         protected int GetRow()
         {   //--------------------------------------------------------------------
             Point p = new Point();
-            LOTROMusicManager.SDK.GetCaretPos(out p);
+            MarkedEditBox.SDK.GetCaretPos(out p);
             if (ClientRectangle.Contains(p))
             {
                 int c = GetCharIndexFromPosition(p);
@@ -329,12 +329,12 @@ namespace MarkedEditBox
         {   //--------------------------------------------------------------------
             // Restart the hover timer
             base.OnMouseEnter(e);
-            LOTROMusicManager.SDK.TRACKMOUSEEVENT tme =  new LOTROMusicManager.SDK.TRACKMOUSEEVENT();
+            MarkedEditBox.SDK.TRACKMOUSEEVENT tme =  new MarkedEditBox.SDK.TRACKMOUSEEVENT();
             tme.hwndTrack = this.Handle;            
             tme.cbSize = (uint)Marshal.SizeOf(tme);
-            tme.dwFlags = (int)LOTROMusicManager.SDK.TrackMouseFlags.TME_HOVER;
+            tme.dwFlags = (int)MarkedEditBox.SDK.TrackMouseFlags.TME_HOVER;
             tme.dwHoverTime = 1000 * 3; //TODO: Config this
-            LOTROMusicManager.SDK.TrackMouseEvent(ref tme);            
+            MarkedEditBox.SDK.TrackMouseEvent(ref tme);            
         }
     }
 

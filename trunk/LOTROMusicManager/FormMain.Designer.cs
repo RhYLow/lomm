@@ -1,4 +1,4 @@
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
     partial class FormMain
     {
@@ -29,7 +29,6 @@ namespace LOTROMusicManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.MenuStrip menustripMain;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -39,6 +38,7 @@ namespace LOTROMusicManager
             System.Windows.Forms.SplitContainer splitContainer1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             System.Windows.Forms.TableLayoutPanel layoutButtons;
+            this.menustripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mniPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.mniNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,17 +60,34 @@ namespace LOTROMusicManager
             this.lstFiles = new System.Windows.Forms.ListView();
             this.Title = new System.Windows.Forms.ColumnHeader();
             this.File = new System.Windows.Forms.ColumnHeader();
+            this.Index = new System.Windows.Forms.ColumnHeader();
             this.mnuListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mniListContextPlay = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniListContextRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.copySongNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSongListCopySongTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSongListCopyFilename = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSongListCopyFQFilename = new System.Windows.Forms.ToolStripMenuItem();
             this.mniSongListCopySongInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniOpenInEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniListContextRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.tabsMain = new System.Windows.Forms.TabControl();
             this.tpgEdit = new System.Windows.Forms.TabPage();
             this.rteEdit = new MarkedEditBox.RegexTaggedEdit();
+            this.mnuEditorContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniEditorPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditToggleMusic = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditStopPlaying = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniEditSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniEditCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniEditSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditUndoAll = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
             this.btnToggleMusicMode = new System.Windows.Forms.Button();
@@ -82,7 +99,7 @@ namespace LOTROMusicManager
             this.mniDDPlaySync = new System.Windows.Forms.ToolStripMenuItem();
             this.mniDDStartSync = new System.Windows.Forms.ToolStripMenuItem();
             this.tpgPerform = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitPerform = new System.Windows.Forms.SplitContainer();
             this.lstLyrics = new System.Windows.Forms.ListBox();
             this.rtePerform = new MarkedEditBox.RegexTaggedEdit();
             this.layoutPerformButtons = new System.Windows.Forms.TableLayoutPanel();
@@ -98,24 +115,6 @@ namespace LOTROMusicManager
             this.startGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startGroupandSayFirstLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbReciteChannel = new System.Windows.Forms.ComboBox();
-            this.tpgMyLotroBand = new System.Windows.Forms.TabPage();
-            this.layoutMyLotroBand = new System.Windows.Forms.TableLayoutPanel();
-            this.layoutMyLotroBandButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLogin = new InstantUpdate.Controls.SplitButton();
-            this.mnuMyLotroBandLogin = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.forgetLoginInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.mniMyLotroBandCreateAccount = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniMyLotroBandVisitSite = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnMyLotroBandActions = new InstantUpdate.Controls.SplitButton();
-            this.lstMyLotroBand = new System.Windows.Forms.ListView();
-            this.colName = new System.Windows.Forms.ColumnHeader();
-            this.colArtist = new System.Windows.Forms.ColumnHeader();
-            this.colParts = new System.Windows.Forms.ColumnHeader();
-            this.colAddedBy = new System.Windows.Forms.ColumnHeader();
-            this.colCreated = new System.Windows.Forms.ColumnHeader();
-            this.colSongId = new System.Windows.Forms.ColumnHeader();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -128,7 +127,6 @@ namespace LOTROMusicManager
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.menustripEmotes = new System.Windows.Forms.MenuStrip();
             this.emotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            menustripMain = new System.Windows.Forms.MenuStrip();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -137,25 +135,22 @@ namespace LOTROMusicManager
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             layoutButtons = new System.Windows.Forms.TableLayoutPanel();
-            menustripMain.SuspendLayout();
+            this.menustripMain.SuspendLayout();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             this.mnuListContext.SuspendLayout();
             this.tabsMain.SuspendLayout();
             this.tpgEdit.SuspendLayout();
+            this.mnuEditorContext.SuspendLayout();
             layoutButtons.SuspendLayout();
             this.mnuPlay.SuspendLayout();
             this.tpgPerform.SuspendLayout();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            this.splitPerform.Panel1.SuspendLayout();
+            this.splitPerform.Panel2.SuspendLayout();
+            this.splitPerform.SuspendLayout();
             this.layoutPerformButtons.SuspendLayout();
             this.mnuPerform.SuspendLayout();
-            this.tpgMyLotroBand.SuspendLayout();
-            this.layoutMyLotroBand.SuspendLayout();
-            this.layoutMyLotroBandButtons.SuspendLayout();
-            this.mnuMyLotroBandLogin.SuspendLayout();
             this.statPane.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -165,9 +160,9 @@ namespace LOTROMusicManager
             // 
             // menustripMain
             // 
-            menustripMain.Dock = System.Windows.Forms.DockStyle.None;
-            menustripMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            menustripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menustripMain.Dock = System.Windows.Forms.DockStyle.None;
+            this.menustripMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menustripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -175,12 +170,12 @@ namespace LOTROMusicManager
             this.mniEmotes,
             this.mniMoods,
             this.mniBestowals});
-            menustripMain.Location = new System.Drawing.Point(3, 24);
-            menustripMain.Name = "menustripMain";
-            menustripMain.Size = new System.Drawing.Size(345, 24);
-            menustripMain.Stretch = false;
-            menustripMain.TabIndex = 0;
-            menustripMain.Text = "menuStrip1";
+            this.menustripMain.Location = new System.Drawing.Point(3, 0);
+            this.menustripMain.Name = "menustripMain";
+            this.menustripMain.Size = new System.Drawing.Size(345, 24);
+            this.menustripMain.Stretch = false;
+            this.menustripMain.TabIndex = 0;
+            this.menustripMain.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -391,15 +386,17 @@ namespace LOTROMusicManager
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(this.tabsMain);
-            splitContainer1.Size = new System.Drawing.Size(746, 548);
-            splitContainer1.SplitterDistance = 251;
+            splitContainer1.Size = new System.Drawing.Size(746, 572);
+            splitContainer1.SplitterDistance = 261;
             splitContainer1.TabIndex = 1;
             // 
             // lstFiles
             // 
+            this.lstFiles.CheckBoxes = true;
             this.lstFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Title,
-            this.File});
+            this.File,
+            this.Index});
             this.lstFiles.ContextMenuStrip = this.mnuListContext;
             this.lstFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstFiles.FullRowSelect = true;
@@ -408,7 +405,7 @@ namespace LOTROMusicManager
             this.lstFiles.MultiSelect = false;
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.ShowItemToolTips = true;
-            this.lstFiles.Size = new System.Drawing.Size(746, 251);
+            this.lstFiles.Size = new System.Drawing.Size(746, 261);
             this.lstFiles.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lstFiles.TabIndex = 0;
             this.lstFiles.UseCompatibleStateImageBehavior = false;
@@ -425,28 +422,28 @@ namespace LOTROMusicManager
             // 
             this.File.Text = "File";
             // 
+            // Index
+            // 
+            this.Index.Text = "Song Index";
+            this.Index.Width = 81;
+            // 
             // mnuListContext
             // 
             this.mnuListContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniListContextPlay,
-            this.mniListContextRefresh,
-            this.copySongNameToolStripMenuItem});
+            this.copySongNameToolStripMenuItem,
+            this.mniOpenInEditor,
+            this.toolStripSeparator9,
+            this.mniListContextRefresh});
             this.mnuListContext.Name = "mnuListContext";
-            this.mnuListContext.Size = new System.Drawing.Size(114, 70);
+            this.mnuListContext.Size = new System.Drawing.Size(195, 98);
             // 
             // mniListContextPlay
             // 
             this.mniListContextPlay.Name = "mniListContextPlay";
-            this.mniListContextPlay.Size = new System.Drawing.Size(113, 22);
+            this.mniListContextPlay.Size = new System.Drawing.Size(194, 22);
             this.mniListContextPlay.Text = "Play";
             this.mniListContextPlay.Click += new System.EventHandler(this.OnPlay);
-            // 
-            // mniListContextRefresh
-            // 
-            this.mniListContextRefresh.Name = "mniListContextRefresh";
-            this.mniListContextRefresh.Size = new System.Drawing.Size(113, 22);
-            this.mniListContextRefresh.Text = "Refresh";
-            this.mniListContextRefresh.Click += new System.EventHandler(this.OnRefresh);
             // 
             // copySongNameToolStripMenuItem
             // 
@@ -456,7 +453,7 @@ namespace LOTROMusicManager
             this.mniSongListCopyFQFilename,
             this.mniSongListCopySongInfo});
             this.copySongNameToolStripMenuItem.Name = "copySongNameToolStripMenuItem";
-            this.copySongNameToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.copySongNameToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.copySongNameToolStripMenuItem.Text = "Copy";
             // 
             // mniSongListCopySongTitle
@@ -487,16 +484,35 @@ namespace LOTROMusicManager
             this.mniSongListCopySongInfo.Text = "Information Block";
             this.mniSongListCopySongInfo.Click += new System.EventHandler(this.OnSongListCopyInfoBlock);
             // 
+            // mniOpenInEditor
+            // 
+            this.mniOpenInEditor.Name = "mniOpenInEditor";
+            this.mniOpenInEditor.Size = new System.Drawing.Size(194, 22);
+            this.mniOpenInEditor.Text = "Open In External Editor";
+            this.mniOpenInEditor.Click += new System.EventHandler(this.OnOpenInEditor);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(191, 6);
+            // 
+            // mniListContextRefresh
+            // 
+            this.mniListContextRefresh.Name = "mniListContextRefresh";
+            this.mniListContextRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.mniListContextRefresh.Size = new System.Drawing.Size(194, 22);
+            this.mniListContextRefresh.Text = "Refresh";
+            this.mniListContextRefresh.Click += new System.EventHandler(this.OnRefresh);
+            // 
             // tabsMain
             // 
             this.tabsMain.Controls.Add(this.tpgEdit);
             this.tabsMain.Controls.Add(this.tpgPerform);
-            this.tabsMain.Controls.Add(this.tpgMyLotroBand);
             this.tabsMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsMain.Location = new System.Drawing.Point(0, 0);
             this.tabsMain.Name = "tabsMain";
             this.tabsMain.SelectedIndex = 0;
-            this.tabsMain.Size = new System.Drawing.Size(746, 293);
+            this.tabsMain.Size = new System.Drawing.Size(746, 307);
             this.tabsMain.TabIndex = 1;
             // 
             // tpgEdit
@@ -506,7 +522,7 @@ namespace LOTROMusicManager
             this.tpgEdit.Location = new System.Drawing.Point(4, 22);
             this.tpgEdit.Name = "tpgEdit";
             this.tpgEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgEdit.Size = new System.Drawing.Size(738, 267);
+            this.tpgEdit.Size = new System.Drawing.Size(738, 281);
             this.tpgEdit.TabIndex = 0;
             this.tpgEdit.Text = "Edit";
             this.tpgEdit.UseVisualStyleBackColor = true;
@@ -515,6 +531,7 @@ namespace LOTROMusicManager
             // 
             this.rteEdit.AutoTag = true;
             this.rteEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rteEdit.ContextMenuStrip = this.mnuEditorContext;
             this.rteEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rteEdit.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rteEdit.HoverDelay = 1500;
@@ -522,8 +539,8 @@ namespace LOTROMusicManager
             this.rteEdit.InsertionRow = 0;
             this.rteEdit.Location = new System.Drawing.Point(3, 3);
             this.rteEdit.Name = "rteEdit";
-            this.rteEdit.Size = new System.Drawing.Size(732, 226);
-            this.rteEdit.TabIndex = 3;
+            this.rteEdit.Size = new System.Drawing.Size(732, 240);
+            this.rteEdit.TabIndex = 0;
             this.rteEdit.Tags = new MarkedEditBox.RegexTag[] {
         ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags"))),
         ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags1"))),
@@ -532,11 +549,122 @@ namespace LOTROMusicManager
         ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags4"))),
         ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags5"))),
         ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags6"))),
-        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags7")))};
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags7"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags8"))),
+        ((MarkedEditBox.RegexTag)(resources.GetObject("rteEdit.Tags9")))};
             this.rteEdit.Text = "";
             this.rteEdit.WordWrap = false;
             this.rteEdit.CaretMoved += new System.EventHandler<MarkedEditBox.CaretMovedEventArgs>(this.OnCaretMoved);
             this.rteEdit.TextChanged += new System.EventHandler(this.OnABCChanged);
+            // 
+            // mnuEditorContext
+            // 
+            this.mnuEditorContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniEditorPlay,
+            this.mniEditToggleMusic,
+            this.mniEditStopPlaying,
+            this.toolStripSeparator11,
+            this.mniEditSelectAll,
+            this.toolStripSeparator12,
+            this.mniEditCopy,
+            this.mniEditCut,
+            this.mniEditPaste,
+            this.toolStripSeparator10,
+            this.mniEditSave,
+            this.mniEditSaveAs,
+            this.mniEditUndoAll});
+            this.mnuEditorContext.Name = "mnuEditor";
+            this.mnuEditorContext.Size = new System.Drawing.Size(170, 242);
+            // 
+            // mniEditorPlay
+            // 
+            this.mniEditorPlay.Name = "mniEditorPlay";
+            this.mniEditorPlay.Size = new System.Drawing.Size(169, 22);
+            this.mniEditorPlay.Text = "Play";
+            this.mniEditorPlay.Click += new System.EventHandler(this.OnPlay);
+            // 
+            // mniEditToggleMusic
+            // 
+            this.mniEditToggleMusic.Name = "mniEditToggleMusic";
+            this.mniEditToggleMusic.Size = new System.Drawing.Size(169, 22);
+            this.mniEditToggleMusic.Text = "Toggle Music";
+            this.mniEditToggleMusic.Click += new System.EventHandler(this.OnToggleMusicMode);
+            // 
+            // mniEditStopPlaying
+            // 
+            this.mniEditStopPlaying.Name = "mniEditStopPlaying";
+            this.mniEditStopPlaying.Size = new System.Drawing.Size(169, 22);
+            this.mniEditStopPlaying.Text = "Stop Playing";
+            this.mniEditStopPlaying.Click += new System.EventHandler(this.OnStopSong);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(166, 6);
+            // 
+            // mniEditSelectAll
+            // 
+            this.mniEditSelectAll.Name = "mniEditSelectAll";
+            this.mniEditSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.mniEditSelectAll.Size = new System.Drawing.Size(169, 22);
+            this.mniEditSelectAll.Text = "Select All";
+            this.mniEditSelectAll.Click += new System.EventHandler(this.OnEditorSelectAll);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(166, 6);
+            // 
+            // mniEditCopy
+            // 
+            this.mniEditCopy.Name = "mniEditCopy";
+            this.mniEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.mniEditCopy.Size = new System.Drawing.Size(169, 22);
+            this.mniEditCopy.Text = "Copy";
+            this.mniEditCopy.Click += new System.EventHandler(this.OnEditCopy);
+            // 
+            // mniEditCut
+            // 
+            this.mniEditCut.Name = "mniEditCut";
+            this.mniEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.mniEditCut.Size = new System.Drawing.Size(169, 22);
+            this.mniEditCut.Text = "Cut";
+            this.mniEditCut.Click += new System.EventHandler(this.OnEditCut);
+            // 
+            // mniEditPaste
+            // 
+            this.mniEditPaste.Name = "mniEditPaste";
+            this.mniEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.mniEditPaste.Size = new System.Drawing.Size(169, 22);
+            this.mniEditPaste.Text = "Paste";
+            this.mniEditPaste.Click += new System.EventHandler(this.OnEditPaste);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(166, 6);
+            // 
+            // mniEditSave
+            // 
+            this.mniEditSave.Name = "mniEditSave";
+            this.mniEditSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.mniEditSave.Size = new System.Drawing.Size(169, 22);
+            this.mniEditSave.Text = "Save";
+            this.mniEditSave.Click += new System.EventHandler(this.OnSaveABC);
+            // 
+            // mniEditSaveAs
+            // 
+            this.mniEditSaveAs.Name = "mniEditSaveAs";
+            this.mniEditSaveAs.Size = new System.Drawing.Size(169, 22);
+            this.mniEditSaveAs.Text = "Save As...";
+            this.mniEditSaveAs.Click += new System.EventHandler(this.OnSaveAs);
+            // 
+            // mniEditUndoAll
+            // 
+            this.mniEditUndoAll.Name = "mniEditUndoAll";
+            this.mniEditUndoAll.Size = new System.Drawing.Size(169, 22);
+            this.mniEditUndoAll.Text = "Undo All Changes";
+            this.mniEditUndoAll.Click += new System.EventHandler(this.OnUndoAll);
             // 
             // layoutButtons
             // 
@@ -550,7 +678,7 @@ namespace LOTROMusicManager
             layoutButtons.Controls.Add(this.btnToggleMusicMode, 2, 0);
             layoutButtons.Controls.Add(this.btnPlay, 3, 0);
             layoutButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            layoutButtons.Location = new System.Drawing.Point(3, 229);
+            layoutButtons.Location = new System.Drawing.Point(3, 243);
             layoutButtons.Name = "layoutButtons";
             layoutButtons.RowCount = 1;
             layoutButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -585,7 +713,7 @@ namespace LOTROMusicManager
             this.btnToggleMusicMode.Location = new System.Drawing.Point(510, 3);
             this.btnToggleMusicMode.Name = "btnToggleMusicMode";
             this.btnToggleMusicMode.Size = new System.Drawing.Size(94, 28);
-            this.btnToggleMusicMode.TabIndex = 5;
+            this.btnToggleMusicMode.TabIndex = 3;
             this.btnToggleMusicMode.Text = "Toggle /music";
             this.btnToggleMusicMode.UseVisualStyleBackColor = true;
             this.btnToggleMusicMode.Click += new System.EventHandler(this.OnToggleMusicMode);
@@ -599,7 +727,7 @@ namespace LOTROMusicManager
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(100, 27);
             this.btnPlay.SplitMenu = this.mnuPlay;
-            this.btnPlay.TabIndex = 6;
+            this.btnPlay.TabIndex = 0;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.OnPlay);
@@ -651,32 +779,33 @@ namespace LOTROMusicManager
             // 
             // tpgPerform
             // 
-            this.tpgPerform.Controls.Add(this.splitContainer2);
+            this.tpgPerform.Controls.Add(this.splitPerform);
             this.tpgPerform.Controls.Add(this.layoutPerformButtons);
             this.tpgPerform.Location = new System.Drawing.Point(4, 22);
             this.tpgPerform.Name = "tpgPerform";
             this.tpgPerform.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgPerform.Size = new System.Drawing.Size(738, 267);
+            this.tpgPerform.Size = new System.Drawing.Size(738, 281);
             this.tpgPerform.TabIndex = 1;
             this.tpgPerform.Text = "Perform";
             this.tpgPerform.UseVisualStyleBackColor = true;
             // 
-            // splitContainer2
+            // splitPerform
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
+            this.splitPerform.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPerform.Location = new System.Drawing.Point(3, 3);
+            this.splitPerform.Name = "splitPerform";
             // 
-            // splitContainer2.Panel1
+            // splitPerform.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.lstLyrics);
+            this.splitPerform.Panel1.Controls.Add(this.lstLyrics);
             // 
-            // splitContainer2.Panel2
+            // splitPerform.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.rtePerform);
-            this.splitContainer2.Size = new System.Drawing.Size(732, 226);
-            this.splitContainer2.SplitterDistance = 332;
-            this.splitContainer2.TabIndex = 2;
+            this.splitPerform.Panel2.Controls.Add(this.rtePerform);
+            this.splitPerform.Panel2.SizeChanged += new System.EventHandler(this.OnPerformTextPaneSizeChanged);
+            this.splitPerform.Size = new System.Drawing.Size(732, 240);
+            this.splitPerform.SplitterDistance = 332;
+            this.splitPerform.TabIndex = 0;
             // 
             // lstLyrics
             // 
@@ -685,9 +814,11 @@ namespace LOTROMusicManager
             this.lstLyrics.HorizontalScrollbar = true;
             this.lstLyrics.Location = new System.Drawing.Point(0, 0);
             this.lstLyrics.Name = "lstLyrics";
-            this.lstLyrics.Size = new System.Drawing.Size(332, 225);
+            this.lstLyrics.Size = new System.Drawing.Size(332, 238);
             this.lstLyrics.TabIndex = 0;
             this.lstLyrics.SelectedIndexChanged += new System.EventHandler(this.OnLyricsListSelectedIndexChanged);
+            this.lstLyrics.DoubleClick += new System.EventHandler(this.OnLyricListDblClick);
+            this.lstLyrics.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnLyricListKeyPress);
             // 
             // rtePerform
             // 
@@ -705,7 +836,7 @@ namespace LOTROMusicManager
             this.rtePerform.Name = "rtePerform";
             this.rtePerform.ReadOnly = true;
             this.rtePerform.ShowSelectionMargin = true;
-            this.rtePerform.Size = new System.Drawing.Size(396, 226);
+            this.rtePerform.Size = new System.Drawing.Size(396, 240);
             this.rtePerform.TabIndex = 1;
             this.rtePerform.Tags = new MarkedEditBox.RegexTag[] {
         ((MarkedEditBox.RegexTag)(resources.GetObject("rtePerform.Tags"))),
@@ -725,7 +856,7 @@ namespace LOTROMusicManager
             this.layoutPerformButtons.Controls.Add(this.btnPerform, 3, 0);
             this.layoutPerformButtons.Controls.Add(this.cmbReciteChannel, 0, 0);
             this.layoutPerformButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.layoutPerformButtons.Location = new System.Drawing.Point(3, 229);
+            this.layoutPerformButtons.Location = new System.Drawing.Point(3, 243);
             this.layoutPerformButtons.Name = "layoutPerformButtons";
             this.layoutPerformButtons.RowCount = 1;
             this.layoutPerformButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -744,6 +875,7 @@ namespace LOTROMusicManager
             this.btnPerform.TabIndex = 0;
             this.btnPerform.Text = "Recite Line";
             this.btnPerform.UseVisualStyleBackColor = true;
+            this.btnPerform.Click += new System.EventHandler(this.OnPerformButton);
             // 
             // mnuPerform
             // 
@@ -765,6 +897,7 @@ namespace LOTROMusicManager
             this.reciteLineToolStripMenuItem.Name = "reciteLineToolStripMenuItem";
             this.reciteLineToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.reciteLineToolStripMenuItem.Text = "Recite Line";
+            this.reciteLineToolStripMenuItem.Click += new System.EventHandler(this.OnPerformButton);
             // 
             // toolStripSeparator7
             // 
@@ -776,18 +909,21 @@ namespace LOTROMusicManager
             this.playSongToolStripMenuItem.Name = "playSongToolStripMenuItem";
             this.playSongToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.playSongToolStripMenuItem.Text = "Play Song";
+            this.playSongToolStripMenuItem.Click += new System.EventHandler(this.OnPlayNow);
             // 
             // playSongsayFirstLineToolStripMenuItem
             // 
             this.playSongsayFirstLineToolStripMenuItem.Name = "playSongsayFirstLineToolStripMenuItem";
             this.playSongsayFirstLineToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.playSongsayFirstLineToolStripMenuItem.Text = "Play Song (and say first line)";
+            this.playSongsayFirstLineToolStripMenuItem.Click += new System.EventHandler(this.OnPerformPlayAndRecite);
             // 
             // stopSongToolStripMenuItem
             // 
             this.stopSongToolStripMenuItem.Name = "stopSongToolStripMenuItem";
             this.stopSongToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.stopSongToolStripMenuItem.Text = "Stop Song";
+            this.stopSongToolStripMenuItem.Click += new System.EventHandler(this.OnPerformStopSong);
             // 
             // toolStripSeparator6
             // 
@@ -799,18 +935,21 @@ namespace LOTROMusicManager
             this.waitToPlayToolStripMenuItem.Name = "waitToPlayToolStripMenuItem";
             this.waitToPlayToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.waitToPlayToolStripMenuItem.Text = "Wait to Play";
+            this.waitToPlayToolStripMenuItem.Click += new System.EventHandler(this.OnPerformWaitToPlay);
             // 
             // startGroupToolStripMenuItem
             // 
             this.startGroupToolStripMenuItem.Name = "startGroupToolStripMenuItem";
             this.startGroupToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.startGroupToolStripMenuItem.Text = "Start Group";
+            this.startGroupToolStripMenuItem.Click += new System.EventHandler(this.OnPerformStartGroup);
             // 
             // startGroupandSayFirstLineToolStripMenuItem
             // 
             this.startGroupandSayFirstLineToolStripMenuItem.Name = "startGroupandSayFirstLineToolStripMenuItem";
             this.startGroupandSayFirstLineToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.startGroupandSayFirstLineToolStripMenuItem.Text = "Start Group (and say first line)";
+            this.startGroupandSayFirstLineToolStripMenuItem.Click += new System.EventHandler(this.OnPerformStartGroupAndRecite);
             // 
             // cmbReciteChannel
             // 
@@ -827,166 +966,6 @@ namespace LOTROMusicManager
             this.cmbReciteChannel.Name = "cmbReciteChannel";
             this.cmbReciteChannel.Size = new System.Drawing.Size(121, 21);
             this.cmbReciteChannel.TabIndex = 1;
-            // 
-            // tpgMyLotroBand
-            // 
-            this.tpgMyLotroBand.Controls.Add(this.layoutMyLotroBand);
-            this.tpgMyLotroBand.Location = new System.Drawing.Point(4, 22);
-            this.tpgMyLotroBand.Name = "tpgMyLotroBand";
-            this.tpgMyLotroBand.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgMyLotroBand.Size = new System.Drawing.Size(738, 267);
-            this.tpgMyLotroBand.TabIndex = 2;
-            this.tpgMyLotroBand.Text = "MyLotroBand";
-            this.tpgMyLotroBand.UseVisualStyleBackColor = true;
-            // 
-            // layoutMyLotroBand
-            // 
-            this.layoutMyLotroBand.ColumnCount = 1;
-            this.layoutMyLotroBand.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMyLotroBand.Controls.Add(this.layoutMyLotroBandButtons, 0, 1);
-            this.layoutMyLotroBand.Controls.Add(this.lstMyLotroBand, 0, 0);
-            this.layoutMyLotroBand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutMyLotroBand.Location = new System.Drawing.Point(3, 3);
-            this.layoutMyLotroBand.Name = "layoutMyLotroBand";
-            this.layoutMyLotroBand.RowCount = 2;
-            this.layoutMyLotroBand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMyLotroBand.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.layoutMyLotroBand.Size = new System.Drawing.Size(732, 261);
-            this.layoutMyLotroBand.TabIndex = 2;
-            // 
-            // layoutMyLotroBandButtons
-            // 
-            this.layoutMyLotroBandButtons.ColumnCount = 5;
-            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.8297F));
-            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.170305F));
-            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
-            this.layoutMyLotroBandButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 261F));
-            this.layoutMyLotroBandButtons.Controls.Add(this.btnLogin, 0, 0);
-            this.layoutMyLotroBandButtons.Controls.Add(this.btnMyLotroBandActions, 4, 0);
-            this.layoutMyLotroBandButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.layoutMyLotroBandButtons.Location = new System.Drawing.Point(3, 229);
-            this.layoutMyLotroBandButtons.Name = "layoutMyLotroBandButtons";
-            this.layoutMyLotroBandButtons.RowCount = 1;
-            this.layoutMyLotroBandButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutMyLotroBandButtons.Size = new System.Drawing.Size(726, 29);
-            this.layoutMyLotroBandButtons.TabIndex = 1;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnLogin.AutoSize = true;
-            this.btnLogin.ContextMenuStrip = this.mnuMyLotroBandLogin;
-            this.btnLogin.Location = new System.Drawing.Point(3, 3);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(103, 23);
-            this.btnLogin.SplitMenu = this.mnuMyLotroBandLogin;
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Get Song List";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.OnMyLotroBandLogin);
-            // 
-            // mnuMyLotroBandLogin
-            // 
-            this.mnuMyLotroBandLogin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loginToolStripMenuItem,
-            this.forgetLoginInformationToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.mniMyLotroBandCreateAccount,
-            this.mniMyLotroBandVisitSite});
-            this.mnuMyLotroBandLogin.Name = "mnuMyLotroBandLogin";
-            this.mnuMyLotroBandLogin.Size = new System.Drawing.Size(208, 98);
-            // 
-            // loginToolStripMenuItem
-            // 
-            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.loginToolStripMenuItem.Text = "Get Song List";
-            // 
-            // forgetLoginInformationToolStripMenuItem
-            // 
-            this.forgetLoginInformationToolStripMenuItem.Name = "forgetLoginInformationToolStripMenuItem";
-            this.forgetLoginInformationToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.forgetLoginInformationToolStripMenuItem.Text = "Forget Login Information";
-            this.forgetLoginInformationToolStripMenuItem.Click += new System.EventHandler(this.OnMyLotroBandForgetLoginInformation);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(204, 6);
-            // 
-            // mniMyLotroBandCreateAccount
-            // 
-            this.mniMyLotroBandCreateAccount.Name = "mniMyLotroBandCreateAccount";
-            this.mniMyLotroBandCreateAccount.Size = new System.Drawing.Size(207, 22);
-            this.mniMyLotroBandCreateAccount.Text = "Create Account...";
-            this.mniMyLotroBandCreateAccount.Click += new System.EventHandler(this.OnMyLotroBandCreateAccount);
-            // 
-            // mniMyLotroBandVisitSite
-            // 
-            this.mniMyLotroBandVisitSite.Name = "mniMyLotroBandVisitSite";
-            this.mniMyLotroBandVisitSite.Size = new System.Drawing.Size(207, 22);
-            this.mniMyLotroBandVisitSite.Text = "Visit MyLotroBand...";
-            this.mniMyLotroBandVisitSite.Click += new System.EventHandler(this.OnMyLotroBandVisitSite);
-            // 
-            // btnMyLotroBandActions
-            // 
-            this.btnMyLotroBandActions.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnMyLotroBandActions.AutoSize = true;
-            this.btnMyLotroBandActions.Enabled = false;
-            this.btnMyLotroBandActions.Location = new System.Drawing.Point(617, 3);
-            this.btnMyLotroBandActions.Name = "btnMyLotroBandActions";
-            this.btnMyLotroBandActions.Size = new System.Drawing.Size(106, 23);
-            this.btnMyLotroBandActions.TabIndex = 1;
-            this.btnMyLotroBandActions.Text = "Download All Parts";
-            this.btnMyLotroBandActions.UseVisualStyleBackColor = true;
-            this.btnMyLotroBandActions.Click += new System.EventHandler(this.OnMyLotroBandClick);
-            // 
-            // lstMyLotroBand
-            // 
-            this.lstMyLotroBand.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colName,
-            this.colArtist,
-            this.colParts,
-            this.colAddedBy,
-            this.colCreated,
-            this.colSongId});
-            this.lstMyLotroBand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstMyLotroBand.FullRowSelect = true;
-            this.lstMyLotroBand.Location = new System.Drawing.Point(3, 3);
-            this.lstMyLotroBand.Name = "lstMyLotroBand";
-            this.lstMyLotroBand.Size = new System.Drawing.Size(726, 220);
-            this.lstMyLotroBand.TabIndex = 0;
-            this.lstMyLotroBand.UseCompatibleStateImageBehavior = false;
-            this.lstMyLotroBand.View = System.Windows.Forms.View.Details;
-            this.lstMyLotroBand.SelectedIndexChanged += new System.EventHandler(this.OnMyLotroBandSongSelectionChange);
-            this.lstMyLotroBand.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.OnColumnClick);
-            // 
-            // colName
-            // 
-            this.colName.Text = "Name";
-            // 
-            // colArtist
-            // 
-            this.colArtist.Text = "Artist";
-            // 
-            // colParts
-            // 
-            this.colParts.Text = "Parts";
-            // 
-            // colAddedBy
-            // 
-            this.colAddedBy.Text = "Added By";
-            // 
-            // colCreated
-            // 
-            this.colCreated.Text = "Added On";
-            this.colCreated.Width = 123;
-            // 
-            // colSongId
-            // 
-            this.colSongId.Text = "Song ID";
-            this.colSongId.Width = 97;
             // 
             // dlgOpenFile
             // 
@@ -1053,22 +1032,24 @@ namespace LOTROMusicManager
             // 
             // toolStripContainer1
             // 
+            this.toolStripContainer1.BottomToolStripPanelVisible = false;
             // 
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(splitContainer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(746, 548);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(746, 572);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.RightToolStripPanelVisible = false;
             this.toolStripContainer1.Size = new System.Drawing.Size(746, 596);
             this.toolStripContainer1.TabIndex = 2;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menustripMain);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menustripEmotes);
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(menustripMain);
             // 
             // menustripEmotes
             // 
@@ -1076,12 +1057,13 @@ namespace LOTROMusicManager
             this.menustripEmotes.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menustripEmotes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emotesToolStripMenuItem});
-            this.menustripEmotes.Location = new System.Drawing.Point(80, 0);
+            this.menustripEmotes.Location = new System.Drawing.Point(445, 0);
             this.menustripEmotes.Name = "menustripEmotes";
             this.menustripEmotes.Size = new System.Drawing.Size(70, 24);
             this.menustripEmotes.Stretch = false;
             this.menustripEmotes.TabIndex = 1;
             this.menustripEmotes.Text = "menuStrip1";
+            this.menustripEmotes.Visible = false;
             // 
             // emotesToolStripMenuItem
             // 
@@ -1093,42 +1075,38 @@ namespace LOTROMusicManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = global::LOTROMusicManager.Properties.Settings.Default.WindowSize;
+            this.ClientSize = global::LotroMusicManager.Properties.Settings.Default.WindowSize;
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.statPane);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::LOTROMusicManager.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::LotroMusicManager.Properties.Settings.Default, "WindowLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = global::LOTROMusicManager.Properties.Settings.Default.WindowLocation;
-            this.MainMenuStrip = menustripMain;
+            this.Location = global::LotroMusicManager.Properties.Settings.Default.WindowLocation;
+            this.MainMenuStrip = this.menustripMain;
             this.Name = "FormMain";
             this.Text = "LOTRO Music Manager";
             this.Load += new System.EventHandler(this.OnLoad);
             this.Activated += new System.EventHandler(this.OnActivated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
-            menustripMain.ResumeLayout(false);
-            menustripMain.PerformLayout();
+            this.menustripMain.ResumeLayout(false);
+            this.menustripMain.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             splitContainer1.ResumeLayout(false);
             this.mnuListContext.ResumeLayout(false);
             this.tabsMain.ResumeLayout(false);
             this.tpgEdit.ResumeLayout(false);
+            this.mnuEditorContext.ResumeLayout(false);
             layoutButtons.ResumeLayout(false);
             layoutButtons.PerformLayout();
             this.mnuPlay.ResumeLayout(false);
             this.tpgPerform.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.ResumeLayout(false);
+            this.splitPerform.Panel1.ResumeLayout(false);
+            this.splitPerform.Panel2.ResumeLayout(false);
+            this.splitPerform.ResumeLayout(false);
             this.layoutPerformButtons.ResumeLayout(false);
             this.layoutPerformButtons.PerformLayout();
             this.mnuPerform.ResumeLayout(false);
-            this.tpgMyLotroBand.ResumeLayout(false);
-            this.layoutMyLotroBand.ResumeLayout(false);
-            this.layoutMyLotroBandButtons.ResumeLayout(false);
-            this.layoutMyLotroBandButtons.PerformLayout();
-            this.mnuMyLotroBandLogin.ResumeLayout(false);
             this.statPane.ResumeLayout(false);
             this.statPane.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -1200,29 +1178,11 @@ namespace LOTROMusicManager
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private MarkedEditBox.RegexTaggedEdit rteEdit;
         private System.Windows.Forms.ComboBox cmbReciteChannel;
-        private System.Windows.Forms.TabPage tpgMyLotroBand;
-        private System.Windows.Forms.ListView lstMyLotroBand;
-        public System.Windows.Forms.ColumnHeader colName;
-        private System.Windows.Forms.TableLayoutPanel layoutMyLotroBandButtons;
-        private System.Windows.Forms.ColumnHeader colArtist;
-        private System.Windows.Forms.ColumnHeader colParts;
-        private System.Windows.Forms.ColumnHeader colAddedBy;
-        private System.Windows.Forms.ColumnHeader colCreated;
-        private System.Windows.Forms.TableLayoutPanel layoutMyLotroBand;
-        private InstantUpdate.Controls.SplitButton btnLogin;
-        private System.Windows.Forms.ContextMenuStrip mnuMyLotroBandLogin;
-        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem forgetLoginInformationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem mniMyLotroBandCreateAccount;
-        private System.Windows.Forms.ToolStripMenuItem mniMyLotroBandVisitSite;
         private System.Windows.Forms.ToolStripMenuItem copySongNameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mniSongListCopySongTitle;
         private System.Windows.Forms.ToolStripMenuItem mniSongListCopyFilename;
         private System.Windows.Forms.ToolStripMenuItem mniSongListCopyFQFilename;
         private System.Windows.Forms.ToolStripMenuItem mniSongListCopySongInfo;
-        private InstantUpdate.Controls.SplitButton btnMyLotroBandActions;
-        private System.Windows.Forms.ColumnHeader colSongId;
         private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
         private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
@@ -1232,8 +1192,26 @@ namespace LOTROMusicManager
         private System.Windows.Forms.ToolStripMenuItem emotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mniOptions;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitPerform;
         private System.Windows.Forms.ListBox lstLyrics;
+        private System.Windows.Forms.ColumnHeader Index;
+        private System.Windows.Forms.ToolStripMenuItem mniOpenInEditor;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ContextMenuStrip mnuEditorContext;
+        private System.Windows.Forms.ToolStripMenuItem mniEditCut;
+        private System.Windows.Forms.ToolStripMenuItem mniEditCopy;
+        private System.Windows.Forms.ToolStripMenuItem mniEditPaste;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem mniEditorPlay;
+        private System.Windows.Forms.ToolStripMenuItem mniEditToggleMusic;
+        private System.Windows.Forms.ToolStripMenuItem mniEditStopPlaying;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem mniEditSave;
+        private System.Windows.Forms.ToolStripMenuItem mniEditSaveAs;
+        private System.Windows.Forms.ToolStripMenuItem mniEditUndoAll;
+        private System.Windows.Forms.ToolStripMenuItem mniEditSelectAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.MenuStrip menustripMain;
     }
 }
 

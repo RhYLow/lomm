@@ -4,9 +4,9 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
-namespace LOTROMusicManager
+namespace LotroMusicManager
 {
-    internal class SDK
+    public class SDK
     {
         [DllImport("user32.dll")]
         public static extern int TrackMouseEvent(ref TRACKMOUSEEVENT lpEventTrack);

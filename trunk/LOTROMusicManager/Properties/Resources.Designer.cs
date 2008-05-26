@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LOTROMusicManager.Properties {
+namespace LotroMusicManager.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LOTROMusicManager.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LOTROMusicManager.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LotroMusicManager.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -85,6 +85,15 @@ namespace LOTROMusicManager.Properties {
         internal static string ABCTagHistory {
             get {
                 return ResourceManager.GetString("ABCTagHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X:.
+        /// </summary>
+        internal static string ABCTagIndex {
+            get {
+                return ResourceManager.GetString("ABCTagIndex", resourceCulture);
             }
         }
         
@@ -234,7 +243,7 @@ namespace LOTROMusicManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /play &quot;{0}&quot;.
+        ///   Looks up a localized string similar to /play &quot;{0}&quot; {1}.
         /// </summary>
         internal static string PlayFileCommand {
             get {
@@ -243,7 +252,7 @@ namespace LOTROMusicManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /play &quot;{0}&quot; sync.
+        ///   Looks up a localized string similar to /play &quot;{0}&quot; {1} sync.
         /// </summary>
         internal static string PlaySyncCommand {
             get {
