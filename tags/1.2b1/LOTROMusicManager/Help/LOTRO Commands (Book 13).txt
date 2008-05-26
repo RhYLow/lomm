@@ -1,0 +1,231 @@
+Player Commands:
+ To use these commands, prefix the commands names with /
+ 1 -- usage: /userchat# <msg>
+ 2 -- usage: /userchat# <msg>
+ 3 -- usage: /userchat# <msg>
+ 4 -- usage: /userchat# <msg>
+ adopt -- usage: /adopt
+ advice -- usage: /advice <msg>
+ afk -- usage: /afk <message>
+ agree -- Performs an emote.
+ ahem -- Performs an emote.
+ alias -- usage: /alias < ;<new alias string> <replacement string > | add ;<new alias string> <replacement string> | remove ;<unwanted alias string> | list | clear | clearlist | shortcut ;<alias string> <shortcut location>>
+ angry -- Performs an emote.
+ anon -- usage: /anon <on|off>
+alternative: /anonymous <on|off> anonymous -- usage: /anon <on|off>
+alternative: /anonymous <on|off> assist -- Performs an emote.
+ attack -- Performs an emote.
+ automove -- Usage: /automove
+ autotarget -- usage: /autotarget < on | off >
+ beckon -- Performs an emote.
+ beg -- Performs an emote.
+ bio -- Performs an emote.
+ blush -- Performs an emote.
+ bored -- Performs an emote.
+ bother -- Performs an emote.
+ bow -- Performs an emote.
+ brb -- Performs an emote.
+ bug -- usage: /bug
+ burp -- Performs an emote.
+ bye -- Performs an emote.
+ calm -- Performs an emote.
+ changename -- usage: /changename <new name>
+ charge -- Performs an emote.
+ chatlog -- usage: /chatlog < on | off | capture >
+ cheer -- Performs an emote.
+ clap -- Performs an emote.
+ confused -- Performs an emote.
+ congratulate -- Performs an emote.
+ cough -- Performs an emote.
+ cower -- Performs an emote.
+ crazy -- Performs an emote.
+ cry -- Performs an emote.
+ curtsey -- Performs an emote.
+ damagetext -- usage: /damagetext < all < true | false > | other < true | false > | range < new range > | list >
+ dance -- Performs an emote.
+ dance1 -- Performs an emote.
+ dance2 -- Performs an emote.
+ dance3 -- Performs an emote.
+ dance_dwarf -- Performs an emote.
+ dance_elf -- Performs an emote.
+ dance_hobbit -- Performs an emote.
+ dance_man -- Performs an emote.
+ drink -- Performs an emote.
+ drool -- Performs an emote.
+ duel -- usage: /spar with a valid player target selected.
+usage: /duel with a valid player target selected.
+ dustoff -- Performs an emote.
+ e -- usage: /emote <text>
+ eat -- Performs an emote.
+ em -- usage: /emote <text>
+ emote -- usage: /emote <text>
+ emotelist -- usage: /emotelist
+ f -- /f <msg> - send <msg> to the fellowship's chat channel
+ faint -- Performs an emote.
+ feather -- Performs an emote.
+ fidget -- Performs an emote.
+ fight -- Performs an emote.
+ filterlist -- usage: /filterlist
+ finvite -- usage: /finvite < player >
+alternative: /invite < player > firebreath -- Performs an emote.
+ flex -- Performs an emote.
+ flip -- Performs an emote.
+ flirt -- Performs an emote.
+ follow -- usage: /follow 
+ followme -- Performs an emote.
+ friend -- usage: /friend add <name> : Adds a player to your friends list.
+ /friend remove <name> : Removes a player from your friends list.
+ /friend list : Displays the status of everyone in your friends list.
+ giggle -- Performs an emote.
+ grumble -- Performs an emote.
+ handstand -- Performs an emote.
+ help -- usage: /help <cmd_name>
+ heropose -- Performs an emote.
+ hug -- Performs an emote.
+ ignore -- usage: /ignore add <name> : Adds a player to your ignore list.
+ /ignore remove <name> : Removes a player from your ignore list.
+ /ignore list : Displays the players you currently have ignored.
+ impatient -- Performs an emote.
+ innocent -- Performs an emote.
+ inspect -- usage: /inspect <target>
+ invite -- usage: /finvite < player >
+alternative: /invite < player > joinchannel -- usage: /joinchannel <channel-name> juggle -- Performs an emote.
+ k -- usage: /k <msg>
+ kinship -- usage: /kinship < disband | recruit | accept | decline | quit | expel | promote | demote | motd | successor | resign >
+ kiss -- Performs an emote.
+ kneel -- Performs an emote.
+ ko -- usage: /ko <msg> - send <msg> to all officers of your kinship
+ laugh -- Performs an emote.
+ leavechannel -- usage: /leavechannel <channel-name>
+ lff -- usage: /lff <msg>
+ lfp -- Marks yourself as looking for players matching your criteria.
+ liedown -- Performs an emote.
+ listchannels -- usage: /listchannels
+ loc -- usage: /loc
+ localtime -- usage: /localtime
+alternative: /time location -- usage: /loc
+ lol -- Performs an emote.
+ look -- Performs an emote.
+ lookaround -- Performs an emote.
+ lookingforfellowship -- usage: /lookingforfellowship <on|off>
+ me -- usage: /emote <text>
+ mock -- Performs an emote.
+ mood_angry -- Performs an emote.
+ mood_apprehensive -- Performs an emote.
+ mood_calm -- Performs an emote.
+ mood_confused -- Performs an emote.
+ mood_fearful -- Performs an emote.
+ mood_happy -- Performs an emote.
+ mood_mischievous -- Performs an emote.
+ mood_sad -- Performs an emote.
+ mood_sleepy -- Performs an emote.
+ mood_solemn -- Performs an emote.
+ mood_surprised -- Performs an emote.
+ mourn -- Performs an emote.
+ msg -- usage: /tell <target name> <message>
+ mumble -- Performs an emote.
+ munch -- Performs an emote.
+ music -- usage: /music
+ no -- Performs an emote.
+ nothing -- Performs an emote.
+ o -- usage: /ko <msg> - send <msg> to all officers of your kinship
+ officer -- usage: /ko <msg> - send <msg> to all officers of your kinship
+ ooc -- usage: /OOC <msg>
+ oop -- Performs an emote.
+ pat -- Performs an emote.
+ pet -- usage: /pet < attack | follow | stay | assist < on | off > | guard | aggressive | passive | skill1 | skill2 | skill3 | status | release | releaseall | rename <name>>
+ pick -- Performs an emote.
+ play -- usage: /play <song file> [index #] [sync]
+ played -- usage: /played
+ playlist -- usage: /playlist [<filter>]
+ playstart -- usage: /playstart
+ point -- Performs an emote.
+ poke -- Performs an emote.
+ pose -- Performs an emote.
+ pushups -- Performs an emote.
+ r -- usage: /reply message
+ ra -- /ra <msg> - send <msg> to the raid's chat channel
+ raid -- usage: /raid < create | disband | invite | dismiss | promote | demote | swap | leave>
+ raidshout -- usage: /raidshout <text to shout>
+ 1)Must be in a Raid Group
+ 2)Must be the leader of the Raid
+ 3)Must supply a text string.
+ random -- usage: /roll <range> (default 100) 
+/random <range> (default 100)
+ ready -- Performs an emote.
+ readycheck -- usage: /readycheck
+ 1)Must be in a Fellowship or Raid.
+ 2)Must be the leader of the Fellowship or Raid.
+ reclaim -- usage: /reclaim - Used to re-create pre-order/promotional items.
+ regional -- usage: /general <msg>
+ reply -- usage: /reply message
+ rest -- Performs an emote.
+ retell -- usage: /retell message
+ roar -- Performs an emote.
+ roll -- usage: /roll <range> (default 100) 
+/random <range> (default 100)
+ rp -- usage: /rp <on|off>
+ rpc -- usage: /RPC <msg>
+ rt -- usage: /retell message
+ rude -- Performs an emote.
+ sad -- Performs an emote.
+ salute -- Performs an emote.
+ say -- usage: /say <text>
+ scold -- Performs an emote.
+ scratch -- Performs an emote.
+ servertime -- usage: /servertime
+ shakefist -- Performs an emote.
+ shiver -- Performs an emote.
+ shortcut -- usage: /shortcut <shortcut location> <text string> 
+ shout -- usage: /shout <text>
+ shrug -- Performs an emote.
+ sigh -- Performs an emote.
+ sit -- Performs an emote.
+ slap -- Performs an emote.
+ smackhead -- Performs an emote.
+ smoke -- Performs an emote.
+ smoke1 -- Performs an emote.
+ sorry -- Performs an emote.
+ spar -- usage: /spar with a valid player target selected.
+usage: /duel with a valid player target selected.
+ stare -- Performs an emote.
+ story -- Performs an emote.
+ stretch -- Performs an emote.
+ stuck -- usage: /stuck
+ surrender -- Performs an emote.
+ sweat -- Performs an emote.
+ swordsalute -- Performs an emote.
+ t -- usage: /tell <target name> <message>
+ talk -- Performs an emote.
+ tantrum -- Performs an emote.
+ tear -- Performs an emote.
+ tell -- usage: /tell <target name> <message>
+ thank -- Performs an emote.
+ think -- Performs an emote.
+ time -- usage: /localtime
+alternative: /time trade -- usage: /trade <msg>
+ tutorial -- usage: /tutorial <enable|disable|reset>
+ uc -- usage: /userchat <channel-name> <msg>
+ uc1 -- usage: /userchat# <msg>
+ uc2 -- usage: /userchat# <msg>
+ uc3 -- usage: /userchat# <msg>
+ uc4 -- usage: /userchat# <msg>
+ unstuck -- usage: /stuck
+ userchat -- usage: /userchat <channel-name> <msg>
+ userchat1 -- usage: /userchat# <msg>
+ userchat2 -- usage: /userchat# <msg>
+ userchat3 -- usage: /userchat# <msg>
+ userchat4 -- usage: /userchat# <msg>
+ useselection -- usage: /useselection
+ w -- usage: /tell <target name> <message>
+ wait -- Performs an emote.
+ wave -- Performs an emote.
+ whisper -- usage: /tell <target name> <message>
+ whistle -- Performs an emote.
+ who -- Finds players matching your criteria.
+ wince -- Performs an emote.
+ wink -- Performs an emote.
+ yawn -- Performs an emote.
+ yell -- usage: /shout <text>
+ yes -- Performs an emote.
+ yield -- usage: /yield

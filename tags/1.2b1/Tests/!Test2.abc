@@ -1,0 +1,21 @@
+X:1
+T: - Song 1 - LOMM Test 2: Two Songs
+M: 4/4     
+L: 1/4     
+K: Amin    
+Q: 1/4=120 
+A: Carborunda Riverside of the Stoors
+O: Stock, The Shire, Eriador
+N: Test song 1 - 2 songs in the file
+|+p+ABCD|+f+z(3EFG>^G|+fff+[A4a4C4E4]||
+
+X:3
+T: - Song 2 - LOMM Test 2: Two Songs
+M: 4/4     
+L: 1/4     
+K: Amin    
+Q: 1/4=120 
+A: Carborunda Riverside of the Stoors
+O: Stock, The Shire, Eriador
+N: Test song 2 - 2 songs in the file
+|+p+ABCD|+f+z(3EFG>^G|+fff+[A4a4C4E4]||

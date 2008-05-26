@@ -1,0 +1,48 @@
+ afk -- usage: /afk <message>
+ anon -- usage: /anon <on|off>
+ chatlog -- usage: /chatlog < on | off | capture >
+ damagetext -- usage: /damagetext < all < true | false > | other < true | false > | range < new range > | list >
+ automove -- Usage: /automove
+ autotarget -- usage: /autotarget < on | off >
+ follow -- usage: /follow 
+ inspect -- usage: /inspect <target>
+ invite -- usage: /finvite < player >
+ lfp -- Marks yourself as looking for players matching your criteria.
+ music -- usage: /music
+ pet -- usage: /pet < attack | follow | stay | assist < on | off > | guard | aggressive | passive | skill1 | skill2 | skill3 | status | release | releaseall | rename <name>>
+ play -- usage: /play <song file> [index #] [sync]
+ played -- usage: /played
+ playlist -- usage: /playlist [<filter>]
+ playstart -- usage: /playstart
+ random -- usage: /roll <range> (default 100) 
+ readycheck -- usage: /readycheck
+ rp -- usage: /rp <on|off>
+ servertime -- usage: /servertime
+ tutorial -- usage: /tutorial <enable|disable|reset>
+ useselection -- usage: /useselection
+ who -- Finds players matching your criteria.
+
+
+ adopt -- usage: /adopt
+ duel -- usage: /spar with a valid player target selected.
+ emotelist -- usage: /emotelist
+ filterlist -- usage: /filterlist
+ finvite -- usage: /finvite < player >
+ friend -- usage: /friend add <name> : Adds a player to your friends list.
+ /friend remove <name> : Removes a player from your friends list.
+ /friend list : Displays the status of everyone in your friends list.
+ ignore -- usage: /ignore add <name> : Adds a player to your ignore list.
+ /ignore remove <name> : Removes a player from your ignore list.
+ /ignore list : Displays the players you currently have ignored.
+ joinchannel -- usage: /joinchannel <channel-name> juggle -- Performs an emote.
+ leavechannel -- usage: /leavechannel <channel-name>
+ listchannels -- usage: /listchannels
+ localtime -- usage: /localtime
+ loc -- usage: /loc
+ reclaim -- usage: /reclaim - Used to re-create pre-order/promotional items.
+ alias -- usage: /alias < ;<new alias string> <replacement string > | add ;<new alias string> <replacement string> | remove ;<unwanted alias string> | list | clear | clearlist | shortcut ;<alias string> <shortcut location>>
+ bug -- usage: /bug
+ help -- usage: /help <cmd_name>
+ shortcut -- usage: /shortcut <shortcut location> <text string> 
+ stuck -- usage: /stuck
+

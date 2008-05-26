@@ -1,0 +1,217 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2613B56-1290-4CA2-9F0D-C7F7062797B7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LotroMusicManager</RootNamespace>
+    <AssemblyName>LOTROMusicManager</AssemblyName>
+    <ApplicationIcon>Resources\LOMM.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://lomm.googlecode.com</SupportUrl>
+    <ProductName>LOTRO Music Manager</ProductName>
+    <PublisherName>Herndon Morris, Inc</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationVersion>1.0.2.%2a</ApplicationVersion>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ManifestCertificateThumbprint>754150B5B59BC2C1220F855F47461CBBB2A23D24</ManifestCertificateThumbprint>
+    <ManifestKeyFile>LOTROMusicManager_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ABC.cs" />
+    <Compile Include="ColumnSorter.cs" />
+    <Compile Include="Emotes.cs" />
+    <Compile Include="FormABCRef.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormABCRef.Designer.cs">
+      <DependentUpon>FormABCRef.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditEmote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditEmote.Designer.cs">
+      <DependentUpon>FormEditEmote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMyLotroBandLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMyLotroBandLogin.Designer.cs">
+      <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOptions.Designer.cs">
+      <DependentUpon>FormOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Keymapping.cs" />
+    <Compile Include="LOTROFocuser.cs" />
+    <Compile Include="Macro.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormABCRef.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormABCRef.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Help\ABCRef.rtf" />
+    <None Include="app.config" />
+    <None Include="Help\lomm helpfile.mmap" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteController.cs" />
+    <Compile Include="SDK.cs" />
+    <Compile Include="Song.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LOMM.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Help\keymapping.xlsx" />
+    <None Include="LOTROMusicManager_TemporaryKey.pfx" />
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormEditEmote.resx">
+      <DependentUpon>FormEditEmote.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMyLotroBandLogin.resx">
+      <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOptions.resx">
+      <DependentUpon>FormOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\NewABC.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Help\Commands %28book 12%29.htm" />
+    <Content Include="Help\LOTRO Commands %28Book 12%29.txt" />
+    <Content Include="Help\LOTRO Commands - non-emote %28Book 13%29.txt" />
+    <Content Include="Help\lotro.keymap %28book 12%29.txt" />
+    <Content Include="Help\lotro.keymap %28book 13%29.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LOMMSplitButton\Control_LOMMSplitButton.csproj">
+      <Project>{B12A704E-7DC3-4005-A01D-6DFA54AC3B18}</Project>
+      <Name>Control_LOMMSplitButton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MarkedEditBox\Control_MarkedEditBox.csproj">
+      <Project>{5B294E8D-A43A-4EEC-AFFE-899AE406AEDA}</Project>
+      <Name>Control_MarkedEditBox</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Notes="&lt;Notes Project=&quot;a2613b56-1290-4ca2-9f0d-c7f7062797b7&quot; xmlns=&quot;clr-namespace:StickyNotes.Model;assembly=StickyNotes&quot;&gt;&lt;Notes.StickyNotes&gt;&lt;Note FilePath=&quot;&quot; Content=&quot;&quot; Date=&quot;2008-04-27T19:35:35.5319684-07:00&quot; /&gt;&lt;Note FilePath=&quot;C:\Dev\src\LOTROMusicManager\LOTROMusicManager\LOTROMusicManager.csproj&quot; Content=&quot;ToDo:&amp;#xD;&amp;#xA; * X: tag handling&amp;#xD;&amp;#xA; * Finish lyrics&amp;#xD;&amp;#xA; * Tuple handling&amp;#xD;&amp;#xA; * Macro class types&amp;#xD;&amp;#xA; * Macro class editing&amp;#xD;&amp;#xA;Desirable:&amp;#xD;&amp;#xA; * Detachable toolbars for macros&amp;#xD;&amp;#xA; * Minimized mode&amp;#xD;&amp;#xA;Investigate:&amp;#xD;&amp;#xA; * New Ribbon classes?&quot; Date=&quot;2008-04-27T19:53:15.8674229-07:00&quot; /&gt;&lt;/Notes.StickyNotes&gt;&lt;/Notes&gt;" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
