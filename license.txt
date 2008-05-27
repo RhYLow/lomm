@@ -1,0 +1,1 @@
+This project with all its source code is distributed under terms of Artistic License/GPLv2
