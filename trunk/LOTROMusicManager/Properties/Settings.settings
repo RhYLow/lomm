@@ -140,9 +140,6 @@
     <Setting Name="MyLotroBandRememberLoginInformation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="EmoteList" Type="LotroMusicManager.EmoteGroup" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="FocusTimeout" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">400</Value>
     </Setting>

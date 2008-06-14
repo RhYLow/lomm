@@ -1,13 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Style Enforcer", "Code Style Enforcer", "{A2D1E299-2A79-4368-8B1B-EACF157F8742}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml
-		..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml
-		..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOTROMusicManager", "LOTROMusicManager\LOTROMusicManager.csproj", "{A2613B56-1290-4CA2-9F0D-C7F7062797B7}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "LOMMSetup", "LMMSetup\LMMSetup.vdproj", "{0F043263-05E6-4EA3-BFA0-6186885DFA56}"
@@ -15,6 +8,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_MarkedEditBox", "MarkedEditBox\Control_MarkedEditBox.csproj", "{5B294E8D-A43A-4EEC-AFFE-899AE406AEDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_LOMMSplitButton", "LOMMSplitButton\Control_LOMMSplitButton.csproj", "{B12A704E-7DC3-4005-A01D-6DFA54AC3B18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Style Enforcer", "Code Style Enforcer", "{D4B4D5FF-CC52-4216-B301-6AAD7CEC80B8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\ImplementationRules.xml
+		..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\NameRules.xml
+		..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml = ..\..\..\Program Files\Code Style Enforcer\CustomRules\VisibilityRules.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

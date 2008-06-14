@@ -159,6 +159,7 @@ namespace LotroMusicManager
 
         public enum VK 
         {
+            unknown_vk          = 0x00,  // Unassigned VK
             LBUTTON             = 0x01,  // Left mouse button
             RBUTTON             = 0x02,  // Right mouse button
             CANCEL              = 0x03,  // Control-break processing
@@ -207,7 +208,7 @@ namespace LotroMusicManager
             INSERT              = 0x2D,  // INS key
             DELETE              = 0x2E,  // DEL key
             HELP                = 0x2F,  // HELP key
-            KEY_0               = 0x30, // 0 key
+            KEY_0               = 0x30,  // 0 key
             KEY_1               = 0x31,  // 1 key
             KEY_2               = 0x32,  // 2 key
             KEY_3               = 0x33,  // 3 key

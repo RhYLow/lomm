@@ -78,9 +78,6 @@ namespace LotroMusicManager
             if (Settings.Default.TagsEdit    != null) rteEdit.Tags    = Settings.Default.TagsEdit;
             if (Settings.Default.TagsPerform != null) rtePerform.Tags = Settings.Default.TagsPerform;
 
-            CreateTestEmotes();
-            LoadEmotes();
-
             rteEdit.AutoTag = Settings.Default.HighlightABC;
 
             menustripMain.Left = 0;
@@ -89,6 +86,9 @@ namespace LotroMusicManager
             //mac.AddAction(new MacroActionSay(MacroAction.Channel.Say, "Some text"));
             //mac.AddAction(new MacroActionBinding(LotroFunction.Functions["ToggleCraftingPanel"]));
             //mac.Execute();
+            FormMacroManager fmm = new FormMacroManager();
+            fmm.ShowDialog();
+
 
             // Kick off the timer that makes LOTRO music play while LOMM has focus
             _focuser.Start();
@@ -96,53 +96,6 @@ namespace LotroMusicManager
             return;
         }
 
-        private static void CreateTestEmotes()
-        {   //====================================================================
-            EmoteGroup eg1 = new EmoteGroup(); eg1.Name = "Dances";
-            eg1.Emotes.Add(new Emote("Clap Hands", new String[] { "/dance" }));
-            eg1.Emotes.Add(new Emote("Dance 1", new String[] { "/dance1" }));
-            eg1.Emotes.Add(new Emote("Hobbit", new String[] { "/dance_hobbit" }));
-            eg1.Emotes.Add(new Emote("Elf", new String[] { "/dance_elf" }));
-            eg1.Emotes.Add(new Emote("Dwarf", new String[] { "/dance_dwarf" }));
-
-            //--------------------------------------------------------------------
-            EmoteGroup eg2 = new EmoteGroup(); eg2.Name = "Social";
-            eg2.Emotes.Add(new Emote("Scold x 5 (grants The Naughty at 100)", new String[] { "/scold", "/scold", "/scold", "/scold", "/scold" }));
-
-            //--------------------------------------------------------------------
-            EmoteGroup eg3 = new EmoteGroup(); eg3.Name = "Experiments";
-
-            Emote emKey = new Emote(); emKey.Name = "Send key 8";
-            emKey.EmoteBlocks.Add(new EmoteBlock(EmoteLine.LineType.KEY, new String[] { "8" }));
-            eg3.Emotes.Add(emKey);
-
-            Emote emChance = new Emote(); emChance.Name = "A4, B4, C1";
-            EmoteBlock ebA = new EmoteBlock(EmoteLine.LineType.Say, new String[] { "A" }); ebA.Chance = 4;
-            EmoteBlock ebB = new EmoteBlock(EmoteLine.LineType.Say, new String[] { "B" }); ebB.Chance = 4;
-            EmoteBlock ebC = new EmoteBlock(EmoteLine.LineType.Say, new String[] { "C" }); ebC.Chance = 1;
-            emChance.EmoteBlocks.Add(ebA);
-            emChance.EmoteBlocks.Add(ebB);
-            emChance.EmoteBlocks.Add(ebC);
-            eg3.Emotes.Add(emChance);
-
-
-            Emote emRP = new Emote(); emRP.Name = "Text and then 8";
-            EmoteBlock ebRP = new EmoteBlock();
-            ebRP.Lines.Add(new EmoteLine(EmoteLine.LineType.Say, "/t ;target Heal incoming"));
-            ebRP.Lines.Add(new EmoteLine(EmoteLine.LineType.KEY, "8"));
-            emRP.EmoteBlocks.Add(ebRP);
-            eg3.Emotes.Add(emRP);
-
-            EmoteGroup eg = new EmoteGroup();
-            eg.Groups.Add(eg1);
-            eg.Groups.Add(eg2);
-            eg.Groups.Add(eg3);
-
-            Settings.Default.EmoteList = eg;
-            Settings.Default.Save();
-
-            return;
-        }                           
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
@@ -623,40 +576,6 @@ namespace LotroMusicManager
             return;
         }
 
-        private void LoadEmotes()
-        {//====================================================================
-            EmoteGroup egTop = Settings.Default.EmoteList;
-            foreach (EmoteGroup eg in egTop.Groups)
-            {
-                ToolStripMenuItem item = (ToolStripMenuItem)menustripEmotes.Items.Add(eg.Name);
-                AddEmoteGroupToMenuItem(eg, item);
-            }
-            return;
-        }
-
-        private void AddEmoteGroupToMenuItem(EmoteGroup eg, ToolStripMenuItem tsi)
-        {   //====================================================================
-            foreach (EmoteGroup egInner in eg.Groups)
-            {
-                ToolStripMenuItem item = (ToolStripMenuItem)tsi.DropDownItems.Add(egInner.Name);
-                item.Tag = egInner;
-                AddEmoteGroupToMenuItem(egInner, item);
-            }
-
-            foreach (Emote e in eg.Emotes)
-            {
-                ToolStripMenuItem item = (ToolStripMenuItem)tsi.DropDownItems.Add(e.Name, null, OnCustomEmote);
-                item.Tag = e;
-            }
-            return;
-        }
-
-        private void OnCustomEmote(object sender, EventArgs e)
-        {   //====================================================================
-            Emote em = (Emote)(((ToolStripMenuItem)sender).Tag);
-            em.Execute();
-            return;
-        }
     #endregion
 
     #region Lyrics Playing
@@ -845,6 +764,13 @@ namespace LotroMusicManager
             return;
         }
     #endregion
+
+        private void OnManageMacros(object sender, EventArgs e)
+        {
+            FormMacroManager fmm = new FormMacroManager();
+            fmm.ShowDialog();
+            return;
+        }
 
     } // class
 

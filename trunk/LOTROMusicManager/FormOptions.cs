@@ -15,31 +15,39 @@ namespace LotroMusicManager
         public Boolean AOT              {get {return chkAOT.Checked;}}
         
         private FormMain _frmMain;
+        private double   _dblInitialOpacity;
 
         public FormOptions(FormMain frmMain)
         {
-            _frmMain = frmMain;
+            _frmMain           = frmMain;
+            _dblInitialOpacity = _frmMain.Opacity;
             InitializeComponent();
         }
 
         private void OnLoad(object sender, EventArgs e)
         {  //====================================================================
             chkKeepLOTROFocused.Checked = Settings.Default.KeepLOTROFocused;
-            Location = new Point(_frmMain.Location.X + (_frmMain.Width - Width)/2, _frmMain.Location.Y + 50);
+            Location           = new Point(_frmMain.Location.X + (_frmMain.Width - Width)/2, _frmMain.Location.Y + 50);
+            trackOpacity.Value = (int)(_frmMain.Opacity * 100);
             return;
         }
 
         private void OnOpacityValueChanged(object sender, EventArgs e)
         {   //====================================================================
-            _frmMain.Opacity = trackOpacity.Value;
+            _frmMain.Opacity = ((double)trackOpacity.Value)/100.0;
             return;
         }
 
         private void OnNewEmote(object sender, EventArgs e)
         {   //====================================================================
-            FormEditEmote frm = new FormEditEmote(this);
+            FormEditMacro frm = new FormEditMacro(this);
             frm.ShowDialog();
             return;
+        }
+
+        private void OnCancel(object sender, EventArgs e)
+        {
+            _frmMain.Opacity = _dblInitialOpacity;
         }
     }
 }
