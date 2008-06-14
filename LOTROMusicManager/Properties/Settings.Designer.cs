@@ -294,17 +294,6 @@ namespace LotroMusicManager.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::LotroMusicManager.EmoteGroup EmoteList {
-            get {
-                return ((global::LotroMusicManager.EmoteGroup)(this["EmoteList"]));
-            }
-            set {
-                this["EmoteList"] = value;
-            }
-        }
-        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("400")]

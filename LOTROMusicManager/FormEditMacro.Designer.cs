@@ -34,21 +34,25 @@
             "act1",
             "act details",
             ""}, -1);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEditMacro));
             this.tableEditEmote = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.mnuLOTROCommands2 = new System.Windows.Forms.MenuStrip();
             this.lstEmoteEditor = new System.Windows.Forms.ListView();
             this.colType = new System.Windows.Forms.ColumnHeader();
-            this.colWeight = new System.Windows.Forms.ColumnHeader();
             this.colText = new System.Windows.Forms.ColumnHeader();
             this.toolsEmoteEditor = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.cmbActionType = new System.Windows.Forms.ComboBox();
-            this.cmbActionWeight = new System.Windows.Forms.ComboBox();
+            this.lblMacroName = new System.Windows.Forms.ToolStripLabel();
+            this.txtMacroName = new System.Windows.Forms.ToolStripTextBox();
+            this.btnMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.btnMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.btnAddItem = new System.Windows.Forms.ToolStripButton();
+            this.btnEditItem = new System.Windows.Forms.ToolStripButton();
+            this.btnDelItem = new System.Windows.Forms.ToolStripButton();
             this.txtActionDetails = new System.Windows.Forms.TextBox();
-            this.mnuLOTROCommands = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuLOTROCommands2 = new System.Windows.Forms.MenuStrip();
+            this.cmbActionType = new System.Windows.Forms.ComboBox();
+            this.mnuActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             btnOK = new System.Windows.Forms.Button();
             this.tableEditEmote.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -111,13 +115,19 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // mnuLOTROCommands2
+            // 
+            this.mnuLOTROCommands2.Location = new System.Drawing.Point(0, 0);
+            this.mnuLOTROCommands2.Name = "mnuLOTROCommands2";
+            this.mnuLOTROCommands2.Size = new System.Drawing.Size(404, 24);
+            this.mnuLOTROCommands2.TabIndex = 2;
+            this.mnuLOTROCommands2.Text = "menuStrip1";
+            // 
             // lstEmoteEditor
             // 
             this.lstEmoteEditor.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colType,
-            this.colText,
-            this.colWeight});
-            this.lstEmoteEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colText});
             this.lstEmoteEditor.FullRowSelect = true;
             this.lstEmoteEditor.GridLines = true;
             this.lstEmoteEditor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -127,23 +137,15 @@
             this.lstEmoteEditor.MultiSelect = false;
             this.lstEmoteEditor.Name = "lstEmoteEditor";
             this.lstEmoteEditor.ShowItemToolTips = true;
-            this.lstEmoteEditor.Size = new System.Drawing.Size(488, 358);
+            this.lstEmoteEditor.Size = new System.Drawing.Size(198, 227);
             this.lstEmoteEditor.TabIndex = 2;
             this.lstEmoteEditor.UseCompatibleStateImageBehavior = false;
             this.lstEmoteEditor.View = System.Windows.Forms.View.Details;
-            this.lstEmoteEditor.SelectedIndexChanged += new System.EventHandler(this.OnSelectedIndexChanged);
-            this.lstEmoteEditor.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnEmoteEditorMouseUp);
-            this.lstEmoteEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnEmoteEditorKeyPress);
             // 
             // colType
             // 
             this.colType.Text = "Action";
             this.colType.Width = 101;
-            // 
-            // colWeight
-            // 
-            this.colWeight.Text = "How Often";
-            this.colWeight.Width = 73;
             // 
             // colText
             // 
@@ -153,24 +155,86 @@
             // toolsEmoteEditor
             // 
             this.toolsEmoteEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripTextBox1});
+            this.lblMacroName,
+            this.txtMacroName,
+            this.btnMoveUp,
+            this.btnMoveDown,
+            this.btnAddItem,
+            this.btnEditItem,
+            this.btnDelItem});
             this.toolsEmoteEditor.Location = new System.Drawing.Point(0, 0);
             this.toolsEmoteEditor.Name = "toolsEmoteEditor";
             this.toolsEmoteEditor.Size = new System.Drawing.Size(494, 25);
             this.toolsEmoteEditor.TabIndex = 3;
             this.toolsEmoteEditor.Text = "toolStrip1";
             // 
-            // toolStripLabel1
+            // lblMacroName
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(79, 22);
-            this.toolStripLabel1.Text = "Emote Name:";
+            this.lblMacroName.Name = "lblMacroName";
+            this.lblMacroName.Size = new System.Drawing.Size(79, 22);
+            this.lblMacroName.Text = "Emote Name:";
             // 
-            // toolStripTextBox1
+            // txtMacroName
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.txtMacroName.Name = "txtMacroName";
+            this.txtMacroName.Size = new System.Drawing.Size(100, 25);
+            // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("btnMoveUp.Image")));
+            this.btnMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.btnMoveUp.Text = "Move Up";
+            // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("btnMoveDown.Image")));
+            this.btnMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.btnMoveDown.Text = "Move Down";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
+            this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(23, 22);
+            this.btnAddItem.Text = "New Action";
+            this.btnAddItem.Click += new System.EventHandler(this.OnAddActionItem);
+            // 
+            // btnEditItem
+            // 
+            this.btnEditItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnEditItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditItem.Image = ((System.Drawing.Image)(resources.GetObject("btnEditItem.Image")));
+            this.btnEditItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditItem.Name = "btnEditItem";
+            this.btnEditItem.Size = new System.Drawing.Size(23, 22);
+            this.btnEditItem.Text = "Edit Action";
+            // 
+            // btnDelItem
+            // 
+            this.btnDelItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnDelItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDelItem.Image = ((System.Drawing.Image)(resources.GetObject("btnDelItem.Image")));
+            this.btnDelItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelItem.Name = "btnDelItem";
+            this.btnDelItem.Size = new System.Drawing.Size(23, 22);
+            this.btnDelItem.Text = "Delete Action";
+            // 
+            // txtActionDetails
+            // 
+            this.txtActionDetails.Location = new System.Drawing.Point(190, 425);
+            this.txtActionDetails.Name = "txtActionDetails";
+            this.txtActionDetails.Size = new System.Drawing.Size(24, 20);
+            this.txtActionDetails.TabIndex = 5;
+            this.txtActionDetails.Visible = false;
             // 
             // cmbActionType
             // 
@@ -182,44 +246,13 @@
             this.cmbActionType.Size = new System.Drawing.Size(121, 21);
             this.cmbActionType.TabIndex = 2;
             this.cmbActionType.Visible = false;
-            this.cmbActionType.Leave += new System.EventHandler(this.OnActionTypeLoseFocus);
-            this.cmbActionType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnActionTypeKeyPress);
             // 
-            // cmbActionWeight
+            // mnuActions
             // 
-            this.cmbActionWeight.FormattingEnabled = true;
-            this.cmbActionWeight.Location = new System.Drawing.Point(0, 0);
-            this.cmbActionWeight.Name = "cmbActionWeight";
-            this.cmbActionWeight.Size = new System.Drawing.Size(121, 21);
-            this.cmbActionWeight.TabIndex = 4;
-            this.cmbActionWeight.Visible = false;
-            this.cmbActionWeight.Leave += new System.EventHandler(this.OnActionWeightLoseFocus);
-            this.cmbActionWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnActionWeightKeyPress);
+            this.mnuActions.Name = "mnuActions";
+            this.mnuActions.Size = new System.Drawing.Size(61, 4);
             // 
-            // txtActionDetails
-            // 
-            this.txtActionDetails.Location = new System.Drawing.Point(190, 425);
-            this.txtActionDetails.Name = "txtActionDetails";
-            this.txtActionDetails.Size = new System.Drawing.Size(24, 20);
-            this.txtActionDetails.TabIndex = 5;
-            this.txtActionDetails.Visible = false;
-            this.txtActionDetails.Leave += new System.EventHandler(this.OnEmoteEditorTextLoseFocus);
-            this.txtActionDetails.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnEmoteEditorTextKeyPress);
-            // 
-            // mnuLOTROCommands
-            // 
-            this.mnuLOTROCommands.Name = "mnuLOTROCommands";
-            this.mnuLOTROCommands.Size = new System.Drawing.Size(61, 4);
-            // 
-            // mnuLOTROCommands2
-            // 
-            this.mnuLOTROCommands2.Location = new System.Drawing.Point(0, 0);
-            this.mnuLOTROCommands2.Name = "mnuLOTROCommands2";
-            this.mnuLOTROCommands2.Size = new System.Drawing.Size(404, 24);
-            this.mnuLOTROCommands2.TabIndex = 2;
-            this.mnuLOTROCommands2.Text = "menuStrip1";
-            // 
-            // FormEditEmote
+            // FormEditMacro
             // 
             this.AcceptButton = btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,13 +261,12 @@
             this.ClientSize = new System.Drawing.Size(494, 426);
             this.ControlBox = false;
             this.Controls.Add(this.txtActionDetails);
-            this.Controls.Add(this.cmbActionWeight);
             this.Controls.Add(this.cmbActionType);
             this.Controls.Add(this.tableEditEmote);
             this.MainMenuStrip = this.mnuLOTROCommands2;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormEditEmote";
+            this.Name = "FormEditMacro";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Edit Emote";
@@ -259,13 +291,16 @@
         private System.Windows.Forms.ColumnHeader colType;
         private System.Windows.Forms.ColumnHeader colText;
         private System.Windows.Forms.ToolStrip toolsEmoteEditor;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ComboBox cmbActionType;
-        private System.Windows.Forms.ColumnHeader colWeight;
-        private System.Windows.Forms.ComboBox cmbActionWeight;
+        private System.Windows.Forms.ToolStripLabel lblMacroName;
+        private System.Windows.Forms.ToolStripTextBox txtMacroName;
         private System.Windows.Forms.TextBox txtActionDetails;
-        private System.Windows.Forms.ContextMenuStrip mnuLOTROCommands;
         private System.Windows.Forms.MenuStrip mnuLOTROCommands2;
+        private System.Windows.Forms.ComboBox cmbActionType;
+        private System.Windows.Forms.ContextMenuStrip mnuActions;
+        private System.Windows.Forms.ToolStripButton btnMoveUp;
+        private System.Windows.Forms.ToolStripButton btnMoveDown;
+        private System.Windows.Forms.ToolStripButton btnDelItem;
+        private System.Windows.Forms.ToolStripButton btnEditItem;
+        private System.Windows.Forms.ToolStripButton btnAddItem;
     }
 }

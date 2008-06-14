@@ -250,7 +250,7 @@ namespace LotroMusicManager
 
         public static void ExecuteFunction(String strFunctionName)
         {   //====================================================================
-            LotroFunction lf = LotroFunction.Functions[strFunctionName];
+            MappedLotroCommand lf = MappedLotroCommand.Functions[strFunctionName];
             SendScanCode(lf.MappedScanCode, lf.Bits);
             return;
         }

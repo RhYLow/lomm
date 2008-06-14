@@ -4,8 +4,36 @@ using System.Text;
 
 namespace LotroMusicManager
 {
-    class StringExtensions
+    public class StringExtensions
     {
+        private enum ToLowerMode {INITIAL, FIRSTCHAR, NONFIRST, WHITESPACE};
+        public static String ToTitleCase(String str)
+        {//====================================================================           
+            ToLowerMode mode = ToLowerMode.INITIAL;
+            char[] ach = str.ToCharArray();
+            for (int i = 0; i < ach.Length; i += 1)
+            {
+                switch (mode)
+                {
+                    default:
+                        break;
+
+                    case ToLowerMode.INITIAL:
+                    case ToLowerMode.WHITESPACE:
+                        if (Char.IsLetterOrDigit(ach[i])) {ach[i] = Char.ToUpper(ach[i]); mode = ToLowerMode.FIRSTCHAR;}
+                        break;
+
+                    case ToLowerMode.FIRSTCHAR:
+                    case ToLowerMode.NONFIRST:
+                        ach[i] = Char.ToLower(ach[i]);
+                        mode = Char.IsWhiteSpace(ach[i]) ? ToLowerMode.WHITESPACE : ToLowerMode.NONFIRST;
+                        break;
+
+                }
+            }
+            return new String(ach);
+        }
+
         public static String RightOf(String str, String strSep)
         {//====================================================================
             if (strSep.Length > 0) str = str.Substring(str.IndexOf(strSep) + strSep.Length).Trim();

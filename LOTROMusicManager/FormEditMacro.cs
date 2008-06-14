@@ -19,11 +19,12 @@ namespace LotroMusicManager
         {
             Action = 0,
             Text   = 1,
-            Weight = 2,
         };
 
         private Form _frmParent;
-
+        
+        private Macro _macro = new Macro("");
+        
         public FormEditMacro(Form frmParent)
         {
             _frmParent = frmParent;
@@ -33,181 +34,25 @@ namespace LotroMusicManager
         private void OnFormLoad(object sender, EventArgs e)
         {   //====================================================================
             ArrayList alLineTypes = new ArrayList();
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.Say,           "Say"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.Fellowship,    "Fellowship"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.Raid,          "Raid"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.Local,         "Regional"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.RP,            "RP"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.UserChannel1,  "User channel 1"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.UserChannel2,  "User channel 2"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.UserChannel3,  "User channel 3"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.LFF,           "lff"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.COMMAND,       "Slash Command"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.LOTROFUNCTION, "LOTRO command"));
-            alLineTypes.Add(new NamedEmoteLine(EmoteLine.LineType.KEY,           "Press key"));
+            foreach(MacroAction.ActionType at in Enum.GetValues(typeof(MacroAction.ActionType)))
+            {
+                alLineTypes.Add(new NamedMacroAction(at, Enum.GetName(typeof(MacroAction.ActionType), at)));
+            }
 
             cmbActionType.DataSource = alLineTypes;
             cmbActionType.DisplayMember = "Name";
 
-            CreateCommandMenus(); // Read the categories and functions and build the menus from that
+            CreateMenus(); // Read the categories and functions and build the menus from that
+
+            UpdateListView();
 
             Location = new Point(_frmParent.Location.X + (_frmParent.Width - Width)/2, _frmParent.Location.Y + 50);
             return;
         }
 
-        private void OnSelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateListView()
         {   //====================================================================
-            return;
-        }
-
-        private void OnEmoteEditorKeyPress(object sender, KeyPressEventArgs e)
-        {   //====================================================================
-            return;
-        }
-
-        private void OnActionWeightLoseFocus(object sender, EventArgs e)
-        {   //====================================================================
-            return;
-        }
-
-        private void OnActionTypeLoseFocus(object sender, EventArgs e)
-        {   //====================================================================
-            int nRow = (int)cmbActionType.Tag;
-            lstEmoteEditor.Items[nRow].Text = ((NamedEmoteLine)cmbActionType.SelectedValue).Name;
-            lstEmoteEditor.Items[nRow].Tag  = new EmoteLine(((NamedEmoteLine)cmbActionType.SelectedValue).Type, "");
-            cmbActionType.Visible = false;
-            return;
-        }
-
-        private void OnActionTypeKeyPress(object sender, KeyPressEventArgs e)
-        {   //====================================================================
-            // If it's a tab or an enter, move to the next column
-            //  Note that the next column is usually *not* Weight
-            // If it's ESC, undo the change
-            return;
-        }
-
-        private void OnActionWeightKeyPress(object sender, KeyPressEventArgs e)
-        {   //====================================================================
-            // If it's a tab or an enter, move to the next column
-            // If it's ESC, undo the change
-            return;
-        }   
-
-        private void MakeNewLine()
-        {   //====================================================================
-            ListViewItem lvi = lstEmoteEditor.Items.Add("(new item)");
-            lvi.SubItems.Add("");
-            lvi.SubItems.Add("");
-            lvi.Selected = true;
-            EditSelectedItem(lvi, 0);
-            return;
-        }
-
-        private void OnEmoteEditorMouseUp(object sender, MouseEventArgs e)
-        {   //====================================================================
-            ListViewItem lvi = lstEmoteEditor.GetItemAt(e.X, e.Y);
-            if (null == lvi) {MakeNewLine(); return;}
-            ListViewItem.ListViewSubItem lvsi = lvi.GetSubItemAt(e.X, e.Y);
-            if (null == lvsi) return;
-            
-            int nCol = -1;
-            int nWidth = 0;
-            foreach (ColumnHeader col in lstEmoteEditor.Columns)
-            {
-                nWidth += col.Width;
-                if (nWidth > e.X)
-                {
-                    nCol = col.Index;
-                    break;
-                }
-            }
-            if (-1 == nCol) return;
-
-            EditSelectedItem(lvi, nCol);
-
-            return;
-        }
-
-        private void EditSelectedItem(ListViewItem lvi, int nCol)
-        {   //====================================================================
-            switch ((EditorColumns)nCol)
-            {
-                default:
-                    break; // How did this happen?!
-
-                case EditorColumns.Action:
-                    ShowTypeEditor(lvi.Index);
-                    break;
-
-                case EditorColumns.Weight:
-                    ShowWeightEditor(lvi.Index);
-                    break;
-
-                case EditorColumns.Text:
-                    ShowDetailsEditor(lvi.Index);
-                    break;
-            }
-            return;
-        }
-
-        private void ShowDetailsEditor(int nRow)
-        {   //====================================================================
-            if (null == (EmoteLine)lstEmoteEditor.Items[nRow].Tag) return;
-            switch (((EmoteLine)lstEmoteEditor.Items[nRow].Tag).Channel)
-            {
-                default:
-                    return; // Unknown line type. Might actually even be UNKNOWN
-
-                case EmoteLine.LineType.Say:
-                case EmoteLine.LineType.RP:
-                case EmoteLine.LineType.Raid:
-                case EmoteLine.LineType.Local:
-                case EmoteLine.LineType.LFF:
-                case EmoteLine.LineType.Fellowship:
-                case EmoteLine.LineType.UserChannel1:
-                case EmoteLine.LineType.UserChannel2:
-                case EmoteLine.LineType.UserChannel3:
-                case EmoteLine.LineType.COMMAND:
-                    {
-                    // Show the edit box
-                    ListViewItem lvi = lstEmoteEditor.Items[nRow];
-                    ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
-
-                    Point p = lstEmoteEditor.Location;
-                    p.X += lvsi.Bounds.X; p.Y += lvsi.Bounds.Y;
-
-                    txtActionDetails.Location = p; 
-                    txtActionDetails.Height   = lvsi.Bounds.Height;
-                    txtActionDetails.Width    = lstEmoteEditor.Columns[(int)EditorColumns.Text].Width;
-                    txtActionDetails.Text     = lvsi.Text;
-                    txtActionDetails.Tag      = lvi.Index;
-                    txtActionDetails.Visible  = true;
-                    txtActionDetails.BringToFront();
-                    txtActionDetails.Focus();
-                    break;
-                    }
-
-                case EmoteLine.LineType.KEY:
-                    // Show a dialog asking for a key
-                    break;
-
-                case EmoteLine.LineType.LOTROFUNCTION:
-                    {
-                    // Show the menu of functions
-                    ListViewItem lvi = lstEmoteEditor.Items[nRow];
-                    ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
-                    Point p = lstEmoteEditor.Location;
-                    p.X += lvsi.Bounds.X; p.Y += lvsi.Bounds.Y;
-                    mnuLOTROCommands.Show(this, p) ;
-                    break;
-                    }
-            }
-            return;
-        }
-
-        private void ShowWeightEditor(int nRow)
-        {   //====================================================================
+            //throw new NotImplementedException();
             return;
         }
 
@@ -220,55 +65,131 @@ namespace LotroMusicManager
             Point p = lstEmoteEditor.Location;
             p.X += lvsi.Bounds.X; p.Y += lvsi.Bounds.Y;
 
-            cmbActionType.Location = p;
-            cmbActionType.Height   = lvsi.Bounds.Height;
-            cmbActionType.Width    = lstEmoteEditor.Columns[(int)EditorColumns.Action].Width;
-            cmbActionType.Tag      = lvi.Index;
-            cmbActionType.SelectedIndex = -1;
-            
-            foreach (NamedEmoteLine nel in cmbActionType.Items)
+            mnuActions.Tag = nRow;
+            mnuActions.Show(this, p);
+            return;
+        }
+
+        private void OnActionSelected(object sender, EventArgs e)
+        {   //====================================================================
+            ToolStripItem tsi = (ToolStripItem)sender;
+            switch ((MacroAction.ActionType)tsi.Tag)
             {
-                if (lvi.Tag != null && nel.Type == ((EmoteLine)lvi.Tag).Channel)
-                {
-                    cmbActionType.SelectedItem = nel;
+                case MacroAction.ActionType.UNKNOWN:
+                    // Weird.
+                    #if DEBUG
+                        //TODO: Some type of ASSERT
+                    #endif 
                     break;
+
+                case MacroAction.ActionType.SAY:
+                    AddSayAction();
+                    break;
+
+                case MacroAction.ActionType.KEY:
+                    AddKeyAction();
+                    break;
+
+                case MacroAction.ActionType.COMMAND:
+                    // Do nothing. We don't care about this one.
+                    break;
+            }
+            return;
+        }
+
+        private void AddKeyAction()
+        {   //====================================================================
+            int n = _macro.AddAction(new MacroActionKey());
+            ListViewItem lvi = lstEmoteEditor.Items.Add(_macro.Actions[n].Describe());
+            ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
+            _macro.Actions[n].Edit();
+            return;
+        }
+
+        private void AddSayAction()
+        {   //====================================================================
+            int n = _macro.AddAction(new MacroActionSay()); 
+            MacroAction ma = _macro.Actions[n];
+            ma.Edit();
+            lstEmoteEditor.Items.Add(new ListViewItem(new string[] {ma.DescribeType(), ma.Describe()}));
+            return;
+        }
+
+        private void AddBindingCommandAction()
+        {   //====================================================================
+            int n = _macro.AddAction(new MacroActionKeyBinding());
+            ListViewItem lvi = lstEmoteEditor.Items.Add(_macro.Actions[n].Describe());
+            ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
+            _macro.Actions[n].Edit();
+            return;
+        }
+
+        private void AddSlashCommandAction()
+        {   //====================================================================
+            int n = _macro.AddAction(new MacroActionSlashCommand());
+            ListViewItem lvi = lstEmoteEditor.Items.Add(_macro.Actions[n].Describe());
+            ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
+            _macro.Actions[n].Edit();
+            return;
+        }
+
+        private void OnPickCommand(object sender, EventArgs e)
+        {   //====================================================================
+            ToolStripItem tsi = (ToolStripItem)sender;
+            LotroCommand  lc  = (LotroCommand)(tsi.Tag);
+            if (lc is LotroSlashCommand)
+            {
+                LotroSlashCommand lsc = (LotroSlashCommand)lc;
+                int n = _macro.AddAction(new MacroActionSlashCommand(lsc));
+                ListViewItem lvi = lstEmoteEditor.Items.Add(_macro.Actions[n].Describe());
+                ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
+                _macro.Actions[n].Edit();
+            }
+            else
+            if (lc is LotroBindingCommand)
+            {
+                LotroBindingCommand lbc = (LotroBindingCommand)lc;
+                int n = _macro.AddAction(new MacroActionKeyBinding(lbc));
+                ListViewItem lvi = lstEmoteEditor.Items.Add(_macro.Actions[n].Describe());
+                ListViewItem.ListViewSubItem lvsi = lvi.SubItems[(int)EditorColumns.Text];
+                _macro.Actions[n].Edit();
+
+            }
+            return;
+        }
+
+        private void OnAddActionItem(object sender, EventArgs e)
+        {   //====================================================================
+            // Show the menu of everything we can add
+            mnuActions.Show(btnAddItem.Owner, btnAddItem.Bounds.Location);
+        }
+
+
+        private void CreateMenus()
+        {   //====================================================================
+            mnuActions.Items.Clear();
+            ToolStripDropDownItem tsddiCommands = null;
+            foreach (MacroAction.ActionType cat in Enum.GetValues(typeof(MacroAction.ActionType)))
+            {
+                if (cat != MacroAction.ActionType.UNKNOWN)
+                {
+                    String strCat = Enum.GetName(typeof(MacroAction.ActionType), cat);
+                    ToolStripItem tsi = mnuActions.Items.Add(StringExtensions.ToTitleCase(strCat), null, OnActionSelected);
+                    tsi.Tag = cat;
+                    if (cat == MacroAction.ActionType.COMMAND) tsddiCommands = (ToolStripDropDownItem)tsi;
                 }
             }
-            cmbActionType.Visible  = true;
-            cmbActionType.Focus();
-            cmbActionType.BringToFront();
-            return;
-        }
+            if (null == tsddiCommands) return;
 
-        private void OnEmoteEditorTextKeyPress(object sender, KeyPressEventArgs e)
-        {   //====================================================================
-            // Handle tab, return, and escape
-            return;
-        }
-
-        private void OnEmoteEditorTextLoseFocus(object sender, EventArgs e)
-        {   //====================================================================
-            int nRow = (int)txtActionDetails.Tag; 
-            lstEmoteEditor.Items[nRow].SubItems[(int)EditorColumns.Text].Text = txtActionDetails.Text;
-            if (null != lstEmoteEditor.Items[nRow].Tag as EmoteLine)
-            {
-                ((EmoteLine)(lstEmoteEditor.Items[nRow].Tag)).Text = txtActionDetails.Text;
-            }
-            txtActionDetails.Visible = false;
-           return;
-        }
-
-        private void CreateCommandMenus()
-        {   //====================================================================
-            mnuLOTROCommands.Items.Clear();
+            //--------------------------------------------------------------------
             String[] astrCats = Enum.GetNames(typeof(LotroCommands.Categories));
             foreach (LotroCommands.Categories cat in Enum.GetValues(typeof(LotroCommands.Categories)))
             {
                 if (cat != LotroCommands.Categories.Unknown)
                 {
                     String strCatName = Enum.GetName(typeof(LotroCommands.Categories), cat);
-                    ToolStripItem tsi = mnuLOTROCommands.Items.Add(strCatName);
-                    ToolStripDropDownItem tsddi = tsi as ToolStripDropDownItem;
+                    ToolStripItem tsiCat = tsddiCommands.DropDownItems.Add(strCatName);
+                    ToolStripDropDownItem tsddi = (ToolStripDropDownItem)tsiCat;
                     foreach (LotroCommand lc in LotroCommands.Commands)
                     {
                         if (lc.Name != "" && lc.Category == cat)
@@ -282,20 +203,14 @@ namespace LotroMusicManager
             } // Loop over categories
             return;
         }
-
-        private void OnPickCommand(object sender, EventArgs e)
-        {   //====================================================================
-            lstEmoteEditor.SelectedItems[0].SubItems[(int)EditorColumns.Text].Text = ((LotroCommand)((ToolStripItem)sender).Tag).Description;
-            return;
-        }
     }
 
     // A data bag for the combo box
-    internal class NamedEmoteLine
+    internal class NamedMacroAction
     {
-        public String             Name {get; private set;}
-        public EmoteLine.LineType Type {get; private set;}
-        public NamedEmoteLine(EmoteLine.LineType type, String name)
+        public String                 Name {get; private set;}
+        public MacroAction.ActionType Type {get; private set;}
+        public NamedMacroAction(MacroAction.ActionType type, String name)
         {
             Type = type;
             Name = name;

@@ -40,6 +40,7 @@
             this.btnDeleteMenu = new System.Windows.Forms.ToolStripButton();
             this.tabsOptions = new System.Windows.Forms.TabControl();
             this.tpgGeneral = new System.Windows.Forms.TabPage();
+            this.chkHighlightABC = new System.Windows.Forms.CheckBox();
             this.chkAOT = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.trackOpacity = new System.Windows.Forms.TrackBar();
@@ -64,7 +65,6 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.imglEmotes = new System.Windows.Forms.ImageList(this.components);
-            this.chkHighlightABC = new System.Windows.Forms.CheckBox();
             toolsEmotes = new System.Windows.Forms.ToolStrip();
             toolsMenus = new System.Windows.Forms.ToolStrip();
             toolsEmotes.SuspendLayout();
@@ -194,6 +194,19 @@
             this.tpgGeneral.TabIndex = 0;
             this.tpgGeneral.Text = "General";
             this.tpgGeneral.UseVisualStyleBackColor = true;
+            // 
+            // chkHighlightABC
+            // 
+            this.chkHighlightABC.AutoSize = true;
+            this.chkHighlightABC.Checked = global::LotroMusicManager.Properties.Settings.Default.HighlightABC;
+            this.chkHighlightABC.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkHighlightABC.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::LotroMusicManager.Properties.Settings.Default, "HighlightABC", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkHighlightABC.Location = new System.Drawing.Point(8, 67);
+            this.chkHighlightABC.Name = "chkHighlightABC";
+            this.chkHighlightABC.Size = new System.Drawing.Size(136, 17);
+            this.chkHighlightABC.TabIndex = 2;
+            this.chkHighlightABC.Text = "Highlighting in ABC text";
+            this.chkHighlightABC.UseVisualStyleBackColor = true;
             // 
             // chkAOT
             // 
@@ -455,25 +468,13 @@
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.OnCancel);
             // 
             // imglEmotes
             // 
             this.imglEmotes.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imglEmotes.ImageSize = new System.Drawing.Size(16, 16);
             this.imglEmotes.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // chkHighlightABC
-            // 
-            this.chkHighlightABC.AutoSize = true;
-            this.chkHighlightABC.Checked = global::LotroMusicManager.Properties.Settings.Default.HighlightABC;
-            this.chkHighlightABC.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkHighlightABC.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::LotroMusicManager.Properties.Settings.Default, "HighlightABC", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkHighlightABC.Location = new System.Drawing.Point(8, 67);
-            this.chkHighlightABC.Name = "chkHighlightABC";
-            this.chkHighlightABC.Size = new System.Drawing.Size(136, 17);
-            this.chkHighlightABC.TabIndex = 2;
-            this.chkHighlightABC.Text = "Highlighting in ABC text";
-            this.chkHighlightABC.UseVisualStyleBackColor = true;
             // 
             // FormOptions
             // 
