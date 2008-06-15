@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace LotroMusicManager
 {
-    [Serializable]
+    [Serializable()]
     public class BuckyBits
     {   //====================================================================
         public Boolean Shift   {get; set;}
@@ -17,6 +17,7 @@ namespace LotroMusicManager
         public BuckyBits() {Shift = false; Control = false; Alt = false; Windows = false; return;}
     }
 
+    [Serializable()]
     public class MappedLotroCommand : LotroCommand
     {
         private static Object _lock = new Object();

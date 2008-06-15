@@ -149,5 +149,8 @@
     <Setting Name="HighlightABC" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Macros" Type="LotroMusicManager.MacroList" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

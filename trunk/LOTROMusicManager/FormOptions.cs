@@ -38,13 +38,6 @@ namespace LotroMusicManager
             return;
         }
 
-        private void OnNewEmote(object sender, EventArgs e)
-        {   //====================================================================
-            FormEditMacro frm = new FormEditMacro(this);
-            frm.ShowDialog();
-            return;
-        }
-
         private void OnCancel(object sender, EventArgs e)
         {
             _frmMain.Opacity = _dblInitialOpacity;

@@ -5,39 +5,23 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LotroMusicManager.Properties;
 
 namespace LotroMusicManager
 {
     public partial class FormMacroManager : Form
     {
-        private List<Macro> _macros = new List<Macro>();
         public FormMacroManager()
         {
             InitializeComponent();
 
-            CreateMenus();
-
-            Macro mac1 = new Macro("Minstrel Healing");
-                mac1.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("QUICKSLOT_10")));
-                mac1.AddAction(new MacroActionSay(MacroActionSay.Channel.Fellowship, "Healing ;target for ~650 in 2 seconds"));
-                mac1.AddAction(new MacroActionSay(MacroActionSay.Channel.Say, "/me reminds ;target of the strength of our purpose."));
-                mac1.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("SELECTION_LAST")));
-            Macro mac2 = new Macro("Captain Pulling");
-                mac2.AddAction(new MacroActionSlashCommand(new LotroSlashCommand("Pet Mode"), "guard")); 
-                mac2.AddAction(new MacroActionSlashCommand(new LotroSlashCommand("Pet Mode"), "assist off"));
-                mac2.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("ToggleTargetMark3")));
-                mac2.AddAction(new MacroActionSay( MacroActionSay.Channel.Fellowship, "Pulling the arrow...."));
-            Macro mac3 = new Macro("Loremaster CC");
-                mac3.AddAction(new MacroActionSay(MacroActionSay.Channel.Fellowship, "Mezzing ;target. You spank it, you tank it. Champions, this means you."));
-                mac3.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("QUICKSLOT_14")));
-
-            _macros.Add(mac1);
-            _macros.Add(mac2);
-            _macros.Add(mac3);
+            CreateMenus(); 
+            return;
         }
 
         private void OnLoad(object sender, EventArgs e)
         {   //====================================================================
+            CenterToParent();
             RefreshMacros();
             return;
         }
@@ -47,7 +31,7 @@ namespace LotroMusicManager
             //TODO: get this from saved properties
             lstMacros.Items.Clear();
             lstActions.Items.Clear();
-            foreach (Macro m in _macros) lstMacros.Items.Add(m);
+            foreach (Macro m in Settings.Default.Macros.Items) lstMacros.Items.Add(m);
         }
 
         private void OnSelectedMacroChanged(object sender, EventArgs e)
@@ -80,7 +64,7 @@ namespace LotroMusicManager
             if (strName == String.Empty) return;
 
             Macro mac = new Macro(strName);
-            _macros.Add(mac);
+            Settings.Default.Macros.Items.Add(mac);
 
             RefreshMacros();
             return;
@@ -117,7 +101,7 @@ namespace LotroMusicManager
         private void OnDeleteMacro(object sender, EventArgs e)
         {   //====================================================================
             if (lstMacros.SelectedItems.Count == 0) return;
-            _macros.Remove((Macro)lstMacros.SelectedItem);
+            Settings.Default.Macros.Items.Remove((Macro)lstMacros.SelectedItem);
             RefreshMacros();
             return;
         }
@@ -245,6 +229,25 @@ namespace LotroMusicManager
             ma.Edit();
             RefreshActions();
             return;            
+        }
+
+        private void OnAddMacroToToolbar(object sender, EventArgs e)
+        {   //====================================================================
+            if (lstMacros.SelectedIndex != -1)
+            {
+                ToolStripItem tsi = tsEditor.Items.Add(((Macro)lstMacros.SelectedItem).Name);
+                tsi.Tag = (Macro)lstMacros.SelectedItem;
+                tsi.Click += new EventHandler(OnToolbarClick);
+            }
+            return;
+        }
+
+        void OnToolbarClick(object sender, EventArgs e)
+        {   //====================================================================
+            ToolStripItem tsi = (ToolStripItem)sender;
+            Macro mac = (Macro)tsi.Tag;
+            //mac.Execute();
+            return;
         }
     }
     

@@ -63,6 +63,12 @@
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOK = new System.Windows.Forms.Button();
             this.mnuActions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuToolbarEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniAddMacro = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniAddStandardItems = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniAddSeparator = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniAddMacroChoice = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlToolbarEditor.SuspendLayout();
@@ -75,6 +81,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
             this.mnuActionList.SuspendLayout();
+            this.mnuToolbarEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -120,6 +127,7 @@
             // tsEditor
             // 
             this.tsEditor.AllowItemReorder = true;
+            this.tsEditor.ContextMenuStrip = this.mnuToolbarEditor;
             this.tsEditor.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsEditor.Location = new System.Drawing.Point(0, 0);
             this.tsEditor.Name = "tsEditor";
@@ -419,6 +427,49 @@
             this.mnuActions.Name = "mnuActions";
             this.mnuActions.Size = new System.Drawing.Size(61, 4);
             // 
+            // mnuToolbarEditor
+            // 
+            this.mnuToolbarEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniAddMacro,
+            this.mniAddStandardItems,
+            this.mniRemoveItem,
+            this.mniAddSeparator,
+            this.mniAddMacroChoice});
+            this.mnuToolbarEditor.Name = "mnuToolbarEditor";
+            this.mnuToolbarEditor.Size = new System.Drawing.Size(187, 114);
+            // 
+            // mniAddMacro
+            // 
+            this.mniAddMacro.Name = "mniAddMacro";
+            this.mniAddMacro.Size = new System.Drawing.Size(186, 22);
+            this.mniAddMacro.Text = "Add Macro";
+            this.mniAddMacro.Click += new System.EventHandler(this.OnAddMacroToToolbar);
+            // 
+            // mniAddStandardItems
+            // 
+            this.mniAddStandardItems.Name = "mniAddStandardItems";
+            this.mniAddStandardItems.Size = new System.Drawing.Size(186, 22);
+            this.mniAddStandardItems.Text = "Add Standard Item(s)";
+            this.mniAddStandardItems.Click += new System.EventHandler(this.OnAddMacroToToolbar);
+            // 
+            // mniRemoveItem
+            // 
+            this.mniRemoveItem.Name = "mniRemoveItem";
+            this.mniRemoveItem.Size = new System.Drawing.Size(186, 22);
+            this.mniRemoveItem.Text = "Remove Item";
+            // 
+            // mniAddSeparator
+            // 
+            this.mniAddSeparator.Name = "mniAddSeparator";
+            this.mniAddSeparator.Size = new System.Drawing.Size(186, 22);
+            this.mniAddSeparator.Text = "Add Separator";
+            // 
+            // mniAddMacroChoice
+            // 
+            this.mniAddMacroChoice.Name = "mniAddMacroChoice";
+            this.mniAddMacroChoice.Size = new System.Drawing.Size(186, 22);
+            this.mniAddMacroChoice.Text = "Add Macro Choice";
+            // 
             // FormMacroManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +494,7 @@
             this.tableLayoutPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.mnuActionList.ResumeLayout(false);
+            this.mnuToolbarEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -483,6 +535,12 @@
         private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip mnuActions;
+        private System.Windows.Forms.ContextMenuStrip mnuToolbarEditor;
+        private System.Windows.Forms.ToolStripMenuItem mniAddMacro;
+        private System.Windows.Forms.ToolStripMenuItem mniAddStandardItems;
+        private System.Windows.Forms.ToolStripMenuItem mniRemoveItem;
+        private System.Windows.Forms.ToolStripMenuItem mniAddSeparator;
+        private System.Windows.Forms.ToolStripMenuItem mniAddMacroChoice;
 
     }
 }
