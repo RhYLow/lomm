@@ -316,6 +316,7 @@ namespace LotroMusicManager
 	#endregion    
     }
 
+    [Serializable()]
     public class LotroCommand
     {
         public String                   Name           {get; set;}
@@ -323,13 +324,14 @@ namespace LotroMusicManager
         public String                   Description    {get; set;}
     }
 
+    [Serializable()]
     public class LotroSlashCommand : LotroCommand
     {   //====================================================================
-        public String   Command     {get; private set;}
-        public String   ArgumentTip {get; private set;}
-        public String[] AllowedArgs {get; private set;}
+        public String   Command     {get; set;}
+        public String   ArgumentTip {get; set;}
+        public String[] AllowedArgs {get; set;}
         
-        public SlashCommandType Type {get; private set;}
+        public SlashCommandType Type {get; set;}
         public enum SlashCommandType {UNKNOWN, NoArg, StringArg, ArgChoice}
 
         public LotroSlashCommand(String name)
@@ -355,6 +357,15 @@ namespace LotroMusicManager
             return;
         }
 
+        public LotroSlashCommand()
+        {
+            Command     = String.Empty;
+            ArgumentTip = String.Empty;
+            AllowedArgs = null;
+            Category    = LotroCommands.Categories.Unknown;
+            Description = String.Empty;
+            Name        = String.Empty;
+        }
         public LotroSlashCommand(LotroCommands.Categories category, String name, String description, String command)
         {   //--------------------------------------------------------------------
             // This is for slash commands with no arguments
@@ -393,12 +404,19 @@ namespace LotroMusicManager
         }
     }
 
+    [Serializable()]
     public class LotroBindingCommand : LotroCommand
     {
         public String     MapfileName    {get; set;}
         public short      MappedScanCode {get; set;}
         public BuckyBits  Bits           {get; set;}
 
+        public LotroBindingCommand()
+        {
+            MapfileName     = String.Empty;
+            MappedScanCode  = 0;
+            Bits            = new BuckyBits();
+        }
         public LotroBindingCommand(String mapfilename)
         {
             foreach (LotroCommand lc in LotroCommands.Commands)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Xml.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,11 @@ using System.Windows.Forms;
 // executing a Lotro "command" (as per LotroCommands.cs)
 namespace LotroMusicManager
 {
-    [Serializable]
+    [Serializable()]
+    [XmlInclude(typeof(MacroActionKey))]
+    [XmlInclude(typeof(MacroActionSay))]
+    [XmlInclude(typeof(MacroActionSlashCommand))]
+    [XmlInclude(typeof(MacroActionKeyBinding))]
     abstract public class MacroAction
     {
         public enum ActionType {UNKNOWN, 
@@ -18,8 +23,8 @@ namespace LotroMusicManager
                                 COMMAND,
                                 SAY};
         //--------------------------------------------------------------------
-        public ActionType Type      {get; protected set;}
-        public String     ErrorText {get; protected set;}
+        public ActionType Type      {get; set;}
+        public String     ErrorText {get; set;}
         
         public abstract bool  Execute();
         public virtual  bool  Edit(){return false;}
@@ -29,7 +34,7 @@ namespace LotroMusicManager
 
     }
 
-    [Serializable]
+    [Serializable()]
     public class MacroActionSay : MacroAction
     {//====================================================================
         private static Random _rand = new Random();
@@ -52,12 +57,13 @@ namespace LotroMusicManager
             Tribe,
             TribeOfficers
         };
+        [Serializable()]
         public class ChannelCommand
         {   //--------------------------------------------------------------------
             // Nested data bag to make the Channels array
-            public Channel Channel { get; private set; }
-            public String Command { get; private set; }
-            public String Name { get; private set; }
+            public Channel Channel {get; set;}
+            public String  Command {get; set;}
+            public String  Name    {get; set;}
             public ChannelCommand(Channel channel, String command, String name)
             {
                 Channel = channel;
@@ -87,16 +93,17 @@ namespace LotroMusicManager
     #endregion
 
     #region Weighted odds handling
+        [Serializable()]
         public class WeightedText
         {   //--------------------------------------------------------------------
             // Data bag to handle weighted odds of showing a line
-            public int Weight { get; set; }
-            public String Text { get; set; }
+            public int    Weight {get; set;}
+            public String Text   {get; set;}
             public WeightedText(int weight, String text) { Weight = weight; Text = text; return; }
             public WeightedText(String text) { Weight = 1; Text = text; return; }
             public WeightedText() { Weight = 1; Text = String.Empty; }
         }
-        public List<WeightedText> Lines { get; private set; }
+        public List<WeightedText> Lines { get; set; }
     #endregion    
     
         public MacroActionSay()
@@ -203,14 +210,14 @@ namespace LotroMusicManager
         }
     }
 
-    [Serializable]
+    [Serializable()]
     public class MacroActionKey : MacroAction
     {   //====================================================================
-        public SDK.VK Key       {get; private set;}
-        public bool   Shift     {get; private set;}
-        public bool   Control   {get; private set;}
-        public bool   Alt       {get; private set;}
-        public bool   Windows   {get; private set;}
+        public SDK.VK Key       {get; set;}
+        public bool   Shift     {get; set;}
+        public bool   Control   {get; set;}
+        public bool   Alt       {get; set;}
+        public bool   Windows   {get; set;}
         
         public MacroActionKey()
         {
@@ -276,10 +283,10 @@ namespace LotroMusicManager
         }
     }
 
-    [Serializable]
+    [Serializable()]
     public class MacroActionKeyBinding : MacroAction
     {   //====================================================================
-        public LotroBindingCommand Command {get; private set;}
+        public LotroBindingCommand Command {get; set;}
         
         public MacroActionKeyBinding()
         {
@@ -301,11 +308,11 @@ namespace LotroMusicManager
         }
     }
 
-    [Serializable]
+    [Serializable()]
     public class MacroActionSlashCommand : MacroAction
     {   //====================================================================
-        public LotroSlashCommand Command     {get; private set;}
-        public String            Arguments   {get; private set;}
+        public LotroSlashCommand Command     {get; set;}
+        public String            Arguments   {get; set;}
 
         public MacroActionSlashCommand()
         {
@@ -385,36 +392,33 @@ namespace LotroMusicManager
         }
     }
 
-    [Serializable]
+    [Serializable()]
     public class Macro
     {   //====================================================================
         public String Name      {get; set;}
         public String ErrorText {get; set;}
-
-        public List<MacroAction>              _actions {get; set;}
-        public ReadOnlyCollection<MacroAction> Actions 
-        {        get {return _actions.AsReadOnly();} 
-         private set {return;}}
-
-        public void ClearActions()                {_actions.Clear();}
-        public int  AddAction(MacroAction action) {_actions.Add(action); return _actions.Count - 1;}
         
-        public int  RemoveAction(int nIndex)      {_actions.RemoveAt(nIndex); return _actions.Count;}        
+        public List<MacroAction>              Actions {get; set;}
+
+        public void ClearActions()                {Actions.Clear();}
+        public int  AddAction(MacroAction action) {Actions.Add(action); return Actions.Count - 1;}
+        
+        public int  RemoveAction(int nIndex)      {Actions.RemoveAt(nIndex); return Actions.Count;}        
         public int  RemoveActions(int[] aIndex)   
         {
             // Remove from bottom to top
             Array.Sort(aIndex); Array.Reverse(aIndex); 
             foreach (int i in aIndex) RemoveAction(i); 
-            return _actions.Count;
+            return Actions.Count;
         }
 
         public void MoveUp(int nIndex)
         {   //====================================================================
             if (0 == nIndex) return;
 
-            MacroAction maSwap = _actions[nIndex];
-            _actions[nIndex] = _actions[nIndex - 1];
-            _actions[nIndex - 1] = maSwap;
+            MacroAction maSwap = Actions[nIndex];
+            Actions[nIndex] = Actions[nIndex - 1];
+            Actions[nIndex - 1] = maSwap;
             return;
         }
         public void MoveUp(int[] aIndex)
@@ -426,11 +430,11 @@ namespace LotroMusicManager
         }
         public void MoveDown(int nIndex)
         {   //--------------------------------------------------------------------
-            if (_actions.Count - 1 == nIndex) return;
+            if (Actions.Count - 1 == nIndex) return;
 
-            MacroAction maSwap = _actions[nIndex];
-            _actions[nIndex] = _actions[nIndex + 1];
-            _actions[nIndex + 1] = maSwap;
+            MacroAction maSwap = Actions[nIndex];
+            Actions[nIndex] = Actions[nIndex + 1];
+            Actions[nIndex + 1] = maSwap;
             return;
         }
         public void MoveDown(int[] aIndex)
@@ -446,20 +450,20 @@ namespace LotroMusicManager
         public Macro()
         {   //====================================================================
             Name = "";
-            _actions = new List<MacroAction>();
+            Actions = new List<MacroAction>();
             return;
         }
         public Macro(String name)
         {   //====================================================================
             Name = name;
-            _actions = new List<MacroAction>();
+            Actions = new List<MacroAction>();
             return;
         }
 
         public bool Execute()
         {   //--------------------------------------------------------------------
             ErrorText = String.Empty;
-            foreach (MacroAction action in _actions)
+            foreach (MacroAction action in Actions)
             {
                 if (!action.Execute()) 
                 {
@@ -469,5 +473,13 @@ namespace LotroMusicManager
             }
             return true;
         }
+    }
+
+    [Serializable()]
+    public class MacroList
+    {
+        public String Name {get; set;}
+        [XmlArray()] public List<Macro> Items {get; set;}
+        public MacroList() {Items = new List<Macro>(); Name = String.Empty;}
     }
 }

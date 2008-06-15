@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Xml.Serialization;
 using System.Text;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace LotroMusicManager
 {
@@ -60,6 +62,20 @@ namespace LotroMusicManager
             Char[]   aLF = {'\n'};
             String[] aLines = str.Split(aLF, StringSplitOptions.None);
             return String.Join(Environment.NewLine, aLines);
+        }   
+
+        public static string ToString(object o)
+        {   //====================================================================
+            // For testing serialization
+            StringBuilder sb = new StringBuilder();
+            XmlSerializer serializer = new XmlSerializer(o.GetType());
+            XmlRootAttribute root = new XmlRootAttribute(o.GetType().Name);
+            root.Namespace = "http://schemas.microsoft.com/crm/2006/WebServices";
+
+            TextWriter writer = new StringWriter(sb);
+            serializer.Serialize(writer, o);
+
+            return sb.ToString();
         }
 
     }

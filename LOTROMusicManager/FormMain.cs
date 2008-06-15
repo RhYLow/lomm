@@ -53,8 +53,8 @@ namespace LotroMusicManager
             InsertMenuItems(Settings.Default.Bestowals,  mniBestowals, OnEmote);
 
             // Auto-binding size or AOT causes all sorts of mess 
-            Size = (Size)Settings.Default.WindowSize;
-            TopMost = Settings.Default.AOT;
+            Size      = (Size)Settings.Default.WindowSize;
+            TopMost  = Settings.Default.AOT;
             Location = (Point)Settings.Default.WindowLocation;
 
             // Simulate a click on the "Title" column. Much more useful than starting with
@@ -82,13 +82,9 @@ namespace LotroMusicManager
 
             menustripMain.Left = 0;
             
-            //Macro mac = new Macro("Test Macro");
-            //mac.AddAction(new MacroActionSay(MacroAction.Channel.Say, "Some text"));
-            //mac.AddAction(new MacroActionBinding(LotroFunction.Functions["ToggleCraftingPanel"]));
-            //mac.Execute();
-            FormMacroManager fmm = new FormMacroManager();
-            fmm.ShowDialog();
-
+            //FormMacroManager fmm = new FormMacroManager();
+            //fmm.ShowDialog();
+            //CreateTestMacros();
 
             // Kick off the timer that makes LOTRO music play while LOMM has focus
             _focuser.Start();
@@ -96,6 +92,31 @@ namespace LotroMusicManager
             return;
         }
 
+        private void CreateTestMacros()
+        {   //====================================================================
+            Macro mac1 = new Macro("Minstrel Healing");
+                mac1.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("QUICKSLOT_10")));
+                mac1.AddAction(new MacroActionSay(MacroActionSay.Channel.Fellowship, "Healing ;target for ~650 in 2 seconds"));
+                mac1.AddAction(new MacroActionSay(MacroActionSay.Channel.Say, "/me reminds ;target of the strength of our purpose."));
+                mac1.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("SELECTION_LAST")));
+            Macro mac2 = new Macro("Captain Pulling");
+                mac2.AddAction(new MacroActionSlashCommand(new LotroSlashCommand("Pet Mode"), "guard")); 
+                mac2.AddAction(new MacroActionSlashCommand(new LotroSlashCommand("Pet Mode"), "assist off"));
+                mac2.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("ToggleTargetMark3")));
+                mac2.AddAction(new MacroActionSay( MacroActionSay.Channel.Fellowship, "Pulling the arrow...."));
+            Macro mac3 = new Macro("Loremaster CC");
+                mac3.AddAction(new MacroActionSay(MacroActionSay.Channel.Fellowship, "Mezzing ;target. You spank it, you tank it. Champions, this does mean you."));
+                mac3.AddAction(new MacroActionKeyBinding(new LotroBindingCommand("QUICKSLOT_14")));
+            
+            if (Settings.Default.Macros == null) Settings.Default.Macros = new MacroList();
+            Settings.Default.Macros.Name = DateTime.Now.ToShortTimeString();
+            Settings.Default.Macros.Items.Add(mac1);
+            Settings.Default.Macros.Items.Add(mac2);
+            Settings.Default.Macros.Items.Add(mac3);
+            Settings.Default.Save();
+
+            return;
+        }
 
         private void OnClosing(object sender, FormClosingEventArgs e)
         {//--------------------------------------------------------------------
