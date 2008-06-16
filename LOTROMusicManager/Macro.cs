@@ -302,8 +302,8 @@ namespace LotroMusicManager
         }
         public override bool Execute()
         {   //--------------------------------------------------------------------
-            if (null == Command || String.Empty == Command.Name || "" == String.Empty) return false;
-            RemoteController.ExecuteFunction(Command.Name);
+            if (null == Command || String.Empty == Command.MapfileName) return false;
+            RemoteController.ExecuteFunction(Command.MapfileName);
             return true;
         }
     }

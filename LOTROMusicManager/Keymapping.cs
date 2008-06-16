@@ -69,9 +69,9 @@ namespace LotroMusicManager
                 foreach (LotroCommand kc in LotroCommands.Commands)
                 {
                     
-                    if (kc is LotroBindingCommand && !_functions.ContainsKey(kc.Name)) 
+                    if (kc is LotroBindingCommand && !_functions.ContainsKey(((LotroBindingCommand)kc).MapfileName)) 
                     {
-                        _functions.Add(kc.Name, new MappedLotroCommand((LotroBindingCommand)kc));
+                        _functions.Add(((LotroBindingCommand)kc).MapfileName, new MappedLotroCommand((LotroBindingCommand)kc));
                     }
                 }
             }
