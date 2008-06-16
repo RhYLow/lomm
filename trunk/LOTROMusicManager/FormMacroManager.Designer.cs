@@ -33,6 +33,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlToolbarEditor = new System.Windows.Forms.Panel();
             this.tsEditor = new System.Windows.Forms.ToolStrip();
+            this.mnuToolbarEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mniAddSeparator = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniAddMacroChoice = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniAddStandardItems = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDelToolbar = new System.Windows.Forms.Button();
             this.btnRenameToolbar = new System.Windows.Forms.Button();
             this.btnAddToolbar = new System.Windows.Forms.Button();
@@ -48,6 +53,8 @@
             this.newMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniAddMacroToToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -63,15 +70,10 @@
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOK = new System.Windows.Forms.Button();
             this.mnuActions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuToolbarEditor = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mniAddMacro = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniAddStandardItems = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniAddSeparator = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniAddMacroChoice = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlToolbarEditor.SuspendLayout();
+            this.mnuToolbarEditor.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -81,7 +83,6 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.panel3.SuspendLayout();
             this.mnuActionList.SuspendLayout();
-            this.mnuToolbarEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -134,6 +135,47 @@
             this.tsEditor.Size = new System.Drawing.Size(436, 25);
             this.tsEditor.TabIndex = 0;
             this.tsEditor.Text = "toolStrip1";
+            // 
+            // mnuToolbarEditor
+            // 
+            this.mnuToolbarEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniAddSeparator,
+            this.mniAddMacroChoice,
+            this.mniRemoveItem,
+            this.mniAddStandardItems});
+            this.mnuToolbarEditor.Name = "mnuToolbarEditor";
+            this.mnuToolbarEditor.Size = new System.Drawing.Size(206, 92);
+            this.mnuToolbarEditor.Opening += new System.ComponentModel.CancelEventHandler(this.OnToolbarEditorMenuOpening);
+            // 
+            // mniAddSeparator
+            // 
+            this.mniAddSeparator.Name = "mniAddSeparator";
+            this.mniAddSeparator.Size = new System.Drawing.Size(205, 22);
+            this.mniAddSeparator.Text = "Add Separator";
+            this.mniAddSeparator.Click += new System.EventHandler(this.OnAddToolbarSeparator);
+            // 
+            // mniAddMacroChoice
+            // 
+            this.mniAddMacroChoice.Image = global::LotroMusicManager.Properties.Resources.table_multiple;
+            this.mniAddMacroChoice.Name = "mniAddMacroChoice";
+            this.mniAddMacroChoice.Size = new System.Drawing.Size(205, 22);
+            this.mniAddMacroChoice.Text = "Add Macro Choice";
+            // 
+            // mniRemoveItem
+            // 
+            this.mniRemoveItem.Image = global::LotroMusicManager.Properties.Resources.script_delete;
+            this.mniRemoveItem.Name = "mniRemoveItem";
+            this.mniRemoveItem.Size = new System.Drawing.Size(205, 22);
+            this.mniRemoveItem.Text = "Remove Item";
+            this.mniRemoveItem.Click += new System.EventHandler(this.OnRemoveToolbarItem);
+            // 
+            // mniAddStandardItems
+            // 
+            this.mniAddStandardItems.Image = global::LotroMusicManager.Properties.Resources.wand;
+            this.mniAddStandardItems.Name = "mniAddStandardItems";
+            this.mniAddStandardItems.Size = new System.Drawing.Size(205, 22);
+            this.mniAddStandardItems.Text = "Add Predefined Item(s)...";
+            this.mniAddStandardItems.Click += new System.EventHandler(this.OnAddMacroToToolbar);
             // 
             // btnDelToolbar
             // 
@@ -224,22 +266,26 @@
             // btnDelMacro
             // 
             this.btnDelMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelMacro.Location = new System.Drawing.Point(66, 4);
+            this.btnDelMacro.Image = global::LotroMusicManager.Properties.Resources.script_delete;
+            this.btnDelMacro.Location = new System.Drawing.Point(38, 4);
             this.btnDelMacro.Name = "btnDelMacro";
-            this.btnDelMacro.Size = new System.Drawing.Size(79, 23);
+            this.btnDelMacro.Size = new System.Drawing.Size(95, 23);
             this.btnDelMacro.TabIndex = 1;
             this.btnDelMacro.Text = "Delete Macro";
+            this.btnDelMacro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelMacro.UseVisualStyleBackColor = true;
             this.btnDelMacro.Click += new System.EventHandler(this.OnDeleteMacro);
             // 
             // btnNewMacro
             // 
             this.btnNewMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewMacro.Location = new System.Drawing.Point(151, 4);
+            this.btnNewMacro.Image = global::LotroMusicManager.Properties.Resources.script_add;
+            this.btnNewMacro.Location = new System.Drawing.Point(139, 4);
             this.btnNewMacro.Name = "btnNewMacro";
-            this.btnNewMacro.Size = new System.Drawing.Size(75, 23);
+            this.btnNewMacro.Size = new System.Drawing.Size(87, 23);
             this.btnNewMacro.TabIndex = 0;
             this.btnNewMacro.Text = "New Macro";
+            this.btnNewMacro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNewMacro.UseVisualStyleBackColor = true;
             this.btnNewMacro.Click += new System.EventHandler(this.OnNewMacro);
             // 
@@ -261,29 +307,48 @@
             this.mnuMacroList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newMacroToolStripMenuItem,
             this.deleteMacroToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.toolStripSeparator2,
+            this.mniAddMacroToToolbar});
             this.mnuMacroList.Name = "mnuMacroList";
-            this.mnuMacroList.Size = new System.Drawing.Size(155, 70);
+            this.mnuMacroList.Size = new System.Drawing.Size(192, 98);
+            this.mnuMacroList.Opening += new System.ComponentModel.CancelEventHandler(this.OnMacroListMenuOpening);
             // 
             // newMacroToolStripMenuItem
             // 
+            this.newMacroToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.script_add;
             this.newMacroToolStripMenuItem.Name = "newMacroToolStripMenuItem";
-            this.newMacroToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.newMacroToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.newMacroToolStripMenuItem.Text = "New Macro";
             // 
             // deleteMacroToolStripMenuItem
             // 
+            this.deleteMacroToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.script_delete;
             this.deleteMacroToolStripMenuItem.Name = "deleteMacroToolStripMenuItem";
-            this.deleteMacroToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.deleteMacroToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.deleteMacroToolStripMenuItem.Text = "Delete Macro";
             this.deleteMacroToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteMacro);
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Image = global::LotroMusicManager.Properties.Resources.script_edit;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.toolStripMenuItem1.Text = "Rename Macro";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.OnRenameMacro);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(188, 6);
+            // 
+            // mniAddMacroToToolbar
+            // 
+            this.mniAddMacroToToolbar.Image = global::LotroMusicManager.Properties.Resources.script_link;
+            this.mniAddMacroToToolbar.Name = "mniAddMacroToToolbar";
+            this.mniAddMacroToToolbar.Size = new System.Drawing.Size(191, 22);
+            this.mniAddMacroToToolbar.Text = "Add Macro to Toolbar";
+            this.mniAddMacroToToolbar.Click += new System.EventHandler(this.OnAddMacroToToolbar);
             // 
             // tableLayoutPanel3
             // 
@@ -325,22 +390,26 @@
             // 
             // btnDelAction
             // 
-            this.btnDelAction.Location = new System.Drawing.Point(161, 2);
+            this.btnDelAction.Image = global::LotroMusicManager.Properties.Resources.cog_delete;
+            this.btnDelAction.Location = new System.Drawing.Point(122, 2);
             this.btnDelAction.Name = "btnDelAction";
-            this.btnDelAction.Size = new System.Drawing.Size(75, 23);
+            this.btnDelAction.Size = new System.Drawing.Size(99, 23);
             this.btnDelAction.TabIndex = 1;
             this.btnDelAction.Text = "Delete Action";
+            this.btnDelAction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelAction.UseVisualStyleBackColor = true;
             this.btnDelAction.Click += new System.EventHandler(this.OnDeleteAction);
             // 
             // btnAddAction
             // 
             this.btnAddAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddAction.Location = new System.Drawing.Point(242, 3);
+            this.btnAddAction.Image = global::LotroMusicManager.Properties.Resources.cog_add;
+            this.btnAddAction.Location = new System.Drawing.Point(227, 3);
             this.btnAddAction.Name = "btnAddAction";
-            this.btnAddAction.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAction.Size = new System.Drawing.Size(90, 23);
             this.btnAddAction.TabIndex = 0;
             this.btnAddAction.Text = "Add Action";
+            this.btnAddAction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddAction.UseVisualStyleBackColor = true;
             this.btnAddAction.Click += new System.EventHandler(this.OnNewAction);
             // 
@@ -368,9 +437,11 @@
             this.moveDownToolStripMenuItem});
             this.mnuActionList.Name = "mnuActionList";
             this.mnuActionList.Size = new System.Drawing.Size(204, 120);
+            this.mnuActionList.Opening += new System.ComponentModel.CancelEventHandler(this.OnActionListMenuOpening);
             // 
             // addActionToolStripMenuItem
             // 
+            this.addActionToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.cog_add;
             this.addActionToolStripMenuItem.Name = "addActionToolStripMenuItem";
             this.addActionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.addActionToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
@@ -378,12 +449,14 @@
             // 
             // editActionToolStripMenuItem
             // 
+            this.editActionToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.cog_edit;
             this.editActionToolStripMenuItem.Name = "editActionToolStripMenuItem";
             this.editActionToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.editActionToolStripMenuItem.Text = "Edit Action";
             // 
             // deleteActionToolStripMenuItem
             // 
+            this.deleteActionToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.cog_delete;
             this.deleteActionToolStripMenuItem.Name = "deleteActionToolStripMenuItem";
             this.deleteActionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteActionToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
@@ -397,6 +470,7 @@
             // 
             // moveUpToolStripMenuItem
             // 
+            this.moveUpToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.arrow_up;
             this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
             this.moveUpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
             this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
@@ -405,6 +479,7 @@
             // 
             // moveDownToolStripMenuItem
             // 
+            this.moveDownToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.arrow_down;
             this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
             this.moveDownToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
             this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
@@ -427,56 +502,16 @@
             this.mnuActions.Name = "mnuActions";
             this.mnuActions.Size = new System.Drawing.Size(61, 4);
             // 
-            // mnuToolbarEditor
-            // 
-            this.mnuToolbarEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniAddMacro,
-            this.mniAddStandardItems,
-            this.mniRemoveItem,
-            this.mniAddSeparator,
-            this.mniAddMacroChoice});
-            this.mnuToolbarEditor.Name = "mnuToolbarEditor";
-            this.mnuToolbarEditor.Size = new System.Drawing.Size(187, 114);
-            // 
-            // mniAddMacro
-            // 
-            this.mniAddMacro.Name = "mniAddMacro";
-            this.mniAddMacro.Size = new System.Drawing.Size(186, 22);
-            this.mniAddMacro.Text = "Add Macro";
-            this.mniAddMacro.Click += new System.EventHandler(this.OnAddMacroToToolbar);
-            // 
-            // mniAddStandardItems
-            // 
-            this.mniAddStandardItems.Name = "mniAddStandardItems";
-            this.mniAddStandardItems.Size = new System.Drawing.Size(186, 22);
-            this.mniAddStandardItems.Text = "Add Standard Item(s)";
-            this.mniAddStandardItems.Click += new System.EventHandler(this.OnAddMacroToToolbar);
-            // 
-            // mniRemoveItem
-            // 
-            this.mniRemoveItem.Name = "mniRemoveItem";
-            this.mniRemoveItem.Size = new System.Drawing.Size(186, 22);
-            this.mniRemoveItem.Text = "Remove Item";
-            // 
-            // mniAddSeparator
-            // 
-            this.mniAddSeparator.Name = "mniAddSeparator";
-            this.mniAddSeparator.Size = new System.Drawing.Size(186, 22);
-            this.mniAddSeparator.Text = "Add Separator";
-            // 
-            // mniAddMacroChoice
-            // 
-            this.mniAddMacroChoice.Name = "mniAddMacroChoice";
-            this.mniAddMacroChoice.Size = new System.Drawing.Size(186, 22);
-            this.mniAddMacroChoice.Text = "Add Macro Choice";
-            // 
             // FormMacroManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 526);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimizeBox = false;
             this.Name = "FormMacroManager";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Macro Manager";
             this.Load += new System.EventHandler(this.OnLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -484,6 +519,7 @@
             this.panel1.PerformLayout();
             this.pnlToolbarEditor.ResumeLayout(false);
             this.pnlToolbarEditor.PerformLayout();
+            this.mnuToolbarEditor.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
@@ -494,7 +530,6 @@
             this.tableLayoutPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.mnuActionList.ResumeLayout(false);
-            this.mnuToolbarEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -536,11 +571,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip mnuActions;
         private System.Windows.Forms.ContextMenuStrip mnuToolbarEditor;
-        private System.Windows.Forms.ToolStripMenuItem mniAddMacro;
         private System.Windows.Forms.ToolStripMenuItem mniAddStandardItems;
         private System.Windows.Forms.ToolStripMenuItem mniRemoveItem;
         private System.Windows.Forms.ToolStripMenuItem mniAddSeparator;
         private System.Windows.Forms.ToolStripMenuItem mniAddMacroChoice;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mniAddMacroToToolbar;
 
     }
 }

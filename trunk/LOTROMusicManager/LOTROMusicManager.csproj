@@ -230,6 +230,29 @@
     <Content Include="Help\LOTRO Commands - non-emote %28Book 13%29.txt" />
     <Content Include="Help\lotro.keymap %28book 12%29.txt" />
     <Content Include="Help\lotro.keymap %28book 13%29.txt" />
+    <Content Include="Resources\Separator.ico" />
+    <None Include="Resources\SilkIcons\table_multiple.png" />
+    <None Include="Resources\SilkIcons\wand.png" />
+    <None Include="Resources\SilkIcons\arrow_down.png" />
+    <None Include="Resources\SilkIcons\arrow_up.png" />
+    <None Include="Resources\SilkIcons\cog_edit.png" />
+    <None Include="Resources\SilkIcons\script_edit.png" />
+    <None Include="Resources\SilkIcons\script_link.png" />
+    <None Include="Resources\SilkIcons\cog_add.png" />
+    <None Include="Resources\SilkIcons\cog_delete.png" />
+    <None Include="Resources\SilkIcons\script_add.png" />
+    <None Include="Resources\SilkIcons\script_delete.png" />
+    <None Include="Resources\SilkIcons\comment.png" />
+    <None Include="Resources\SilkIcons\control_fastforward_blue.png" />
+    <None Include="Resources\SilkIcons\control_pause_blue.png" />
+    <None Include="Resources\SilkIcons\control_stop_blue.png" />
+    <None Include="Resources\SilkIcons\control_play_blue.png" />
+    <None Include="Resources\SilkIcons\plugin.png" />
+    <None Include="Resources\SilkIcons\book_open.png" />
+    <None Include="Resources\SilkIcons\help.png" />
+    <None Include="Resources\SilkIcons\wrench.png" />
+    <None Include="Resources\SilkIcons\script_gear.png" />
+    <None Include="Resources\SilkIcons\arrow_refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LOMMSplitButton\Control_LOMMSplitButton.csproj">

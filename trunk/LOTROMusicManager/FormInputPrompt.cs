@@ -25,5 +25,13 @@ namespace LotroMusicManager
             lbl.Text = strPrompt;
             txt.Text = strDefault;
         }
+
+        private void OnLoad(object sender, EventArgs e)
+        {   //====================================================================
+            int nWidth = lbl.Right + lbl.Left;
+            if (nWidth > Width) Width = nWidth;
+            CenterToParent();
+            return;
+        }
     }
 }

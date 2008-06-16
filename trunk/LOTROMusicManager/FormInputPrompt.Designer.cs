@@ -92,6 +92,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Enter Text";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.OnLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

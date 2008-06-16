@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cboChannels = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -187,9 +187,9 @@
             // 
             // LineWeight
             // 
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = "1";
-            this.LineWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = "1";
+            this.LineWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.LineWeight.HeaderText = "Weight";
             this.LineWeight.MaxInputLength = 3;
             this.LineWeight.Name = "LineWeight";
@@ -216,7 +216,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cboChannels);
+            this.MinimizeBox = false;
             this.Name = "FormActionEditSay";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Edit \"Say\" Action";
             this.Load += new System.EventHandler(this.OnLoad);
             this.mnuListLines.ResumeLayout(false);

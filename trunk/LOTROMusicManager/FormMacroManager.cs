@@ -123,6 +123,7 @@ namespace LotroMusicManager
         {   //====================================================================
             if (lstMacros.SelectedItems.Count == 0) return;
             ((Macro)lstMacros.SelectedItem).Name = FormInputPrompt.GetInput("Rename Macro", "New name:", ((Macro)lstMacros.SelectedItem).Name);
+            RefreshMacros();
             return;
         }
 
@@ -246,9 +247,62 @@ namespace LotroMusicManager
         {   //====================================================================
             ToolStripItem tsi = (ToolStripItem)sender;
             Macro mac = (Macro)tsi.Tag;
-            //mac.Execute();
+            mac.Execute();
             return;
         }
+
+        private void OnAddToolbarSeparator(object sender, EventArgs e)
+        {   //====================================================================
+            ToolStripDropDownItem tsddi = (ToolStripDropDownItem)sender;
+
+            Point pScreen = tsddi.Owner.Location;
+            Point pClient = tsEditor.PointToClient(pScreen);
+            ToolStripItem tsi = tsEditor.GetItemAt(pClient);
+            
+            ToolStripSeparator tss = new ToolStripSeparator();            
+            if (tsi == null)
+            {
+                tsEditor.Items.Add(tss);
+            }
+            else
+            {
+                tsEditor.Items.Insert(tsEditor.Items.IndexOf(tsi) + 1, tss);
+            }
+            
+            return;
+        }
+
+        private void OnRemoveToolbarItem(object sender, EventArgs e)
+        {   //====================================================================
+            ToolStripDropDownItem tsddi = (ToolStripDropDownItem)sender;
+
+            Point pScreen = tsddi.Owner.Location;
+            Point pClient = tsEditor.PointToClient(pScreen);
+            ToolStripItem tsi = tsEditor.GetItemAt(pClient);
+            if (tsi != null) tsEditor.Items.Remove(tsi);            
+            return;
+        }
+
+        private void OnMacroListMenuOpening(object sender, CancelEventArgs e)
+        {
+            // Is the selected item the one we context-clicked on? If not, select it
+            // Do we have a macro selected?
+            // If not, disable most items
+        }
+
+        private void OnActionListMenuOpening(object sender, CancelEventArgs e)
+        {
+            // Is the selected item the one we context-clicked on? If not, select it
+            // Do we have an action selected?
+            // If not, disable most items
+        }
+
+        private void OnToolbarEditorMenuOpening(object sender, CancelEventArgs e)
+        {
+            // Are we over an item?
+            // If not, disable most items            
+        }
+
     }
     
 }

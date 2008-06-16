@@ -117,77 +117,161 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ABCRef" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Help\ABCRef.rtf;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOMM" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\lomm.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NewABC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NewABC.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="AppTitle" xml:space="preserve">
-    <value>LOTRO Music Manager</value>
-  </data>
-  <data name="NoLOTROFound" xml:space="preserve">
-    <value>Unable to find LOTRO client to send commands</value>
-  </data>
-  <data name="SavePrompt" xml:space="preserve">
-    <value>The text in the ABC file has changed. Do you want to save the changes?</value>
-  </data>
-  <data name="ABCTagAuthor" xml:space="preserve">
-    <value>A:</value>
+  <data name="ABCTagUnit" xml:space="preserve">
+    <value>L:</value>
   </data>
   <data name="ABCTagHistory" xml:space="preserve">
     <value>H:</value>
   </data>
-  <data name="ABCTagKey" xml:space="preserve">
-    <value>K:</value>
-  </data>
   <data name="ABCTagLyrics" xml:space="preserve">
     <value>W:</value>
   </data>
-  <data name="ABCTagMeter" xml:space="preserve">
-    <value>M:</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="control_play_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\control_play_blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ABCTagNote" xml:space="preserve">
-    <value>N:</value>
+  <data name="SavePrompt" xml:space="preserve">
+    <value>The text in the ABC file has changed. Do you want to save the changes?</value>
   </data>
-  <data name="ABCTagOrigin" xml:space="preserve">
-    <value>O:</value>
-  </data>
-  <data name="ABCTagTempo" xml:space="preserve">
-    <value>Q:</value>
-  </data>
-  <data name="ABCTagTitle" xml:space="preserve">
-    <value>T:</value>
-  </data>
-  <data name="ABCTagTranscriber" xml:space="preserve">
-    <value>Z:</value>
-  </data>
-  <data name="ABCTagUnit" xml:space="preserve">
-    <value>L:</value>
+  <data name="script_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\script_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MusicSubfolder" xml:space="preserve">
     <value>\The Lord of the Rings Online\music\</value>
   </data>
-  <data name="PlayFileCommand" xml:space="preserve">
-    <value>/play "{0}" {1}</value>
+  <data name="ABCTagNote" xml:space="preserve">
+    <value>N:</value>
   </data>
-  <data name="PlaySyncCommand" xml:space="preserve">
-    <value>/play "{0}" {1} sync</value>
+  <data name="cog_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\cog_delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wrench" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\wrench.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="book_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\book_open.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="script_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\script_delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ABCTagMeter" xml:space="preserve">
+    <value>M:</value>
+  </data>
+  <data name="ABCTagTitle" xml:space="preserve">
+    <value>T:</value>
+  </data>
+  <data name="wand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\wand.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOMM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\lomm.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\arrow_up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\arrow_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="control_fastforward_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\control_fastforward_blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ABCTagTranscriber" xml:space="preserve">
+    <value>Z:</value>
+  </data>
+  <data name="comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\comment.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="page_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\page_save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="control_pause_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\control_pause_blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plugin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\plugin.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ABCTagOrigin" xml:space="preserve">
+    <value>O:</value>
+  </data>
+  <data name="resultset_next" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\resultset_next.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ABCTagKey" xml:space="preserve">
+    <value>K:</value>
+  </data>
+  <data name="cog_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\cog_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StartSyncCommand" xml:space="preserve">
     <value>/playstart</value>
   </data>
-  <data name="ToggleMusicCommand" xml:space="preserve">
-    <value>/music</value>
+  <data name="script_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\script_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="page_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\page_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="control_stop_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\control_stop_blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewABC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NewABC.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PlaySyncCommand" xml:space="preserve">
+    <value>/play "{0}" {1} sync</value>
+  </data>
+  <data name="ABCTagTempo" xml:space="preserve">
+    <value>Q:</value>
+  </data>
+  <data name="ABCRef" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Help\ABCRef.rtf;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="arrow_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\arrow_down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ABCTagIndex" xml:space="preserve">
     <value>X:</value>
+  </data>
+  <data name="page_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\page_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cog_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\cog_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NoLOTROFound" xml:space="preserve">
+    <value>Unable to find LOTRO client to send commands</value>
+  </data>
+  <data name="script_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\script_gear.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="page_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\page_delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayFileCommand" xml:space="preserve">
+    <value>/play "{0}" {1}</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>LOTRO Music Manager</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ToggleMusicCommand" xml:space="preserve">
+    <value>/music</value>
+  </data>
+  <data name="music" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\music.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ABCTagAuthor" xml:space="preserve">
+    <value>A:</value>
+  </data>
+  <data name="script_link" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\script_link.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="table_multiple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilkIcons\table_multiple.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
