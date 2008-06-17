@@ -271,6 +271,13 @@ namespace LotroMusicManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap cut {
+            get {
+                object obj = ResourceManager.GetObject("cut", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
@@ -347,9 +354,23 @@ namespace LotroMusicManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap page_copy {
+            get {
+                object obj = ResourceManager.GetObject("page_copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap page_delete {
             get {
                 object obj = ResourceManager.GetObject("page_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap page_paste {
+            get {
+                object obj = ResourceManager.GetObject("page_paste", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

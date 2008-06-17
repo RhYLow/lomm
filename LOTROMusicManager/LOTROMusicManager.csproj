@@ -231,6 +231,9 @@
     <Content Include="Help\lotro.keymap %28book 12%29.txt" />
     <Content Include="Help\lotro.keymap %28book 13%29.txt" />
     <Content Include="Resources\Separator.ico" />
+    <None Include="Resources\SilkIcons\page_paste.png" />
+    <None Include="Resources\SilkIcons\cut.png" />
+    <None Include="Resources\SilkIcons\page_copy.png" />
     <None Include="Resources\SilkIcons\table_multiple.png" />
     <None Include="Resources\SilkIcons\wand.png" />
     <None Include="Resources\SilkIcons\arrow_down.png" />
