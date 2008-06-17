@@ -96,6 +96,7 @@ namespace LotroMusicManager
             this.startGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startGroupandSayFirstLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbReciteChannel = new System.Windows.Forms.ComboBox();
+            this.imglstTabs = new System.Windows.Forms.ImageList(this.components);
             this.menustripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mniPlay = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +129,6 @@ namespace LotroMusicManager
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.menustripEmotes = new System.Windows.Forms.MenuStrip();
             this.emotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imglstTabs = new System.Windows.Forms.ImageList(this.components);
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -409,6 +409,7 @@ namespace LotroMusicManager
             // 
             // mniEditorPlay
             // 
+            this.mniEditorPlay.Image = global::LotroMusicManager.Properties.Resources.control_play_blue;
             this.mniEditorPlay.Name = "mniEditorPlay";
             this.mniEditorPlay.Size = new System.Drawing.Size(169, 22);
             this.mniEditorPlay.Text = "Play";
@@ -416,6 +417,7 @@ namespace LotroMusicManager
             // 
             // mniEditToggleMusic
             // 
+            this.mniEditToggleMusic.Image = global::LotroMusicManager.Properties.Resources.music;
             this.mniEditToggleMusic.Name = "mniEditToggleMusic";
             this.mniEditToggleMusic.Size = new System.Drawing.Size(169, 22);
             this.mniEditToggleMusic.Text = "Toggle Music";
@@ -423,6 +425,7 @@ namespace LotroMusicManager
             // 
             // mniEditStopPlaying
             // 
+            this.mniEditStopPlaying.Image = global::LotroMusicManager.Properties.Resources.control_stop_blue;
             this.mniEditStopPlaying.Name = "mniEditStopPlaying";
             this.mniEditStopPlaying.Size = new System.Drawing.Size(169, 22);
             this.mniEditStopPlaying.Text = "Stop Playing";
@@ -448,6 +451,7 @@ namespace LotroMusicManager
             // 
             // mniEditCopy
             // 
+            this.mniEditCopy.Image = global::LotroMusicManager.Properties.Resources.page_copy;
             this.mniEditCopy.Name = "mniEditCopy";
             this.mniEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.mniEditCopy.Size = new System.Drawing.Size(169, 22);
@@ -456,6 +460,7 @@ namespace LotroMusicManager
             // 
             // mniEditCut
             // 
+            this.mniEditCut.Image = global::LotroMusicManager.Properties.Resources.cut;
             this.mniEditCut.Name = "mniEditCut";
             this.mniEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.mniEditCut.Size = new System.Drawing.Size(169, 22);
@@ -464,6 +469,7 @@ namespace LotroMusicManager
             // 
             // mniEditPaste
             // 
+            this.mniEditPaste.Image = global::LotroMusicManager.Properties.Resources.page_paste;
             this.mniEditPaste.Name = "mniEditPaste";
             this.mniEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
             this.mniEditPaste.Size = new System.Drawing.Size(169, 22);
@@ -477,6 +483,7 @@ namespace LotroMusicManager
             // 
             // mniEditSave
             // 
+            this.mniEditSave.Image = global::LotroMusicManager.Properties.Resources.page_save;
             this.mniEditSave.Name = "mniEditSave";
             this.mniEditSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mniEditSave.Size = new System.Drawing.Size(169, 22);
@@ -492,6 +499,7 @@ namespace LotroMusicManager
             // 
             // mniEditUndoAll
             // 
+            this.mniEditUndoAll.Image = global::LotroMusicManager.Properties.Resources.arrow_refresh;
             this.mniEditUndoAll.Name = "mniEditUndoAll";
             this.mniEditUndoAll.Size = new System.Drawing.Size(169, 22);
             this.mniEditUndoAll.Text = "Undo All Changes";
@@ -678,7 +686,7 @@ namespace LotroMusicManager
             this.rtePerform.Name = "rtePerform";
             this.rtePerform.ReadOnly = true;
             this.rtePerform.ShowSelectionMargin = true;
-            this.rtePerform.Size = new System.Drawing.Size(396, 240);
+            this.rtePerform.Size = new System.Drawing.Size(396, 239);
             this.rtePerform.TabIndex = 1;
             this.rtePerform.Tags = new MarkedEditBox.RegexTag[] {
         ((MarkedEditBox.RegexTag)(resources.GetObject("rtePerform.Tags"))),
@@ -813,6 +821,13 @@ namespace LotroMusicManager
             this.cmbReciteChannel.Name = "cmbReciteChannel";
             this.cmbReciteChannel.Size = new System.Drawing.Size(121, 21);
             this.cmbReciteChannel.TabIndex = 1;
+            // 
+            // imglstTabs
+            // 
+            this.imglstTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglstTabs.ImageStream")));
+            this.imglstTabs.TransparentColor = System.Drawing.Color.Transparent;
+            this.imglstTabs.Images.SetKeyName(0, "page_edit.png");
+            this.imglstTabs.Images.SetKeyName(1, "comment.png");
             // 
             // menustripMain
             // 
@@ -1111,13 +1126,6 @@ namespace LotroMusicManager
             this.emotesToolStripMenuItem.Name = "emotesToolStripMenuItem";
             this.emotesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.emotesToolStripMenuItem.Text = "Emotes";
-            // 
-            // imglstTabs
-            // 
-            this.imglstTabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglstTabs.ImageStream")));
-            this.imglstTabs.TransparentColor = System.Drawing.Color.Transparent;
-            this.imglstTabs.Images.SetKeyName(0, "page_edit.png");
-            this.imglstTabs.Images.SetKeyName(1, "comment.png");
             // 
             // FormMain
             // 
