@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ using System.Windows.Forms;
 namespace LotroMusicManager
 {
     [Serializable()]
-    [XmlInclude(typeof(MacroActionKey))]
-    [XmlInclude(typeof(MacroActionSay))]
-    [XmlInclude(typeof(MacroActionSlashCommand))]
+    [XmlInclude(typeof(MacroActionKey))]             // Remember, kids, Good OO design == Bad C#!
+    [XmlInclude(typeof(MacroActionSay))]             // Therefore, let's just make the base class
+    [XmlInclude(typeof(MacroActionSlashCommand))]    // have to know about its specializations.
     [XmlInclude(typeof(MacroActionKeyBinding))]
     abstract public class MacroAction
     {
@@ -395,10 +396,19 @@ namespace LotroMusicManager
     [Serializable()]
     public class Macro
     {   //====================================================================
-        public String Name      {get; set;}
-        public String ErrorText {get; set;}
-        
-        public List<MacroAction>              Actions {get; set;}
+        public  String Name      {get; set;}
+        public  String ErrorText {get; set;}
+        public  String ID        {get {if (null == _id) _id = GetNewKey(); return _id;} set {_id = value;}} 
+        private String _id;      
+        public List<MacroAction> Actions {get; set;}
+        public  String ImagePath {get; set;}
+
+        private static String GetNewKey()
+        {
+            String s = String.Empty;
+            do {s = ObjectUtils.GenerateKey(8);} while (Properties.Settings.Default.Macros.Get(s) != null);
+            return s;
+        }
 
         public void ClearActions()                {Actions.Clear();}
         public int  AddAction(MacroAction action) {Actions.Add(action); return Actions.Count - 1;}
@@ -451,12 +461,14 @@ namespace LotroMusicManager
         {   //====================================================================
             Name = "";
             Actions = new List<MacroAction>();
+            ImagePath = String.Empty;
             return;
         }
         public Macro(String name)
         {   //====================================================================
             Name = name;
             Actions = new List<MacroAction>();
+            ImagePath = String.Empty;
             return;
         }
 
@@ -473,13 +485,36 @@ namespace LotroMusicManager
             }
             return true;
         }
+    
+        static public Macro FromID(String id)
+        {   //====================================================================
+            return Properties.Settings.Default.Macros.Get(id);
+        }
     }
 
     [Serializable()]
     public class MacroList
-    {
+    {   //====================================================================
+        // This is here to make it easy to put a collection of macros into the
+        // project properties.
         public String Name {get; set;}
-        [XmlArray()] public List<Macro> Items {get; set;}
-        public MacroList() {Items = new List<Macro>(); Name = String.Empty;}
+        [XmlArray()]  public List<Macro> Items {get; set;}
+        public MacroList()
+        {   //--------------------------------------------------------------------
+            Items  = new List<Macro>(); 
+            Name   = String.Empty; 
+        }
+
+        public void  Add(Macro mac)     {Items.Add(mac);} //TODO: Check for duplicates
+        public void  Remove(String id)  {Macro mac = Get(id); if (null != mac) Items.Remove(mac);}
+        public void  Remove(Macro mac)  {Items.Remove(mac);}
+        public Macro Get(String id)     
+        {
+            foreach (Macro mac in Items) if (mac.ID == id) return mac;
+            return null;
+        }
+        public Macro this[String id]    
+        {   get {return Get(id);} 
+            set {Macro mac = Get(id); if (null != mac) mac = value;}}
     }
 }

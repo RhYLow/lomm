@@ -112,17 +112,17 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMyLotroBandLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMyLotroBandLogin.Designer.cs">
-      <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormOptions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormOptions.Designer.cs">
       <DependentUpon>FormOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormToolbar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormToolbar.Designer.cs">
+      <DependentUpon>FormToolbar.cs</DependentUpon>
     </Compile>
     <Compile Include="Keymapping.cs" />
     <Compile Include="LotroCommands.cs" />
@@ -169,6 +169,7 @@
     <Compile Include="RemoteController.cs" />
     <Compile Include="SDK.cs" />
     <Compile Include="Song.cs" />
+    <Compile Include="Toolbar.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,12 +212,12 @@
       <DependentUpon>FormMacroManager.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMyLotroBandLogin.resx">
-      <DependentUpon>FormMyLotroBandLogin.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormOptions.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormToolbar.resx">
+      <DependentUpon>FormToolbar.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\NewABC.txt" />
@@ -231,6 +232,9 @@
     <Content Include="Help\lotro.keymap %28book 12%29.txt" />
     <Content Include="Help\lotro.keymap %28book 13%29.txt" />
     <Content Include="Resources\Separator.ico" />
+    <None Include="Resources\SilkIcons\textfield_add.png" />
+    <None Include="Resources\SilkIcons\arrow_branch.png" />
+    <None Include="Resources\SilkIcons\picture_add.png" />
     <None Include="Resources\SilkIcons\page_paste.png" />
     <None Include="Resources\SilkIcons\cut.png" />
     <None Include="Resources\SilkIcons\page_copy.png" />

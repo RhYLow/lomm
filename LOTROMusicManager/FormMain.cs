@@ -27,6 +27,8 @@ namespace LotroMusicManager
         protected FormABCRef _abcref = new FormABCRef();
 
         private LOTROFocuser _focuser = new LOTROFocuser();
+
+        private List<FormToolbar> _lstToolbars = new List<FormToolbar>();
     #endregion
 
     #region Form methods
@@ -47,10 +49,6 @@ namespace LotroMusicManager
 
             ReloadFileList();
             ShowSelectedFile();
-            InsertMenuItems(Settings.Default.Dances,     mniDances,    OnEmote);
-            InsertMenuItems(Settings.Default.Emotes,     mniEmotes,    OnEmote);
-            InsertMenuItems(Settings.Default.Moods,      mniMoods,     OnEmote);
-            InsertMenuItems(Settings.Default.Bestowals,  mniBestowals, OnEmote);
 
             // Auto-binding size or AOT causes all sorts of mess 
             Size      = (Size)Settings.Default.WindowSize;
@@ -85,6 +83,24 @@ namespace LotroMusicManager
             //FormMacroManager fmm = new FormMacroManager();
             //fmm.ShowDialog();
             //CreateTestMacros();
+            if (null == Settings.Default.Toolbars) Settings.Default.Toolbars = new LotroToolbarList();
+            if (0 == Settings.Default.Toolbars.Items.Count) 
+            {
+                LotroToolbar tb = new LotroToolbar();
+                tb.Name = "All Macros";
+                foreach (Macro mac in Properties.Settings.Default.Macros.Items) tb.Items.Add(new LotroToolbarItem(mac));
+                Settings.Default.Toolbars.Items.Add(tb);
+                Settings.Default.Save();
+            }
+
+            // Load up all the toolbars
+            foreach (LotroToolbar tb in Settings.Default.Toolbars.Items)
+            {
+                FormToolbar ft = new FormToolbar(tb);
+                _lstToolbars.Add(ft);
+                if (tb.Visible) ft.Show();
+            }
+            
 
             // Kick off the timer that makes LOTRO music play while LOMM has focus
             _focuser.Start();
@@ -110,10 +126,19 @@ namespace LotroMusicManager
             
             if (Settings.Default.Macros == null) Settings.Default.Macros = new MacroList();
             Settings.Default.Macros.Name = DateTime.Now.ToShortTimeString();
-            Settings.Default.Macros.Items.Add(mac1);
-            Settings.Default.Macros.Items.Add(mac2);
-            Settings.Default.Macros.Items.Add(mac3);
+            Settings.Default.Macros.Add(mac1);
+            Settings.Default.Macros.Add(mac2);
+            Settings.Default.Macros.Add(mac3);
             Settings.Default.Save();
+
+            LotroToolbar tb = new LotroToolbar();
+            tb.Items.Add(new LotroToolbarItem(mac1));
+            tb.Items.Add(new LotroToolbarItem(mac2));
+            tb.Items.Add(new LotroToolbarItem(LotroToolbarItem.ItemType.Separator));
+            tb.Items.Add(new LotroToolbarItem(mac3));
+
+            FormToolbar ft = new FormToolbar(tb);
+            ft.Show();
 
             return;
         }
@@ -558,46 +583,6 @@ namespace LotroMusicManager
         }               
     #endregion
 
-    #region Emotes
-        private void OnEmote(object sender, EventArgs e)
-        {//====================================================================
-            ToolStripItem item = (ToolStripItem)sender;
-            if (IsCommand(item.Text))
-            {
-                String s = item.Text;
-                // If it has a parens in it, remove it. That's a comment.
-                if (s.Contains("("))
-                {
-                    s = s.Remove(s.IndexOf('('));
-                }
-                RemoteController.SendText(s.Trim());
-                Activate(); // Keep focus for multiple emotes
-            }
-            else
-            {
-                // Windows tried to close the menu because something was selected. Re-show it/
-                ((ToolStripMenuItem)item.OwnerItem).ShowDropDown();
-            }
-            return;
-        }
-
-        private void InsertMenuItems(StringCollection src, ToolStripMenuItem mnu, EventHandler func)
-        {//--------------------------------------------------------------------
-            foreach (String s in src)
-            {
-                ToolStripMenuItem item = (ToolStripMenuItem)mnu.DropDownItems.Add(s, null, func);
-                item.DisplayStyle = ToolStripItemDisplayStyle.Text;
-
-                // If it isn't actually a command, make it look special
-                if (!IsCommand(s))
-                {
-                    item.BackColor = Color.FromKnownColor(KnownColor.ActiveBorder);
-                }
-            }
-            return;
-        }
-
-    #endregion
 
     #region Lyrics Playing
         private void ReciteLine()
@@ -786,13 +771,33 @@ namespace LotroMusicManager
         }
     #endregion
 
+    #region Macros and Toolbars
         private void OnManageMacros(object sender, EventArgs e)
         {
             FormMacroManager fmm = new FormMacroManager();
             fmm.ShowDialog();
             return;
         }
+    #endregion
 
+    #region Favorite Songs
+        private void OnFavoriteSongsDropDown(object sender, EventArgs e)
+        {
+        }
+
+        private void OnPlayFavoriteSong(object sender, EventArgs e)
+        {
+        }
+
+        private void OnSelectedFavoriteSongChange(object sender, EventArgs e)
+        {
+        }
+
+        private void OnFavoriteSongListChanged(object sender, ItemCheckedEventArgs e)
+        {
+        }
+
+    #endregion
     } // class
 
 } // namespace

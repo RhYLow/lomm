@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Security.Cryptography;
+using System.Xml.Serialization;
 using System.Text;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,22 @@ namespace LotroMusicManager
             serializer.Serialize(writer, o);
 
             return sb.ToString();
+        }
+
+    }
+
+    public class ObjectUtils
+    {
+        public static string GenerateKey(int nLen)
+        {   //====================================================================
+
+            RNGCryptoServiceProvider  crypto = new RNGCryptoServiceProvider();
+            byte[] data = new byte[nLen];
+            crypto.GetNonZeroBytes(data);
+            
+            StringBuilder result = new StringBuilder(nLen*2) ;
+            foreach(byte b in data) result.Append(((int)b).ToString("X2"));
+            return result.ToString();
         }
 
     }

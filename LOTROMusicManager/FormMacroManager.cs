@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +29,6 @@ namespace LotroMusicManager
 
         private void RefreshMacros()
         {   //====================================================================
-            //TODO: get this from saved properties
             lstMacros.Items.Clear();
             lstActions.Items.Clear();
             foreach (Macro m in Settings.Default.Macros.Items) lstMacros.Items.Add(m);
@@ -64,7 +64,7 @@ namespace LotroMusicManager
             if (strName == String.Empty) return;
 
             Macro mac = new Macro(strName);
-            Settings.Default.Macros.Items.Add(mac);
+            Settings.Default.Macros.Add(mac);
 
             RefreshMacros();
             return;
@@ -101,7 +101,7 @@ namespace LotroMusicManager
         private void OnDeleteMacro(object sender, EventArgs e)
         {   //====================================================================
             if (lstMacros.SelectedItems.Count == 0) return;
-            Settings.Default.Macros.Items.Remove((Macro)lstMacros.SelectedItem);
+            Settings.Default.Macros.Remove((Macro)lstMacros.SelectedItem);
             RefreshMacros();
             return;
         }
@@ -232,57 +232,6 @@ namespace LotroMusicManager
             return;            
         }
 
-        private void OnAddMacroToToolbar(object sender, EventArgs e)
-        {   //====================================================================
-            if (lstMacros.SelectedIndex != -1)
-            {
-                ToolStripItem tsi = tsEditor.Items.Add(((Macro)lstMacros.SelectedItem).Name);
-                tsi.Tag = (Macro)lstMacros.SelectedItem;
-                tsi.Click += new EventHandler(OnToolbarClick);
-            }
-            return;
-        }
-
-        void OnToolbarClick(object sender, EventArgs e)
-        {   //====================================================================
-            ToolStripItem tsi = (ToolStripItem)sender;
-            Macro mac = (Macro)tsi.Tag;
-            mac.Execute();
-            return;
-        }
-
-        private void OnAddToolbarSeparator(object sender, EventArgs e)
-        {   //====================================================================
-            ToolStripDropDownItem tsddi = (ToolStripDropDownItem)sender;
-
-            Point pScreen = tsddi.Owner.Location;
-            Point pClient = tsEditor.PointToClient(pScreen);
-            ToolStripItem tsi = tsEditor.GetItemAt(pClient);
-            
-            ToolStripSeparator tss = new ToolStripSeparator();            
-            if (tsi == null)
-            {
-                tsEditor.Items.Add(tss);
-            }
-            else
-            {
-                tsEditor.Items.Insert(tsEditor.Items.IndexOf(tsi) + 1, tss);
-            }
-            
-            return;
-        }
-
-        private void OnRemoveToolbarItem(object sender, EventArgs e)
-        {   //====================================================================
-            ToolStripDropDownItem tsddi = (ToolStripDropDownItem)sender;
-
-            Point pScreen = tsddi.Owner.Location;
-            Point pClient = tsEditor.PointToClient(pScreen);
-            ToolStripItem tsi = tsEditor.GetItemAt(pClient);
-            if (tsi != null) tsEditor.Items.Remove(tsi);            
-            return;
-        }
-
         private void OnMacroListMenuOpening(object sender, CancelEventArgs e)
         {
             // Is the selected item the one we context-clicked on? If not, select it
@@ -301,6 +250,28 @@ namespace LotroMusicManager
         {
             // Are we over an item?
             // If not, disable most items            
+        }
+
+        private void OnAssignIcon(object sender, EventArgs e)
+        {   //====================================================================
+            if (lstMacros.SelectedItems.Count == 0) return;
+            if (!(lstMacros.SelectedItem is Macro)) return;
+            Macro mac = ((Macro)lstMacros.SelectedItem);
+            if (mac.ImagePath != null && mac.ImagePath != String.Empty) 
+            {
+                FileInfo fi = new FileInfo(mac.ImagePath);
+                ofd.InitialDirectory = fi.Directory.FullName;
+                ofd.FileName = fi.Name;
+            }
+            else
+            {
+                ofd.InitialDirectory = Environment.CurrentDirectory;
+            }
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                mac.ImagePath = ofd.FileName;
+            }
+            return;
         }
 
     }
