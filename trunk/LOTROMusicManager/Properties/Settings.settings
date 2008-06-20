@@ -23,105 +23,6 @@
     <Setting Name="Opacity" Type="System.String" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="Dances" Type="System.Collections.Specialized.StringCollection" Scope="Application">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;(basic dances)&lt;/string&gt;
-  &lt;string&gt;  /dance&lt;/string&gt;
-  &lt;string&gt;  /dance1&lt;/string&gt;
-  &lt;string&gt;  /dance2&lt;/string&gt;
-  &lt;string&gt;  /dance3&lt;/string&gt;
-  &lt;string&gt;(learned dances)&lt;/string&gt;
-  &lt;string&gt;  /dance_hobbit &lt;/string&gt;
-  &lt;string&gt;  /dance_elf&lt;/string&gt;
-  &lt;string&gt;  /dance_man&lt;/string&gt;
-  &lt;string&gt;  /dance_dwarf&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="Emotes" Type="System.Collections.Specialized.StringCollection" Scope="Application">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;(meet and greet)&lt;/string&gt;
-  &lt;string&gt;  /wave&lt;/string&gt;
-  &lt;string&gt;  /salute&lt;/string&gt;
-  &lt;string&gt;  /bow&lt;/string&gt;
-  &lt;string&gt;  /curtsey&lt;/string&gt;
-  &lt;string&gt;  /hug&lt;/string&gt;
-  &lt;string&gt;  /kiss&lt;/string&gt;
-  &lt;string&gt;  /bye&lt;/string&gt;
-  &lt;string&gt;(converse)&lt;/string&gt;
-  &lt;string&gt;  /yes&lt;/string&gt;
-  &lt;string&gt;  /no&lt;/string&gt;
-  &lt;string&gt;  /shrug&lt;/string&gt;
-  &lt;string&gt;  /sorry&lt;/string&gt;
-  &lt;string&gt;  /thank&lt;/string&gt;
-  &lt;string&gt;(settle in)&lt;/string&gt;
-  &lt;string&gt;  /sit&lt;/string&gt;
-  &lt;string&gt;  /kneel&lt;/string&gt;
-  &lt;string&gt;  /liedown&lt;/string&gt;
-  &lt;string&gt;  /stretch&lt;/string&gt;
-  &lt;string&gt;  /smoke&lt;/string&gt;
-  &lt;string&gt;  /smoke1&lt;/string&gt;
-  &lt;string&gt;  /story&lt;/string&gt;
-  &lt;string&gt;  /talk&lt;/string&gt;
-  &lt;string&gt; /dustoff&lt;/string&gt;
-  &lt;string&gt;(respond)&lt;/string&gt;
-  &lt;string&gt;  /cheer&lt;/string&gt;
-  &lt;string&gt;  /clap&lt;/string&gt;
-  &lt;string&gt;  /laugh&lt;/string&gt;
-  &lt;string&gt;  /bored&lt;/string&gt;
-  &lt;string&gt;  /fidget&lt;/string&gt;
-  &lt;string&gt;  /impatient&lt;/string&gt;
-  &lt;string&gt;  /cry&lt;/string&gt;
-  &lt;string&gt;  /whistle&lt;/string&gt;
-  &lt;string&gt;  /yawn&lt;/string&gt;
-  &lt;string&gt;(hobbits)&lt;/string&gt;
-  &lt;string&gt;  /eat&lt;/string&gt;
-  &lt;string&gt;  /drink&lt;/string&gt;
-  &lt;string&gt;  /burp&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="Moods" Type="System.Collections.Specialized.StringCollection" Scope="Application">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;(moods)&lt;/string&gt;
-  &lt;string&gt;  /mood_angry&lt;/string&gt;
-  &lt;string&gt;  /mood_apprehensive&lt;/string&gt;
-  &lt;string&gt;  /mood_calm&lt;/string&gt;
-  &lt;string&gt;  /mood_confused&lt;/string&gt;
-  &lt;string&gt;  /mood_fearful&lt;/string&gt;
-  &lt;string&gt;  /mood_happy&lt;/string&gt;
-  &lt;string&gt;  /mood_mischievous&lt;/string&gt;
-  &lt;string&gt;  /mood_sad&lt;/string&gt;
-  &lt;string&gt;  /mood_sleepy&lt;/string&gt;
-  &lt;string&gt;  /mood_solemn&lt;/string&gt;
-  &lt;string&gt;  /mood_surprised&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="Bestowals" Type="System.Collections.Specialized.StringCollection" Scope="Application">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;Bestows an Emote&lt;/string&gt;
-  &lt;string&gt; /cheer (grants /firebreath - receive 100 - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /bow  (grants /heropose - receive 100 - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /laugh (grants /juggle - receive 200 - max 6/day)&lt;/string&gt;
-  &lt;string&gt; /salute (grants /swordsalute - receive 100 - max 5/day)&lt;/string&gt;
-  &lt;string&gt;Bestowes a Title&lt;/string&gt;
-  &lt;string&gt; /hug (grants The Adorable: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /flirt (grants The Alluring: 100 times  - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /confused (grants The Befuddling: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /kiss (grants The Beloved: 100 times - max 5/day) &lt;/string&gt;
-  &lt;string&gt; /bored (grants The Dull: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /beg (grants The Harrassed: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /thank (grants The Helpful: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /angry (grants The Infuriating: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /rude (grants The Insulted: 200 times - max 5?/day)&lt;/string&gt;
-  &lt;string&gt; /cower (grants The Intimidating: 40 times - max 2/day)&lt;/string&gt;
-  &lt;string&gt; /scold (grants The Naughty:  100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /mock (grants The Ridiculed: 100 times - max 5/day)&lt;/string&gt;
-  &lt;string&gt; /surrender (grants The Victorious: 40 times - max 2/day)&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
     <Setting Name="MillisWaitOnCommand" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">250</Value>
     </Setting>
@@ -130,15 +31,6 @@
     </Setting>
     <Setting Name="TagsPerform" Type="MarkedEditBox.RegexTagBag" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MyLotroBandLoginEmail" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MyLotroBandLoginPW" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MyLotroBandRememberLoginInformation" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="FocusTimeout" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">400</Value>
@@ -150,6 +42,9 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Macros" Type="LotroMusicManager.MacroList" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Toolbars" Type="LotroMusicManager.LotroToolbarList" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

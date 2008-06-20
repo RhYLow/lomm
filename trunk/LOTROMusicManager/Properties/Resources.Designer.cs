@@ -187,6 +187,13 @@ namespace LotroMusicManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap arrow_branch {
+            get {
+                object obj = ResourceManager.GetObject("arrow_branch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap arrow_down {
             get {
                 object obj = ResourceManager.GetObject("arrow_down", resourceCulture);
@@ -389,6 +396,13 @@ namespace LotroMusicManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap picture_add {
+            get {
+                object obj = ResourceManager.GetObject("picture_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to /play &quot;{0}&quot; {1}.
         /// </summary>
@@ -477,6 +491,13 @@ namespace LotroMusicManager.Properties {
         internal static System.Drawing.Bitmap table_multiple {
             get {
                 object obj = ResourceManager.GetObject("table_multiple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap textfield_add {
+            get {
+                object obj = ResourceManager.GetObject("textfield_add", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

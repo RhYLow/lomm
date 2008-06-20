@@ -53,6 +53,7 @@
             // 
             // cboChannels
             // 
+            this.cboChannels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboChannels.FormattingEnabled = true;
             this.cboChannels.Location = new System.Drawing.Point(71, 9);
             this.cboChannels.Name = "cboChannels";

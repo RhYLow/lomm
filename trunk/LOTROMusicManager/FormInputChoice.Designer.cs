@@ -47,6 +47,7 @@
             // 
             this.cmb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb.FormattingEnabled = true;
             this.cmb.Location = new System.Drawing.Point(16, 29);
             this.cmb.Name = "cmb";
