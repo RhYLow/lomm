@@ -6,6 +6,30 @@ using System.Text;
 
 namespace LotroMusicManager
 {
+    public class MacroChoiceItem
+    {
+        public String ID   {get; set;}
+        public String Name {get {return GetName();} private set {;}}
+
+        public MacroChoiceItem(String id)
+        {   //====================================================================
+            ID = id;
+            return;
+        }
+
+        public override string ToString()
+        {   //====================================================================
+            return Name;
+        }
+
+        private String GetName()
+        {   //--------------------------------------------------------------------
+            if (ID != null && ID != String.Empty) return (Macro.FromID(ID).Name);
+            return null;
+        }
+
+    }
+    
     [Serializable()]
     public class LotroToolbarItem
     {
