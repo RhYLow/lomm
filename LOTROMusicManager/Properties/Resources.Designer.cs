@@ -178,6 +178,13 @@ namespace LotroMusicManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to LOTRO Music Manager.
         /// </summary>
@@ -285,6 +292,13 @@ namespace LotroMusicManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
@@ -371,6 +385,13 @@ namespace LotroMusicManager.Properties {
         internal static System.Drawing.Bitmap page_delete {
             get {
                 object obj = ResourceManager.GetObject("page_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap page_edit {
+            get {
+                object obj = ResourceManager.GetObject("page_edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

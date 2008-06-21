@@ -35,12 +35,8 @@
             this.mniView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mniAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniAddSeparator = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mniAddDefaultItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniAddMacroChoice = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mniRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditMacroList = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +47,7 @@
             this.ts.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts.Location = new System.Drawing.Point(10, 0);
             this.ts.Name = "ts";
-            this.ts.Size = new System.Drawing.Size(34, 25);
+            this.ts.Size = new System.Drawing.Size(102, 25);
             this.ts.TabIndex = 0;
             // 
             // mnu
@@ -61,9 +57,10 @@
             this.mniView,
             this.toolStripSeparator1,
             this.mniAdd,
-            this.mniRemoveItem});
+            this.mniRemoveItem,
+            this.mniEditMacroList});
             this.mnu.Name = "contextMenuStrip1";
-            this.mnu.Size = new System.Drawing.Size(185, 98);
+            this.mnu.Size = new System.Drawing.Size(185, 142);
             this.mnu.Opening += new System.ComponentModel.CancelEventHandler(this.OnContextMenuOpening);
             // 
             // mniFlip
@@ -89,55 +86,26 @@
             // 
             // mniAdd
             // 
-            this.mniAdd.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniAddSeparator,
-            this.toolStripSeparator3,
-            this.mniAddDefaultItem,
-            this.mniAddMacroChoice,
-            this.toolStripSeparator4});
+            this.mniAdd.Image = global::LotroMusicManager.Properties.Resources.add;
             this.mniAdd.Name = "mniAdd";
             this.mniAdd.Size = new System.Drawing.Size(184, 22);
             this.mniAdd.Text = "Add";
             // 
-            // mniAddSeparator
-            // 
-            this.mniAddSeparator.Name = "mniAddSeparator";
-            this.mniAddSeparator.Size = new System.Drawing.Size(153, 22);
-            this.mniAddSeparator.Text = "Separator";
-            this.mniAddSeparator.Click += new System.EventHandler(this.OnAddSeparator);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(150, 6);
-            // 
-            // mniAddDefaultItem
-            // 
-            this.mniAddDefaultItem.Image = global::LotroMusicManager.Properties.Resources.wand;
-            this.mniAddDefaultItem.Name = "mniAddDefaultItem";
-            this.mniAddDefaultItem.Size = new System.Drawing.Size(153, 22);
-            this.mniAddDefaultItem.Text = "Default Items...";
-            this.mniAddDefaultItem.Click += new System.EventHandler(this.OnAddDefaultItems);
-            // 
-            // mniAddMacroChoice
-            // 
-            this.mniAddMacroChoice.Image = global::LotroMusicManager.Properties.Resources.textfield_add;
-            this.mniAddMacroChoice.Name = "mniAddMacroChoice";
-            this.mniAddMacroChoice.Size = new System.Drawing.Size(153, 22);
-            this.mniAddMacroChoice.Text = "Macro Selector";
-            this.mniAddMacroChoice.Click += new System.EventHandler(this.OnAddMacroSelector);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(150, 6);
-            // 
             // mniRemoveItem
             // 
+            this.mniRemoveItem.Image = global::LotroMusicManager.Properties.Resources.delete;
             this.mniRemoveItem.Name = "mniRemoveItem";
             this.mniRemoveItem.Size = new System.Drawing.Size(184, 22);
             this.mniRemoveItem.Text = "Remove Item";
             this.mniRemoveItem.Click += new System.EventHandler(this.OnRemoveItem);
+            // 
+            // mniEditMacroList
+            // 
+            this.mniEditMacroList.Image = global::LotroMusicManager.Properties.Resources.page_edit;
+            this.mniEditMacroList.Name = "mniEditMacroList";
+            this.mniEditMacroList.Size = new System.Drawing.Size(184, 22);
+            this.mniEditMacroList.Text = "Edit Macro List...";
+            this.mniEditMacroList.Click += new System.EventHandler(this.OnEditMacroList);
             // 
             // FormToolbar
             // 
@@ -176,12 +144,8 @@
         private System.Windows.Forms.ToolStripMenuItem mniFlip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mniAdd;
-        private System.Windows.Forms.ToolStripMenuItem mniAddSeparator;
         private System.Windows.Forms.ToolStripMenuItem mniRemoveItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem mniAddDefaultItem;
-        private System.Windows.Forms.ToolStripMenuItem mniAddMacroChoice;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem mniView;
+        private System.Windows.Forms.ToolStripMenuItem mniEditMacroList;
     }
 }
