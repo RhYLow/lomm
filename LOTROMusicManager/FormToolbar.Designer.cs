@@ -42,12 +42,13 @@
             // 
             // ts
             // 
+            this.ts.BackColor = System.Drawing.SystemColors.Window;
             this.ts.ContextMenuStrip = this.mnu;
             this.ts.Dock = System.Windows.Forms.DockStyle.None;
             this.ts.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts.Location = new System.Drawing.Point(10, 0);
             this.ts.Name = "ts";
-            this.ts.Size = new System.Drawing.Size(102, 25);
+            this.ts.Size = new System.Drawing.Size(34, 25);
             this.ts.TabIndex = 0;
             // 
             // mnu
@@ -60,7 +61,7 @@
             this.mniRemoveItem,
             this.mniEditMacroList});
             this.mnu.Name = "contextMenuStrip1";
-            this.mnu.Size = new System.Drawing.Size(185, 142);
+            this.mnu.Size = new System.Drawing.Size(185, 120);
             this.mnu.Opening += new System.ComponentModel.CancelEventHandler(this.OnContextMenuOpening);
             // 
             // mniFlip

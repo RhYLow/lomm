@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Text;
@@ -133,7 +135,7 @@ namespace LotroMusicManager
         }
     }
 
-    public class SongIndex
+    public class SongDetails
     {
         public String FileName      {get; set;}
         public String Title         {get; set;}
@@ -149,7 +151,7 @@ namespace LotroMusicManager
         public String Lyrics        {get; set;}
         public String Index         {get; set;}
         
-        public SongIndex()
+        public SongDetails()
         {
             FileName    = String.Empty;
             Index       = String.Empty;
@@ -164,6 +166,48 @@ namespace LotroMusicManager
             History     = String.Empty;
             Transcriber = String.Empty;
             Lyrics      = String.Empty;
+        }
+    }
+
+    [Serializable()]
+    public class FavoriteSongs
+    {
+        [XmlArray()] public List<FavoriteSong> Items {get; set;}
+        public FavoriteSongs() {Items = new List<FavoriteSong>();}
+    }
+
+    [Serializable()]
+    public class FavoriteSong
+    {
+                      public String FileName {get; set;}
+        [XmlIgnore()] public String SongName {get; set;}
+                      public String Index    {get; set;}
+        
+        public FavoriteSong()                                                        {FileName = String.Empty; SongName = String.Empty; Index = String.Empty;}
+        public FavoriteSong(String strFileName)                                      {FileName = strFileName;  SongName = String.Empty; Index = String.Empty;}
+        public FavoriteSong(String strFileName, String strIndex)                     {FileName = strFileName;  SongName = String.Empty; Index = strIndex;}
+        public FavoriteSong(String strFileName, String strIndex, String strSongName) {FileName = strFileName;  SongName = strSongName;  Index = strIndex;}
+        
+        // Value equals so we can just add and remove from the list
+        public override bool Equals(object obj)
+        {
+            if (!(obj is FavoriteSong)) return false;
+            return Equals((FavoriteSong)obj);
+        }
+
+        public bool Equals(FavoriteSong fav)
+        {
+            return (fav.FileName == FileName) && (fav.Index == Index);
+        }
+
+        public override int GetHashCode()
+        {
+            return FileName.GetHashCode() ^ Index.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return SongName + "\t   (" + FileName + " - " + Index + ")";
         }
     }
 }

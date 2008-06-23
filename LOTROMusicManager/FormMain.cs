@@ -42,6 +42,8 @@ namespace LotroMusicManager
 
         private void OnLoad(object sender, EventArgs e)
         {//--------------------------------------------------------------------
+            if (Settings.Default.FavoriteSongs == null) Settings.Default.FavoriteSongs = new FavoriteSongs();
+
             // Set up the sorting style we want in the list views
             lstFiles.Columns[0].Tag = SortType.TITLE;
             lstFiles.Columns[1].Tag = SortType.PATH; 
@@ -261,6 +263,10 @@ namespace LotroMusicManager
                     li.SubItems.Insert((int)SONG_COLUMN.Path,  new ListViewItem.ListViewSubItem(li, song.ShortName));
                     li.SubItems.Insert((int)SONG_COLUMN.Index, new ListViewItem.ListViewSubItem(li, song.Index));
                     li.ToolTipText = song.ToolTip;
+                    if (Settings.Default.FavoriteSongs != null && Settings.Default.FavoriteSongs.Items != null)
+                    {
+                        li.Checked = Settings.Default.FavoriteSongs.Items.Contains(new FavoriteSong(song.ShortName, song.Index));
+                    }
                     lstFiles.Items.Add(li);
                 }
             }
@@ -794,7 +800,22 @@ namespace LotroMusicManager
         }
 
         private void OnFavoriteSongListChanged(object sender, ItemCheckedEventArgs e)
-        {
+        {   //====================================================================
+            switch (e.Item.Checked)
+            {
+                case true:
+                    // Add the item to the list
+                    Settings.Default.FavoriteSongs.Items.Add(new FavoriteSong(e.Item.SubItems[(int)SONG_COLUMN.Path].Text, 
+                                                                              e.Item.SubItems[(int)SONG_COLUMN.Index].Text,
+                                                                              e.Item.SubItems[(int)SONG_COLUMN.Title].Text));
+                    break;
+
+                case false:
+                    // Remove from the list - title is irrelevant except for display, so we don't need to pass it
+                    Settings.Default.FavoriteSongs.Items.Remove(new FavoriteSong(e.Item.SubItems[(int)SONG_COLUMN.Path].Text, e.Item.SubItems[(int)SONG_COLUMN.Index].Text));
+                    break;
+            }
+            return;
         }
 
     #endregion

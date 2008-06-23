@@ -182,9 +182,9 @@ namespace LotroMusicManager
                             ts.Items.Add(tscb);
                             tscb.DropDownStyle = ComboBoxStyle.DropDownList;
                             tscb.ComboBox.DrawMode = DrawMode.OwnerDrawFixed;
-                            tscb.ComboBox.DrawItem += new DrawItemEventHandler(OnDrawMacroChoice);
                             tscb.Tag = tbi;
-                            tscb.Click += new EventHandler(OnMacroListClick);
+                            tscb.ToolTipText = tbi.Name;
+                            tscb.ComboBox.DrawItem += new DrawItemEventHandler(OnDrawMacroChoice);
                             tscb.DropDown += new EventHandler(OnMacroListDropDown);
                             tscb.DropDownClosed += new EventHandler(OnMacroListDropDownClosed);
                             break;
@@ -195,6 +195,9 @@ namespace LotroMusicManager
                             ComboButton cbobtn = new ComboButton();
                             ts.Items.Add(new ToolStripControlHost(cbobtn));
                             cbobtn.Button.Image = Properties.Resources.control_play_blue;
+                            cbobtn.ComboDrawMode = DrawMode.OwnerDrawFixed;
+                            cbobtn.BackColor = ts.BackColor;
+                            cbobtn.DrawItem += new EventHandler<DrawItemEventArgs>(OnDrawSongListItem);
                             cbobtn.ButtonClick += new EventHandler<EventArgs>(OnPlayFromFavoritesList);
                             cbobtn.DropDown += new EventHandler<EventArgs>(OnDropDownFavoritesList);                                                       
                             break;
@@ -202,6 +205,41 @@ namespace LotroMusicManager
                 }
             }
             SetBarSize();
+        }
+
+        void OnDrawSongListItem(object sender, DrawItemEventArgs e)
+        {   //====================================================================
+            if (e.Index == -1) return;
+            ComboButton  cb  = sender            as ComboButton;  if (cb == null)  return;
+            FavoriteSong fav = cb.Items[e.Index] as FavoriteSong; if (fav == null) return;
+
+            String strTitle     = fav.SongName + " ";
+            String strDetails   = fav.FileName + ": " + fav.Index;
+
+            Font   fontDetails  = new Font(cb.Font, FontStyle.Italic);
+            
+            int nTitleWidth   = TextRenderer.MeasureText(strTitle, cb.Font).Width;
+            int nDetailsWidth = TextRenderer.MeasureText(strDetails, fontDetails).Width;
+                nTitleWidth   = Math.Min(nTitleWidth, e.Bounds.Width);
+                nDetailsWidth = Math.Min(nDetailsWidth, e.Bounds.Width - nTitleWidth);
+            RectangleF rectfTitle   = new RectangleF(e.Bounds.X, e.Bounds.Y, nTitleWidth, e.Bounds.Height);
+            RectangleF rectfDetails = new RectangleF(e.Bounds.X + nTitleWidth, e.Bounds.Y, nDetailsWidth, e.Bounds.Height);
+
+            // Now we do the "simple" drawing.. as if anything wrapping the GDI is ever simple
+            Brush  brTitle      = new SolidBrush(cb.ForeColor);
+            Brush  brDetails    = new SolidBrush(Color.FromKnownColor(KnownColor.DarkGray));
+            Brush  brBackground = new SolidBrush((e.State & DrawItemState.Selected) == DrawItemState.Selected ? Color.FromKnownColor(KnownColor.Highlight) : cb.BackColor);
+            e.Graphics.FillRectangle(brBackground, e.Bounds);
+
+            e.Graphics.DrawString(strTitle,   cb.Font,     brTitle,   rectfTitle);
+            e.Graphics.DrawString(strDetails, fontDetails, brDetails, rectfDetails);
+
+            if (null != brTitle)      brTitle.Dispose();
+            if (null != brDetails)    brDetails.Dispose();
+            if (null != fontDetails)  fontDetails.Dispose();
+            if (null != brBackground) brBackground.Dispose();
+
+            return;            
         }
 
         void OnDrawMacroChoice(object sender, DrawItemEventArgs e)
@@ -213,20 +251,60 @@ namespace LotroMusicManager
 
             MacroChoiceItem mci = (MacroChoiceItem)cbo.Items[e.Index];
             Macro mac = Macro.FromID(mci.ID);
+            
+            System.Diagnostics.Debug.WriteLine("Index: " + e.Index + " Macro: " + mac.Name + " --- " + e.State);
 
-            // Draw the icon if we have one
-            if (mac.ImagePath != null && mac.ImagePath != String.Empty)
+            if ((e.State & DrawItemState.ComboBoxEdit) == DrawItemState.ComboBoxEdit)
             {
-                Image img = new Bitmap(mac.ImagePath);
-                Rectangle rectImage = new Rectangle(e.Bounds.X + 1, e.Bounds.Y + 1, e.Bounds.X + 17, e.Bounds.Y + 17);
-                e.Graphics.DrawImage(img, rectImage);
-            }
+                // In the edit area
+                Rectangle rectText = new Rectangle(e.Bounds.X + 1, e.Bounds.Y + 1, e.Bounds.Width - 1, e.Bounds.Height - 1);
+                Brush brushBg = new SolidBrush(Color.FromKnownColor(KnownColor.White));
+                e.Graphics.FillRectangle(brushBg, rectText);
 
-            // And draw the text
-            Rectangle rectText = new Rectangle(e.Bounds.X + 19, e.Bounds.Y + 1, e.Bounds.Width - 19, e.Bounds.Height - 1);
-            Brush brush = new SolidBrush((e.State & DrawItemState.Selected) == DrawItemState.Selected ? Color.FromKnownColor(KnownColor.Highlight) : cbo.BackColor);
-            e.Graphics.FillRectangle(brush, rectText);
-            e.Graphics.DrawString(mac.Name, e.Font, new SolidBrush(Color.Black), rectText);
+                LotroToolbarItem ltbi = (LotroToolbarItem)GetTSIForScreenPoint(cbo.Parent.PointToScreen(new Point(cbo.Bounds.X, cbo.Bounds.Y))).Tag;
+                if (ltbi != null)
+                {
+                    Font  fontText  = null;
+                    Brush brushText = null;
+                    try
+                    {
+                        //LotroToolbarItem ltbi = (LotroToolbarItem)((ToolStripControlHost)((Control)sender).Parent).Tag;
+                        fontText  = new Font(e.Font, FontStyle.Italic);
+                        brushText = new SolidBrush(Color.Blue);
+                        e.Graphics.DrawString(ltbi.Name, fontText, brushText, rectText);
+                    }
+                    catch {}
+                    finally 
+                    {
+                        if (fontText  != null) fontText.Dispose();
+                        if (brushText != null) brushText.Dispose();
+                        if (brushBg   != null) brushBg.Dispose();
+                    }
+                }
+            }
+            else
+            {
+                // In the dropdown menu
+                // Draw the icon if we have one
+                if (mac.ImagePath != null && mac.ImagePath != String.Empty)
+                {
+                    Image img = new Bitmap(mac.ImagePath);
+                    Rectangle rectImage = new Rectangle(e.Bounds.X + 1, e.Bounds.Y + 1, e.Bounds.X + 17, e.Bounds.Y + 17);
+                    e.Graphics.DrawImage(img, rectImage);
+                    img.Dispose();
+                }
+                // And draw the text
+                Rectangle rectText = new Rectangle(e.Bounds.X + 19, e.Bounds.Y + 1, e.Bounds.Width - 19, e.Bounds.Height - 1);
+                Brush brush = null;
+                try
+                {
+                    brush = new SolidBrush((e.State & DrawItemState.Selected) == DrawItemState.Selected ? Color.FromKnownColor(KnownColor.Highlight) : cbo.BackColor);
+                    e.Graphics.FillRectangle(brush, rectText);
+                    e.Graphics.DrawString(mac.Name, e.Font, new SolidBrush(Color.Black), rectText);
+                }
+                catch {}
+                finally {brush.Dispose();}
+            }
 
             // Do the focus stuff if needed
             e.DrawFocusRectangle();
@@ -259,20 +337,23 @@ namespace LotroMusicManager
             return; 
         }
 
-        void OnMacroListClick(object sender, EventArgs e)
-        {   //====================================================================
-            if (!(sender is ToolStripComboBox)) return;
-            ToolStripComboBox tscb = (ToolStripComboBox)sender;
-            if (tscb.SelectedIndex == -1) return;
-            if (!(tscb.SelectedItem is Macro)) return;
-            Macro mac = (Macro)tscb.SelectedItem;
-            mac.Execute();
-            return;            
-        }
-
         void OnDropDownFavoritesList(object sender, EventArgs e)
         {   //====================================================================
             // Get the list of favorites
+            ComboButtonControl.ComboButton cb = sender as ComboButtonControl.ComboButton;
+            if (cb == null) return;
+            cb.Items.Clear();
+            int nDropDownWidth = cb.Width;
+            foreach (FavoriteSong song in Properties.Settings.Default.FavoriteSongs.Items)
+            {
+                cb.Items.Add(song);
+            
+                int nTextWidth = (TextRenderer.MeasureText(song.ToString(), cb.ComboBox.Font)).Width;
+                if (nTextWidth > nDropDownWidth) nDropDownWidth = nTextWidth;
+                System.Diagnostics.Debug.WriteLine("Width: " + nTextWidth.ToString() + " - " + song.ToString());
+            }
+            cb.DropDownWidth = nDropDownWidth;
+            System.Diagnostics.Debug.WriteLine("DropDownWidth = " + cb.DropDownWidth.ToString());
             return;
         }
 
@@ -299,9 +380,9 @@ namespace LotroMusicManager
 
         void OnPlayFromFavoritesList(object sender, EventArgs e)
         {   //====================================================================
-            if (!(sender is ComboButton)) return;
-            ComboButton cb = (ComboButton)sender;
-            //TODO: Play the selected song
+            ComboButtonControl.ComboButton cb = sender as ComboButtonControl.ComboButton; if (cb == null) return;
+            FavoriteSong fav = cb.SelectedItem as FavoriteSong; if (fav == null) return;
+            RemoteController.SendText(String.Format(Properties.Resources.PlayFileCommand, fav.FileName, fav.Index));
             return;
         }
 
@@ -394,9 +475,10 @@ namespace LotroMusicManager
         {   //====================================================================
             ToolStripItem tsi = (ToolStripItem)sender;
             LotroToolbarItem ltbi = (LotroToolbarItem)tsi.Tag;
-            FormListSelector frm = new FormListSelector(ltbi.Choices);
+            FormListSelector frm = new FormListSelector(ltbi.Name, ltbi.Choices);
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                ltbi.Name    = frm.Name;
                 ltbi.Choices = frm.CheckedItems;
             }
             return;

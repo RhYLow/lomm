@@ -189,5 +189,16 @@ namespace LotroMusicManager.Properties {
                 this["Toolbars"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::LotroMusicManager.FavoriteSongs FavoriteSongs {
+            get {
+                return ((global::LotroMusicManager.FavoriteSongs)(this["FavoriteSongs"]));
+            }
+            set {
+                this["FavoriteSongs"] = value;
+            }
+        }
     }
 }

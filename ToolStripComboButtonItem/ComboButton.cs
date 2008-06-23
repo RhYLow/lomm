@@ -13,10 +13,14 @@ namespace ComboButtonControl
         public enum ComboButtonLayoutType {ComboBeforeButton, ButtonBeforeCombo};
         [Category("Layout")] public ComboButtonLayoutType ComboButtonOrder {get; set;}
 
+        public override Color BackColor {get {return base.BackColor;} set {cbo.BackColor = btn.BackColor = base.BackColor = value;}}
+        
         // Act like a combobox
-        [Category("Data")]       public ComboBox.ObjectCollection Items {get {return cbo.Items;} set {cbo.Items.Clear(); foreach (Object o in value) cbo.Items.Add(o);}}
-        [Browsable(false)] public Object SelectedItem  {get {return cbo.SelectedItem;}  set {cbo.SelectedItem  = value;}}
-        [Browsable(false)] public int    SelectedIndex {get {return cbo.SelectedIndex;} set {cbo.SelectedIndex = value;}}
+        [Category("Data")]      public ComboBox.ObjectCollection Items         {get {return cbo.Items;}         set {cbo.Items.Clear(); foreach (Object o in value) cbo.Items.Add(o);}}
+        [Category("Behavior")]  public int                       DropDownWidth {get {return cbo.DropDownWidth;} set {cbo.DropDownWidth = value;}}
+        [Category("Behavior")]  public DrawMode                  ComboDrawMode {get {return cbo.DrawMode;}      set {cbo.DrawMode = value;}}
+        [Browsable(false)]      public Object                    SelectedItem  {get {return cbo.SelectedItem;}  set {cbo.SelectedItem  = value;}}
+        [Browsable(false)]      public int                       SelectedIndex {get {return cbo.SelectedIndex;} set {cbo.SelectedIndex = value;}}
         
         // And act like a button
         [Category("Appearance")] public Image  ButtonImage {get {return btn.Image;} set {btn.Image = value;}}
