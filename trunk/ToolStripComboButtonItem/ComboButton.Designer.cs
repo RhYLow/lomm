@@ -48,6 +48,7 @@
             // cbo
             // 
             this.cbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo.DropDownWidth = 800;
             this.cbo.FormattingEnabled = true;
             this.cbo.Location = new System.Drawing.Point(0, 1);
             this.cbo.Margin = new System.Windows.Forms.Padding(0);

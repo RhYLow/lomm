@@ -11,16 +11,19 @@ namespace LotroMusicManager
     public partial class FormListSelector : Form
     {
         public String[] CheckedItems {get; private set;}
+        public new String   Name         {get; private set;}
 
-        public FormListSelector(String[] astrIDs)
+        public FormListSelector(String name, String[] astrIDs)
         {   //====================================================================
             InitializeComponent();
             CheckedItems = astrIDs;
+            Name = name;
             return;
         }
 
         private void OnLoad(object sender, EventArgs e)
         {   //====================================================================
+            CenterToScreen();
             // All macros with their images so we can check/uncheck them
             imglst.Images.Clear();
             foreach (Macro mac in Properties.Settings.Default.Macros.Items)
@@ -44,7 +47,10 @@ namespace LotroMusicManager
                     alvi[0].Checked = true;
                 }
             }
+            
+            txtName.Text = Name;
 
+            lst.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             return;
         }
 
@@ -56,6 +62,7 @@ namespace LotroMusicManager
                 if (lvi.Checked) strings.Add(lvi.Name);
             }
             CheckedItems = strings.ToArray();
+            Name = txtName.Text;
             return;
         }
     }

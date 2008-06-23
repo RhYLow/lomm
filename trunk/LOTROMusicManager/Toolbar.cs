@@ -37,6 +37,7 @@ namespace LotroMusicManager
         public String   ID       {get; set;}
         public ItemType Type     {get; set;}
         public String[] Choices  {get; set;}
+        public String   Name     {get; set;}
 
         public LotroToolbarItem()                                {Type = ItemType.UNKNOWN; ID = String.Empty; Choices = null;}
         public LotroToolbarItem(Macro mac)                       {Type = ItemType.Macro;   ID = mac.ID;       Choices = null;}

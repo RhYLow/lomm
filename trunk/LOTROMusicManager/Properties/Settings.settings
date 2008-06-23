@@ -47,5 +47,8 @@
     <Setting Name="Toolbars" Type="LotroMusicManager.LotroToolbarList" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="FavoriteSongs" Type="LotroMusicManager.FavoriteSongs" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
