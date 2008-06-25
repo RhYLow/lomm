@@ -10,7 +10,8 @@ namespace LotroMusicManager
 {
     public partial class FormInputChoice : Form
     {
-        public String Value {get {return cmb.Text;} private set {;}}
+        public String Value         {get {return cmb.Text;}          private set {;}}
+        public int    SelectedIndex {get {return cmb.SelectedIndex;} private set {;}}
 
         public static String GetInput(String strTitle, String strPrompt, String[] astr, String strDefault)
         {   //====================================================================
