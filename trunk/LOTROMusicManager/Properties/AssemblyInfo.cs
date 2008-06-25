@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("LOTRO Music and Macros")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Herndon Morris, Inc")]
-[assembly: AssemblyProduct("LOTRO Music Manager")]
+[assembly: AssemblyProduct("LOTRO Music and Macros")]
 [assembly: AssemblyCopyright("Copyright ©  2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyVersion("2.0.1.0")]
+[assembly: AssemblyFileVersion("2.0.1.0")]
