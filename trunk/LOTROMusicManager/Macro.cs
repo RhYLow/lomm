@@ -1,10 +1,7 @@
-﻿using System.Runtime.Serialization;
-using System.Xml.Serialization;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 //====================================================================
 // These classes organize "macros", which are collections of "actions"
@@ -405,8 +402,14 @@ namespace LotroMusicManager
 
         private static String GetNewKey()
         {
-            String s = String.Empty;
-            do {s = ObjectUtils.GenerateKey(8);} while (Properties.Settings.Default.Macros.Get(s) != null);
+            
+            // Make a *safe* copy of the ids... we can't touch the accessor (which the List<Macros> will do)
+            List<String> lstIDs = new List<string>();
+            foreach (Macro mac in Properties.Settings.Default.Macros.Items) lstIDs.Add(mac._id); 
+            
+            String s;
+            do {s = ObjectUtils.GenerateKey(8);} while (lstIDs.Contains(s));
+
             return s;
         }
 
