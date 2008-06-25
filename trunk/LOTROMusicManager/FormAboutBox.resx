@@ -126,13 +126,17 @@
   <metadata name="labelProductName.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="richTextBox1.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="rtf.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <data name="richTextBox1.Text" xml:space="preserve">
+  <data name="rtf.Text" xml:space="preserve">
     <value>By Seth Morris, aka Carborunda Riverside of the Stoors, Slug-Squasher, Breakfast Connoisseur, and Minstrel of Brandywine
 
 See http://code.google.com/p/lomm/ for updates.
-See http://forums.lotro.com/ for more on the music system in LOTRO.</value>
+See http://forums.lotro.com/ for more on the music system in LOTRO.
+
+Contains icons from Mark James' excellent "Silk" Icon set
+http://www.famfamfam.com/lab/icons/silk/
+</value>
   </data>
 </root>
