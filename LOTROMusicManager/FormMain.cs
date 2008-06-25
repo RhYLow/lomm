@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Diagnostics;
 using LotroMusicManager.Properties;
-using System.Configuration;
 //using LotroMusicManager.MyLotroBand;
-using System.Collections.Specialized;
 
 namespace LotroMusicManager
 {
@@ -168,7 +165,7 @@ namespace LotroMusicManager
 
         private void OnHelpAbout(object sender, EventArgs e)
         {//====================================================================
-            AboutBox ab = new AboutBox();
+            FormAboutBox ab = new FormAboutBox();
             ab.ShowDialog();
             return;
         }
@@ -782,6 +779,83 @@ namespace LotroMusicManager
         {
             FormMacroManager fmm = new FormMacroManager();
             fmm.ShowDialog();
+
+            // Need to refresh toolbars if 
+            // - macro deleted
+            // - icon changed
+            // - macro renamed
+            if (fmm.NeedToolbarsRefreshed) foreach (FormToolbar frm in _lstToolbars) frm.RefreshToolbarItems();
+            return;
+        }
+
+            private void OnViewMenuOpening(object sender, EventArgs e)
+        {   //====================================================================
+            mniViewToolbars.DropDown.Items.Clear();
+            foreach (LotroToolbar ltb in Settings.Default.Toolbars.Items)
+            {
+                ToolStripMenuItem tsmi = new ToolStripMenuItem();
+                tsmi.Text = ltb.Name;
+                tsmi.Tag = ltb;
+                tsmi.Checked = ltb.Visible;
+                tsmi.Click += new EventHandler(OnViewToolbarsItemClick);
+                mniViewToolbars.DropDown.Items.Add(tsmi);
+            }
+            return;
+        }
+
+        void OnResetAllToolbars(object sender, EventArgs e)
+        {   //====================================================================
+            if (MessageBox.Show("Really reset all toolbar locations? This will move every toolbar.", "Reset all toolbars", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                int n = 0; // Increasing offset to cascade the toolbars
+                foreach (FormToolbar ft in _lstToolbars) {ft.Location = ft.Toolbar.Location = new Point(Location.X + n, Location.Y + n); n += 20;}
+            }
+            return;
+        }
+
+        void OnRemoveToolbar(object sender, EventArgs e)
+        {   //====================================================================
+            String[] astr = new String[Settings.Default.Toolbars.Items.Count];
+            for (int i = 0; i < Settings.Default.Toolbars.Items.Count; i += 1) astr[i] = Settings.Default.Toolbars.Items[i].Name;
+            FormInputChoice frm = new FormInputChoice("Remove toolbar", "Select toolbar to remove", astr, "");
+            if (frm.ShowDialog() == DialogResult.OK && frm.SelectedIndex != -1)
+            {                
+                Settings.Default.Toolbars.Items.Remove(_lstToolbars[frm.SelectedIndex].Toolbar);
+                FormToolbar ft = _lstToolbars[frm.SelectedIndex];
+                _lstToolbars.RemoveAt(frm.SelectedIndex);
+                ft.Close();
+                ft.Dispose();
+            }
+            return;
+        }
+
+        void OnNewToolbar(object sender, EventArgs e)
+        {   //====================================================================
+            FormInputPrompt frm = new FormInputPrompt("New Toolbar", "Name:", "toolbar" + Settings.Default.Toolbars.Items.Count.ToString());
+            if (frm.ShowDialog() == DialogResult.OK && frm.Value != String.Empty)
+            {
+                LotroToolbar ltb = new LotroToolbar();
+                ltb.Name = frm.Value;
+                ltb.Direction = LotroToolbar.BarDirection.Horizontal;
+                ltb.Location = Location; // Gotta start somewhere.....
+                ltb.Visible = true;
+
+                Settings.Default.Toolbars.Items.Add(ltb);
+
+                FormToolbar ft = new FormToolbar(ltb);
+                _lstToolbars.Add(ft);               
+                if (ltb.Visible) ft.Show();
+            }
+            return;
+        }
+
+        void OnViewToolbarsItemClick(object sender, EventArgs e)
+        {   //====================================================================
+            ToolStripMenuItem tsmi = sender   as ToolStripMenuItem; if (tsmi == null) return;
+            LotroToolbar      ltb  = tsmi.Tag as LotroToolbar;      if (ltb  == null) return;
+            ltb.Visible  = !ltb.Visible;
+            tsmi.Checked = ltb.Visible;
+            foreach (FormToolbar frm in _lstToolbars) if (frm.Toolbar == ltb) frm.Visible = ltb.Visible;
             return;
         }
     #endregion
@@ -819,6 +893,14 @@ namespace LotroMusicManager
         }
 
     #endregion
+
+        private void OnTabSelectedChanged(object sender, EventArgs e)
+        {   //====================================================================
+            // The edit pane may have made changes that need to be reflected in the perform pane
+            if (tabsMain.SelectedTab == tpgPerform && btnSave.Enabled) rtePerform.Text = rteEdit.Text;  
+            return;
+        }
+
     } // class
 
 } // namespace
