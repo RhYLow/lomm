@@ -1,10 +1,6 @@
-﻿using System.IO;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using LotroMusicManager.Properties;
 
@@ -12,8 +8,11 @@ namespace LotroMusicManager
 {
     public partial class FormMacroManager : Form
     {
+        public Boolean NeedToolbarsRefreshed {get; set;}
+
         public FormMacroManager()
         {
+            NeedToolbarsRefreshed = false;
             InitializeComponent();
 
             CreateMenus(); 
@@ -32,10 +31,17 @@ namespace LotroMusicManager
             lstMacros.Items.Clear();
             lstActions.Items.Clear();
             foreach (Macro m in Settings.Default.Macros.Items) lstMacros.Items.Add(m);
+            btnAddAction.Enabled = false;
+            btnDelAction.Enabled = false;
+            btnDelMacro.Enabled  = false;
+            RefreshActions();
         }
 
         private void OnSelectedMacroChanged(object sender, EventArgs e)
         {   //====================================================================
+            btnAddAction.Enabled = (lstMacros.SelectedIndex != -1);
+            btnDelAction.Enabled = (lstMacros.SelectedIndex != -1);
+            btnDelMacro.Enabled  = (lstMacros.SelectedIndex != -1);
             RefreshActions();
             return;
         }
@@ -67,6 +73,7 @@ namespace LotroMusicManager
             Settings.Default.Macros.Add(mac);
 
             RefreshMacros();
+            lstMacros.SelectedItem = mac;
             return;
         }
 
@@ -103,6 +110,7 @@ namespace LotroMusicManager
             if (lstMacros.SelectedItems.Count == 0) return;
             Settings.Default.Macros.Remove((Macro)lstMacros.SelectedItem);
             RefreshMacros();
+            NeedToolbarsRefreshed = true;
             return;
         }
 
@@ -124,6 +132,7 @@ namespace LotroMusicManager
             if (lstMacros.SelectedItems.Count == 0) return;
             ((Macro)lstMacros.SelectedItem).Name = FormInputPrompt.GetInput("Rename Macro", "New name:", ((Macro)lstMacros.SelectedItem).Name);
             RefreshMacros();
+            NeedToolbarsRefreshed = true;
             return;
         }
 
@@ -267,9 +276,11 @@ namespace LotroMusicManager
             {
                 ofd.InitialDirectory = Environment.CurrentDirectory;
             }
+            ofd.Title = "Select icon for macro '" + mac.Name + "'";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 mac.ImagePath = ofd.FileName;
+                NeedToolbarsRefreshed = true;
             }
             return;
         }
