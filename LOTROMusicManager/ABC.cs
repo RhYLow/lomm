@@ -1,9 +1,7 @@
-﻿using System.Runtime.Serialization;
-using System.Xml.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Text;
+using System.Xml.Serialization;
 using LotroMusicManager.Properties;
 
 namespace LotroMusicManager
@@ -178,7 +176,7 @@ namespace LotroMusicManager
 
     [Serializable()]
     public class FavoriteSong
-    {
+    {  // Minimum description of a song. Needs to have value equals so we can compare two different ones in the List<>
                       public String FileName {get; set;}
         [XmlIgnore()] public String SongName {get; set;}
                       public String Index    {get; set;}
@@ -206,7 +204,7 @@ namespace LotroMusicManager
         }
 
         public override string ToString()
-        {
+        {   // I don't think this is called anymore, but it doesn't hurt to have it for the debugger
             return SongName + "\t   (" + FileName + " - " + Index + ")";
         }
     }
