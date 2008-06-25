@@ -1,13 +1,12 @@
-﻿using System.Drawing;
-using System.Xml.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Drawing;
+using System.Xml.Serialization;
 
 namespace LotroMusicManager
 {
     public class MacroChoiceItem
-    {
+    {   // Data bag for comboboxes of macros
         public String ID   {get; set;}
         public String Name {get {return GetName();} private set {;}}
 
@@ -32,7 +31,7 @@ namespace LotroMusicManager
     
     [Serializable()]
     public class LotroToolbarItem
-    {
+    {   // Data bag for what's in a toolbar
         public enum ItemType {UNKNOWN, Macro, Separator, MacroList, SongList}
         public String   ID       {get; set;}
         public ItemType Type     {get; set;}
@@ -47,7 +46,7 @@ namespace LotroMusicManager
     
     [Serializable()]
     public class LotroToolbar
-    {
+    {   // Describes the contents and display of a toolbar. This is the logical toolbar, not the UI object
         public enum BarDirection {Horizontal, Vertical};
         public String       Name      {get; set;}
         public Point        Location  {get; set;}
@@ -60,7 +59,7 @@ namespace LotroMusicManager
 
     [Serializable()]
     public class LotroToolbarList
-    {
+    {   // This makes it easier to make a user property
         [XmlArray()] public List<LotroToolbar> Items {get; set;}
         public LotroToolbarList() {Items = new List<LotroToolbar>();}
     }
