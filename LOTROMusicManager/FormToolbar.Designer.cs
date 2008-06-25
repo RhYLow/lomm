@@ -48,7 +48,7 @@
             this.ts.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts.Location = new System.Drawing.Point(10, 0);
             this.ts.Name = "ts";
-            this.ts.Size = new System.Drawing.Size(34, 25);
+            this.ts.Size = new System.Drawing.Size(102, 25);
             this.ts.TabIndex = 0;
             // 
             // mnu
