@@ -166,11 +166,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="AboutBox.cs">
+    <Compile Include="FormAboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox.Designer.cs">
-      <DependentUpon>AboutBox.cs</DependentUpon>
+    <Compile Include="FormAboutBox.Designer.cs">
+      <DependentUpon>FormAboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="RemoteController.cs" />
     <Compile Include="SDK.cs" />
@@ -179,9 +179,9 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AboutBox.resx">
+    <EmbeddedResource Include="FormAboutBox.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>AboutBox.cs</DependentUpon>
+      <DependentUpon>FormAboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\LOMM.ico" />
   </ItemGroup>
