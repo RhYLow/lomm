@@ -40,6 +40,7 @@
             this.newMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mniAssignIcon = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -172,9 +173,10 @@
             this.newMacroToolStripMenuItem,
             this.deleteMacroToolStripMenuItem,
             this.toolStripMenuItem1,
+            this.toolStripSeparator2,
             this.mniAssignIcon});
             this.mnuMacroList.Name = "mnuMacroList";
-            this.mnuMacroList.Size = new System.Drawing.Size(173, 92);
+            this.mnuMacroList.Size = new System.Drawing.Size(173, 98);
             this.mnuMacroList.Opening += new System.ComponentModel.CancelEventHandler(this.OnMacroListMenuOpening);
             // 
             // newMacroToolStripMenuItem
@@ -199,6 +201,11 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.toolStripMenuItem1.Text = "Rename Macro";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.OnRenameMacro);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(169, 6);
             // 
             // mniAssignIcon
             // 
@@ -362,7 +369,7 @@
             // 
             // ofd
             // 
-            this.ofd.Filter = "Images|*.png,*.gif,*.bmp,*.ico";
+            this.ofd.Filter = "Images|*.png;*.gif;*.bmp;*.ico";
             // 
             // FormMacroManager
             // 
@@ -370,6 +377,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 526);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMacroManager";
             this.ShowIcon = false;
@@ -421,6 +429,7 @@
         private System.Windows.Forms.ContextMenuStrip mnuActions;
         private System.Windows.Forms.ToolStripMenuItem mniAssignIcon;
         private System.Windows.Forms.OpenFileDialog ofd;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }
