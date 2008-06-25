@@ -7,9 +7,9 @@ using System.Reflection;
 
 namespace LotroMusicManager
 {
-    public partial class AboutBox : Form
+    public partial class FormAboutBox : Form
     {
-        public AboutBox()
+        public FormAboutBox()
         {
             InitializeComponent();
 
