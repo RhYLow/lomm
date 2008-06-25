@@ -1,9 +1,8 @@
-﻿using System.Security.Cryptography;
-using System.Xml.Serialization;
-using System.Text;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace LotroMusicManager
 {
