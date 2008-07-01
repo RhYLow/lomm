@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Windows.Forms;
 using ComboButtonControl;
 
@@ -28,15 +29,6 @@ namespace LotroMusicManager
             if (Toolbar.Location != null) Location = Toolbar.Location;
             return;
         }
-
-        private void OnActivated(object sender, EventArgs e)
-        {   //====================================================================
-            // Assume we were clicked
-            //TODO: Fix bug: right-clicking when not active will click the button instead of showing menu
-            ToolStripItem tsi = GetTSIForScreenPoint(Control.MousePosition);
-            if (tsi != null) tsi.PerformClick();
-            return;
-        }
     #endregion
 
     #region Creating Toolbar Items
@@ -59,7 +51,7 @@ namespace LotroMusicManager
                             if (null == mac) break;
                             ToolStripButton tsb = new ToolStripButton(mac.Name); 
                             tsb.Tag = mac.ID;
-                            tsb.ToolTipText = mac.Name;
+                            tsb.ToolTipText = mac.Description;
                             if (mac.ImagePath != null) try {tsb.Image = new Bitmap(mac.ImagePath); tsb.Text = String.Empty;} catch {;}
                             tsb.Click += new EventHandler(OnMacroButtonClick);
                             ts.Items.Add(tsb);
@@ -102,7 +94,6 @@ namespace LotroMusicManager
             }
             SetBarSize();
         }
-
     #endregion
 
     #region Toolbar State and Contents
@@ -190,6 +181,7 @@ namespace LotroMusicManager
             {
                 ltbi.Name    = frm.Name;
                 ltbi.Choices = frm.CheckedItems;
+                RefreshToolbarItems();
             }
             return;
         }
@@ -332,19 +324,6 @@ namespace LotroMusicManager
             ContextMenuStrip cms = (ContextMenuStrip)sender;
 
             //--------------------------------------------------------------------
-            // Fill in the View list with the toolbars
-            mniView.DropDownItems.Clear();
-            foreach (LotroToolbar tb in Properties.Settings.Default.Toolbars.Items)
-            {
-                ToolStripItem tsi = mniView.DropDownItems.Add(tb.Name);                
-                ToolStripMenuItem tsmi = (ToolStripMenuItem)tsi;
-                tsmi.Checked = tb.Visible;
-                tsmi.CheckOnClick = true;
-                tsmi.Tag = tb;
-                tsmi.CheckedChanged += new EventHandler(OnToggleToolbarVisible);
-            }
-
-            //--------------------------------------------------------------------
             // Fill in the Add list with standard items....
             mniAdd.DropDownItems.Clear();
             
@@ -377,19 +356,22 @@ namespace LotroMusicManager
                 tsmi.Click += new EventHandler(OnAddMacro);
             }
             
-            ToolStripItem tsiClicked = GetTSIForScreenPoint(cms.Bounds.Location);
+            ToolStripItem tsiClicked = GetTSIForScreenPoint(Control.MousePosition);  //This might be wrong under weird circumstances, but it's the best I can think of
             mniEditMacroList.Visible = false;
             mniRemoveItem.Enabled    = false;
+            mniRemoveItem.Text       = "Remove item";
             if (tsiClicked is ToolStripButton)
             {
-                mniRemoveItem.Enabled = true;
-                mniRemoveItem.Tag     = tsiClicked;
+                mniRemoveItem.Enabled   = true;
+                mniRemoveItem.Text      = "Remove '" + Macro.FromID((String)tsiClicked.Tag).Name + "'";
+                mniRemoveItem.Tag       = tsiClicked;
             }
             else
             if (tsiClicked is ToolStripComboBox)
             {
                 mniRemoveItem.Enabled    = true;
                 mniRemoveItem.Tag        = tsiClicked;
+                mniRemoveItem.Text       = "Remove '" + ((LotroToolbarItem)tsiClicked.Tag).Name + "'";
                 mniEditMacroList.Visible = true;
                 mniEditMacroList.Tag     = tsiClicked.Tag;
             }
@@ -397,6 +379,7 @@ namespace LotroMusicManager
             if (tsiClicked is ToolStripControlHost)
             {
                 mniRemoveItem.Enabled    = true;
+                mniRemoveItem.Text       = "Remove quick-play";
                 mniRemoveItem.Tag        = tsiClicked;
             }
             else
@@ -404,6 +387,7 @@ namespace LotroMusicManager
             {
                 mniRemoveItem.Enabled = true;
                 mniRemoveItem.Tag     = tsiClicked;
+                mniRemoveItem.Text    = "Remove separator";
             }
             return;
         }
@@ -490,5 +474,10 @@ namespace LotroMusicManager
         {
         }
 
+    }
+
+    public class Toolbars
+    {
+        public static System.Collections.Generic.List<FormToolbar> All = new System.Collections.Generic.List<FormToolbar>();
     }
 }

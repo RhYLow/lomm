@@ -28,9 +28,21 @@ namespace LotroMusicManager
 
         private void RefreshMacros()
         {   //====================================================================
-            lstMacros.Items.Clear();
+            lsvMacros.Items.Clear();
+            imgMacros.Images.Clear();
             lstActions.Items.Clear();
-            foreach (Macro m in Settings.Default.Macros.Items) lstMacros.Items.Add(m);
+            foreach (Macro m in Settings.Default.Macros.Items) 
+            {
+                ListViewItem lvi = new ListViewItem(m.Name);
+                lvi.Tag = m;
+                if (m.ImagePath != null && m.ImagePath != String.Empty) 
+                {
+                    imgMacros.Images.Add(m.ID, new System.Drawing.Bitmap(m.ImagePath));
+                    lvi.ImageKey = m.ID;
+                }
+                lsvMacros.Items.Add(lvi);
+            }
+            lsvMacros.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             btnAddAction.Enabled = false;
             btnDelAction.Enabled = false;
             btnDelMacro.Enabled  = false;
@@ -39,19 +51,25 @@ namespace LotroMusicManager
 
         private void OnSelectedMacroChanged(object sender, EventArgs e)
         {   //====================================================================
-            btnAddAction.Enabled = (lstMacros.SelectedIndex != -1);
-            btnDelAction.Enabled = (lstMacros.SelectedIndex != -1);
-            btnDelMacro.Enabled  = (lstMacros.SelectedIndex != -1);
+            btnAddAction.Enabled = (lsvMacros.SelectedItems.Count != 0);
+            btnDelAction.Enabled = (lsvMacros.SelectedItems.Count != 0);
+            btnDelMacro.Enabled  = (lsvMacros.SelectedItems.Count != 0);
             RefreshActions();
             return;
+        }
+
+        private Macro SelectedMacro()
+        {   //====================================================================
+            if (lsvMacros.SelectedItems.Count == 0) return null;
+            return (Macro)(lsvMacros.SelectedItems[0]).Tag;
         }
 
         private void RefreshActions()
         {   //====================================================================
             lstActions.Items.Clear();
-            if (lstMacros.SelectedItems.Count == 0) return;
+            if (lsvMacros.SelectedItems.Count == 0) return;
 
-            foreach (MacroAction ma in ((Macro)lstMacros.SelectedItems[0]).Actions)
+            foreach (MacroAction ma in SelectedMacro().Actions)
             {
                 lstActions.Items.Add(ma);
             }
@@ -73,7 +91,8 @@ namespace LotroMusicManager
             Settings.Default.Macros.Add(mac);
 
             RefreshMacros();
-            lstMacros.SelectedItem = mac;
+            ListViewItem[] alvi = lsvMacros.Items.Find(mac.Name, false);
+            if (alvi.Length != 0) alvi[0].Selected = true;
             return;
         }
 
@@ -85,7 +104,7 @@ namespace LotroMusicManager
             int iLoc = 0;
             foreach (int i in lstActions.SelectedIndices) {ai[iLoc] = i; iLoc += 1;}
 
-            ((Macro)lstMacros.SelectedItems[0]).MoveUp(ai);
+            SelectedMacro().MoveUp(ai);
             RefreshActions();
             foreach (int i in ai) if (i > 0) lstActions.SelectedIndices.Add(i - 1); else lstActions.SelectedIndices.Add(0);
             return;
@@ -99,7 +118,7 @@ namespace LotroMusicManager
             int iLoc = 0;
             foreach (int i in lstActions.SelectedIndices) {ai[iLoc] = i; iLoc += 1;}
 
-            ((Macro)lstMacros.SelectedItems[0]).MoveDown(ai);
+            SelectedMacro().MoveDown(ai);
             RefreshActions();
             foreach (int i in ai) if (i < lstActions.Items.Count - 1) lstActions.SelectedIndices.Add(i + 1); else lstActions.SelectedIndices.Add(lstActions.Items.Count - 1);
             return;
@@ -107,8 +126,8 @@ namespace LotroMusicManager
 
         private void OnDeleteMacro(object sender, EventArgs e)
         {   //====================================================================
-            if (lstMacros.SelectedItems.Count == 0) return;
-            Settings.Default.Macros.Remove((Macro)lstMacros.SelectedItem);
+            if (lsvMacros.SelectedItems.Count == 0) return;
+            Settings.Default.Macros.Remove(SelectedMacro());
             RefreshMacros();
             NeedToolbarsRefreshed = true;
             return;
@@ -122,17 +141,8 @@ namespace LotroMusicManager
             int iLoc = 0;
             foreach (int i in lstActions.SelectedIndices) {ai[iLoc] = i; iLoc += 1;}
 
-            ((Macro)lstMacros.SelectedItem).RemoveActions(ai);
+            SelectedMacro().RemoveActions(ai);
             RefreshActions();
-            return;
-        }
-
-        private void OnRenameMacro(object sender, EventArgs e)
-        {   //====================================================================
-            if (lstMacros.SelectedItems.Count == 0) return;
-            ((Macro)lstMacros.SelectedItem).Name = FormInputPrompt.GetInput("Rename Macro", "New name:", ((Macro)lstMacros.SelectedItem).Name);
-            RefreshMacros();
-            NeedToolbarsRefreshed = true;
             return;
         }
 
@@ -170,7 +180,7 @@ namespace LotroMusicManager
         {   //--------------------------------------------------------------------
             // This is super ugly....
             ma.Edit();
-            ((Macro)lstMacros.SelectedItem).AddAction(ma);
+            SelectedMacro().AddAction(ma);
             RefreshActions();
             return;
         }
@@ -261,26 +271,17 @@ namespace LotroMusicManager
             // If not, disable most items            
         }
 
-        private void OnAssignIcon(object sender, EventArgs e)
+        private void OnEditMacroDetailsClick(object sender, EventArgs e)
         {   //====================================================================
-            if (lstMacros.SelectedItems.Count == 0) return;
-            if (!(lstMacros.SelectedItem is Macro)) return;
-            Macro mac = ((Macro)lstMacros.SelectedItem);
-            if (mac.ImagePath != null && mac.ImagePath != String.Empty) 
+            Macro mac = SelectedMacro(); if (mac == null) return;
+            FormMacroDetails frm = new FormMacroDetails(mac);
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-                FileInfo fi = new FileInfo(mac.ImagePath);
-                ofd.InitialDirectory = fi.Directory.FullName;
-                ofd.FileName = fi.Name;
-            }
-            else
-            {
-                ofd.InitialDirectory = Environment.CurrentDirectory;
-            }
-            ofd.Title = "Select icon for macro '" + mac.Name + "'";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                mac.ImagePath = ofd.FileName;
-                NeedToolbarsRefreshed = true;
+                mac.Name        = frm.MacroName;
+                mac.Description = frm.MacroDescription;
+                mac.ImagePath   = frm.MacroImagePath;
+                foreach (FormToolbar frmToolbar in Toolbars.All) frmToolbar.RefreshToolbarItems(); //TODO: only refresh needed bars
+                RefreshMacros();
             }
             return;
         }

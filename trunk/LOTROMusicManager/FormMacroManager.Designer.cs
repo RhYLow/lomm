@@ -35,13 +35,15 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDelMacro = new System.Windows.Forms.Button();
             this.btnNewMacro = new System.Windows.Forms.Button();
-            this.lstMacros = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lsvMacros = new System.Windows.Forms.ListView();
+            this.colName = new System.Windows.Forms.ColumnHeader();
             this.mnuMacroList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mniAssignIcon = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniEditMacroDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.imgMacros = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -107,12 +109,14 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lstMacros, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lsvMacros, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(235, 492);
@@ -154,66 +158,80 @@
             this.btnNewMacro.UseVisualStyleBackColor = true;
             this.btnNewMacro.Click += new System.EventHandler(this.OnNewMacro);
             // 
-            // lstMacros
+            // label1
             // 
-            this.lstMacros.ContextMenuStrip = this.mnuMacroList;
-            this.lstMacros.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstMacros.FormattingEnabled = true;
-            this.lstMacros.HorizontalScrollbar = true;
-            this.lstMacros.Location = new System.Drawing.Point(3, 3);
-            this.lstMacros.Name = "lstMacros";
-            this.lstMacros.Size = new System.Drawing.Size(229, 446);
-            this.lstMacros.Sorted = true;
-            this.lstMacros.TabIndex = 1;
-            this.lstMacros.SelectedIndexChanged += new System.EventHandler(this.OnSelectedMacroChanged);
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(229, 27);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Macros";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // lsvMacros
+            // 
+            this.lsvMacros.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colName});
+            this.lsvMacros.ContextMenuStrip = this.mnuMacroList;
+            this.lsvMacros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lsvMacros.FullRowSelect = true;
+            this.lsvMacros.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lsvMacros.Location = new System.Drawing.Point(3, 30);
+            this.lsvMacros.MultiSelect = false;
+            this.lsvMacros.Name = "lsvMacros";
+            this.lsvMacros.ShowGroups = false;
+            this.lsvMacros.Size = new System.Drawing.Size(229, 426);
+            this.lsvMacros.SmallImageList = this.imgMacros;
+            this.lsvMacros.TabIndex = 2;
+            this.lsvMacros.UseCompatibleStateImageBehavior = false;
+            this.lsvMacros.View = System.Windows.Forms.View.Details;
+            this.lsvMacros.SelectedIndexChanged += new System.EventHandler(this.OnSelectedMacroChanged);
             // 
             // mnuMacroList
             // 
             this.mnuMacroList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newMacroToolStripMenuItem,
             this.deleteMacroToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.toolStripSeparator2,
-            this.mniAssignIcon});
+            this.mniEditMacroDetails});
             this.mnuMacroList.Name = "mnuMacroList";
-            this.mnuMacroList.Size = new System.Drawing.Size(173, 98);
+            this.mnuMacroList.Size = new System.Drawing.Size(179, 76);
             this.mnuMacroList.Opening += new System.ComponentModel.CancelEventHandler(this.OnMacroListMenuOpening);
             // 
             // newMacroToolStripMenuItem
             // 
             this.newMacroToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.script_add;
             this.newMacroToolStripMenuItem.Name = "newMacroToolStripMenuItem";
-            this.newMacroToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.newMacroToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.newMacroToolStripMenuItem.Text = "New Macro";
             // 
             // deleteMacroToolStripMenuItem
             // 
             this.deleteMacroToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.script_delete;
             this.deleteMacroToolStripMenuItem.Name = "deleteMacroToolStripMenuItem";
-            this.deleteMacroToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.deleteMacroToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.deleteMacroToolStripMenuItem.Text = "Delete Macro";
             this.deleteMacroToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteMacro);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = global::LotroMusicManager.Properties.Resources.script_edit;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
-            this.toolStripMenuItem1.Text = "Rename Macro";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.OnRenameMacro);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(175, 6);
             // 
-            // mniAssignIcon
+            // mniEditMacroDetails
             // 
-            this.mniAssignIcon.Image = global::LotroMusicManager.Properties.Resources.picture_add;
-            this.mniAssignIcon.Name = "mniAssignIcon";
-            this.mniAssignIcon.Size = new System.Drawing.Size(172, 22);
-            this.mniAssignIcon.Text = "Assign Macro Icon";
-            this.mniAssignIcon.Click += new System.EventHandler(this.OnAssignIcon);
+            this.mniEditMacroDetails.Image = global::LotroMusicManager.Properties.Resources.script_edit;
+            this.mniEditMacroDetails.Name = "mniEditMacroDetails";
+            this.mniEditMacroDetails.Size = new System.Drawing.Size(178, 22);
+            this.mniEditMacroDetails.Text = "Edit Macro Details...";
+            this.mniEditMacroDetails.Click += new System.EventHandler(this.OnEditMacroDetailsClick);
+            // 
+            // imgMacros
+            // 
+            this.imgMacros.ColorDepth = System.Windows.Forms.ColorDepth.Depth24Bit;
+            this.imgMacros.ImageSize = new System.Drawing.Size(16, 16);
+            this.imgMacros.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // tableLayoutPanel3
             // 
@@ -311,6 +329,7 @@
             this.addActionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.addActionToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.addActionToolStripMenuItem.Text = "Add Action";
+            this.addActionToolStripMenuItem.Click += new System.EventHandler(this.OnNewAction);
             // 
             // editActionToolStripMenuItem
             // 
@@ -318,6 +337,7 @@
             this.editActionToolStripMenuItem.Name = "editActionToolStripMenuItem";
             this.editActionToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.editActionToolStripMenuItem.Text = "Edit Action";
+            this.editActionToolStripMenuItem.Click += new System.EventHandler(this.OnDoubleClickAction);
             // 
             // deleteActionToolStripMenuItem
             // 
@@ -389,6 +409,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.mnuMacroList.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -413,7 +434,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnDelAction;
         private System.Windows.Forms.Button btnAddAction;
-        private System.Windows.Forms.ListBox lstMacros;
         private System.Windows.Forms.ListBox lstActions;
         private System.Windows.Forms.ContextMenuStrip mnuMacroList;
         private System.Windows.Forms.ToolStripMenuItem newMacroToolStripMenuItem;
@@ -425,11 +445,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip mnuActions;
-        private System.Windows.Forms.ToolStripMenuItem mniAssignIcon;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListView lsvMacros;
+        private System.Windows.Forms.ColumnHeader colName;
+        private System.Windows.Forms.ImageList imgMacros;
+        private System.Windows.Forms.ToolStripMenuItem mniEditMacroDetails;
 
     }
 }

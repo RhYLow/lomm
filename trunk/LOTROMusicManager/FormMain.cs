@@ -25,7 +25,7 @@ namespace LotroMusicManager
 
         private LOTROFocuser _focuser = new LOTROFocuser();
 
-        private List<FormToolbar> _lstToolbars = new List<FormToolbar>();
+        //public static List<FormToolbar> Toolbars = new List<FormToolbar>();
     #endregion
 
     #region Form methods
@@ -39,7 +39,9 @@ namespace LotroMusicManager
 
         private void OnLoad(object sender, EventArgs e)
         {//--------------------------------------------------------------------
-            if (Settings.Default.FavoriteSongs == null) Settings.Default.FavoriteSongs = new FavoriteSongs();
+            if (Settings.Default.FavoriteSongs == null)           Settings.Default.FavoriteSongs           = new FavoriteSongs();
+            if (Properties.Settings.Default.Macros == null)       Properties.Settings.Default.Macros       = new MacroList();
+            if (Properties.Settings.Default.Macros.Items == null) Properties.Settings.Default.Macros.Items = new List<Macro>();
 
             // Set up the sorting style we want in the list views
             lstFiles.Columns[0].Tag = SortType.TITLE;
@@ -96,7 +98,7 @@ namespace LotroMusicManager
             foreach (LotroToolbar tb in Settings.Default.Toolbars.Items)
             {
                 FormToolbar ft = new FormToolbar(tb);
-                _lstToolbars.Add(ft);
+                Toolbars.All.Add(ft);
                 if (tb.Visible) ft.Show();
             }
             
@@ -456,13 +458,7 @@ namespace LotroMusicManager
                 rtePerform.Text = rteEdit.Text;
                 rteEdit.Enabled  = true; // Allow edits
 
-                for (int i = 0; i < rteEdit.Lines.Length; i += 1)
-                {
-                    if (ABC.IsLyrics(rteEdit.Lines[i])) 
-                    {
-                        lstLyrics.Items.Add(new ABCLine(ABC.RemoveHeaderTag(rteEdit.Lines[i]), i));
-                    }
-                }
+                RefreshLyricsList();
             }
             else
             {
@@ -475,6 +471,18 @@ namespace LotroMusicManager
             SetChangedState(false); // No changes yet, so no save or undo
             return;
         } // ShowSelectedFile
+
+        private void RefreshLyricsList()
+        {//====================================================================
+            lstLyrics.Items.Clear();
+            for (int i = 0; i < rteEdit.Lines.Length; i += 1)
+            {
+                if (ABC.IsLyrics(rteEdit.Lines[i]))
+                {
+                    lstLyrics.Items.Add(new ABCLine(ABC.RemoveHeaderTag(rteEdit.Lines[i]), i));
+                }
+            }
+        }
 
         private void OnABCChanged(object sender, EventArgs e)
         {//--------------------------------------------------------------------
@@ -565,27 +573,26 @@ namespace LotroMusicManager
     #region Settings
         private void OnOptions(object sender, EventArgs e)
         {
+            String strInitialToolbarOpacity = Settings.Default.ToolbarOpacity;
             FormOptions dlg = new FormOptions(this);
             if (dlg.ShowDialog() == DialogResult.OK) 
             {
                 Settings.Default.KeepLOTROFocused = dlg.KeepLOTROFocused;
                 Settings.Default.Opacity          = Opacity.ToString();
-                
                 Settings.Default.AOT              = dlg.AOT;
-                TopMost = Settings.Default.AOT;
 
-                Settings.Default.Save();
-
+                TopMost         = Settings.Default.AOT;
                 rteEdit.AutoTag = Settings.Default.HighlightABC;
             }
             else
             {
                 Opacity = Double.Parse(Settings.Default.Opacity);
+                foreach (FormToolbar frm in Toolbars.All) frm.Opacity = Double.Parse(Settings.Default.ToolbarOpacity);
             }
+            Settings.Default.Save();
             return;                   
         }               
     #endregion
-
 
     #region Lyrics Playing
         private void ReciteLine()
@@ -734,6 +741,17 @@ namespace LotroMusicManager
             return;
         }
 
+        private void OnTabSelectedChanged(object sender, EventArgs e)
+        {   //====================================================================
+            // The edit pane may have made changes that need to be reflected in the perform pane
+            if (tabsMain.SelectedTab == tpgPerform && btnSave.Enabled) 
+            {
+                rtePerform.Text = rteEdit.Text;  
+                RefreshLyricsList();
+            }
+            return;
+        }
+
     #endregion
 
     #region Song List Context Menu
@@ -784,7 +802,7 @@ namespace LotroMusicManager
             // - macro deleted
             // - icon changed
             // - macro renamed
-            if (fmm.NeedToolbarsRefreshed) foreach (FormToolbar frm in _lstToolbars) frm.RefreshToolbarItems();
+            if (fmm.NeedToolbarsRefreshed) foreach (FormToolbar frm in Toolbars.All) frm.RefreshToolbarItems();
             return;
         }
 
@@ -808,7 +826,7 @@ namespace LotroMusicManager
             if (MessageBox.Show("Really reset all toolbar locations? This will move every toolbar.", "Reset all toolbars", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 int n = 0; // Increasing offset to cascade the toolbars
-                foreach (FormToolbar ft in _lstToolbars) {ft.Location = ft.Toolbar.Location = new Point(Location.X + n, Location.Y + n); n += 20;}
+                foreach (FormToolbar ft in Toolbars.All) {ft.Location = ft.Toolbar.Location = new Point(Location.X + n, Location.Y + n); n += 20;}
             }
             return;
         }
@@ -820,9 +838,9 @@ namespace LotroMusicManager
             FormInputChoice frm = new FormInputChoice("Remove toolbar", "Select toolbar to remove", astr, "");
             if (frm.ShowDialog() == DialogResult.OK && frm.SelectedIndex != -1)
             {                
-                Settings.Default.Toolbars.Items.Remove(_lstToolbars[frm.SelectedIndex].Toolbar);
-                FormToolbar ft = _lstToolbars[frm.SelectedIndex];
-                _lstToolbars.RemoveAt(frm.SelectedIndex);
+                Settings.Default.Toolbars.Items.Remove(Toolbars.All[frm.SelectedIndex].Toolbar);
+                FormToolbar ft = Toolbars.All[frm.SelectedIndex];
+                Toolbars.All.RemoveAt(frm.SelectedIndex);
                 ft.Close();
                 ft.Dispose();
             }
@@ -843,7 +861,7 @@ namespace LotroMusicManager
                 Settings.Default.Toolbars.Items.Add(ltb);
 
                 FormToolbar ft = new FormToolbar(ltb);
-                _lstToolbars.Add(ft);               
+                Toolbars.All.Add(ft);               
                 if (ltb.Visible) ft.Show();
             }
             return;
@@ -855,7 +873,7 @@ namespace LotroMusicManager
             LotroToolbar      ltb  = tsmi.Tag as LotroToolbar;      if (ltb  == null) return;
             ltb.Visible  = !ltb.Visible;
             tsmi.Checked = ltb.Visible;
-            foreach (FormToolbar frm in _lstToolbars) if (frm.Toolbar == ltb) frm.Visible = ltb.Visible;
+            foreach (FormToolbar frm in Toolbars.All) if (frm.Toolbar == ltb) frm.Visible = ltb.Visible;
             return;
         }
     #endregion
@@ -894,10 +912,9 @@ namespace LotroMusicManager
 
     #endregion
 
-        private void OnTabSelectedChanged(object sender, EventArgs e)
+        private void OnHelpContentsClick(object sender, EventArgs e)
         {   //====================================================================
-            // The edit pane may have made changes that need to be reflected in the perform pane
-            if (tabsMain.SelectedTab == tpgPerform && btnSave.Enabled) rtePerform.Text = rteEdit.Text;  
+            try {Process.Start("lomm.chm");} catch {;}
             return;
         }
 

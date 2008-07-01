@@ -48,13 +48,14 @@ namespace LotroMusicManager
     public class LotroToolbar
     {   // Describes the contents and display of a toolbar. This is the logical toolbar, not the UI object
         public enum BarDirection {Horizontal, Vertical};
-        public String       Name      {get; set;}
-        public Point        Location  {get; set;}
-        public BarDirection Direction {get; set;}
-        public Boolean      Visible   {get; set;}
+        public String       Name       {get; set;}
+        public Point        Location   {get; set;}
+        public BarDirection Direction  {get; set;}
+        public Boolean      Visible    {get; set;}
+        public Int32        OpacityPct {get; set;}
         [XmlArray()] public List<LotroToolbarItem> Items {get; set;}
 
-        public LotroToolbar() {Name = String.Empty; Items = new List<LotroToolbarItem>(); Direction = BarDirection.Horizontal;}
+        public LotroToolbar() {Name = String.Empty; Items = new List<LotroToolbarItem>(); Direction = BarDirection.Horizontal; OpacityPct = 100;}
     }
 
     [Serializable()]

@@ -33,11 +33,26 @@ namespace LotroMusicManager
         public static extern bool GetCaretPos(out Point lpPoint);
 
         [DllImport("User32.dll")] public extern static int     SendMessage    (IntPtr hwnd, int msg, int wParam, int lParam);
-        public const int WM_ACTIVATE   = 0x0006;
-        public const int WM_SETFOCUS   = 0x0007;
-        public const int WM_IME_NOTIFY = 0x0282;
-        public const int IMN_SETCOMPOSITIONFONT   = 0x000A;
-        public const int IMN_SETCOMPOSITIONWINDOW = 0x000B;
+        public const int WM_ACTIVATE                = 0x0006;
+        public const int WM_SETFOCUS                = 0x0007;     
+        public const int WM_MOUSEMOVE               = 0x0200;
+        public const int WM_LBUTTONDOWN             = 0x0201;
+        public const int WM_LBUTTONUP               = 0x0202;
+        public const int WM_LBUTTONDBLCLK           = 0x0203;
+        public const int WM_RBUTTONDOWN             = 0x0204;
+        public const int WM_RBUTTONUP               = 0x0205;
+        public const int WM_RBUTTONDBLCLK           = 0x0206;
+        public const int WM_MBUTTONDOWN             = 0x0207;
+        public const int WM_MBUTTONUP               = 0x0208;
+        public const int WM_MBUTTONDBLCLK           = 0x0209;
+        public const int WM_MOUSEWHEEL              = 0x020A;     // Used on XP
+        public const int WM_MOUSEWHEEL2             = 0x020E;     // Used on Vista
+        public const int WM_XBUTTONDOWN             = 0x020B;
+        public const int WM_XBUTTONUP               = 0x020C;
+        public const int WM_XBUTTONDBLCLK           = 0x020D;
+        public const int WM_IME_NOTIFY              = 0x0282;
+        public const int IMN_SETCOMPOSITIONFONT     = 0x000A;
+        public const int IMN_SETCOMPOSITIONWINDOW   = 0x000B;
         
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
@@ -162,7 +177,7 @@ namespace LotroMusicManager
             unknown_vk          = 0x00,  // Unassigned VK
             LBUTTON             = 0x01,  // Left mouse button
             RBUTTON             = 0x02,  // Right mouse button
-            CANCEL              = 0x03,  // Control-break processing
+            //CANCEL              = 0x03,  // Control-break processing
             MBUTTON             = 0x04,  // Middle mouse button (three-button mouse)
             XBUTTON1            = 0x05,  // Windows 2000/XP: X1 mouse button
             XBUTTON2            = 0x06,  // Windows 2000/XP: X2 mouse button
@@ -249,7 +264,7 @@ namespace LotroMusicManager
             RWIN                = 0x5C,  // Right Windows key (Natural keyboard)
             APPS                = 0x5D,  // Applications key (Natural keyboard)
             //                     0x5E, // Reserved
-            SLEEP               = 0x5F,  // Computer Sleep key
+            //SLEEP               = 0x5F,  // Computer Sleep key
             NUMPAD0             = 0x60,  // Numeric keypad 0 key
             NUMPAD1             = 0x61,  // Numeric keypad 1 key
             NUMPAD2             = 0x62,  // Numeric keypad 2 key
@@ -339,7 +354,7 @@ namespace LotroMusicManager
             //                 0xE3-E4,  // OEM specific
             PROCESSKEY          = 0xE5,  // Windows 95/98/Me, Windows NT 4.0, Windows 2000/XP: IME PROCESS key
             //                    0xE6,  // OEM specific
-            PACKET              = 0xE7,  // Windows 2000/XP: Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low word of a 32-bit Virtual Key value used for non-keyboard input methods. For more information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP
+            //PACKET              = 0xE7,  // Windows 2000/XP: Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low word of a 32-bit Virtual Key value used for non-keyboard input methods. For more information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP
             //                    0xE8,  // Unassigned
             //                 0xE9-F5,  // OEM specific
             ATTN                = 0xF6,  // Attn key

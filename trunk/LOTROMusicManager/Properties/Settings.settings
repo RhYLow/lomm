@@ -50,5 +50,8 @@
     <Setting Name="FavoriteSongs" Type="LotroMusicManager.FavoriteSongs" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ToolbarOpacity" Type="System.String" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
