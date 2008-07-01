@@ -200,5 +200,17 @@ namespace LotroMusicManager.Properties {
                 this["FavoriteSongs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public string ToolbarOpacity {
+            get {
+                return ((string)(this["ToolbarOpacity"]));
+            }
+            set {
+                this["ToolbarOpacity"] = value;
+            }
+        }
     }
 }

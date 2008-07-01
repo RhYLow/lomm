@@ -33,7 +33,7 @@ namespace LotroMusicManager
             System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
             System.Windows.Forms.ToolStripMenuItem mniFileExit;
-            System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
+            System.Windows.Forms.ToolStripMenuItem mniHelpContents;
             System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
             System.Windows.Forms.SplitContainer splitContainer1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
@@ -116,8 +116,6 @@ namespace LotroMusicManager
             this.mniRemoveToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.mniResetToolbars = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniSep1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniSep2 = new System.Windows.Forms.ToolStripMenuItem();
             this.mniHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCQuickReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -137,7 +135,7 @@ namespace LotroMusicManager
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             mniFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mniHelpContents = new System.Windows.Forms.ToolStripMenuItem();
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             layoutButtons = new System.Windows.Forms.TableLayoutPanel();
@@ -187,13 +185,14 @@ namespace LotroMusicManager
             mniFileExit.Text = "E&xit";
             mniFileExit.Click += new System.EventHandler(this.OnExit);
             // 
-            // contentsToolStripMenuItem
+            // mniHelpContents
             // 
-            contentsToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.help;
-            contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            contentsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            contentsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            contentsToolStripMenuItem.Text = "Contents";
+            mniHelpContents.Image = global::LotroMusicManager.Properties.Resources.help;
+            mniHelpContents.Name = "mniHelpContents";
+            mniHelpContents.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            mniHelpContents.Size = new System.Drawing.Size(195, 22);
+            mniHelpContents.Text = "Contents";
+            mniHelpContents.Click += new System.EventHandler(this.OnHelpContentsClick);
             // 
             // aboutToolStripMenuItem
             // 
@@ -842,12 +841,10 @@ namespace LotroMusicManager
             this.menustripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniFile,
             this.mniView,
-            this.mniSep1,
-            this.mniSep2,
             this.mniHelp});
             this.menustripMain.Location = new System.Drawing.Point(3, 0);
             this.menustripMain.Name = "menustripMain";
-            this.menustripMain.Size = new System.Drawing.Size(181, 24);
+            this.menustripMain.Size = new System.Drawing.Size(229, 24);
             this.menustripMain.Stretch = false;
             this.menustripMain.TabIndex = 0;
             this.menustripMain.Text = "menuStrip1";
@@ -1011,22 +1008,10 @@ namespace LotroMusicManager
             this.mniResetToolbars.Text = "Reset Toolbar Locations";
             this.mniResetToolbars.Click += new System.EventHandler(this.OnResetAllToolbars);
             // 
-            // mniSep1
-            // 
-            this.mniSep1.Name = "mniSep1";
-            this.mniSep1.Size = new System.Drawing.Size(22, 20);
-            this.mniSep1.Text = " ";
-            // 
-            // mniSep2
-            // 
-            this.mniSep2.Name = "mniSep2";
-            this.mniSep2.Size = new System.Drawing.Size(22, 20);
-            this.mniSep2.Text = " ";
-            // 
             // mniHelp
             // 
             this.mniHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            contentsToolStripMenuItem,
+            mniHelpContents,
             this.aBCQuickReferenceToolStripMenuItem,
             this.toolStripSeparator4,
             aboutToolStripMenuItem});
@@ -1223,7 +1208,6 @@ namespace LotroMusicManager
         private System.Windows.Forms.ToolStripMenuItem mniRefresh;
         private System.Windows.Forms.ToolStripMenuItem mniHelp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem mniSep1;
         private System.Windows.Forms.ContextMenuStrip mnuListContext;
         private System.Windows.Forms.ToolStripMenuItem mniListContextPlay;
         private System.Windows.Forms.ToolStripMenuItem mniListContextRefresh;
@@ -1292,7 +1276,6 @@ namespace LotroMusicManager
         private System.Windows.Forms.ImageList imglstTabs;
         private System.Windows.Forms.ToolStripMenuItem mniView;
         private System.Windows.Forms.ToolStripMenuItem mniViewToolbars;
-        private System.Windows.Forms.ToolStripMenuItem mniSep2;
         private System.Windows.Forms.ToolStripMenuItem mniNewToolbar;
         private System.Windows.Forms.ToolStripMenuItem mniRemoveToolbar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;

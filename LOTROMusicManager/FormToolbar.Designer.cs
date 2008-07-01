@@ -32,7 +32,6 @@
             this.ts = new System.Windows.Forms.ToolStrip();
             this.mnu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mniFlip = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mniAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mniRemoveItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +41,7 @@
             // 
             // ts
             // 
+            this.ts.AllowItemReorder = true;
             this.ts.BackColor = System.Drawing.SystemColors.Window;
             this.ts.ContextMenuStrip = this.mnu;
             this.ts.Dock = System.Windows.Forms.DockStyle.None;
@@ -55,7 +55,6 @@
             // 
             this.mnu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mniFlip,
-            this.mniView,
             this.toolStripSeparator1,
             this.mniAdd,
             this.mniRemoveItem,
@@ -73,12 +72,6 @@
             this.mniFlip.Text = "Flip Direction";
             this.mniFlip.ToolTipText = "Switches the toolbar between horizontal and vertical";
             this.mniFlip.Click += new System.EventHandler(this.OnFlip);
-            // 
-            // mniView
-            // 
-            this.mniView.Name = "mniView";
-            this.mniView.Size = new System.Drawing.Size(184, 22);
-            this.mniView.Text = "View";
             // 
             // toolStripSeparator1
             // 
@@ -129,7 +122,6 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.OnLoad);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            this.Activated += new System.EventHandler(this.OnActivated);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
             this.mnu.ResumeLayout(false);
@@ -146,7 +138,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mniAdd;
         private System.Windows.Forms.ToolStripMenuItem mniRemoveItem;
-        private System.Windows.Forms.ToolStripMenuItem mniView;
         private System.Windows.Forms.ToolStripMenuItem mniEditMacroList;
     }
 }

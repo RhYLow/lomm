@@ -393,12 +393,13 @@ namespace LotroMusicManager
     [Serializable()]
     public class Macro
     {   //====================================================================
-        public  String Name      {get; set;}
-        public  String ErrorText {get; set;}
-        public  String ID        {get {if (null == _id) _id = GetNewKey(); return _id;} set {_id = value;}} 
+        public  String              Name        {get; set;}
+        public  String              Description {get; set;}
+        public  String              ErrorText   {get; set;}
+        public  String              ID          {get {if (null == _id) _id = GetNewKey(); return _id;} set {_id = value;}} 
+        public  String              ImagePath   {get; set;}
+        public  List<MacroAction>   Actions     {get; set;}
         private String _id;      
-        public List<MacroAction> Actions {get; set;}
-        public  String ImagePath {get; set;}
 
         private static String GetNewKey()
         {

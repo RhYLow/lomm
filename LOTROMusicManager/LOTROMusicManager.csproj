@@ -100,6 +100,12 @@
     <Compile Include="FormInputPrompt.Designer.cs">
       <DependentUpon>FormInputPrompt.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMacroDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMacroDetails.Designer.cs">
+      <DependentUpon>FormMacroDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMacroManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +220,10 @@
       <DependentUpon>FormInputPrompt.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMacroDetails.resx">
+      <DependentUpon>FormMacroDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMacroManager.resx">
       <DependentUpon>FormMacroManager.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -242,6 +252,7 @@
     <Content Include="Help\lotro.keymap %28book 12%29.txt" />
     <Content Include="Help\lotro.keymap %28book 13%29.txt" />
     <Content Include="Resources\Separator.ico" />
+    <None Include="Resources\SilkIcons\layers.png" />
     <None Include="Resources\SilkIcons\page_edit.png" />
     <None Include="Resources\SilkIcons\delete.png" />
     <None Include="Resources\SilkIcons\add.png" />
