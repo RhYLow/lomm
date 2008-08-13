@@ -292,10 +292,13 @@ namespace LotroMusicManager
                     // Draw the icon if we have one
                     if (mac.ImagePath != null && mac.ImagePath != String.Empty)
                     {
-                        Image img = new Bitmap(mac.ImagePath);
-                        Rectangle rectImage = new Rectangle(e.Bounds.X + 1, e.Bounds.Y + 1, 16, 16);
-                        e.Graphics.DrawImage(img, rectImage);
-                        img.Dispose();
+                        try
+                        {
+                            Image img = new Bitmap(mac.ImagePath);
+                            Rectangle rectImage = new Rectangle(e.Bounds.X + 1, e.Bounds.Y + 1, 16, 16);
+                            e.Graphics.DrawImage(img, rectImage);
+                            img.Dispose();
+                        } catch {;} // If this throws, we just don't have an icon. Probably a bad filename
                     }
                     // And draw the text
                     Rectangle rectText = new Rectangle(e.Bounds.X + 19, e.Bounds.Y + 1, e.Bounds.Width - 19, e.Bounds.Height - 1);
