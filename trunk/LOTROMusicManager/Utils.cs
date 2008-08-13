@@ -53,15 +53,36 @@ namespace LotroMusicManager
             return RightOf(strNew, strSep);
         }
 
+        private enum ConvertState {CHARACTER, CR = 0x0d, LF = 0x0a};
         public static String ConvertNonDosFile(String str)
         {//====================================================================
-            // If we have any dos newlines, use the file as-is
-            if (str.IndexOf('\r') != -1) return str;
+            // No, this isn't very fast, is it?
+            String strRet = String.Empty;
+            
+            ConvertState state = ConvertState.CHARACTER;
+            foreach (char c in str.ToCharArray())
+            {
+                switch (c)
+                {
+                    default:                        
+                        if (state == ConvertState.CR) strRet += (char)ConvertState.LF;  // If we added a CR but no LF, add the LF
+                        strRet += c;
+                        state = ConvertState.CHARACTER;
+                        break;
+                    
+                    case (char)ConvertState.CR:                        
+                        strRet += (char)ConvertState.CR;
+                        state = ConvertState.CR;
+                        break;
 
-            // split on unix newlines and join with dos newlines
-            Char[]   aLF = {'\n'};
-            String[] aLines = str.Split(aLF, StringSplitOptions.None);
-            return String.Join(Environment.NewLine, aLines);
+                    case (char)ConvertState.LF:                        
+                        if (state != ConvertState.CR) strRet += (char)ConvertState.CR;  // If we didn't just add a CR, insert it now
+                        strRet += (char)ConvertState.LF;
+                        state = ConvertState.LF;
+                        break;
+                }
+            }
+            return strRet;
         }   
 
         public static string ToString(object o)
