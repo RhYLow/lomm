@@ -37,8 +37,11 @@ namespace LotroMusicManager
                 lvi.Tag = m;
                 if (m.ImagePath != null && m.ImagePath != String.Empty) 
                 {
-                    imgMacros.Images.Add(m.ID, new System.Drawing.Bitmap(m.ImagePath));
-                    lvi.ImageKey = m.ID;
+                    try
+                    {
+                        imgMacros.Images.Add(m.ID, new System.Drawing.Bitmap(m.ImagePath));
+                        lvi.ImageKey = m.ID;
+                    } catch {;} // A throw just means we should ignore that image
                 }
                 lsvMacros.Items.Add(lvi);
             }
