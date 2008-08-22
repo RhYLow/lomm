@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using LotroMusicManager.Properties;
-using System.Diagnostics;
-using System.Threading;
 
 namespace LotroMusicManager
 {

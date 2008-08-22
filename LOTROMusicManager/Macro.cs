@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+
 
 //====================================================================
 // These classes organize "macros", which are collections of "actions"
@@ -494,6 +497,23 @@ namespace LotroMusicManager
         {   //====================================================================
             return Properties.Settings.Default.Macros.Get(id);
         }
+
+        static public Macro FromXML(String sx)
+        {   //====================================================================
+            Macro mac = new Macro();
+            XmlSerializer xs = new XmlSerializer(typeof(Macro));
+            mac = xs.Deserialize(new StringReader(sx)) as Macro;
+            if (mac != null) mac.ID = null; // Ignore the ID because it may collide with one we have in use. We'll generate a new one when we need it.
+            return mac;
+        }
+
+        public String GetXML()
+        {   //====================================================================
+            XmlSerializer xs = new XmlSerializer(typeof(Macro));
+            StringWriter sw = new StringWriter(new StringBuilder());
+            xs.Serialize(sw, this);
+            return sw.ToString();
+        }
     }
 
     [Serializable()]
@@ -520,5 +540,30 @@ namespace LotroMusicManager
         public Macro this[String id]    
         {   get {return Get(id);} 
             set {Macro mac = Get(id); if (null != mac) mac = value;}}
+
+        static public MacroList FromXML(StreamReader sr)
+        {   //====================================================================
+            MacroList ml = new MacroList();
+            XmlSerializer xs = new XmlSerializer(typeof(MacroList));
+            ml = (MacroList)xs.Deserialize(sr);
+            foreach (Macro m in ml.Items) m.ID = null;
+            return ml;
+        }
+
+        static public MacroList FromXML(String sx)
+        {   //--------------------------------------------------------------------
+            MacroList ml = new MacroList();
+            XmlSerializer xs = new XmlSerializer(typeof(MacroList));
+            ml = (MacroList)xs.Deserialize(new StringReader(sx));
+            return ml;
+        }
+
+        public String GetXML()
+        {   //====================================================================
+            XmlSerializer xs = new XmlSerializer(typeof(MacroList));
+            StringWriter sw = new StringWriter(new StringBuilder());
+            xs.Serialize(sw, this);
+            return sw.ToString();
+        }
     }
 }
