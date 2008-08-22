@@ -33,7 +33,6 @@
             this.tpgGeneral = new System.Windows.Forms.TabPage();
             this.trackToolbarOpacity = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
-            this.chkHighlightABC = new System.Windows.Forms.CheckBox();
             this.chkAOT = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.trackMainWindowOpacity = new System.Windows.Forms.TrackBar();
@@ -43,6 +42,8 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.imglEmotes = new System.Windows.Forms.ImageList(this.components);
+            this.chkLoadABCFilesAtStartup = new System.Windows.Forms.CheckBox();
+            this.chkHighlightABC = new System.Windows.Forms.CheckBox();
             this.tabsOptions.SuspendLayout();
             this.tpgGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackToolbarOpacity)).BeginInit();
@@ -63,6 +64,7 @@
             // 
             // tpgGeneral
             // 
+            this.tpgGeneral.Controls.Add(this.chkLoadABCFilesAtStartup);
             this.tpgGeneral.Controls.Add(this.trackToolbarOpacity);
             this.tpgGeneral.Controls.Add(this.label2);
             this.tpgGeneral.Controls.Add(this.chkHighlightABC);
@@ -82,7 +84,7 @@
             // 
             this.trackToolbarOpacity.BackColor = System.Drawing.SystemColors.Window;
             this.trackToolbarOpacity.LargeChange = 10;
-            this.trackToolbarOpacity.Location = new System.Drawing.Point(124, 133);
+            this.trackToolbarOpacity.Location = new System.Drawing.Point(124, 159);
             this.trackToolbarOpacity.Maximum = 100;
             this.trackToolbarOpacity.Minimum = 30;
             this.trackToolbarOpacity.Name = "trackToolbarOpacity";
@@ -96,24 +98,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 138);
+            this.label2.Location = new System.Drawing.Point(5, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Toolbar Opacity";
-            // 
-            // chkHighlightABC
-            // 
-            this.chkHighlightABC.AutoSize = true;
-            this.chkHighlightABC.Checked = global::LotroMusicManager.Properties.Settings.Default.HighlightABC;
-            this.chkHighlightABC.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkHighlightABC.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::LotroMusicManager.Properties.Settings.Default, "HighlightABC", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkHighlightABC.Location = new System.Drawing.Point(8, 67);
-            this.chkHighlightABC.Name = "chkHighlightABC";
-            this.chkHighlightABC.Size = new System.Drawing.Size(155, 17);
-            this.chkHighlightABC.TabIndex = 2;
-            this.chkHighlightABC.Text = "Highlight syntax in ABC text";
-            this.chkHighlightABC.UseVisualStyleBackColor = true;
             // 
             // chkAOT
             // 
@@ -128,7 +117,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 105);
+            this.label1.Location = new System.Drawing.Point(5, 131);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 13);
             this.label1.TabIndex = 2;
@@ -138,7 +127,7 @@
             // 
             this.trackMainWindowOpacity.BackColor = System.Drawing.SystemColors.Window;
             this.trackMainWindowOpacity.LargeChange = 10;
-            this.trackMainWindowOpacity.Location = new System.Drawing.Point(124, 101);
+            this.trackMainWindowOpacity.Location = new System.Drawing.Point(124, 127);
             this.trackMainWindowOpacity.Maximum = 100;
             this.trackMainWindowOpacity.Minimum = 30;
             this.trackMainWindowOpacity.Name = "trackMainWindowOpacity";
@@ -222,6 +211,32 @@
             this.imglEmotes.ImageSize = new System.Drawing.Size(16, 16);
             this.imglEmotes.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // chkLoadABCFilesAtStartup
+            // 
+            this.chkLoadABCFilesAtStartup.AutoSize = true;
+            this.chkLoadABCFilesAtStartup.Checked = global::LotroMusicManager.Properties.Settings.Default.LoadABCAtStartup;
+            this.chkLoadABCFilesAtStartup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkLoadABCFilesAtStartup.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::LotroMusicManager.Properties.Settings.Default, "LoadABCAtStartup", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkLoadABCFilesAtStartup.Location = new System.Drawing.Point(8, 90);
+            this.chkLoadABCFilesAtStartup.Name = "chkLoadABCFilesAtStartup";
+            this.chkLoadABCFilesAtStartup.Size = new System.Drawing.Size(161, 17);
+            this.chkLoadABCFilesAtStartup.TabIndex = 6;
+            this.chkLoadABCFilesAtStartup.Text = "Load ABC File List at Startup";
+            this.chkLoadABCFilesAtStartup.UseVisualStyleBackColor = true;
+            // 
+            // chkHighlightABC
+            // 
+            this.chkHighlightABC.AutoSize = true;
+            this.chkHighlightABC.Checked = global::LotroMusicManager.Properties.Settings.Default.HighlightABC;
+            this.chkHighlightABC.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkHighlightABC.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::LotroMusicManager.Properties.Settings.Default, "HighlightABC", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkHighlightABC.Location = new System.Drawing.Point(8, 67);
+            this.chkHighlightABC.Name = "chkHighlightABC";
+            this.chkHighlightABC.Size = new System.Drawing.Size(155, 17);
+            this.chkHighlightABC.TabIndex = 2;
+            this.chkHighlightABC.Text = "Highlight syntax in ABC text";
+            this.chkHighlightABC.UseVisualStyleBackColor = true;
+            // 
             // FormOptions
             // 
             this.AcceptButton = this.btnOK;
@@ -265,6 +280,7 @@
         private System.Windows.Forms.CheckBox chkHighlightABC;
         private System.Windows.Forms.TrackBar trackToolbarOpacity;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkLoadABCFilesAtStartup;
 
 
     }

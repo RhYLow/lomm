@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using System.Windows.Forms;
 using LotroMusicManager.Properties;
 
@@ -286,6 +285,35 @@ namespace LotroMusicManager
                 foreach (FormToolbar frmToolbar in Toolbars.All) frmToolbar.RefreshToolbarItems(); //TODO: only refresh needed bars
                 RefreshMacros();
             }
+            return;
+        }
+
+        private void OnCopyMacro(object sender, EventArgs e)
+        {   //====================================================================
+            Macro mac = SelectedMacro(); if (mac == null) return;
+            Clipboard.SetText(mac.GetXML());
+            return;
+        }
+
+        private void OnCutMacro(object sender, EventArgs e)
+        {   //====================================================================
+            Macro mac = SelectedMacro(); if (mac == null) return;
+            Clipboard.SetText(mac.GetXML());
+            Settings.Default.Macros.Remove(SelectedMacro());
+            RefreshMacros();
+            NeedToolbarsRefreshed = true;
+            return;
+        }
+
+        private void OnPasteMacro(object sender, EventArgs e)
+        {   //====================================================================
+            Macro mac = Macro.FromXML(Clipboard.GetText());
+            if (mac == null) return;
+            
+            Settings.Default.Macros.Add(mac);
+            RefreshMacros();
+            ListViewItem[] alvi = lsvMacros.Items.Find(mac.Name, false); //TODO: Find the right one if there are two with the same name
+            if (alvi.Length != 0) alvi[0].Selected = true;
             return;
         }
 

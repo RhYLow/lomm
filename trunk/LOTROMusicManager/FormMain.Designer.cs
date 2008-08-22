@@ -31,13 +31,12 @@ namespace LotroMusicManager
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
             System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-            System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-            System.Windows.Forms.ToolStripMenuItem mniFileExit;
             System.Windows.Forms.ToolStripMenuItem mniHelpContents;
-            System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+            System.Windows.Forms.ToolStripMenuItem mniHelpAbout;
             System.Windows.Forms.SplitContainer splitContainer1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             System.Windows.Forms.TableLayoutPanel layoutButtons;
+            System.Windows.Forms.ToolStripMenuItem mniFileExit;
             this.lstFiles = new System.Windows.Forms.ListView();
             this.Title = new System.Windows.Forms.ColumnHeader();
             this.File = new System.Windows.Forms.ColumnHeader();
@@ -98,15 +97,7 @@ namespace LotroMusicManager
             this.cmbReciteChannel = new System.Windows.Forms.ComboBox();
             this.imglstTabs = new System.Windows.Forms.ImageList(this.components);
             this.menustripMain = new System.Windows.Forms.MenuStrip();
-            this.mniFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniPlay = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniSaveABC = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniUndoAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.mniManageMacros = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniMusic = new System.Windows.Forms.ToolStripMenuItem();
             this.mniOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.mniView = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,8 +107,24 @@ namespace LotroMusicManager
             this.mniRemoveToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.mniResetToolbars = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniSaveABC = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniUndoAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniMacros = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniManageMacros = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniMacroWizard = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.mniExportMacros = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniImportMacros = new System.Windows.Forms.ToolStripMenuItem();
             this.mniHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.aBCQuickReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniABCQuickReference = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniMacroQuickReference = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -133,12 +140,11 @@ namespace LotroMusicManager
             this.emotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            mniFileExit = new System.Windows.Forms.ToolStripMenuItem();
             mniHelpContents = new System.Windows.Forms.ToolStripMenuItem();
-            aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            mniHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             layoutButtons = new System.Windows.Forms.TableLayoutPanel();
+            mniFileExit = new System.Windows.Forms.ToolStripMenuItem();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -172,34 +178,21 @@ namespace LotroMusicManager
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new System.Drawing.Size(239, 6);
             // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(239, 6);
-            // 
-            // mniFileExit
-            // 
-            mniFileExit.Name = "mniFileExit";
-            mniFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            mniFileExit.Size = new System.Drawing.Size(242, 22);
-            mniFileExit.Text = "E&xit";
-            mniFileExit.Click += new System.EventHandler(this.OnExit);
-            // 
             // mniHelpContents
             // 
             mniHelpContents.Image = global::LotroMusicManager.Properties.Resources.help;
             mniHelpContents.Name = "mniHelpContents";
             mniHelpContents.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            mniHelpContents.Size = new System.Drawing.Size(195, 22);
+            mniHelpContents.Size = new System.Drawing.Size(197, 22);
             mniHelpContents.Text = "Contents";
             mniHelpContents.Click += new System.EventHandler(this.OnHelpContentsClick);
             // 
-            // aboutToolStripMenuItem
+            // mniHelpAbout
             // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            aboutToolStripMenuItem.Text = "&About...";
-            aboutToolStripMenuItem.Click += new System.EventHandler(this.OnHelpAbout);
+            mniHelpAbout.Name = "mniHelpAbout";
+            mniHelpAbout.Size = new System.Drawing.Size(197, 22);
+            mniHelpAbout.Text = "&About LOMM...";
+            mniHelpAbout.Click += new System.EventHandler(this.OnHelpAbout);
             // 
             // splitContainer1
             // 
@@ -834,41 +827,120 @@ namespace LotroMusicManager
             this.imglstTabs.Images.SetKeyName(0, "page_edit.png");
             this.imglstTabs.Images.SetKeyName(1, "comment.png");
             // 
+            // mniFileExit
+            // 
+            mniFileExit.Name = "mniFileExit";
+            mniFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            mniFileExit.Size = new System.Drawing.Size(135, 22);
+            mniFileExit.Text = "E&xit";
+            // 
             // menustripMain
             // 
             this.menustripMain.Dock = System.Windows.Forms.DockStyle.None;
             this.menustripMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menustripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniFile,
+            this.mniMusic,
             this.mniView,
+            this.mniFile,
+            this.mniMacros,
             this.mniHelp});
             this.menustripMain.Location = new System.Drawing.Point(3, 0);
             this.menustripMain.Name = "menustripMain";
-            this.menustripMain.Size = new System.Drawing.Size(229, 24);
+            this.menustripMain.Size = new System.Drawing.Size(246, 24);
             this.menustripMain.Stretch = false;
             this.menustripMain.TabIndex = 0;
             this.menustripMain.Text = "menuStrip1";
             // 
+            // mniMusic
+            // 
+            this.mniMusic.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniOptions,
+            this.toolStripSeparator8,
+            mniFileExit});
+            this.mniMusic.Name = "mniMusic";
+            this.mniMusic.Size = new System.Drawing.Size(37, 20);
+            this.mniMusic.Text = "&File";
+            // 
+            // mniOptions
+            // 
+            this.mniOptions.Image = global::LotroMusicManager.Properties.Resources.wrench;
+            this.mniOptions.Name = "mniOptions";
+            this.mniOptions.Size = new System.Drawing.Size(135, 22);
+            this.mniOptions.Text = "&Preferences";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(132, 6);
+            // 
+            // mniView
+            // 
+            this.mniView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniViewToolbars,
+            this.toolStripSeparator13,
+            this.mniNewToolbar,
+            this.mniRemoveToolbar,
+            this.toolStripSeparator14,
+            this.mniResetToolbars});
+            this.mniView.Name = "mniView";
+            this.mniView.Size = new System.Drawing.Size(44, 20);
+            this.mniView.Text = "&View";
+            this.mniView.DropDownOpening += new System.EventHandler(this.OnViewMenuOpening);
+            // 
+            // mniViewToolbars
+            // 
+            this.mniViewToolbars.Name = "mniViewToolbars";
+            this.mniViewToolbars.Size = new System.Drawing.Size(200, 22);
+            this.mniViewToolbars.Text = "&Toolbars";
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(197, 6);
+            // 
+            // mniNewToolbar
+            // 
+            this.mniNewToolbar.Name = "mniNewToolbar";
+            this.mniNewToolbar.Size = new System.Drawing.Size(200, 22);
+            this.mniNewToolbar.Text = "&New Toolbar...";
+            this.mniNewToolbar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.mniNewToolbar.Click += new System.EventHandler(this.OnNewToolbar);
+            // 
+            // mniRemoveToolbar
+            // 
+            this.mniRemoveToolbar.Name = "mniRemoveToolbar";
+            this.mniRemoveToolbar.Size = new System.Drawing.Size(200, 22);
+            this.mniRemoveToolbar.Text = "&Delete Toolbar...";
+            this.mniRemoveToolbar.Click += new System.EventHandler(this.OnRemoveToolbar);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(197, 6);
+            // 
+            // mniResetToolbars
+            // 
+            this.mniResetToolbars.Name = "mniResetToolbars";
+            this.mniResetToolbars.Size = new System.Drawing.Size(200, 22);
+            this.mniResetToolbars.Text = "Reset Toolbar &Locations";
+            this.mniResetToolbars.Click += new System.EventHandler(this.OnResetAllToolbars);
+            // 
             // mniFile
             // 
             this.mniFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniPlay,
             toolStripSeparator3,
+            this.mniPlay,
+            this.toolStripSeparator1,
             this.mniNew,
             this.mniSaveABC,
             this.mniSaveAs,
             this.mniDelete,
             this.mniUndoAll,
             toolStripSeparator2,
-            this.mniRefresh,
-            toolStripSeparator1,
-            this.mniManageMacros,
-            this.mniOptions,
-            this.toolStripSeparator8,
-            mniFileExit});
+            this.mniRefresh});
             this.mniFile.Name = "mniFile";
-            this.mniFile.Size = new System.Drawing.Size(37, 20);
-            this.mniFile.Text = "&File";
+            this.mniFile.Size = new System.Drawing.Size(51, 20);
+            this.mniFile.Text = "&Music";
             // 
             // mniPlay
             // 
@@ -878,6 +950,11 @@ namespace LotroMusicManager
             this.mniPlay.Size = new System.Drawing.Size(242, 22);
             this.mniPlay.Text = "&Play File";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(239, 6);
+            // 
             // mniNew
             // 
             this.mniNew.Image = global::LotroMusicManager.Properties.Resources.page_add;
@@ -885,7 +962,6 @@ namespace LotroMusicManager
             this.mniNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.mniNew.Size = new System.Drawing.Size(242, 22);
             this.mniNew.Text = "&New";
-            this.mniNew.Click += new System.EventHandler(this.OnFileNew);
             // 
             // mniSaveABC
             // 
@@ -895,7 +971,6 @@ namespace LotroMusicManager
             this.mniSaveABC.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mniSaveABC.Size = new System.Drawing.Size(242, 22);
             this.mniSaveABC.Text = "&Save Changes";
-            this.mniSaveABC.Click += new System.EventHandler(this.OnSaveABC);
             // 
             // mniSaveAs
             // 
@@ -903,7 +978,7 @@ namespace LotroMusicManager
             this.mniSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.A)));
             this.mniSaveAs.Size = new System.Drawing.Size(242, 22);
-            this.mniSaveAs.Text = "Save &As";
+            this.mniSaveAs.Text = "Save &As...";
             this.mniSaveAs.Click += new System.EventHandler(this.OnSaveAs);
             // 
             // mniDelete
@@ -912,7 +987,7 @@ namespace LotroMusicManager
             this.mniDelete.Name = "mniDelete";
             this.mniDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
             this.mniDelete.Size = new System.Drawing.Size(242, 22);
-            this.mniDelete.Text = "Delete";
+            this.mniDelete.Text = "&Delete";
             this.mniDelete.Click += new System.EventHandler(this.OnDeleteFile);
             // 
             // mniUndoAll
@@ -935,102 +1010,83 @@ namespace LotroMusicManager
             this.mniRefresh.Text = "Re&fresh File List";
             this.mniRefresh.Click += new System.EventHandler(this.OnRefresh);
             // 
+            // mniMacros
+            // 
+            this.mniMacros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniManageMacros,
+            this.mniMacroWizard,
+            this.toolStripSeparator15,
+            this.mniExportMacros,
+            this.mniImportMacros});
+            this.mniMacros.Name = "mniMacros";
+            this.mniMacros.Size = new System.Drawing.Size(58, 20);
+            this.mniMacros.Text = "Ma&cros";
+            // 
             // mniManageMacros
             // 
             this.mniManageMacros.Image = global::LotroMusicManager.Properties.Resources.script_gear;
             this.mniManageMacros.Name = "mniManageMacros";
-            this.mniManageMacros.Size = new System.Drawing.Size(242, 22);
-            this.mniManageMacros.Text = "Manage Macros...";
-            this.mniManageMacros.Click += new System.EventHandler(this.OnManageMacros);
+            this.mniManageMacros.Size = new System.Drawing.Size(161, 22);
+            this.mniManageMacros.Text = "Macro &Manager";
             // 
-            // mniOptions
+            // mniMacroWizard
             // 
-            this.mniOptions.Image = global::LotroMusicManager.Properties.Resources.wrench;
-            this.mniOptions.Name = "mniOptions";
-            this.mniOptions.Size = new System.Drawing.Size(242, 22);
-            this.mniOptions.Text = "LOMM Options...";
-            this.mniOptions.Click += new System.EventHandler(this.OnOptions);
+            this.mniMacroWizard.Image = global::LotroMusicManager.Properties.Resources.script_lightning;
+            this.mniMacroWizard.Name = "mniMacroWizard";
+            this.mniMacroWizard.Size = new System.Drawing.Size(161, 22);
+            this.mniMacroWizard.Text = "Macro &Wizard...";
             // 
-            // toolStripSeparator8
+            // toolStripSeparator15
             // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(239, 6);
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(158, 6);
             // 
-            // mniView
+            // mniExportMacros
             // 
-            this.mniView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mniViewToolbars,
-            this.toolStripSeparator13,
-            this.mniNewToolbar,
-            this.mniRemoveToolbar,
-            this.toolStripSeparator14,
-            this.mniResetToolbars});
-            this.mniView.Name = "mniView";
-            this.mniView.Size = new System.Drawing.Size(44, 20);
-            this.mniView.Text = "View";
-            this.mniView.DropDownOpening += new System.EventHandler(this.OnViewMenuOpening);
+            this.mniExportMacros.Image = global::LotroMusicManager.Properties.Resources.script_save;
+            this.mniExportMacros.Name = "mniExportMacros";
+            this.mniExportMacros.Size = new System.Drawing.Size(161, 22);
+            this.mniExportMacros.Text = "&Export Macros...";
+            this.mniExportMacros.Click += new System.EventHandler(this.OnExportMacros);
             // 
-            // mniViewToolbars
+            // mniImportMacros
             // 
-            this.mniViewToolbars.Name = "mniViewToolbars";
-            this.mniViewToolbars.Size = new System.Drawing.Size(200, 22);
-            this.mniViewToolbars.Text = "Toolbars";
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(197, 6);
-            // 
-            // mniNewToolbar
-            // 
-            this.mniNewToolbar.Name = "mniNewToolbar";
-            this.mniNewToolbar.Size = new System.Drawing.Size(200, 22);
-            this.mniNewToolbar.Text = "New Toolbar...";
-            this.mniNewToolbar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.mniNewToolbar.Click += new System.EventHandler(this.OnNewToolbar);
-            // 
-            // mniRemoveToolbar
-            // 
-            this.mniRemoveToolbar.Name = "mniRemoveToolbar";
-            this.mniRemoveToolbar.Size = new System.Drawing.Size(200, 22);
-            this.mniRemoveToolbar.Text = "Remove Toolbar...";
-            this.mniRemoveToolbar.Click += new System.EventHandler(this.OnRemoveToolbar);
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(197, 6);
-            // 
-            // mniResetToolbars
-            // 
-            this.mniResetToolbars.Name = "mniResetToolbars";
-            this.mniResetToolbars.Size = new System.Drawing.Size(200, 22);
-            this.mniResetToolbars.Text = "Reset Toolbar Locations";
-            this.mniResetToolbars.Click += new System.EventHandler(this.OnResetAllToolbars);
+            this.mniImportMacros.Image = global::LotroMusicManager.Properties.Resources.script_link;
+            this.mniImportMacros.Name = "mniImportMacros";
+            this.mniImportMacros.Size = new System.Drawing.Size(161, 22);
+            this.mniImportMacros.Text = "&Import Macros...";
+            this.mniImportMacros.Click += new System.EventHandler(this.OnImportMacros);
             // 
             // mniHelp
             // 
             this.mniHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             mniHelpContents,
-            this.aBCQuickReferenceToolStripMenuItem,
+            this.mniABCQuickReference,
+            this.mniMacroQuickReference,
             this.toolStripSeparator4,
-            aboutToolStripMenuItem});
+            mniHelpAbout});
             this.mniHelp.Name = "mniHelp";
             this.mniHelp.Size = new System.Drawing.Size(44, 20);
             this.mniHelp.Text = "&Help";
             // 
-            // aBCQuickReferenceToolStripMenuItem
+            // mniABCQuickReference
             // 
-            this.aBCQuickReferenceToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.book_open;
-            this.aBCQuickReferenceToolStripMenuItem.Name = "aBCQuickReferenceToolStripMenuItem";
-            this.aBCQuickReferenceToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.aBCQuickReferenceToolStripMenuItem.Text = "ABC Quick Reference...";
-            this.aBCQuickReferenceToolStripMenuItem.Click += new System.EventHandler(this.OnQuickReference);
+            this.mniABCQuickReference.Image = global::LotroMusicManager.Properties.Resources.book_open;
+            this.mniABCQuickReference.Name = "mniABCQuickReference";
+            this.mniABCQuickReference.Size = new System.Drawing.Size(197, 22);
+            this.mniABCQuickReference.Text = "ABC Quick &Reference...";
+            this.mniABCQuickReference.Click += new System.EventHandler(this.OnQuickReference);
+            // 
+            // mniMacroQuickReference
+            // 
+            this.mniMacroQuickReference.Name = "mniMacroQuickReference";
+            this.mniMacroQuickReference.Size = new System.Drawing.Size(197, 22);
+            this.mniMacroQuickReference.Text = "&Macro Quick Reference";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(194, 6);
             // 
             // dlgOpenFile
             // 
@@ -1149,7 +1205,7 @@ namespace LotroMusicManager
             this.Location = global::LotroMusicManager.Properties.Settings.Default.WindowLocation;
             this.MainMenuStrip = this.menustripMain;
             this.Name = "FormMain";
-            this.Text = "LOTRO Music Manager";
+            this.Text = "LOTRO Music and Macros";
             this.Load += new System.EventHandler(this.OnLoad);
             this.Activated += new System.EventHandler(this.OnActivated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
@@ -1200,9 +1256,6 @@ namespace LotroMusicManager
         private System.Windows.Forms.Button btnToggleMusicMode;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripMenuItem mniFile;
-        private System.Windows.Forms.ToolStripMenuItem mniPlay;
-        private System.Windows.Forms.ToolStripMenuItem mniNew;
-        private System.Windows.Forms.ToolStripMenuItem mniSaveABC;
         private System.Windows.Forms.ToolStripMenuItem mniSaveAs;
         private System.Windows.Forms.ToolStripMenuItem mniUndoAll;
         private System.Windows.Forms.ToolStripMenuItem mniRefresh;
@@ -1211,7 +1264,7 @@ namespace LotroMusicManager
         private System.Windows.Forms.ContextMenuStrip mnuListContext;
         private System.Windows.Forms.ToolStripMenuItem mniListContextPlay;
         private System.Windows.Forms.ToolStripMenuItem mniListContextRefresh;
-        private System.Windows.Forms.ToolStripMenuItem aBCQuickReferenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mniABCQuickReference;
         private InstantUpdate.Controls.SplitButton btnPlay;
         private System.Windows.Forms.ContextMenuStrip mnuPlay;
         private System.Windows.Forms.ToolStripMenuItem mniDDPlay;
@@ -1250,8 +1303,6 @@ namespace LotroMusicManager
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.MenuStrip menustripEmotes;
         private System.Windows.Forms.ToolStripMenuItem emotesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mniOptions;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.SplitContainer splitPerform;
         private System.Windows.Forms.ListBox lstLyrics;
         private System.Windows.Forms.ColumnHeader Index;
@@ -1272,7 +1323,6 @@ namespace LotroMusicManager
         private System.Windows.Forms.ToolStripMenuItem mniEditSelectAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.MenuStrip menustripMain;
-        private System.Windows.Forms.ToolStripMenuItem mniManageMacros;
         private System.Windows.Forms.ImageList imglstTabs;
         private System.Windows.Forms.ToolStripMenuItem mniView;
         private System.Windows.Forms.ToolStripMenuItem mniViewToolbars;
@@ -1281,6 +1331,20 @@ namespace LotroMusicManager
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem mniResetToolbars;
+        private System.Windows.Forms.ToolStripMenuItem mniMacros;
+        private System.Windows.Forms.ToolStripMenuItem mniManageMacros;
+        private System.Windows.Forms.ToolStripMenuItem mniExportMacros;
+        private System.Windows.Forms.ToolStripMenuItem mniImportMacros;
+        private System.Windows.Forms.ToolStripMenuItem mniMacroWizard;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripMenuItem mniMusic;
+        private System.Windows.Forms.ToolStripMenuItem mniOptions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem mniPlay;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mniNew;
+        private System.Windows.Forms.ToolStripMenuItem mniSaveABC;
+        private System.Windows.Forms.ToolStripMenuItem mniMacroQuickReference;
     }
 }
 

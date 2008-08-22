@@ -42,6 +42,10 @@
             this.newMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mniEditMacroDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.imgMacros = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -194,37 +198,73 @@
             this.newMacroToolStripMenuItem,
             this.deleteMacroToolStripMenuItem,
             this.toolStripSeparator2,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.cutToolStripMenuItem,
+            this.toolStripSeparator3,
             this.mniEditMacroDetails});
             this.mnuMacroList.Name = "mnuMacroList";
-            this.mnuMacroList.Size = new System.Drawing.Size(179, 76);
+            this.mnuMacroList.Size = new System.Drawing.Size(145, 148);
             this.mnuMacroList.Opening += new System.ComponentModel.CancelEventHandler(this.OnMacroListMenuOpening);
             // 
             // newMacroToolStripMenuItem
             // 
             this.newMacroToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.script_add;
             this.newMacroToolStripMenuItem.Name = "newMacroToolStripMenuItem";
-            this.newMacroToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.newMacroToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.newMacroToolStripMenuItem.Text = "New Macro";
             // 
             // deleteMacroToolStripMenuItem
             // 
             this.deleteMacroToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.script_delete;
             this.deleteMacroToolStripMenuItem.Name = "deleteMacroToolStripMenuItem";
-            this.deleteMacroToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.deleteMacroToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.deleteMacroToolStripMenuItem.Text = "Delete Macro";
             this.deleteMacroToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteMacro);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(175, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(141, 6);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.page_copy1;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.OnCopyMacro);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.page_paste1;
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.OnPasteMacro);
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Image = global::LotroMusicManager.Properties.Resources.cut1;
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.OnCutMacro);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
             // 
             // mniEditMacroDetails
             // 
             this.mniEditMacroDetails.Image = global::LotroMusicManager.Properties.Resources.script_edit;
             this.mniEditMacroDetails.Name = "mniEditMacroDetails";
-            this.mniEditMacroDetails.Size = new System.Drawing.Size(178, 22);
-            this.mniEditMacroDetails.Text = "Edit Macro Details...";
+            this.mniEditMacroDetails.Size = new System.Drawing.Size(144, 22);
+            this.mniEditMacroDetails.Text = "Properties...";
             this.mniEditMacroDetails.Click += new System.EventHandler(this.OnEditMacroDetailsClick);
             // 
             // imgMacros
@@ -453,6 +493,10 @@
         private System.Windows.Forms.ColumnHeader colName;
         private System.Windows.Forms.ImageList imgMacros;
         private System.Windows.Forms.ToolStripMenuItem mniEditMacroDetails;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
     }
 }

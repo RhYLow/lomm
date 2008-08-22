@@ -48,23 +48,17 @@ namespace LotroMusicManager
             lstFiles.Columns[1].Tag = SortType.PATH; 
             lstFiles.Columns[2].Tag = SortType.INTEGER;
 
-            ReloadFileList();
-            ShowSelectedFile();
-
             // Auto-binding size or AOT causes all sorts of mess 
             Size      = (Size)Settings.Default.WindowSize;
             TopMost  = Settings.Default.AOT;
             Location = (Point)Settings.Default.WindowLocation;
 
-            // Simulate a click on the "Title" column. Much more useful than starting with
-            // the filename sorted.
-            ColumnClickEventArgs eClick = new ColumnClickEventArgs(0);
-            OnColumnClick(lstFiles, eClick);
-
-            lstFiles.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lstFiles.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lstFiles.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-
+            if (Settings.Default.LoadABCAtStartup)
+            {
+                ReloadFileList();
+                ShowSelectedFile();
+            }
+                       
 
             // Default to immediate play
             btnPlay.Tag  = Song.PlayType.Immediate;
@@ -162,13 +156,6 @@ namespace LotroMusicManager
             _abcref.Show();
             _abcref.WindowState = FormWindowState.Normal;
             _abcref.Visible = true;
-            return;
-        }
-
-        private void OnHelpAbout(object sender, EventArgs e)
-        {//====================================================================
-            FormAboutBox ab = new FormAboutBox();
-            ab.ShowDialog();
             return;
         }
 
@@ -277,7 +264,7 @@ namespace LotroMusicManager
         {   //====================================================================
             // Get a prompt to save the file if necessary
             if (lstFiles.SelectedItems.Count > 0) lstFiles.SelectedItems[0].Selected = false;
-            
+            bool bInitialLoad = lstFiles.Items.Count <= 0;
             lstFiles.Items.Clear();
             lstLyrics.Items.Clear();
             rteEdit.Clear();
@@ -287,6 +274,19 @@ namespace LotroMusicManager
             DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Resources.MusicSubfolder);
             AddFilesToList(di.GetFiles("*.abc", SearchOption.AllDirectories));
             AddFilesToList(di.GetFiles("*.txt", SearchOption.AllDirectories));
+            
+            if (bInitialLoad)
+            {
+                // The list box was empty, so let's resize the columns. We don't do it otherwise because the user may have resized to their preference
+                lstFiles.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                lstFiles.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                lstFiles.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                // Simulate a click on the "Title" column. Much more useful than starting with
+                // the filename sorted.
+                ColumnClickEventArgs eClick = new ColumnClickEventArgs(0);
+                OnColumnClick(lstFiles, eClick);
+            }
 
             return;
         }
@@ -591,7 +591,7 @@ namespace LotroMusicManager
             }
             Settings.Default.Save();
             return;                   
-        }               
+        }                                
     #endregion
 
     #region Lyrics Playing
@@ -912,9 +912,39 @@ namespace LotroMusicManager
 
     #endregion
 
+    #region Help
         private void OnHelpContentsClick(object sender, EventArgs e)
         {   //====================================================================
             try {Process.Start("lomm.chm");} catch {;}
+            return;
+        }
+
+        private void OnHelpAbout(object sender, EventArgs e)
+        {//====================================================================
+            FormAboutBox ab = new FormAboutBox();
+            ab.ShowDialog();
+            return;
+        }
+    #endregion
+
+        private void OnExportMacros(object sender, EventArgs e)
+        {   //====================================================================
+            FormExportMacros frm = new FormExportMacros();
+            frm.ShowDialog();
+            return;
+        }
+
+        private void OnImportMacros(object sender, EventArgs e)
+        {   //====================================================================
+            if (dlgOpenFile.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader sr = new StreamReader(dlgOpenFile.FileName);
+                MacroList ml = MacroList.FromXML(sr);
+                foreach (Macro m in ml.Items)
+                {
+                    Settings.Default.Macros.Add(m);
+                }
+            }
             return;
         }
 
